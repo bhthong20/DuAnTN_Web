@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+
 import com.example.demo.models.HangSanPham;
 import com.example.demo.repositories.HangSanPhamRepository;
 import com.example.demo.services.HangSanPhamService;
@@ -21,4 +22,5 @@ public class HangSanPhamServiceImpl implements HangSanPhamService {
     public HangSanPham add(HangSanPham hangSanPham) {
         return sanPhamRepository.save(hangSanPham);
     }
+
 }

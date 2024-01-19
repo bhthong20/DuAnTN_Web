@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+
 import com.example.demo.models.ChatLieu;
 import com.example.demo.repositories.ChatLieuRepository;
 import com.example.demo.services.ChatLieuService;
@@ -21,4 +22,5 @@ public class ChatLieuServiceImpl implements ChatLieuService {
     public ChatLieu add(ChatLieu chatLieu) {
         return chatLieuRepository.save(chatLieu);
     }
+
 }
