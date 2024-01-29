@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.ChatLieu;
-import com.example.demo.models.ChucVu;
 import com.example.demo.models.HangSanPham;
 import com.example.demo.models.HinhAnh;
 import com.example.demo.models.SanPham;
@@ -71,6 +70,8 @@ public class SanPhamController {
 
     @GetMapping("/view-update/{id}")
     public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("sanPham") SanPham sanPham,@ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") HangSanPham hangSanPham, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
+        model.addAttribute("listHangSanPham", hangSanPhamService.findAll());
+        model.addAttribute("listChatLieu", chatLieuService.findAll());
         SanPham hsp = sanPhamService.findById(id);
         model.addAttribute("sanPham", hsp);
         return "san-pham/update";
@@ -81,8 +82,8 @@ public class SanPhamController {
         if (bindingResult.hasErrors()) {
             return "san-pham/add";
         }
-        String maNV = "SP" + (sanPhamService.findAll().size() + 1);
-        sanPham.setMa(maNV);
+        String maSP = "SP" + (sanPhamService.findAll().size() + 1);
+        sanPham.setMa(maSP);
         sanPham.setNgayTao(Date.valueOf(LocalDate.now()));
         sanPhamService.add(sanPham);
         return "redirect:/san-pham/hien-thi";
@@ -90,7 +91,7 @@ public class SanPhamController {
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "sanPham") SanPham sanPham,
-                         @ModelAttribute(name = "chucVu") ChucVu chucVu,
+                         @ModelAttribute(name = "chatLieu") ChatLieu chatLieu,
                          @PathVariable(name = "id") UUID id) {
         SanPham nv = sanPhamService.findById(id);
         sanPham.setId(id);
