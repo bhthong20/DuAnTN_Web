@@ -53,8 +53,8 @@ public class HinhAnh {
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")

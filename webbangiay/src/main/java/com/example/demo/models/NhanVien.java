@@ -32,18 +32,18 @@ import java.util.UUID;
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_nhan_vien")
     private UUID id;
 
     @Column(name = "ma")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "ho_ten")
+    @Column(name = "ten_nhan_vien")
     private String hoTen;
 
 
-    @Column(name = "url_anh")
+    @Column(name = "hinh_anh")
     private String urlAnh;
 
     @Column(name = "gioi_tinh")
@@ -60,8 +60,8 @@ public class NhanVien {
     private String sdt;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "que_quan")
-    private String queQuan;
+    @Column(name = "dia_chi")
+    private String diaChi;
 
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "ngay_sinh")
@@ -87,10 +87,10 @@ public class NhanVien {
     private Date ngayCapNhat;
 
     @NotNull(message = "Không để trống thông tin")
-    @Column(name = "tinh_trang")
+    @Column(name = "trang_thai")
     private int tinhTrang;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_chuc_vu")
+    @JoinColumn(name = "chuc_vu_id")
     private ChucVu chucVu;
 }

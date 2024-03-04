@@ -23,18 +23,18 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "size")
-public class Size {
+@Table(name = "kich_thuoc")
+public class KichThuoc {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_kich_thuoc")
     private UUID id;
 
     @Column(name = "ma")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "size")
+    @Column(name = "ten_kich_thuoc")
     private String size;
 
     @CreationTimestamp
@@ -46,8 +46,8 @@ public class Size {
     private Date ngayCapNhat;
 
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")

@@ -1,11 +1,11 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.ChatLieu;
-import com.example.demo.models.HangSanPham;
+import com.example.demo.models.ThuongHieu;
 import com.example.demo.models.HinhAnh;
 import com.example.demo.models.SanPham;
 import com.example.demo.services.ChatLieuService;
-import com.example.demo.services.HangSanPhamService;
+import com.example.demo.services.ThuongHieuService;
 import com.example.demo.services.HinhAnhService;
 import com.example.demo.services.SanPhamService;
 import jakarta.validation.Valid;
@@ -41,7 +41,7 @@ public class SanPhamController {
     private HinhAnhService hinhAnhService;
 
     @Autowired
-    private HangSanPhamService hangSanPhamService;
+    private ThuongHieuService thuongHieuService;
 
     @Autowired
     private ChatLieuService chatLieuService;
@@ -58,19 +58,19 @@ public class SanPhamController {
     }
 
     @GetMapping("/view-add")
-    public String viewAdd(Model model, @ModelAttribute("sanPham") SanPham sanPham, @ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") HangSanPham hangSanPham, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
+    public String viewAdd(Model model, @ModelAttribute("sanPham") SanPham sanPham, @ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") ThuongHieu thuongHieu, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
 
-        List<HangSanPham> listHangSanPham = hangSanPhamService.findAll();
+        List<ThuongHieu> listThuongHieu = thuongHieuService.findAll();
         List<ChatLieu> listChatLieu = chatLieuService.findAll();
         model.addAttribute("sanPham", new SanPham());
-        model.addAttribute("listHangSanPham", listHangSanPham);
+        model.addAttribute("listHangSanPham", listThuongHieu);
         model.addAttribute("listChatLieu", listChatLieu);
         return "san-pham/add";
     }
 
     @GetMapping("/view-update/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("sanPham") SanPham sanPham,@ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") HangSanPham hangSanPham, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
-        model.addAttribute("listHangSanPham", hangSanPhamService.findAll());
+    public String detail(Model model, @PathVariable("id") UUID id, @ModelAttribute("sanPham") SanPham sanPham, @ModelAttribute("hinhAnh") HinhAnh hinhAnh, @ModelAttribute("hangSanPham") ThuongHieu thuongHieu, @ModelAttribute("chatLieu") ChatLieu chatLieu) {
+        model.addAttribute("listHangSanPham", thuongHieuService.findAll());
         model.addAttribute("listChatLieu", chatLieuService.findAll());
         SanPham hsp = sanPhamService.findById(id);
         model.addAttribute("sanPham", hsp);
@@ -91,7 +91,6 @@ public class SanPhamController {
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "sanPham") SanPham sanPham,
-                         @ModelAttribute(name = "chatLieu") ChatLieu chatLieu,
                          @PathVariable(name = "id") UUID id) {
         SanPham nv = sanPhamService.findById(id);
         sanPham.setId(id);
@@ -109,14 +108,14 @@ public class SanPhamController {
     }
 
     @PostMapping("/modal-add-hang-san-pham")
-    public String addHangSanPham(@ModelAttribute("hangSanPham") @Valid HangSanPham hangSanPham, BindingResult bindingResult) {
+    public String addHangSanPham(@ModelAttribute("hangSanPham") @Valid ThuongHieu thuongHieu, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "san-pham/add";
         }
-        String maHSP = "HSP" + (hangSanPhamService.findAll().size() + 1);
-        hangSanPham.setMa(maHSP);
-        hangSanPham.setNgayTao(Date.valueOf(LocalDate.now()));
-        hangSanPhamService.add(hangSanPham);
+        String maHSP = "HSP" + (thuongHieuService.findAll().size() + 1);
+        thuongHieu.setMa(maHSP);
+        thuongHieu.setNgayTao(Date.valueOf(LocalDate.now()));
+        thuongHieuService.add(thuongHieu);
         return "redirect:/san-pham/view-add";
     }
 

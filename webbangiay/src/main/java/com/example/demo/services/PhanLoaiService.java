@@ -1,4 +1,5 @@
 package com.example.demo.services;
 
-public interface DeService {
+public interface PhanLoaiService {
+
 }

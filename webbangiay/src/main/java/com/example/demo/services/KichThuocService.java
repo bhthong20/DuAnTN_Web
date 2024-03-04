@@ -1,4 +1,4 @@
 package com.example.demo.services;
 
-public interface DoiTraService {
+public interface KichThuocService {
 }

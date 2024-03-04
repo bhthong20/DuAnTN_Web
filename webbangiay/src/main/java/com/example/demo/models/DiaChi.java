@@ -30,23 +30,23 @@ import java.util.UUID;
 public class DiaChi {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_dia_chi")
     private UUID id;
 
     @Column(name = "ma")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "dia_chi")
+    @Column(name = "dia_chi_chi_tiet")
     private String diaChi;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "quan")
+    @Column(name = "quan_huyen")
     private String quan;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "huyen")
-    private String huyen;
+    @Column(name = "phuong_xa")
+    private String phuongXa;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "thanh_pho")
@@ -59,14 +59,10 @@ public class DiaChi {
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
-
-    @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "mo_ta")
-    private String moTa;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_khach_hang")
+    @JoinColumn(name = "khach_hang_id")
     private KhachHang khachHang;
 }

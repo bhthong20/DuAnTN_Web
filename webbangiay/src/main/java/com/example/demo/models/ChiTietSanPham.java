@@ -31,27 +31,19 @@ import java.util.UUID;
 public class ChiTietSanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id_chi_tiet_san_pham")
     private UUID id;
 
-    @NotNull(message = "Không để trống thông tin")
-    @Column(name = "gia_nhap")
-    private BigDecimal giaNhap;
+    @Column(name = "ma_chi_tiet_san_pham")
+    private String ma;
 
     @NotNull(message = "Không để trống thông tin")
-    @Column(name = "gia_ban")
-    private BigDecimal giaBan;
+    @Column(name = "don_gia")
+    private BigDecimal don_gia;
 
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_luong_ton")
     private int soLuongTon;
-
-    @Column(name = "url_anh")
-    private String urlAnh;
-
-    @NotNull(message = "Không để trống thông tin")
-    @Column(name = "nam_bao_hang")
-    private int namBaoHanh;
 
     @Column(name = "ngay_tao")
     private Date ngayTao;
@@ -63,23 +55,23 @@ public class ChiTietSanPham {
     @Column(name = "mo_ta")
     private String moTa;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_san_pham")
+    @JoinColumn(name = "san_pham_id")
     private SanPham sanPham;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_mau_sac")
+    @JoinColumn(name = "mau_sac_id")
     private MauSac mauSac;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_size")
-    private Size size;
+    @JoinColumn(name = "kich_thuoc_id")
+    private KichThuoc kichThuoc;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_de")
-    private De de;
+    @JoinColumn(name = "chat_lieu_id")
+    private ChatLieu chatLieu;
 
 }

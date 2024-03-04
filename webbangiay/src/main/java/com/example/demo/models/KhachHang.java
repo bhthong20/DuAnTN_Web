@@ -27,14 +27,14 @@ import java.util.UUID;
 public class KhachHang {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_khach_hang")
     private UUID id;
 
     @Column(name = "ma")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "ho_ten")
+    @Column(name = "ten_khach_hang")
     private String hoTen;
 
     @Column(name = "gioi_tinh")
@@ -65,6 +65,6 @@ public class KhachHang {
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 }

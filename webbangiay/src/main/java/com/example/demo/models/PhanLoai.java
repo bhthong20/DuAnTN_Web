@@ -23,33 +23,31 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "hang_san_pham")
-public class HangSanPham {
+@Table(name = "loai")
+public class PhanLoai {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_loai")
     private UUID id;
 
     @Column(name = "ma")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "ten")
-    private String ten;
-
-    @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "xuat_su")
-    private String xuatSu;
+    @Column(name = "ten_loai")
+    private String tenLoai;
 
     @CreationTimestamp
     @Column(name = "ngay_tao")
     private Date ngayTao;
 
+
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
