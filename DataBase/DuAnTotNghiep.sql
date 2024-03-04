@@ -16,7 +16,7 @@ CREATE TABLE khach_hang
 	ma				 VARCHAR(50) Null,
 	ten_khach_hang	 NVARCHAR(50) Not Null,
     email          VARCHAR(255) Null,
-	sdt			   INT Null,
+	sdt			   VARCHAR Null,
 	ngay_sinh       DATE Null,
     gioi_tinh       BIT Null,
 	ngay_tao     DATE Default GetDATE(),
@@ -60,8 +60,7 @@ CREATE TABLE gio_hang
         REFERENCES khach_hang (id_khach_hang),
 	ma				 VARCHAR(50) Null,
 	ngay_tao	DATE Default GetDATE(),
-	ngay_cap_nhat DATE Null,
-	ghi_chu NVARCHAR(50) Not Null,
+	ghi_chu NVARCHAR(50) Null,
 	trang_thai INT Null,
 ) 
 Go
@@ -73,8 +72,10 @@ CREATE TABLE gio_hang_chi_tiet
         DEFAULT NEWID() PRIMARY KEY,
 	id_gio_hang   UNIQUEIDENTIFIER
         REFERENCES gio_hang (id_gio_hang),
+	id_chi_tiet_san_pham   UNIQUEIDENTIFIER
+        REFERENCES chi_tiet_san_pham (id_chi_tiet_san_pham),
 	so_luong INT Null,
-	ghi_chu NVARCHAR(50) Not Null,
+	don_gia DECIMAL(10, 2),
 	trang_thai INT Null,
 )
 Go
@@ -86,10 +87,12 @@ CREATE TABLE hinh_anh
         DEFAULT NEWID() PRIMARY KEY,
 	ma				 VARCHAR(50) Null,
 	ten_hinh_anh NVarchar(255) Not Null,
-	url_hinh_anh NVarchar(255) Not Null,
+	url_anh NVarchar(255) Not Null,
+	url_anh1  NVarchar(255) Not Null,
+	url_anh2 NVarchar(255) Not Null,
 	ngay_tao	DATE Default GetDATE(),
 	ngay_cap_nhat DATE Null,
-	mo_ta NVarchar(255) Not Null,
+	mo_ta NVarchar(255)  Null,
 	trang_thai INT Null,
 )
 Go
@@ -103,7 +106,7 @@ CREATE TABLE loai
 	ten_loai NVarchar(255) Not Null,
 	ngay_tao	DATE Default GetDATE(),
 	ngay_cap_nhat DATE Null,
-	mo_ta NVarchar(255) Not Null,
+	mo_ta NVarchar(255)  Null,
 	trang_thai INT Null,
 )
 Go
@@ -115,10 +118,10 @@ CREATE TABLE thuong_hieu
         DEFAULT NEWID() PRIMARY KEY,
 	ma				 VARCHAR(50) Null,
 	ten_thuong_hieu NVarchar(255) Not Null,
+	xuat_su		NVarchar(50)  Null,
 	ngay_tao	DATE Default GetDATE(),
 	ngay_cap_nhat DATE Null,
-	mo_ta NVarchar(255) Not Null,
-	trang_thai INT Null,
+	mo_ta NVarchar(255) Null,
 )
 Go
 
@@ -211,7 +214,7 @@ CREATE TABLE khuyen_mai
     ngay_ket_thuc DATE Null,
     ngay_tao DATE Default GetDATE(),
 	ngay_cap_nhat DATE Null,
-    mo_ta NVARCHAR(255) Not Null,
+    mo_ta NVARCHAR(255)  Null,
     trang_thai INT Null,
 )
 Go
@@ -242,7 +245,8 @@ CREATE TABLE chi_tiet_san_pham
 	ngay_cap_nhat DATE Null,
 	so_luong_ton INT NULL,
 	don_gia DECIMAL(10, 2) null,
-	trang_thai INT NULL
+	trang_thai INT NULL,
+	mo_ta NVARCHAR(255)  Null,
 )
 GO
 
@@ -257,7 +261,7 @@ CREATE TABLE danh_gia
 
 	khach_hang_id   UNIQUEIDENTIFIER
         REFERENCES khach_hang (id_khach_hang),
-	ghi_chu NVARCHAR(50) Not Null,
+	ghi_chu NVARCHAR(50)  Null,
 )
 GO
 
@@ -272,12 +276,13 @@ CREATE TABLE nhan_vien
 	ngay_sinh       DATE Null,
     gioi_tinh       BIT Null,
 	dia_chi			NVARCHAR(150)Null,
-	trang_thai		NVARCHAR(50)Null,
+	cccd			VARCHAR(20) NULL,
 	hinh_anh		NVARCHAR(255)Null,
     tai_khoan		NVARCHAR(50)Null,
     mat_khau		NVARCHAR(32)Null,
 	ngay_tao	DATE Default GetDATE(),
 	ngay_cap_nhat DATE Null,
+	trang_thai		int Null,
 	chuc_vu_id		UNIQUEIDENTIFIER 
 		REFERENCES chuc_vu (id_chuc_vu) Not Null,
 )
