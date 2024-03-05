@@ -27,10 +27,10 @@ public class SanPhamServiceImpl implements SanPhamService {
         return sanPhamRepository.findAll();
     }
 
-//    @Override
-//    public List<SanPham> search(String search) {
-//        return sanPhamRepository.search(search);
-//    }
+    @Override
+    public List<SanPham> search(String search) {
+        return sanPhamRepository.search(search);
+    }
 
     @Override
     public SanPham findById(UUID id) {

@@ -13,61 +13,55 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-<h4 style="text-align: center">Thông tin nhân viên</h4>
-<br>
+<h4 style="text-align: center">Chất liệu</h4>
+
 <div class="container">
     <table class="table container">
         <tbody>
         <tr>
-            <form action="/san-pham/search" method="post">
+            <form action="/chat-lieu/search" method="post">
                 <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
                     <button type="submit">Tìm kiếm</button>
                 </td>
             </form>
             <td colspan="2" style="text-align: center">
                 <button class="btn btn-info">
-                    <a style="color: white;text-decoration: none" href="/san-pham/view-add">Thêm mới</a>
+                    <a style="color: white;text-decoration: none" href="/chat-lieu/view-add">Thêm mới</a>
                 </button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-</div>
 <div class="container">
     <table class="table container">
         <tr>
             <th>STT</th>
             <th>Mã</th>
-            <th>Tên</th>
+            <th>Loại chất liệu </th>
             <th>Ngày tạo</th>
-            <th>Ngày cập nhật</th>
+            <th>Ngày Ngày cập nhập</th>
             <th>Tình trạng</th>
             <th>Mô tả</th>
-            <th>Ảnh</th>
-            <th>Phân loại</th>
-            <th>Thương hiệu</th>
-            <th colspan="2">Chức năng</th>
+            <th>Chức năng</th>
         </tr>
-        <c:forEach items="${listSanPham}" var="sanPham" varStatus="stt">
+        <c:forEach items="${listChatLieu}" var="chatLieu" varStatus="stt">
             <tr>
                 <td>${stt.index+1}</td>
-                <td>${sanPham.ma}</td>
-                <td>${sanPham.tenSP} </td>
-                <td>${sanPham.ngayTao}</td>
-                <td>${sanPham.ngayCapNhat}</td>
+                <td>${chatLieu.ma}</td>
+                <td>${chatLieu.tenChatLieu}</td>
+                <td>${chatLieu.ngayTao}</td>
+                <td>${chatLieu.ngayCapNhat}</td>
+
                 <td>
-                    <c:if test="${sanPham.trangThai==0}">Sản phẩm mới</c:if>
-                    <c:if test="${sanPham.trangThai==1}">Sản phẩm cũ</c:if>
+                    <c:if test="${chatLieu.trangThai==0}">Ngừng hoạt động</c:if>
+                    <c:if test="${chatLieu.trangThai==1}">Hoạt động</c:if>
                 </td>
-                <td>${sanPham.moTa}</td>
-                <td>${sanPham.hinhAnh.ten}</td>
-                <td>${sanPham.phanLoai.tenLoai}</td>
-                <td>${sanPham.thuongHieu.ten}</td>
-                <td colspan="2">
-                    <a href="/san-pham/delete/${sanPham.id}" class="btn btn-success"
+                <td>${chatLieu.moTa}</td>
+                <td>
+                    <a href="/chat-lieu/delete/${chatLieu.id}" class="btn btn-success"
                        onclick="return tbxd()">Delete</a>
-                    <a href="/san-pham/view-update/${sanPham.id}" class="btn btn-success"
+                    <a href="/chat-lieu/view-update/${chatLieu.id}" class="btn btn-success"
                        onclick="return tbxd()">Update</a>
                 </td>
             </tr>
@@ -75,16 +69,16 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><a class="page-link" href="/san-pham/hien-thi?num=0">First</a></li>
+            <li class="page-item"><a class="page-link" href="/chat-lieu/hien-thi?num=0">First</a></li>
 
             <c:forEach begin="1" end="${total}" varStatus="status">
                 <li class="page-item">
-                    <a href="${pageContext.request.contextPath}/san-pham/hien-thi?num=${status.index -1}"
+                    <a href="${pageContext.request.contextPath}/chat-lieu/hien-thi?num=${status.index -1}"
                        class="page-link">${status.index}</a>
                 </li>
             </c:forEach>
 
-            <li class="page-item"><a class="page-link" href="/san-pham/hien-thi?num=${total-1}">Last</a></li>
+            <li class="page-item"><a class="page-link" href="/hang-san-pham/hien-thi?num=${total-1}">Last</a></li>
         </ul>
     </nav>
 </div>
