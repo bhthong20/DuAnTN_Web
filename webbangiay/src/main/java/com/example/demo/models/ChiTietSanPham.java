@@ -30,7 +30,7 @@ import java.util.UUID;
 @Table(name = "chi_tiet_san_pham")
 public class ChiTietSanPham {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_chi_tiet_san_pham")
     private UUID id;
 
@@ -39,7 +39,7 @@ public class ChiTietSanPham {
 
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "don_gia")
-    private BigDecimal don_gia;
+    private BigDecimal donGia;
 
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "so_luong_ton")
