@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface HinhAnhService {
+
     public Page<HinhAnh> getAll(Pageable pageable);
 
     public Page<HinhAnh> getAll1(Pageable pageable);

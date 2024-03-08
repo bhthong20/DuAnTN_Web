@@ -246,7 +246,7 @@ public class ChiTietSanPhamController {
 
     @PostMapping("/loc1")
     public String loc1(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @RequestParam("locSP") String locSP,
-                      @RequestParam("locMS") String locMS,
+                       @RequestParam("locMS") String locMS,
                        @RequestParam("locKT") String locKT,
                        @RequestParam("locCL") String locCL){
         if(locSP.equals("null") && locMS.equals("null") &&  locKT.equals("null") && locCL.equals("null")){
