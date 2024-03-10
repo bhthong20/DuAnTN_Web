@@ -56,8 +56,8 @@ public class KhuyenMai {
     @Column(name = "trang_thai")
     private int trangThai;
 
-    @Column(name = "loai_giam_gia")
-    private String hinhThucGiamGia;
+    @Column(name = "loai_khuyen_mai")
+    private int hinhThucGiamGia;
 
     @Column(name = "gia_tri_giam")
     private BigDecimal gia_triGiam;

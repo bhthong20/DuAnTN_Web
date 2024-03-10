@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface NhanVienRepository extends JpaRepository<NhanVien, UUID> {
-    @Query("select nv from NhanVien nv where nv.ma like %:search% or nv.hoTen like %:search%")
-    List<NhanVien> search(String search);
+//    @Query("select nv from NhanVien nv where nv.ma like %:search% or nv.hoTen like %:search%")
+//    List<NhanVien> search(String search);
 }
