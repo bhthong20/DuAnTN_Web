@@ -50,10 +50,7 @@ public class ThuongHieuServiceImpl implements ThuongHieuService {
             if (thuongHieu != null){
                 BeanUtils.copyProperties(thuongHieu, thuongHieuUpadte);
                 thuongHieuRepository.save(thuongHieuUpadte);
-
             }
-
-
         }
         return null;
     }

@@ -47,7 +47,7 @@ public class ThuongHieu {
 
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
-    
+
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
