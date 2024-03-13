@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface DiaChiRepository extends JpaRepository<DiaChi, UUID> {
-    @Query("select dc from DiaChi dc where dc.ma like %:search% or dc.quan like %:search% or dc.phuongXa like %:search% " +
-            "or dc.thanhPho like %:search% or dc.khachHang.hoTen like %:search%")
-    List<DiaChi> search(String search);
+//    @Query("select dc from DiaChi dc where dc.ma like %:search% or dc.quan like %:search% or dc.phuongXa like %:search% " +
+//            "or dc.thanhPho like %:search% or dc.khachHang.hoTen like %:search%")
+//    List<DiaChi> search(String search);
 }
