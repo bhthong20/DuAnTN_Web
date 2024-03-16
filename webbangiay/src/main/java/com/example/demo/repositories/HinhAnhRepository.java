@@ -14,20 +14,20 @@ import java.util.UUID;
 
 @Repository
 public interface HinhAnhRepository extends JpaRepository<HinhAnh, UUID> {
-//    @Query("select c from HinhAnh c  where c.tinhTrang=0")
-//    Page<HinhAnh> getAll(Pageable pageable);
-//
-//    @Query("select c from HinhAnh c  where c.tinhTrang=1")
-//    Page<HinhAnh> getAll1(Pageable pageable);
-//
-//    @Query("select c from HinhAnh c  where  c.tinhTrang = 0 and (c.ma like %:ten% or c.ten like %:ten%)")
-//    List<HinhAnh> sreach0(String ten);
-//
-//    @Query("select c from HinhAnh c  where  c.tinhTrang = 1 and (c.ma like %:ten% or c.ten like %:ten%)")
-//    List<HinhAnh> sreach1(String ten);
-//
-//    @Transactional
-//    @Modifying
-//    @Query(value = "update hinh_anh set tinh_trang=0", nativeQuery = true)
-//    void updateTT();
+   @Query("select c from HinhAnh c  where c.tinhTrang=0")
+   Page<HinhAnh> getAll(Pageable pageable);
+
+   @Query("select c from HinhAnh c  where c.tinhTrang=1")
+   Page<HinhAnh> getAll1(Pageable pageable);
+
+   @Query("select c from HinhAnh c  where  c.tinhTrang = 0 and (c.ma like %:ten% or c.ten like %:ten%)")
+   List<HinhAnh> sreach0(String ten);
+
+   @Query("select c from HinhAnh c  where  c.tinhTrang = 1 and (c.ma like %:ten% or c.ten like %:ten%)")
+   List<HinhAnh> sreach1(String ten);
+
+   @Transactional
+   @Modifying
+   @Query(value = "update hinh_anh set tinh_trang=0", nativeQuery = true)
+   void updateTT();
 }

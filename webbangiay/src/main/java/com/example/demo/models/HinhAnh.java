@@ -27,23 +27,23 @@ import java.util.UUID;
 public class HinhAnh {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_hinh_anh")
     private UUID id;
 
     @Column(name = "ma")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "ten")
+    @Column(name = "ten_hinh_anh")
     private String ten;
 
-    @Column(name = "url_anh1")
+    @Column(name = "url_anh")
     private String anh1;
 
-    @Column(name = "url_anh2")
+    @Column(name = "url_anh1")
     private String anh2;
 
-    @Column(name = "url_anh3")
+    @Column(name = "url_anh2")
     private String anh3;
 
     @CreationTimestamp

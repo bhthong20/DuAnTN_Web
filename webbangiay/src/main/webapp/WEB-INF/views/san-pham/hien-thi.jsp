@@ -45,8 +45,8 @@
             <th>Tình trạng</th>
             <th>Mô tả</th>
             <th>Ảnh</th>
-            <th>Hãng sản phẩm</th>
-            <th>Chất liệu</th>
+            <th>Phân loại</th>
+            <th>Thương hiệu</th>
             <th colspan="2">Chức năng</th>
         </tr>
         <c:forEach items="${listSanPham}" var="sanPham" varStatus="stt">
@@ -57,13 +57,13 @@
                 <td>${sanPham.ngayTao}</td>
                 <td>${sanPham.ngayCapNhat}</td>
                 <td>
-                    <c:if test="${sanPham.tinhTrang==0}">Sản phẩm mới</c:if>
-                    <c:if test="${sanPham.tinhTrang==1}">Sản phẩm cũ</c:if>
+                    <c:if test="${sanPham.trangThai==0}">Sản phẩm mới</c:if>
+                    <c:if test="${sanPham.trangThai==1}">Sản phẩm cũ</c:if>
                 </td>
                 <td>${sanPham.moTa}</td>
                 <td>${sanPham.hinhAnh.ten}</td>
-                <td>${sanPham.hangSanPham.ten}</td>
-                <td>${sanPham.chatLieu.loaiChatLieu}</td>
+                <td>${sanPham.phanLoai.tenLoai}</td>
+                <td>${sanPham.thuongHieu.ten}</td>
                 <td colspan="2">
                     <a href="/san-pham/delete/${sanPham.id}" class="btn btn-success"
                        onclick="return tbxd()">Delete</a>
