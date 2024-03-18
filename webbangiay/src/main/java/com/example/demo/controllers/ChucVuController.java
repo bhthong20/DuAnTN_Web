@@ -1,9 +1,9 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.ChucVu;
-import com.example.demo.models.KhachHang;
+import com.example.demo.models.NhanVien;
 import com.example.demo.services.ChucVuService;
-import com.example.demo.services.KhachHangService;
+import com.example.demo.services.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,27 +25,27 @@ import java.util.UUID;
 
 @Controller
 //@RequestMapping("/nhan-vien")
-public class KhachHangController {
+public class ChucVuController {
 
     @Autowired
-    private KhachHangService khachHangService;
+    private ChucVuService chucVuService;
 
 
-    @GetMapping("/hien-thi/khach-hang")
+    @GetMapping("/hien-thi/chuc-vu")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KhachHang> list = khachHangService.FindAll(pageable);
-        model.addAttribute("khachHang", list.getContent());
+        Page<ChucVu> list = chucVuService.FindAll(pageable);
+        model.addAttribute("chucVu", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-//        model.addAttribute("khachHang" , khachHangService.getAll());
-        return "/khach-hang/hien-thi";
+//        model.addAttribute("chucVu" , chucVuService.getAll());
+        return "/chuc-vu/hien-thi";
     }
 
-    @GetMapping("/khach-hang/delete/{id}")
+    @GetMapping("/chuc-vu/delete/{id}")
     public String deleteChucVu(@PathVariable(name = "id") UUID id) {
-        khachHangService.deleteKhachHang(id);
+        chucVuService.deleteChucVu(id);
         return "redirect:/hien-thi/chuc-vu";
     }
 
@@ -77,33 +77,31 @@ public class KhachHangController {
 //        return "redirect:/hien-thi/nhan-vien";
 //    }
 //
+
+    @GetMapping("/chuc-vu/view-add")
+    public String viewAdd(Model model, @ModelAttribute("chucVu") ChucVu chucVu) {
+        model.addAttribute("chucVu", new ChucVu());
+//        model.addAttribute("listCv", chucVuService.getAll());
+        model.addAttribute("contentPage", "chuc-vu/add.jsp");
+        return "chuc-vu/add";
+    }
+
+    //
 //
-//    @GetMapping("/khach-hang/view-add")
-//    public String viewAdd(Model model, @ModelAttribute("khachHang") KhachHang khachHang) {
-//        model.addAttribute("khachHang", new KhachHang());
-////        model.addAttribute("listCv", chucVuService.getAll());
-//        model.addAttribute("contentPage", "khach-hang/add.jsp");
-//        return "chuc-vu/add";
-//    }
-//
-//
-//    @PostMapping("/khach-hang/add")
-//    public String add(Model model , @ModelAttribute("khachHang") KhachHang khachHang, BindingResult result) {
-//        if (result.hasErrors()) {
-////            model.addAttribute("listKhachHang", chucVuService.getAll());
-//            model.addAttribute("contentPage", "chuc-vu/add.jsp");
-//            return "khach-hang"/add";
-//        }
-//        String maKhachHang = "KH00" + (khachHangService.getAll().size() + 1);
-//        khachHang.setMa(maKhachHang);
-////        nhanVien.setHoTen(nhanVien.getHoTen());
-//        khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
-//        khachHangService.add(khachHang);
-////        nhanVienService.add(nhanVien);
-//        System.out.println("listKhachHang");
-//        return "redirect:/hien-thi/khach-hang";
-//
-//
-//    }
+    @PostMapping("/chuc-vu/add")
+    public String add(Model model, @ModelAttribute("chucVu") ChucVu chucVu, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("contentPage", "chuc-vu/add.jsp");
+            return "chuc-vu/add";
+        }
+        String maChucVu = "CV00" + (chucVuService.getAll().size() + 1);
+        chucVu.setMa(maChucVu);
+        chucVu.setNgayTao(Date.valueOf(LocalDate.now()));
+        chucVuService.add(chucVu);
+        System.out.println("listChucVu");
+        return "redirect:/hien-thi/chuc-vu";
+
+
+    }
 }
 
