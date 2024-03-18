@@ -42,7 +42,7 @@ public class GioHang {
     @Column(name = "trang_thai")
     private int trangThai;
 
-    @Column(name = "ghi_chi")
+    @Column(name = "ghi_chu")
     private String ghiChu;
 
     @ManyToOne(fetch = FetchType.LAZY)

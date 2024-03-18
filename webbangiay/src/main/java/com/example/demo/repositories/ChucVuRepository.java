@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface ChucVuRepository extends JpaRepository<ChucVu, UUID> {
-    @Query("select ch from ChucVu ch where ch.ma like %:search% or ch.ten like %:search%")
-    List<ChucVu> search(String search);
+//    @Query("select ch from ChucVu ch where ch.ma like %:search% or ch.ten like %:search%")
+//    List<ChucVu> search(String search);
 }

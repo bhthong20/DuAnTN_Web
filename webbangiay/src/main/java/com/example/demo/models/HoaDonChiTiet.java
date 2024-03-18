@@ -47,4 +47,5 @@ public class HoaDonChiTiet {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chi_tiet_san_pham_id")
     private ChiTietSanPham chiTietSanPham;
+
 }

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ThuongHieuService {
-    public Page<ThuongHieu> getAll(Pageable pageable);
+
+    public Page<ThuongHieu> findAll(Pageable pageable);
 
     public List<ThuongHieu> findAll();
 
