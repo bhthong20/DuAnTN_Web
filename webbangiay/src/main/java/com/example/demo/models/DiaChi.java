@@ -33,8 +33,8 @@ public class DiaChi {
     @Column(name = "id_dia_chi")
     private UUID id;
 
-    @Column(name = "ma")
-    private String ma;
+//    @Column(name = "ma")
+//    private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "dia_chi_chi_tiet")
@@ -61,8 +61,12 @@ public class DiaChi {
 
     @Column(name = "trang_thai")
     private int trangThai;
+//
+//    @Column(name = "tinh_trang")
+//    private int tinhTrang;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "khach_hang_id")
+    @JoinColumn(name = "id_khach_hang")
     private KhachHang khachHang;
 }

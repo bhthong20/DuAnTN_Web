@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
-/../../../../../../../../:\Users\dungd\OneDrive\Documents\du-an-tot-nghiep\DuAnTN_Web\.idea/dataSources/
+/../../../:\DuAnTN_Web\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/

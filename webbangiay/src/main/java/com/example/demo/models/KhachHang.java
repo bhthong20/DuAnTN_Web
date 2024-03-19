@@ -66,5 +66,5 @@ public class KhachHang {
     private Date ngayCapNhat;
 
     @Column(name = "trang_thai")
-    private int trangThai;
+    private String trangThai;
 }

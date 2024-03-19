@@ -53,9 +53,9 @@ public class NhanVien {
     @Column(name = "email")
     private String email;
 
-    @NotBlank(message = "Không để trống thông tin")
-    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại không hợp lệ")
-    @jakarta.validation.constraints.Size(max = 10, message = "Số điện thoại không quá 10 ký tự")
+//    @NotBlank(message = "Không để trống thông tin")
+//    @Pattern(regexp = "^0\\d{9}$", message = "Số điện thoại không hợp lệ")
+//    @jakarta.validation.constraints.Size(max = 10, message = "Số điện thoại không quá 10 ký tự")
     @Column(name = "sdt")
     private String sdt;
 
@@ -63,11 +63,11 @@ public class NhanVien {
     @Column(name = "dia_chi")
     private String diaChi;
 
-    @NotNull(message = "Không để trống thông tin")
+//    @NotNull(message = "Không để trống thông tin")
     @Column(name = "ngay_sinh")
     private Date ngaySinh;
 
-    @NotBlank(message = "Không để trống thông tin")
+//    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "cccd")
     private String canCuoc;
 
