@@ -1,6 +1,5 @@
 package com.example.demo.services.impl;
 
-<<<<<<< HEAD
 import com.example.demo.models.ChatLieu;
 import com.example.demo.models.NhanVien;
 import com.example.demo.repositories.NhanVienRepository;
@@ -19,6 +18,10 @@ public class NhanVienServiceImpl implements  NhanVienService {
     @Autowired
     NhanVienRepository nhanVienRepository;
 
+    @Override
+    public List<NhanVien> findAll() {
+        return null;
+    }
 
     @Override
     public Page<NhanVien> FindAll(Pageable pageable) {
@@ -47,10 +50,10 @@ public class NhanVienServiceImpl implements  NhanVienService {
 
     @Override
     public NhanVien update(UUID id, NhanVien nhanVien) {
-        if(id != null){
+        if (id != null) {
             NhanVien nhanVien1 = nhanVienRepository.findById(id).orElse(null);
-            if(nhanVien1 != null){
-                BeanUtils.copyProperties(nhanVien , nhanVien1);
+            if (nhanVien1 != null) {
+                BeanUtils.copyProperties(nhanVien, nhanVien1);
                 nhanVienRepository.save(nhanVien1);
             }
         }
@@ -61,24 +64,7 @@ public class NhanVienServiceImpl implements  NhanVienService {
     public void deleteNhanVien(UUID id) {
         nhanVienRepository.deleteById(id);
     }
-
-
-=======
-import com.example.demo.models.NhanVien;
-import com.example.demo.repositories.NhanVienRepository;
-import com.example.demo.services.NhanVienService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class NhanVienServiceImpl implements NhanVienService {
-    @Autowired
-    private NhanVienRepository nhanVienRepository;
-    @Override
-    public List<NhanVien> findAll() {
-        return nhanVienRepository.findAll();
-    }
->>>>>>> bc0f4784a174f62f31912ddf1720079101fb2bcf
 }
+
+
+

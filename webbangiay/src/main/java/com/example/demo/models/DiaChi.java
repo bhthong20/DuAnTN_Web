@@ -33,8 +33,8 @@ public class DiaChi {
     @Column(name = "id_dia_chi")
     private UUID id;
 
-//    @Column(name = "ma")
-//    private String ma;
+    @Column(name = "ma")
+    private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "dia_chi_chi_tiet")

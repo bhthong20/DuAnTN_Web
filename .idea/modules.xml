@@ -3,10 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DuAnTN_Web.iml" filepath="$PROJECT_DIR$/.idea/DuAnTN_Web.iml" />
-<<<<<<< HEAD
-=======
-      <module fileurl="file://$PROJECT_DIR$/webbangiay/demo.iml" filepath="$PROJECT_DIR$/webbangiay/demo.iml" />
->>>>>>> bc0f4784a174f62f31912ddf1720079101fb2bcf
     </modules>
   </component>
 </project>

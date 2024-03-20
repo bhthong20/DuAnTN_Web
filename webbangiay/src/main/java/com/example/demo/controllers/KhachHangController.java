@@ -1,8 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.ChucVu;
 import com.example.demo.models.KhachHang;
-import com.example.demo.services.ChucVuService;
 import com.example.demo.services.KhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,27 +9,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-//@RequestMapping("/nhan-vien")
+@RequestMapping("/khach-hang")
 public class KhachHangController {
 
     @Autowired
     private KhachHangService khachHangService;
 
 
-    @GetMapping("/hien-thi/khach-hang")
+    @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
@@ -40,6 +34,7 @@ public class KhachHangController {
         model.addAttribute("khachHang", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 //        model.addAttribute("khachHang" , khachHangService.getAll());
+        model.addAttribute("contentPage", "khach-hang/hien-thi.jsp");
         return "/khach-hang/hien-thi";
     }
 

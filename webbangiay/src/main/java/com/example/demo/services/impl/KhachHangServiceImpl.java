@@ -1,7 +1,5 @@
 package com.example.demo.services.impl;
 
-<<<<<<< HEAD
-import com.example.demo.models.ChucVu;
 import com.example.demo.models.KhachHang;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.services.KhachHangService;
@@ -26,7 +24,7 @@ public class KhachHangServiceImpl implements KhachHangService {
     }
 
     @Override
-    public List<KhachHang> getAll() {
+    public List<KhachHang> findAll() {
         return khachHangRepository.findAll();
     }
 
@@ -61,22 +59,6 @@ public class KhachHangServiceImpl implements KhachHangService {
     public void deleteKhachHang(UUID id) {
         khachHangRepository.deleteById(id);
     }
-=======
-import com.example.demo.models.KhachHang;
-import com.example.demo.repositories.KhachHangRepository;
-import com.example.demo.services.KhachHangService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-@Service
-public class KhachHangServiceImpl implements KhachHangService {
-    @Autowired
-    private KhachHangRepository khachHangRepository;
-    @Override
-    public List<KhachHang> findAll() {
-        return khachHangRepository.findAll();
-    }
->>>>>>> bc0f4784a174f62f31912ddf1720079101fb2bcf
 }
+
+

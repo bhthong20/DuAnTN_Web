@@ -47,13 +47,13 @@ public class LoaiController {
         return "loai/add";
     }
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute(name = "MauSac") PhanLoai mauSac , BindingResult bindingResult ){
+    public String add(@Valid @ModelAttribute(name = "PhanLoai") PhanLoai phanLoai , BindingResult bindingResult ){
         if(bindingResult.hasErrors()){
             return "loai/add";
         }
-        mauSac.setId(UUID.randomUUID());
-        mauSac.setNgayTao(Date.valueOf(LocalDate.now()));
-        khuyenMaiService.add(mauSac);
+        phanLoai.setId(UUID.randomUUID());
+        phanLoai.setNgayTao(Date.valueOf(LocalDate.now()));
+        khuyenMaiService.add(phanLoai);
         return "redirect:/loai/hien-thi";
     }
 

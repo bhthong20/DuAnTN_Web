@@ -49,8 +49,8 @@ public class DiaChiController {
         Page<DiaChi> list = diaChiService.FindAll(pageable);
         model.addAttribute("diaChi", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-//        model.addAttribute("diaChi" , diaChiService.getAll());
-        return "/dia-chi/hien-thi";
+        model.addAttribute("contentPage", "dia-chi/hien-thi.jsp");
+        return "layout";
     }
 
     @GetMapping("/dia-chi/delete/{id}")
@@ -92,7 +92,7 @@ public class DiaChiController {
     public String viewAdd(Model model, @ModelAttribute("diaChi") DiaChi diaChi,
                           @ModelAttribute ("khachHang")KhachHang khachHang) {
         model.addAttribute("chucVu", new ChucVu());
-        model.addAttribute("listKh" , khachHangService.getAll());
+        model.addAttribute("listKh" , khachHangService.findAll());
 //        model.addAttribute("listCv", chucVuService.getAll());
         model.addAttribute("contentPage", "dia-chi/add.jsp");
         return "dia-chi/add";
@@ -103,7 +103,7 @@ public class DiaChiController {
     public String add(Model model, @ModelAttribute("diaChi") DiaChi diaChi,
                       @ModelAttribute("khachHang") KhachHang khachHang, BindingResult result) {
         if (result.hasErrors()) {
-            model.addAttribute("listKh" , khachHangService.getAll());
+            model.addAttribute("listKh" , khachHangService.findAll());
             model.addAttribute("contentPage", "dia-chi/add.jsp");
             return "dia-chi/add";
         }

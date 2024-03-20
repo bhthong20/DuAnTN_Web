@@ -1,9 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.ChucVu;
-import com.example.demo.models.NhanVien;
 import com.example.demo.services.ChucVuService;
-import com.example.demo.services.NhanVienService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
@@ -24,14 +23,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-//@RequestMapping("/nhan-vien")
+@RequestMapping("/chuc-vu")
 public class ChucVuController {
 
     @Autowired
     private ChucVuService chucVuService;
 
 
-    @GetMapping("/hien-thi/chuc-vu")
+    @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
@@ -40,7 +39,7 @@ public class ChucVuController {
         model.addAttribute("chucVu", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 //        model.addAttribute("chucVu" , chucVuService.getAll());
-        return "/chuc-vu/hien-thi";
+        return "chuc-vu/hien-thi";
     }
 
     @GetMapping("/chuc-vu/delete/{id}")

@@ -61,7 +61,8 @@ public class ChiTietSanPhamController {
         Page<ChiTietSanPham> list = chiTietSanPhamService.getAll(pageable);
         model.addAttribute("listCTSP", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "chi-tiet-san-pham/hien-thi";
+        model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
+        return "layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -90,7 +91,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("listKT", kichThuocService.findAll());
         model.addAttribute("listCL", chatLieuService.findAll());
         model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
-        return "chi-tiet-san-pham/add";
+        return "layout";
     }
 
     @GetMapping("/view-update/{idctsp}")
@@ -105,7 +106,7 @@ public class ChiTietSanPhamController {
         model.addAttribute("listKT", kichThuocService.findAll());
         model.addAttribute("listCL", chatLieuService.findAll());
         model.addAttribute("contentPage", "chi-tiet-san-pham/update.jsp");
-        return "chi-tiet-san-pham/update";
+        return "layout";
     }
 
     @PostMapping("/add")
@@ -119,7 +120,7 @@ public class ChiTietSanPhamController {
             model.addAttribute("listKT", kichThuocService.findAll());
             model.addAttribute("listCL", chatLieuService.findAll());
             model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
-            return "chi-tiet-san-pham/add";
+            return "layout";
         }
         String maCTSP = "CTSP" + (chiTietSanPhamService.findAll().size() + 1);
         chiTietSanPham.setMa(maCTSP);
@@ -210,7 +211,7 @@ public class ChiTietSanPhamController {
         List<ChiTietSanPham> list = chiTietSanPhamService.search0(search);
         model.addAttribute("listCTSP", list);
         model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
-        return "chi-tiet-san-pham/hien-thi";
+        return "layout";
     }
 
     @PostMapping("/search1")

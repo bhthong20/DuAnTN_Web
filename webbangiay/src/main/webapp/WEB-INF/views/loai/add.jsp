@@ -16,7 +16,7 @@
 <body>
 <h4 style="text-align: center">Thêm loại sản phẩm</h4>
 <div class="container">
-    <form:form action="/loai/add" method="post" modelAttribute="MauSac">
+    <form:form action="/loai/add" method="post" modelAttribute="PhanLoai">
         <div class="row">
             <div class="col-6">
                 <div class="form-floating mb-3 mt-3">
@@ -28,8 +28,8 @@
             </div>
             <div class="col-6">
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="ten"/>
-                    <form:label class="form-label" path="ten">Tên</form:label>
+                    <form:input class="form-control" placeholder="" path="tenLoai"/>
+                    <form:label class="form-label" path="tenLoai">Tên</form:label>
                     <form:errors path="ten" cssStyle="color: red"/>
                 </div>
 

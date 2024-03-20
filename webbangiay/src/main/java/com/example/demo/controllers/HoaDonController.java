@@ -43,7 +43,8 @@ public class HoaDonController {
         System.out.println(list.getContent());
         model.addAttribute("listhoaDon", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "hoa-don/hien-thi";
+        model.addAttribute("contentPage", "hoa-don/hien-thi.jsp");
+        return "layout";
     }
 
     @GetMapping("/view-add")

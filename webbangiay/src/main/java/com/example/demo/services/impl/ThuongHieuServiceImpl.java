@@ -19,7 +19,7 @@ public class ThuongHieuServiceImpl implements ThuongHieuService {
 
 
     @Override
-    public Page<ThuongHieu> getAll(Pageable pageable) {
+    public Page<ThuongHieu> findAll(Pageable pageable) {
         return thuongHieuRepository.findAll(pageable);
     }
 

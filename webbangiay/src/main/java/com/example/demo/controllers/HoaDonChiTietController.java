@@ -45,7 +45,7 @@ public class HoaDonChiTietController {
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("hoaDonCT") HoaDonChiTiet hoaDonChiTiet, @ModelAttribute(name="hoaDon") HoaDon hoaDon, @ModelAttribute(name="chiTietSanPham") ChiTietSanPham chiTietSanPham) {
         List<HoaDon> listHoaDon = hoaDonService.findAll();
-        List<ChiTietSanPham> listCTSP = chiTietSanPhamService.findALL();
+        List<ChiTietSanPham> listCTSP = chiTietSanPhamService.findAll();
         model.addAttribute("hoaDonCT", new HoaDonChiTiet());
         model.addAttribute("listHoaDon", listHoaDon);
         model.addAttribute("listCTSP", listCTSP);
@@ -62,7 +62,7 @@ public class HoaDonChiTietController {
     @GetMapping("/view-update/{id}")
     public String viewUpdate(Model model, @PathVariable("id") UUID id,  @ModelAttribute("hoaDonCT") HoaDonChiTiet hoaDonCT, @ModelAttribute("hoaDon") HoaDon hoaDon, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham) {
         List<HoaDon> listHoaDon = hoaDonService.findAll();
-        List<ChiTietSanPham> listCTSP = chiTietSanPhamService.findALL();
+        List<ChiTietSanPham> listCTSP = chiTietSanPhamService.findAll();
         model.addAttribute("listHoaDon", listHoaDon);
         model.addAttribute("listCTSP", listCTSP);
         HoaDonChiTiet hoaDonCT1 = hoaDonChiTietService.findById(id);

@@ -49,7 +49,7 @@
             <tr>
                 <td>${stt.index+1}</td>
                 <td>${hangSanPham.ma}</td>
-                <td>${hangSanPham.ten}</td>
+                <td>${hangSanPham.tenLoai}</td>
                 <td>${hangSanPham.ngayTao}</td>
                 <td>${hangSanPham.ngayCapNhat}</td>
                 <td>${hangSanPham.moTa}</td>
