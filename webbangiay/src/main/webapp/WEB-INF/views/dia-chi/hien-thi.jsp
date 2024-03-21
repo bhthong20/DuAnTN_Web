@@ -52,13 +52,7 @@
         <c:forEach items="${diaChi}" var="dc" varStatus="stt">
             <tr>
                 <td>${stt.index+1}</td>
-<%--                <td>${dc.ma}</td>--%>
-<%--                <td align="center">--%>
-<%--                    <img src="../../../uploads/${ctsp.sanPham.hinhAnh.anh1}" width="40" height="40"--%>
-<%--                         style="border-radius:50% 50% 50% 50%">--%>
-
-<%--                </td>--%>
-                <td>${dc.diaChi}</td>
+                <td>${dc.dc}</td>
                 <td>${dc.quan}</td>
                 <td>${dc.phuongXa}</td>
                 <td>${dc.thanhPho}</td>
@@ -72,7 +66,7 @@
                 <td colspan="2">
                     <a href="/dia-chi/delete/${dc.id}" class="btn btn-success"
                        onclick="return tbxd()">Delete</a>
-                    <a href="/view-update/${dc.id}" class="btn btn-success"
+                    <a href="/dia-chi/view-update/${dc.id}" class="btn btn-success"
                        onclick="return tbxd()">Update</a>
                 </td>
             </tr>

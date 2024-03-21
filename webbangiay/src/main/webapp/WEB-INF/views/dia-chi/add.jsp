@@ -28,9 +28,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="diaChi"/>
-                    <form:label class="form-label" path="diaChi">Địa Chỉ Chi Tiết:</form:label>
-                    <form:errors path="diaChi" cssStyle="color: red"/>
+                    <form:input class="form-control" placeholder="" path="dc"/>
+                    <form:label class="form-label" path="dc">Địa Chỉ Chi Tiết:</form:label>
+                    <form:errors path="dc" cssStyle="color: red"/>
                 </div>
                 <div class="form-floating mb-3 mt-3">
                     <form:input class="form-control" placeholder="" path="phuongXa"/>
@@ -41,12 +41,6 @@
             <div class="col-6">
             </div>
             <div class="col-md-6">
-                    <%--                <div class="form-floating mb-3 mt-3">--%>
-                    <%--                    <form:textarea class="form-control" placeholder="" path="ngayCapNhat"/>--%>
-                    <%--                    <form:label class="form-label" path="ngayCapNhat">Ngày Cập Nhập:</form:label>--%>
-                    <%--                    <form:errors path="ngayCapNhat" cssStyle="color: #ff0000"/>--%>
-                    <%--                </div>--%>
-
                 <div class="form-floating mb-3 mt-3">
                     <form:input class="form-control" placeholder="" path="quan"/>
                     <form:label class="form-label" path="quan">Quận:</form:label>

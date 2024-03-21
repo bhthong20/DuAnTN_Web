@@ -23,51 +23,51 @@
 <h4 style="text-align: center">Thêm Chức Vụ Mới</h4>
 <div class="container">
     <%--@elvariable id="chiTietSanPham" type=""--%>
-    <form:form action="/chuc-vu/update/${cv.id}" method="post" modelAttribute="chucVu">
+    <form:form action="/dia-chi/update/${diaChi.id}" method="post" modelAttribute="diaChi">
 
         <div class="row">
             <div class="col-md-6">
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="ma" disabled/>
-                    <form:label class="form-label" path="ma" >Mã Chức Vụ:</form:label>
-                    <form:errors path="ma" cssStyle="color: red"/>
+                    <form:input class="form-control" placeholder="" path="dc"/>
+                    <form:label class="form-label" path="dc">Địa Chỉ Chi Tiết:</form:label>
+                    <form:errors path="dc" cssStyle="color: red"/>
                 </div>
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="ten"/>
-                    <form:label class="form-label" path="ten">Tên Chức Vụ:</form:label>
-                    <form:errors path="ten" cssStyle="color: red"/>
+                    <form:input class="form-control" placeholder="" path="phuongXa"/>
+                    <form:label class="form-label" path="phuongXa">Phường Xã:</form:label>
+                    <form:errors path="phuongXa" cssStyle="color: red"/>
                 </div>
             </div>
             <div class="col-6">
             </div>
             <div class="col-md-6">
-<%--                <div class="form-floating mb-3 mt-3">--%>
-<%--                    <form:textarea class="form-control" placeholder="" path="ngayCapNhat"/>--%>
-<%--                    <form:label class="form-label" path="ngayCapNhat">Ngày Cập Nhập:</form:label>--%>
-<%--                    <form:errors path="ngayCapNhat" cssStyle="color: #ff0000"/>--%>
-<%--                </div>--%>
+                <div class="form-floating mb-3 mt-3">
+                    <form:input class="form-control" placeholder="" path="quan"/>
+                    <form:label class="form-label" path="quan">Quận:</form:label>
+                    <form:errors path="quan" cssStyle="color: #ff0000"/>
+                </div>
 
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="moTa"/>
-                    <form:label class="form-label" path="moTa">Mô Tả:</form:label>
-                    <form:errors path="moTa" cssStyle="color: #ff0000"/>
+                    <form:input class="form-control" placeholder="" path="thanhPho"/>
+                    <form:label class="form-label" path="thanhPho">Thành Phó:</form:label>
+                    <form:errors path="thanhPho" cssStyle="color: #ff0000"/>
                 </div>
+
 
                 <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
                 <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
                 <form:radiobutton path="trangThai" value="1"/>Hoạt Động
 
 
-
-        </div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: center">
-                            <button type="submit" class="btn btn-success"
-                                    id="btt" onclick="return myFunction2()">Update
-                            </button>
-                        </div>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="text-align: center">
+                    <button type="submit" class="btn btn-success"
+                            id="btt" onclick="return myFunction1()">Update
+                    </button>
                 </div>
+            </div>
+        </div>
     </form:form>
 </div>
 </body>
