@@ -67,7 +67,7 @@
                 <td colspan="2">
                     <a href="/chuc-vu/delete/${cv.id}" class="btn btn-success"
                        onclick="return tbxd()">Delete</a>
-                    <a href="/view-update/${cv.id}" class="btn btn-success"
+                    <a href="/chuc-vu/view-update/${cv.id}" class="btn btn-success"
                        onclick="return tbxd()">Update</a>
                 </td>
             </tr>

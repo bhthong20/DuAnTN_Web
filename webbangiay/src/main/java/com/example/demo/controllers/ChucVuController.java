@@ -23,14 +23,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/chuc-vu")
+//@RequestMapping("/chuc-vu")
 public class ChucVuController {
 
     @Autowired
     private ChucVuService chucVuService;
 
 
-    @GetMapping("/hien-thi")
+    @GetMapping("/hien-thi/chuc-vu")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
@@ -38,7 +38,6 @@ public class ChucVuController {
         Page<ChucVu> list = chucVuService.FindAll(pageable);
         model.addAttribute("chucVu", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-//        model.addAttribute("chucVu" , chucVuService.getAll());
         return "chuc-vu/hien-thi";
     }
 
@@ -48,45 +47,32 @@ public class ChucVuController {
         return "redirect:/hien-thi/chuc-vu";
     }
 
-//    @GetMapping("/view-update/{id}")
-//    public String viewUpdate(Model model, @PathVariable("id") UUID id) {
-//        ChucVu cv = chucVuService.findById(id);
-//        model.addAttribute("chucVu", cv);;
-//        model.addAttribute("contentPage", "/chuc-vu/update.jsp");
-//        return "/chuc-vu/update";
-//    }
-//
-//    @PostMapping("update/{id}")
-//    public String update(@ModelAttribute(name = "nhanVien") NhanVien nhanVien,
-//                         @PathVariable(name = "id") UUID id ,@ModelAttribute("chucVu") ChucVu chucVu) {
-//        NhanVien nv = nhanVienService.findById(id);
-//        nhanVien.setMa(nv.getMa());
-//        nhanVien.setHoTen(nv.getHoTen());
-//        nhanVien.setEmail(nv.getEmail());
-//        nhanVien.setSdt(nv.getSdt());
-//        nhanVien.setNgaySinh(nv.getNgaySinh());
-//        nhanVien.setGioiTinh(nv.getGioiTinh());
-//        nhanVien.setDiaChi(nv.getDiaChi());
-//        nhanVien.setCanCuoc(nv.getCanCuoc());
-//        nhanVien.setTaiKhoan(nv.getTaiKhoan());
-//        nhanVien.setMatKhau(nv.getMatKhau());
-//        nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-//        nhanVien.setTinhTrang(nv.getTinhTrang());
-//        nhanVienService.update(id, nhanVien);
-//        return "redirect:/hien-thi/nhan-vien";
-//    }
-//
+    @GetMapping("/chuc-vu/view-update/{id}")
+    public String viewUpdate(Model model, @PathVariable("id") UUID id) {
+        ChucVu cv = chucVuService.findById(id);
+        model.addAttribute("chucVu", cv);
+        model.addAttribute("contentPage", "/chuc-vu/update.jsp");
+        return "/chuc-vu/update";
+    }
+
+    @PostMapping("/chuc-vu/update/{id}")
+    public String update(@ModelAttribute(name = "chucVu") ChucVu chucVu,
+                         @PathVariable(name = "id") UUID id) {
+        ChucVu nv = chucVuService.findById(id);
+        chucVu.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        System.out.println(nv.toString());
+        chucVuService.update(id, chucVu);
+        return "redirect:/hien-thi/chuc-vu";
+    }
+
 
     @GetMapping("/chuc-vu/view-add")
     public String viewAdd(Model model, @ModelAttribute("chucVu") ChucVu chucVu) {
         model.addAttribute("chucVu", new ChucVu());
-//        model.addAttribute("listCv", chucVuService.getAll());
         model.addAttribute("contentPage", "chuc-vu/add.jsp");
         return "chuc-vu/add";
     }
 
-    //
-//
     @PostMapping("/chuc-vu/add")
     public String add(Model model, @ModelAttribute("chucVu") ChucVu chucVu, BindingResult result) {
         if (result.hasErrors()) {
@@ -99,8 +85,6 @@ public class ChucVuController {
         chucVuService.add(chucVu);
         System.out.println("listChucVu");
         return "redirect:/hien-thi/chuc-vu";
-
-
     }
 }
 

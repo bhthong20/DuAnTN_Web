@@ -23,12 +23,12 @@
 <h4 style="text-align: center">Thêm Chức Vụ Mới</h4>
 <div class="container">
     <%--@elvariable id="chiTietSanPham" type=""--%>
-    <form:form action="/chuc-vu/update/${cv.id}" method="post" modelAttribute="chucVu">
+    <form:form action="/chuc-vu/update/${chucVu.id}" method="post" modelAttribute="chucVu">
 
         <div class="row">
             <div class="col-md-6">
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="ma" disabled/>
+                    <form:input class="form-control" placeholder="" path="ma" />
                     <form:label class="form-label" path="ma" >Mã Chức Vụ:</form:label>
                     <form:errors path="ma" cssStyle="color: red"/>
                 </div>
@@ -56,8 +56,6 @@
                 <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
                 <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
                 <form:radiobutton path="trangThai" value="1"/>Hoạt Động
-
-
 
         </div>
                     <div class="row">

@@ -41,33 +41,25 @@
             <div class="col-6">
             </div>
             <div class="col-md-6">
-<%--                <div class="form-floating mb-3 mt-3">--%>
-<%--                    <form:textarea class="form-control" placeholder="" path="ngayCapNhat"/>--%>
-<%--                    <form:label class="form-label" path="ngayCapNhat">Ngày Cập Nhập:</form:label>--%>
-<%--                    <form:errors path="ngayCapNhat" cssStyle="color: #ff0000"/>--%>
-<%--                </div>--%>
-
                 <div class="form-floating mb-3 mt-3">
                     <form:input class="form-control" placeholder="" path="moTa"/>
                     <form:label class="form-label" path="moTa">Mô Tả:</form:label>
                     <form:errors path="moTa" cssStyle="color: #ff0000"/>
                 </div>
-
-                <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
-                <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
-                <form:radiobutton path="trangThai" value="1"/>Hoạt Động
-
-
-
-        </div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: center">
-                            <button type="submit" class="btn btn-success"
-                                    id="btt" onclick="return myFunction1()">Add
-                            </button>
-                        </div>
-                    </div>
+                <div class="form-floating mb-3 mt-3">
+                    <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
+                    <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
+                    <form:radiobutton path="trangThai" value="1"/>Hoạt Động
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="text-align: center">
+                    <button type="submit" class="btn btn-success"
+                            id="btt" onclick="return myFunction1()">Add
+                    </button>
+                </div>
+            </div>
+        </div>
     </form:form>
 </div>
 </body>
