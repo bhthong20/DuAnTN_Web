@@ -46,6 +46,7 @@
                     <form:label class="form-label" path="moTa">Mô Tả:</form:label>
                     <form:errors path="moTa" cssStyle="color: #ff0000"/>
                 </div>
+
                 <div class="form-floating mb-3 mt-3">
                     <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
                     <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động

@@ -24,279 +24,88 @@
 <div class="container">
     <%--@elvariable id="chiTietSanPham" type=""--%>
     <form:form action="/nhan-vien/add" method="post" modelAttribute="nhanVien">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="ma"/>
-                    <form:label class="form-label" path="ma">Mã Nhân Viên:</form:label>
-                    <form:errors path="ma" cssStyle="color: red"/>
-                </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="hoTen"/>
-                    <form:label class="form-label" path="hoTen">Họ Tên:</form:label>
-                    <form:errors path="hoTen" cssStyle="color: red"/>
-                </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-floating mb-3 mt-3">
+                <form:input class="form-control" placeholder="" path="ma"/>
+                <form:label class="form-label" path="ma">Mã Nhân Viên:</form:label>
+                <form:errors path="ma" cssStyle="color: red"/>
             </div>
-            <div class="col-6">
+            <div class="form-floating mb-3 mt-3">
+                <form:input class="form-control" placeholder="" path="hoTen"/>
+                <form:label class="form-label" path="hoTen">Họ Tên:</form:label>
+                <form:errors path="hoTen" cssStyle="color: red"/>
             </div>
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mt-3">
-                    <form:textarea class="form-control" placeholder="" path="email"/>
-                    <form:label class="form-label" path="email">Email:</form:label>
-                    <form:errors path="email" cssStyle="color: #ff0000"/>
-                </div>
-
-<%--                <div class="form-floating mb-3 mt-3">--%>
-<%--                    <form:input class="form-control" placeholder="" path="sdt"/>--%>
-<%--                    <form:label class="form-label" path="sdt">Số Điện Thoại:</form:label>--%>
-<%--                    <form:errors path="sdt" cssStyle="color: #ff0000"/>--%>
-<%--                </div>--%>
-
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mb-3 mt-3">
+                <form:textarea class="form-control" placeholder="" path="email"/>
+                <form:label class="form-label" path="email">Email:</form:label>
+                <form:errors path="email" cssStyle="color: #ff0000"/>
+            </div>
+            <div class="form-floating mb-3 mt-3">
                 <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
                 <form:radiobutton path="gioiTinh" value="0" checked="true"/>Nam
                 <form:radiobutton path="gioiTinh" value="1"/>Nữ
-
-                <div class="form-floating mb-3 mt-3">
-                    <form:select class="form-select" path="chucVu">
-                        <option selected disabled>Sản phẩm</option>
-                        <form:options items="${listCv}" itemValue="id" itemLabel="ten"/>
-                    </form:select>
-                    <form:label class="form-label" path="chucVu">Chức Vụ:</form:label>
-                </div>
             </div>
-
-            <div class="col-6">
+            <div class="form-floating mb-3 mt-3">
+                <form:select class="form-select" path="chucVu">
+                    <option selected disabled>Sản phẩm</option>
+                    <form:options items="${listCv}" itemValue="id" itemLabel="ten"/>
+                </form:select>
+                <form:label class="form-label" path="chucVu">Chức Vụ:</form:label>
             </div>
-
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mt-3">
-                    <form:textarea class="form-control" placeholder="" path="diaChi"/>
-                    <form:label class="form-label" path="diaChi">Địa Chỉ:</form:label>
-                    <form:errors path="diaChi" cssStyle="color: #ff0000"/>
-                </div>
-
-<%--                <div class="form-floating mb-3 mt-3">--%>
-<%--                    <form:input class="form-control" placeholder="" path="canCuoc"/>--%>
-<%--                    <form:label class="form-label" path="canCuoc">Căn Cước Công Dân:</form:label>--%>
-<%--                    <form:errors path="canCuoc" cssStyle="color: #ff0000"/>--%>
-<%--                </div>--%>
-<%--                <div class="form-floating mb-3 mt-3">--%>
-<%--                    <form:input class="form-control" placeholder="" path="urlAnh"/>--%>
-<%--                    <form:label class="form-label" path="urlAnh">Hình Ảnh:</form:label>--%>
-<%--                    <form:errors path="urlAnh" cssStyle="color: #ff0000"/>--%>
-<%--                </div>--%>
-            </div>
-            <div class="col-6">
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mt-3">
-                    <form:textarea class="form-control" placeholder="" path="taiKhoan"/>
-                    <form:label class="form-label" path="taiKhoan">Tài Khoản:</form:label>
-                    <form:errors path="taiKhoan" cssStyle="color: #ff0000"/>
-                </div>
-
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="matKhau"/>
-                    <form:label class="form-label" path="matKhau">Mật Khẩu:</form:label>
-                    <form:errors path="matKhau" cssStyle="color: #ff0000"/>
-                </div>
-<%--                <div class="form-floating mb-3 mt-3">--%>
-<%--                    <form:input class="form-control" placeholder="" path="ngayCapNhat"/>--%>
-<%--                    <form:label class="form-label" path="ngayCapNhat">Ngày Cập Nhập:</form:label>--%>
-<%--                    <form:errors path="ngayCapNhat" cssStyle="color: #ff0000"/>--%>
-<%--                </div>--%>
-
-                <div class="form-check mb-3 mt-3">
-                    <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
-                    <br>
-                    <form:radiobutton path="tinhTrang" value="1" checked="true"/>Hoạt động
-                    <br>
-                    <form:radiobutton path="tinhTrang" value="0"/>Ngưng hoạt động
-                </div>
-            </div>
-            <div class="col-6">
-            </div>
-
-
         </div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: center">
-                            <button type="submit" class="btn btn-success"
-                                    id="btt" onclick="return myFunction1()">Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
-    </form:form>
+
+        <div class="col-6">
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-floating mb-3 mt-3">
+                <form:textarea class="form-control" placeholder="" path="diaChi"/>
+                <form:label class="form-label" path="diaChi">Địa Chỉ:</form:label>
+                <form:errors path="diaChi" cssStyle="color: #ff0000"/>
+            </div>
+        </div>
+        <div class="col-6">
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating mb-3 mt-3">
+                <form:textarea class="form-control" placeholder="" path="taiKhoan"/>
+                <form:label class="form-label" path="taiKhoan">Tài Khoản:</form:label>
+                <form:errors path="taiKhoan" cssStyle="color: #ff0000"/>
+            </div>
+
+            <div class="form-floating mb-3 mt-3">
+                <form:input class="form-control" placeholder="" path="matKhau"/>
+                <form:label class="form-label" path="matKhau">Mật Khẩu:</form:label>
+                <form:errors path="matKhau" cssStyle="color: #ff0000"/>
+            </div
+            <div class="form-check mb-3 mt-3">
+                <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                <br>
+                <form:radiobutton path="tinhTrang" value="1" checked="true"/>Hoạt động
+                <br>
+                <form:radiobutton path="tinhTrang" value="0"/>Ngưng hoạt động
+            </div>
+        </div>
+        <div class="col-6">
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-12" style="text-align: center">
+            <button type="submit" class="btn btn-success"
+                    id="btt" onclick="return myFunction1()">Add
+            </button>
+        </div>
+    </div>
 </div>
-<%--Them nhanh mau sac--%>
-<%--<div class="modal fade" id="exampleModalMauSac" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"--%>
-<%--     aria-hidden="true" data-backdrop="static">--%>
-<%--    <div class="modal-dialog modal-dialog-centered">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h1 class="modal-title fs-5" id="exampleModalLabelMauSac">Màu Sắc</h1>--%>
-<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--            </div>--%>
-<%--            <div class="modal-body">--%>
-<%--                <div id="imeiListMauSac">--%>
-<%--                    <table class="table">--%>
-<%--                        &lt;%&ndash;@elvariable id="mauSac" type=""&ndash;%&gt;--%>
-<%--                        <form:form action="/chi-tiet-san-pham/modal-add-mau-sac" method="post" modelAttribute="mauSac">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-floating mb-3 mt-3">--%>
-<%--                                        <form:input class="form-control" placeholder="" path="ten"/>--%>
-<%--                                        <form:label class="form-label" path="ten">Tên màu sắc:</form:label>--%>
-<%--                                        <form:errors path="ten" cssStyle="color: red"/>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-floating mb-3 mt-3">--%>
-<%--                                        <form:input class="form-control" placeholder="" path="moTa"/>--%>
-<%--                                        <form:label class="form-label" path="moTa">Mô tả:</form:label>--%>
-<%--                                        <form:errors path="moTa" cssStyle="color: red"/>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-check mb-3 mt-3">--%>
-<%--                                        <form:label class="form-label" path="trangThai">Tình Trạng:</form:label>--%>
-<%--                                        <br>--%>
-<%--                                        <form:radiobutton path="trangThai" value="0" checked="true"/>Hoạt động--%>
-<%--                                        <br>--%>
-<%--                                        <form:radiobutton path="trangThai" value="1"/>Ngưng hoạt động--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="row">--%>
-<%--                                    <div class="col-12" style="text-align: center">--%>
-<%--                                        <button type="submit" class="btn btn-success"--%>
-<%--                                                onclick="myFunction1()">Add--%>
-<%--                                        </button>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </form:form>--%>
-<%--                    </table>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--&lt;%&ndash;Them nhanh kich co&ndash;%&gt;--%>
-<%--<div class="modal fade" id="exampleModalKichThuoc" tabindex="-1" aria-labelledby="exampleModalLabelKichThuoc"--%>
-<%--     aria-hidden="true" data-backdrop="static">--%>
-<%--    <div class="modal-dialog modal-dialog-centered">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h1 class="modal-title fs-5" id="exampleModalLabelKichThuoc">Kích cỡ</h1>--%>
-<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--            </div>--%>
-<%--            <div class="modal-body">--%>
-<%--                <div id="imeiListKichThuoc">--%>
-<%--                    <table class="table">--%>
-<%--                        &lt;%&ndash;@elvariable id="size" type=""&ndash;%&gt;--%>
-<%--                        <form:form action="/chi-tiet-san-pham/modal-add-kich-thuoc" method="post" modelAttribute="kichThuoc">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-floating mb-3 mt-3">--%>
-<%--                                        <form:input class="form-control" placeholder="" path="size"/>--%>
-<%--                                        <form:label class="form-label" path="size">Kích cỡ:</form:label>--%>
-<%--                                        <form:errors path="size" cssStyle="color: red"/>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-floating mb-3 mt-3">--%>
-<%--                                        <form:input class="form-control" placeholder="" path="moTa"/>--%>
-<%--                                        <form:label class="form-label" path="moTa">Mô tả:</form:label>--%>
-<%--                                        <form:errors path="moTa" cssStyle="color: red"/>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-check mb-3 mt-3">--%>
-<%--                                        <form:label class="form-label" path="trangThai">Tình Trạng:</form:label>--%>
-<%--                                        <br>--%>
-<%--                                        <form:radiobutton path="trangThai" value="0" checked="true"/>Hoạt động--%>
-<%--                                        <br>--%>
-<%--                                        <form:radiobutton path="trangThai" value="1"/>Ngưng hoạt động--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="row">--%>
-<%--                                    <div class="col-12" style="text-align: center">--%>
-<%--                                        <button type="submit" class="btn btn-success"--%>
-<%--                                                onclick="myFunction1()">Add--%>
-<%--                                        </button>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </form:form>--%>
-<%--                    </table>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--Them nhanh de--%>
-<%--<div class="modal fade" id="exampleModalChatLieu" tabindex="-1" aria-labelledby="exampleModalLabelChatLieu"--%>
-<%--     aria-hidden="true" data-backdrop="static">--%>
-<%--    <div class="modal-dialog modal-dialog-centered">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <h1 class="modal-title fs-5" id="exampleModalLabelChatLieu">Loại đế</h1>--%>
-<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--            </div>--%>
-<%--            <div class="modal-body">--%>
-<%--                <div id="imeiListChatLieu">--%>
-<%--                    <table class="table">--%>
-<%--                        &lt;%&ndash;@elvariable id="de" type=""&ndash;%&gt;--%>
-<%--                        <form:form action="/chi-tiet-san-pham/modal-add-chat-lieu" method="post" modelAttribute="chatLieu">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-floating mb-3 mt-3">--%>
-<%--                                        <form:input class="form-control" placeholder="" path="tenChatLieu"/>--%>
-<%--                                        <form:label class="form-label" path="tenChatLieu">Chất liệu:</form:label>--%>
-<%--                                        <form:errors path="tenChatLieu" cssStyle="color: red"/>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-floating mb-3 mt-3">--%>
-<%--                                        <form:input class="form-control" placeholder="" path="moTa"/>--%>
-<%--                                        <form:label class="form-label" path="moTa">Mô tả:</form:label>--%>
-<%--                                        <form:errors path="moTa" cssStyle="color: red"/>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col-6">--%>
-<%--                                    <div class="form-check mb-3 mt-3">--%>
-<%--                                        <form:label class="form-label" path="trangThai">Tình Trạng:</form:label>--%>
-<%--                                        <br>--%>
-<%--                                        <form:radiobutton path="trangThai" value="0" checked="true"/>Hoạt động--%>
-<%--                                        <br>--%>
-<%--                                        <form:radiobutton path="trangThai" value="1"/>Ngưng hoạt động--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="row">--%>
-<%--                                    <div class="col-12" style="text-align: center">--%>
-<%--                                        <button type="submit" class="btn btn-success"--%>
-<%--                                                onclick="myFunction1()">Add--%>
-<%--                                        </button>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </form:form>--%>
-<%--                    </table>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
+</form:form>
+</div>
 </body>
 <script>
     function myFunction1() {
