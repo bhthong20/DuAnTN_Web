@@ -1,6 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.SanPham;
 import com.example.demo.repositories.ChiTietSanPhamRepository;
 import com.example.demo.services.ChiTietSanPhamService;
 import org.springframework.beans.BeanUtils;
@@ -55,6 +56,19 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Override
     public List<ChiTietSanPham> loc1(String locSP, String locMS, String locKT, String locCL) {
         return repository.loc1(locSP, locMS, locKT, locCL);
+    }
+
+    @Override
+    public Boolean delete(UUID id) {
+        if (id != null) {
+            ChiTietSanPham sanPhamUpdate = repository.findById(id).orElse(null);
+            if (sanPhamUpdate != null) {
+                repository.delete(sanPhamUpdate);
+                return true;
+            }
+        }
+        return false;
+
     }
 
     @Override

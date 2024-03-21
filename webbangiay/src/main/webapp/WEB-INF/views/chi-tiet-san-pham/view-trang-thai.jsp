@@ -11,11 +11,37 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../vendors/feather/feather.css">
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
     <link rel="shortcut icon" href="../../images/favicon.png"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico"/>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="../assets/css/demo.css"/>
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
 </head>
 <body>
 <div>
@@ -40,134 +66,214 @@
         </a>
     </ul>
 </div>
-<div>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="description" role="tabpanel"
-             aria-labelledby="description-tab">
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title" style="float: left">Danh sách chi tiết sản phẩm</h4>
-                        <%--            Tìm kiếm               --%>
-                        <table class="table container">
-                            <tbody>
-                            <tr>
-                                <form action="/chi-tiet-san-pham/search1" method="post">
-                                    <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
-                                        <button type="submit">Tìm kiếm</button>
-                                    </td>
-                                </form>
-                                <form action="/chi-tiet-san-pham/loc1" method="post">
-                                    <td colspan="2" style="text-align: center">
-                                        Lọc:
-                                        <select name="locSP">
-                                            <option value="null">Sản phẩm</option>
-                                            <c:forEach items="${listSP}" var="sp">
-                                                <option value="${sp.ten}">${sp.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <select name="locMS">
-                                            <option value="null">Màu sắc</option>
-                                            <c:forEach items="${listMS}" var="ms">
-                                                <option value="${ms.ten}">${ms.ten}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <select name="locSize">
-                                            <option value="null">Size</option>
-                                            <c:forEach items="${listSize}" var="size">
-                                                <option value="${size.size}">${size.size}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <select name="locDe">
-                                            <option value="null">Loại đế</option>
-                                            <c:forEach items="${listDe}" var="de">
-                                                <option value="${de.loaiDe}">${de.loaiDe}</option>
-                                            </c:forEach>
-                                        </select>
-                                        <button type="submit">Lọc</button>
-                                    </td>
-                                </form>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <%--           kết thúc tìm kiếm         --%>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Ảnh</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Màu sắc</th>
-                                    <th>Kích cỡ</th>
-                                    <th>Loại đế</th>
-                                    <th>Số lượng</th>
-                                    <th>Giá nhập</th>
-                                    <th>Giá bán</th>
-                                    <th>Năm bảo hành</th>
-                                    <th>Ngày tạo</th>
-                                    <th>Ngày cập nhật</th>
-                                    <th>Tình trạng</th>
-                                    <th colspan="2">Chức năng</th>
-                                </tr>
-                                <c:forEach items="${listCTSP}" var="ctsp" varStatus="stt">
-                                    <tr>
-                                        <td>${stt.index+1}</td>
-                                        <td>${ctsp.urlAnh}</td>
-                                        <td>${ctsp.sanPham.ten}</td>
-                                        <td>${ctsp.mauSac.ten}</td>
-                                        <td>${ctsp.sizeGiay.size}</td>
-                                        <td>${ctsp.de.loaiDe}</td>
-                                        <td>${ctsp.soLuongTon}</td>
-                                        <td>${ctsp.giaNhap}</td>
-                                        <td>${ctsp.giaBan}</td>
-                                        <td>${ctsp.namBaoHanh}</td>
-                                        <td>${ctsp.ngayTao}</td>
-                                        <td>${ctsp.ngayCapNhat}</td>
-                                        <td>
-                                            <c:if test="${ctsp.tinhTrang==0}">Còn hàng</c:if>
-                                            <c:if test="${ctsp.tinhTrang==1}">Hết hàng</c:if>
-                                        </td>
-
-                                        <td colspan="2">
-                                            <a class="btn btn-warning btn-icon-text"
-                                               href="/chi-tiet-san-pham/view-update/${ctsp.id}"
-                                               onclick="return myFunction2()">
-                                                <i class="ti-file btn-icon-prepend"></i>
-                                                Update</a>
-                                            <a class="btn btn-danger btn-icon-text"
-                                               href="/chi-tiet-san-pham/update-status/${ctsp.id}"
-                                               onclick="return myFunction3()"><i class="ti-reload btn-icon-prepend"></i>
-                                                Status</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
+<div class="card mb-4">
+    <h5 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h5>
+    <table class="table container">
+        <tbody>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                <form action="/chi-tiet-san-pham/search" method="post">
+                    <div class="input-group" style="width:100%; text-align: center">
+                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                               aria-label="Bạn tìm gì..." name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div align="center">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center pagination-lg">
-                            <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi?num=0">First</a></li>
+                </form>
+            </td>
+            <td>
+                <form action="/chi-tiet-san-pham/loc" method="post">
+                    <div class="card-body" style="text-align: center">
+                        <div class="demo-inline-spacing">
+                            <div class="btn-group">
+                                <select class="form-select">
+                                    <option selected disabled>Chất Liệu</option>
+                                    <c:forEach items="${listCL}" var="cl">
+                                        <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
 
-                            <c:forEach begin="1" end="${total}" varStatus="status">
-                                <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/hien-thi?num=${status.index - 1}"
-                                       class="page-link">${status.index}</a>
-                                </li>
-                            </c:forEach>
+                            <div class="btn-group">
+                                <button
+                                        type="button"
+                                        class="btn btn-outline-secondary dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                >
+                                    Secondary
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                                </ul>
+                            </div>
 
-                            <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi?num=${total-1}">Last</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
+                            <div class="btn-group">
+                                <button
+                                        type="button"
+                                        class="btn btn-outline-success dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                >
+                                    Success
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="btn-group">
+                                <button
+                                        type="button"
+                                        class="btn btn-outline-danger dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                >
+                                    Danger
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="btn-group">
+                                <button
+                                        type="button"
+                                        class="btn btn-outline-warning dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                >
+                                    Warning
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="btn-group">
+                                <button
+                                        type="button"
+                                        class="btn btn-outline-info dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                >
+                                    Info
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+<div class="card">
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã</th>
+                <th>Ảnh</th>
+                <th>Tên sản phẩm</th>
+                <th>Màu sắc</th>
+                <th>Kích cỡ</th>
+                <th>Chất liệu</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Ngày tạo</th>
+                <th>Ngày cập nhật</th>
+                <th>Tình trạng</th>
+                <th>Mô tả</th>
+                <th colspan="2">Chức năng</th>
+            </tr>
+            </thead>
+            <tbody class="table-border-bottom-2">
+            <c:forEach items="${listCTSP}" var="ctsp" varStatus="stt">
+                <tr>
+                    <td>${stt.index+1}</td>
+                    <td>${ctsp.ma}</td>
+                    <td align="center">
+                        <img src="../../../uploads/${ctsp.sanPham.hinhAnh.anh1}" width="100" height="100"
+                             style="border-radius:50% 50% 50% 50%">
+
+                    </td>
+                    <td>${ctsp.sanPham.tenSP}</td>
+                    <td>${ctsp.mauSac.ten}</td>
+                    <td>${ctsp.kichThuoc.size}</td>
+                    <td>${ctsp.chatLieu.tenChatLieu}</td>
+                    <td>${ctsp.soLuongTon}</td>
+                    <td><strong>${ctsp.donGia}</strong></td>
+                    <td>${ctsp.ngayTao}</td>
+                    <td>${ctsp.ngayCapNhat}</td>
+                    <td>
+                        <span class="badge bg-label-warning me-1"><c:if
+                                test="${ctsp.trangThai==0}">Còn hàng</c:if></span>
+                        <span class="badge bg-label-success me-1"><c:if
+                                test="${ctsp.trangThai==1}">Hết hàng</c:if></span>
+                    </td>
+                    <td>${ctsp.moTa}</td>
+                    <td colspan="2">
+                        <a href="/chi-tiet-san-pham/delete/${ctsp.id}" class="btn btn-success"
+                           onclick="return tbxd()">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center pagination-lg">
+        <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi?num=0">First</a></li>
+
+        <c:forEach begin="1" end="${total}" varStatus="status">
+            <li class="page-item">
+                <a href="${pageContext.request.contextPath}/chi-tiet-san-pham/hien-thi?num=${status.index -1}"
+                   class="page-link">${status.index}</a>
+            </li>
+        </c:forEach>
+
+        <li class="page-item"><a class="page-link" href="/chi-tiet-san-pham/hien-thi?num=${total-1}">Last</a></li>
+    </ul>
+</nav>
 </body>
 <script>
     function myFunction1() {

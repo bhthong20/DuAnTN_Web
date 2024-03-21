@@ -59,10 +59,11 @@ public class ChiTietSanPhamController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<ChiTietSanPham> list = chiTietSanPhamService.getAll(pageable);
-        model.addAttribute("listCTSP", list.getContent());
+        model.addAttribute("listCTSP"                                                                                                                                                                                   , list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
+//        return "chi-tiet-san-pham/hien-thi";
+        return "home/layout";
     }
 
     @GetMapping("/hien-thi-delete")
@@ -73,13 +74,17 @@ public class ChiTietSanPhamController {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<ChiTietSanPham> page = chiTietSanPhamService.getAll1(pageable);
-        model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/view-trang-thai.jsp");
         model.addAttribute("listCTSP", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "home/layout";
     }
-
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable(name = "id") UUID id) {
+        chiTietSanPhamService.delete(id);
+        return "redirect:/chi-tiet-san-pham/hien-thi";
+    }
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham,
                           @ModelAttribute("mauSac") MauSac mauSac,
@@ -90,8 +95,8 @@ public class ChiTietSanPhamController {
         model.addAttribute("listMS", mauSacService.findAll());
         model.addAttribute("listKT", kichThuocService.findAll());
         model.addAttribute("listCL", chatLieuService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/add.jsp");
+        return "home/layout";
     }
 
     @GetMapping("/view-update/{idctsp}")
@@ -105,8 +110,8 @@ public class ChiTietSanPhamController {
         model.addAttribute("listMS", mauSacService.findAll());
         model.addAttribute("listKT", kichThuocService.findAll());
         model.addAttribute("listCL", chatLieuService.findAll());
-        model.addAttribute("contentPage", "chi-tiet-san-pham/update.jsp");
-        return "layout";
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/update.jsp");
+        return "chi-tiet-san-pham/update";
     }
 
     @PostMapping("/add")
@@ -120,7 +125,7 @@ public class ChiTietSanPhamController {
             model.addAttribute("listKT", kichThuocService.findAll());
             model.addAttribute("listCL", chatLieuService.findAll());
             model.addAttribute("contentPage", "chi-tiet-san-pham/add.jsp");
-            return "layout";
+            return "home/layout";
         }
         String maCTSP = "CTSP" + (chiTietSanPhamService.findAll().size() + 1);
         chiTietSanPham.setMa(maCTSP);
@@ -174,11 +179,11 @@ public class ChiTietSanPhamController {
         ctsp.setTrangThai(1);
         chiTietSanPhamService.update(id, ctsp);
         Page<ChiTietSanPham> page = chiTietSanPhamService.getAll(pageable);
-        model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/view-trang-thai.jsp");
         model.addAttribute("listCTSP", page.getContent());
         model.addAttribute("page", page.getNumber());
         model.addAttribute("total", page.getTotalPages());
-        return "layout";
+        return "home/layout";
     }
 
     @GetMapping("/reset-status/{id}")
