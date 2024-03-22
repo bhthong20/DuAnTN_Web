@@ -294,6 +294,7 @@ CREATE TABLE hoa_don(
         DEFAULT NEWID() PRIMARY KEY,
 	ma_hoa_don	varchar(50) Not Null,
 	ngay_tao		DATE Default GetDATE(),
+	ngay_cap_nhat		DATE ,
 	nhan_vien_id  UNIQUEIDENTIFIER
         REFERENCES nhan_vien (id_nhan_vien) Not Null,
     khach_hang_id  UNIQUEIDENTIFIER
