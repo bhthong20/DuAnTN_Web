@@ -305,6 +305,7 @@ CREATE TABLE hoa_don(
 	dia_chi nvarchar(50) Null,
 	tong_tien Money Not Null,
 	phuong_thuc_thanh_toan INT Null,
+	loai int null,
 	ghi_chu  NVARCHAR( MAX) Null,
 	trang_thai INT Null
 )
