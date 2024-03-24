@@ -296,11 +296,11 @@ CREATE TABLE hoa_don(
 	ngay_tao		DATE Default GetDATE(),
 	ngay_cap_nhat		DATE ,
 	nhan_vien_id  UNIQUEIDENTIFIER
-        REFERENCES nhan_vien (id_nhan_vien) Not Null,
+        REFERENCES nhan_vien (id_nhan_vien)  Null,
     khach_hang_id  UNIQUEIDENTIFIER
-        REFERENCES khach_hang (id_khach_hang)Not Null,
+        REFERENCES khach_hang (id_khach_hang) Null,
 	khuyen_mai_id  UNIQUEIDENTIFIER
-        REFERENCES khuyen_mai (id_khuyen_mai) Not Null,
+        REFERENCES khuyen_mai (id_khuyen_mai)  Null,
 	ten_nguoi_nhan NVARCHAR(100) Null,
 	sdt varchar(50) Null,
 	dia_chi nvarchar(50) Null,
