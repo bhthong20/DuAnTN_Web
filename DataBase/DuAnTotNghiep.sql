@@ -292,7 +292,7 @@ GO
 CREATE TABLE hoa_don(
 	id_hoa_don   UNIQUEIDENTIFIER
         DEFAULT NEWID() PRIMARY KEY,
-	ma_hoa_don	varchar(50) Not Null,
+	ma_hoa_don	varchar(50)  Null,
 	ngay_tao		DATE Default GetDATE(),
 	ngay_cap_nhat		DATE ,
 	nhan_vien_id  UNIQUEIDENTIFIER
@@ -304,7 +304,7 @@ CREATE TABLE hoa_don(
 	ten_nguoi_nhan NVARCHAR(100) Null,
 	sdt varchar(50) Null,
 	dia_chi nvarchar(50) Null,
-	tong_tien Money Not Null,
+	tong_tien Money  Null,
 	phuong_thuc_thanh_toan INT Null,
 	loai int null,
 	ghi_chu  NVARCHAR( MAX) Null,
