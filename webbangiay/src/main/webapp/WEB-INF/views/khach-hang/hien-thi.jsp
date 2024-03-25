@@ -20,11 +20,7 @@
     <table class="table container">
         <tbody>
         <tr>
-            <form action="/chi-tiet-san-pham/search" method="post">
-                <td colspan="2" style="text-align: center">Tìm kiếm: <input type="text" name="search">
-                    <button type="submit">Tìm kiếm</button>
-                </td>
-            </form>
+
             <td colspan="2" style="text-align: center">
                 <button class="btn btn-info">
                     <a style="color: white;text-decoration: none" href="/khach-hang/view-add">Thêm mới</a>
@@ -56,11 +52,6 @@
             <tr>
                 <td>${stt.index+1}</td>
                 <td>${kh.ma}</td>
-<%--                <td align="center">--%>
-<%--                    <img src="../../../uploads/${ctsp.sanPham.hinhAnh.anh1}" width="40" height="40"--%>
-<%--                         style="border-radius:50% 50% 50% 50%">--%>
-
-<%--                </td>--%>
                 <td>${kh.hoTen}</td>
                 <td>${kh.email}</td>
                 <td>${kh.sdt}</td>
@@ -80,7 +71,7 @@
                 <td colspan="2">
                     <a href="/khach-hang/delete/${kh.id}" class="btn btn-success"
                        onclick="return tbxd()">Delete</a>
-                    <a href="/view-update/${kh.id}" class="btn btn-success"
+                    <a href="/khach-hang/view-update/${kh.id}" class="btn btn-success"
                        onclick="return tbxd()">Update</a>
                 </td>
             </tr>
@@ -88,16 +79,16 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center pagination-lg">
-            <li class="page-item"><a class="page-link" href="/hien-thi/nhan-vien?num=0">First</a></li>
+            <li class="page-item"><a class="page-link" href="/hien-thi/khach-hang?num=0">First</a></li>
 
             <c:forEach begin="1" end="${total}" varStatus="status">
                 <li class="page-item">
-                    <a href="${pageContext.request.contextPath}/hien-thi/nhan-vien?num=${status.index -1}"
+                    <a href="${pageContext.request.contextPath}/hien-thi/khach-hang?num=${status.index -1}"
                        class="page-link">${status.index}</a>
                 </li>
             </c:forEach>
 
-            <li class="page-item"><a class="page-link" href="/hien-thi/nhan-vien?num=${total-1}">Last</a></li>
+            <li class="page-item"><a class="page-link" href="/hien-thi/khach-hang?num=${total-1}">Last</a></li>
         </ul>
     </nav>
 </div>
