@@ -57,7 +57,7 @@
         </div>
             <div class="col-md-6">
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="ngaySinh"/>
+                    <form:input class="form-control" type="date"  placeholder="" path="ngaySinh"/>
                     <form:label class="form-label" path="ngaySinh">Ngày Sinh:</form:label>
                     <form:errors path="ngaySinh" cssStyle="color: #ff0000"/>
                 </div>
