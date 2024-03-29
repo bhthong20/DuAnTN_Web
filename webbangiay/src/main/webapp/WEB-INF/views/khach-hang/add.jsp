@@ -11,80 +11,129 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../../vendors/feather/feather.css">
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
     <link rel="shortcut icon" href="../../images/favicon.png"/>
-</head>
-</head>
-<body>
-<h4 style="text-align: center">Thêm Khách Hàng Mới</h4>
-<div class="container">
-    <form:form action="/khach-hang/add" method="post" modelAttribute="khachHang">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="ma"/>
-                    <form:label class="form-label" path="ma">Mã Khách Hàng:</form:label>
-                    <form:errors path="ma" cssStyle="color: red"/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="../assets/css/demo.css"/>
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
+</head>
+</head>
+
+<body>
+<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" href="/hien-thi/khach-hang" role="tab"
+           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin khách hàng</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
+           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+           aria-controls="description" aria-selected="true" role="tab">Thêm mới Khách Hàng</a>
+    </li>
+</ul>
+<div class="container">
+    <div class="col-md-12">
+        <div class="card">
+            <h4 class="card-header" style="text-align: center">Thông tin chi tiết khách hàng</h4>
+            <%--@elvariable id="chiTietSanPham" type=""--%>
+            <div class="card-body">
+                <form:form action="/khach-hang/add" method="post" modelAttribute="khachHang">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 mt-3">
+                            <form:input class="form-control" placeholder="" path="ma"/>
+                            <form:label class="form-label" path="ma">Mã Khách Hàng:</form:label>
+                            <form:errors path="ma" cssStyle="color: red"/>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <form:input class="form-control" placeholder="" path="hoTen"/>
+                            <form:label class="form-label" path="hoTen">Tên Khách Hàng:</form:label>
+                            <form:errors path="hoTen" cssStyle="color: red"/>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <form:input class="form-control" placeholder="" path="email"/>
+                            <form:label class="form-label" path="email">Email:</form:label>
+                            <form:errors path="email" cssStyle="color: red"/>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                    </div>
+                    <div class="col-md-6">
+                        <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
+                        <form:radiobutton path="gioiTinh" value="0" checked="true"/>Nam
+                        <form:radiobutton path="gioiTinh" value="1"/>Nữ
+                        <div class="form-floating mb-3 mt-3">
+                            <form:input class="form-control" placeholder="" path="sdt"/>
+                            <form:label class="form-label" path="sdt">Số Điện Thoại:</form:label>
+                            <form:errors path="sdt" cssStyle="color: #ff0000"/>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="hoTen"/>
-                    <form:label class="form-label" path="hoTen">Tên Khách Hàng:</form:label>
-                    <form:errors path="hoTen" cssStyle="color: red"/>
-                </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="email"/>
-                    <form:label class="form-label" path="email">Email:</form:label>
-                    <form:errors path="email" cssStyle="color: red"/>
-                </div>
-            </div>
-            <div class="col-6">
-            </div>
-            <div class="col-md-6">
-                    <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
-                    <form:radiobutton path="gioiTinh" value="0" checked="true"/>Nam
-                    <form:radiobutton path="gioiTinh" value="1"/>Nữ
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="sdt"/>
-                    <form:label class="form-label" path="sdt">Số Điện Thoại:</form:label>
-                    <form:errors path="sdt" cssStyle="color: #ff0000"/>
-                </div>
-            </div>
-        </div>
-            <div class="col-md-6">
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" type="date"  placeholder="" path="ngaySinh"/>
-                    <form:label class="form-label" path="ngaySinh">Ngày Sinh:</form:label>
-                    <form:errors path="ngaySinh" cssStyle="color: #ff0000"/>
-                </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="taiKhoan"/>
-                    <form:label class="form-label" path="taiKhoan">Tài Khoản:</form:label>
-                    <form:errors path="taiKhoan" cssStyle="color: #ff0000"/>
-                </div>
-                <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="matKhau"/>
-                    <form:label class="form-label" path="matKhau">Mật Khẩu:</form:label>
-                    <form:errors path="matKhau" cssStyle="color: #ff0000"/>
-                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mt-3">
+                        <form:input class="form-control" type="date"  placeholder="" path="ngaySinh"/>
+                        <form:label class="form-label" path="ngaySinh">Ngày Sinh:</form:label>
+                        <form:errors path="ngaySinh" cssStyle="color: #ff0000"/>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                        <form:input class="form-control" placeholder="" path="taiKhoan"/>
+                        <form:label class="form-label" path="taiKhoan">Tài Khoản:</form:label>
+                        <form:errors path="taiKhoan" cssStyle="color: #ff0000"/>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                        <form:input class="form-control" placeholder="" path="matKhau"/>
+                        <form:label class="form-label" path="matKhau">Mật Khẩu:</form:label>
+                        <form:errors path="matKhau" cssStyle="color: #ff0000"/>
+                    </div>
                     <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
                     <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
                     <form:radiobutton path="trangThai" value="1"/>Hoạt Động
-            </div>
-            <div class="row">
-                <div class="col-12" style="text-align: center">
-                    <button type="submit" class="btn btn-success"
-                            id="btt" onclick="return myFunction1()">Add
-                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="text-align: center">
+                        <button type="submit" class="btn btn-success"
+                                id="btt" onclick="return myFunction1()">Add
+                        </button>
+                    </div>
                 </div>
             </div>
+            </form:form>
         </div>
-    </form:form>
+    </div>
 </div>
+</div>
+
+
 </body>
 <script>
     function myFunction1() {
@@ -178,4 +227,23 @@
     });
 
 </script>
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="../assets/vendor/libs/jquery/jquery.js"></script>
+<script src="../assets/vendor/libs/popper/popper.js"></script>
+<script src="../assets/vendor/js/bootstrap.js"></script>
+<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+<script src="../assets/vendor/js/menu.js"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+
+<!-- Main JS -->
+<script src="../assets/js/main.js"></script>
+
+<!-- Page JS -->
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 </html>
