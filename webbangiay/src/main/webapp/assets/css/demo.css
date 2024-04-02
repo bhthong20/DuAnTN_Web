@@ -105,3 +105,317 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+.shopee-sort-bar {
+  align-items: center;
+  background: rgba(0, 0, 0, .03);
+  border-radius: 2px;
+  display: flex;
+  font-weight: 400;
+  justify-content: space-between;
+  padding: .8125rem 1.25rem;
+}
+.shopee-sort-bar__label {
+  color: #555;
+  margin: 0 .3125rem 0 0;
+}
+.shopee-sort-by-options {
+  align-items: stretch;
+  display: flex;
+  flex: 1;
+  gap: .625rem;
+  justify-content: flex-start;
+}
+.shopee-mini-page-controller {
+  align-items: center;
+  display: flex;
+}
+.shopee-sort-by-options__option-group {
+  display: flex;
+  gap: .625rem;
+  margin-left: .625rem;
+}
+.shopee-sort-by-options__option--selected.shopee-sort-by-options__option {
+  background: #ee4d2d;
+  color: #fff;
+}
+.shopee-sort-by-options .select-with-status__holder, .shopee-sort-by-options__option {
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.02);
+  height: 2.125rem;
+  line-height: 2.125rem;
+}
+.shopee-sort-by-options__option {
+  align-items: center;
+  background: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  min-width: 5.625rem;
+  outline: 0;
+  overflow: visible;
+  padding: 0 .9375rem;
+  position: relative;
+  text-transform: capitalize;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.sort-price-select {
+  align-items: center;
+  background: #fff;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.02);
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  height: 2.125rem;
+  justify-content: space-between;
+  line-height: 2.125rem;
+  min-width: 12.5rem;
+  padding-left: .75rem;
+  position: relative;
+  text-align: left;
+  transition: border-color .1s ease;
+}
+.sort-price-select .shopee-svg-icon.icon-arrow-down-small {
+  width: .75rem;
+  fill: #555;
+  margin-right: .75rem;
+}
+.shopee_ic .text-sm {
+  font-size: .875rem;
+  line-height: 1.25rem;
+}
+.shopee_ic .break-words {
+  overflow-wrap: break-word;
+}
+.shopee_ic .min-h-\[2\.5rem\] {
+  min-height: 2.5rem;
+}
+.shopee_ic .line-clamp-2 {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  overflow: hidden;
+}
+.shopee_ic .justify-between {
+  justify-content: space-between;
+}
+.shopee_ic .flex-col {
+  flex-direction: column;
+}
+.shopee_ic .flex-1 {
+  flex: 1 1 0%;
+}
+.shopee_ic .flex {
+  display: flex;
+}
+.shopee_ic .items-center {
+  align-items: center;
+}
+.shopee_ic .flex-shrink-0, .shopee_ic .shrink-0 {
+  flex-shrink: 0;
+}
+.shopee_ic .max-w-full {
+  max-width: 100%;
+}
+.shopee_ic .mb-2 {
+  margin-bottom: .5rem;
+}
+.shopee_ic .flex-row {
+  flex-direction: row;
+}
+
+.shopee_ic .flex-shrink {
+  flex-shrink: 1;
+}
+.shopee_ic .min-w-0 {
+  min-width: 0;
+}
+.shopee_ic .flex {
+  display: flex;
+}
+.shopee_ic .mr-1 {
+  margin-right: .25rem;
+}
+.shopee_ic .text-shopee-primary {
+  --tw-text-opacity: 1;
+  color: rgba(238, 77, 45, var(--tw-text-opacity));
+}
+.shopee_ic .font-normal {
+  font-weight: 400;
+}
+.shopee_ic .text-ellipsis, .shopee_ic .truncate {
+  text-overflow: ellipsis;
+}
+.shopee_ic .truncate {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.shopee_ic .items-center {
+  align-items: center;
+}
+.shopee_ic .flex-shrink-0, .shopee_ic .shrink-0 {
+  flex-shrink: 0;
+}
+.shopee_ic .max-w-full {
+  max-width: 100%;
+}
+.shopee_ic .flex {
+  display: flex;
+}
+.shopee_ic .text-ellipsis, .shopee_ic .truncate {
+  text-overflow: ellipsis;
+}
+.shopee_ic .truncate {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.shopee_ic .items-baseline {
+  align-items: baseline;
+}
+.shopee_ic .flex {
+  display: flex;
+}
+.shopee_ic .text-xs\/sp14 {
+  font-size: 1.25rem;
+
+}
+.shopee_ic .text-base\/5 {
+
+  font-size: 1.5rem;
+}
+.shopee_ic .text-ellipsis, .shopee_ic .truncate {
+  text-overflow: ellipsis;
+}
+.shopee_ic .truncate {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.shopee_ic .space-x-1>:not([hidden])~:not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-left: calc(.25rem*(1 - var(--tw-space-x-reverse)));
+  margin-right: calc(.25rem* var(--tw-space-x-reverse));
+}
+.shopee_ic .space-x-1>:not([hidden])~:not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-left: calc(.25rem*(1 - var(--tw-space-x-reverse)));
+  margin-right: calc(.25rem* var(--tw-space-x-reverse));
+}
+.shopee_ic .line-through {
+  -webkit-text-decoration-line: line-through;
+  text-decoration-line: line-through;
+}
+.shopee_ic .text-shopee-black26 {
+  color: rgba(0, 0, 0, .26);
+}
+.shopee_ic .text-ellipsis, .shopee_ic .truncate {
+  text-overflow: ellipsis;
+}
+.shopee_ic .truncate {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.shopee_ic .items-center {
+  align-items: center;
+}
+.shopee_ic .flex-grow-0, .shopee_ic .grow-0 {
+  flex-grow: 0;
+}
+.shopee_ic .flex-shrink {
+  flex-shrink: 1;
+}
+.shopee_ic .flex {
+  display: flex;
+}
+.shopee_ic .text-ellipsis, .shopee_ic .truncate {
+  text-overflow: ellipsis;
+}
+.shopee_ic .truncate {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.shopee_ic .items-baseline {
+  align-items: baseline;
+}
+.shopee_ic .flex {
+  display: flex;
+}
+.shopee_ic .text-shopee-primary {
+  --tw-text-opacity: 1;
+  color: rgba(238, 77, 45, var(--tw-text-opacity));
+}
+.shopee_ic .font-medium {
+  font-weight: 500;
+}
+.shopee_ic .text-sp10, .shopee_ic .text-sp10\/3 {
+  font-size: .625rem;
+  line-height: .75rem;
+
+
+}
+.shopee_ic .py-0\.5 {
+  padding-bottom: .125rem;
+  padding-top: .125rem;
+}
+.shopee_ic .px-1 {
+  padding-left: .25rem;
+  padding-right: .25rem;
+}
+.shopee_ic .bg-shopee-pink {
+  --tw-bg-opacity: 1;
+  background-color: rgba(254, 238, 234, var(--tw-bg-opacity));
+}
+.shopee_ic .flex-shrink-0, .shopee_ic .shrink-0 {
+  flex-shrink: 0;
+}
+.shopee_ic .h-4 {
+  height: 1rem;
+}
+.shopee_ic .mr-1 {
+  margin-right: .25rem;
+}
+.rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+  color: #666;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+  color: #ffa723;
+}
+.card__product {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card__product:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 10px #696cff;
+}

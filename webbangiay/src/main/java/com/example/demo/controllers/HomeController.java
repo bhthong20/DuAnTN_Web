@@ -22,8 +22,11 @@ public class HomeController {
 //    }
     @GetMapping("/home")
     private String showHome() {
+        return "quang-ba/home";
+    }
 
-        return "home/layout";
-
+    @GetMapping("/san-pham")
+    private String showSanPham() {
+        return "quang-ba/san-pham";
     }
 }
