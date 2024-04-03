@@ -42,8 +42,8 @@ public class LoaiController {
         return "loai/hien-thi";
     }
     @GetMapping("/view-add")
-    public String viewAdd(Model model , @ModelAttribute("MauSac") PhanLoai mauSac){
-        model.addAttribute("MauSac", new PhanLoai());
+    public String viewAdd(Model model , @ModelAttribute("PhanLoai") PhanLoai mauSac){
+        model.addAttribute("PhanLoai", new PhanLoai());
         return "loai/add";
     }
     @PostMapping("/add")

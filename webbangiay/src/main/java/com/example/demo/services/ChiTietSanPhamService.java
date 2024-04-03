@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.dto.SanPhamDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -45,4 +46,6 @@ public interface ChiTietSanPhamService {
     public List<ChiTietSanPham> loc1(String locSP, String locMS, String locKT, String locCL);
 
     public Boolean delete(UUID id);
+
+    Boolean addAllChiTietSanPham(SanPhamDto sanPhamDto);
 }

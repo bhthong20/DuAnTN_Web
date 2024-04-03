@@ -30,7 +30,7 @@
                 <div class="form-floating mb-3 mt-3">
                     <form:input class="form-control" placeholder="" path="tenLoai"/>
                     <form:label class="form-label" path="tenLoai">Tên</form:label>
-                    <form:errors path="ten" cssStyle="color: red"/>
+                    <form:errors path="tenLoai" cssStyle="color: red"/>
                 </div>
 
             </div>

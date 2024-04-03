@@ -52,7 +52,7 @@
                 <td>${i.ten}</td>
                 <td>${i.xuatSu}</td>
                 <td>${i.ngayTao}</td>
-                <td>${i.ngayCapNhap}</td>
+                <td>${i.ngayCapNhat}</td>
                 <td>${i.moTa}</td>
                 <td>
                     <a href="/thuong-hieu/delete/${i.id}" class="btn btn-success"

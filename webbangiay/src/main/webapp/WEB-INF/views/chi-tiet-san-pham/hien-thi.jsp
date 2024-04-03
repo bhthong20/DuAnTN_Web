@@ -62,7 +62,7 @@
     </li>
 </ul>
 <div class="card mb-4">
-    <h5 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h5>
+    <h5 class="card-header" style="text-align: center">Thông tin sản phẩm</h5>
     <table class="table container">
         <tbody>
         <tr>
