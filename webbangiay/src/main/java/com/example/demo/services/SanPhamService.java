@@ -12,7 +12,7 @@ public interface SanPhamService {
 
     public List<SanPham> findAll();
 
-//    public List<SanPham> search(String search);
+    public List<SanPham> search(String search);
 
     public SanPham findById(UUID id);
 

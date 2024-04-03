@@ -49,13 +49,13 @@
             <tr>
                 <td>${stt.index+1}</td>
                 <td>${chatLieu.ma}</td>
-                <td>${chatLieu.loaiChatLieu}</td>
+                <td>${chatLieu.tenChatLieu}</td>
                 <td>${chatLieu.ngayTao}</td>
                 <td>${chatLieu.ngayCapNhat}</td>
 
                 <td>
-                    <c:if test="${chatLieu.tinhTrang==0}">Ngừng hoạt động</c:if>
-                    <c:if test="${chatLieu.tinhTrang==1}">Hoạt động</c:if>
+                    <c:if test="${chatLieu.trangThai==0}">Ngừng hoạt động</c:if>
+                    <c:if test="${chatLieu.trangThai==1}">Hoạt động</c:if>
                 </td>
                 <td>${chatLieu.moTa}</td>
                 <td>

@@ -2,8 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.HinhAnh;
 import com.example.demo.services.HinhAnhService;
-
-
 import com.example.demo.util.FileUploadUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -99,7 +102,7 @@ public class HinhAnhController {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         anh1.setNgayCapNhat(date);
-        anh1.setTinhTrang(1);
+        anh1.setTrangThai(1);
         anhService.update(id, anh1);
         Page<HinhAnh> page = anhService.getAll(pageable);
         model.addAttribute("contentPage", "hinh-anh/hien-thi.jsp");
@@ -119,7 +122,7 @@ public class HinhAnhController {
         Date date = new Date(millis);
         anh1.setNgayCapNhat(date);
 
-        anh1.setTinhTrang(0);
+        anh1.setTrangThai(0);
         anhService.update(id, anh1);
         Page<HinhAnh> page = anhService.getAll1(pageable);
         model.addAttribute("contentPage", "hinh-anh/anh-delete.jsp");
@@ -196,7 +199,7 @@ public class HinhAnhController {
         }
         anh.setMa(mhd);
         anh.setNgayTao(date);
-        anh.setTinhTrang(0);
+        anh.setTrangThai(0);
 
         // Xử lý ảnh 1
         String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
@@ -256,7 +259,7 @@ public class HinhAnhController {
         Date date = new Date(millis);
         anh.setNgayCapNhat(date);
         anh.setNgayTao(tt.getNgayTao());
-        anh.setTinhTrang(tt.getTinhTrang());
+        anh.setTrangThai(tt.getTrangThai());
         anh.setMa(tt.getMa());
         String fileName1 = StringUtils.cleanPath(anh1.getOriginalFilename());
         if (checkanh1.equals("cu1")) {

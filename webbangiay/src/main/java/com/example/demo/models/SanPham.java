@@ -29,15 +29,15 @@ import java.util.UUID;
 @Table(name = "san_pham")
 public class SanPham {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id_san_pham")
     private UUID id;
 
-    @Column(name = "ma")
+    @Column(name = "ma_san_pham")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "ten")
+    @Column(name = "ten_san_pham")
     private String tenSP;
 
     @CreationTimestamp
@@ -47,22 +47,23 @@ public class SanPham {
     @Column(name = "ngay_cap_nhat")
     private Date ngayCapNhat;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")
     private String moTa;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_anh")
+    @JoinColumn(name = "id_hinh_anh")
     private HinhAnh hinhAnh;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_hang")
-    private HangSanPham hangSanPham;
+    @JoinColumn(name = "id_thuong_hieu")
+    private ThuongHieu thuongHieu;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_chat_lieu")
-    private ChatLieu chatLieu;
+    @JoinColumn(name = "id_loai")
+    private PhanLoai phanLoai;
+
 }

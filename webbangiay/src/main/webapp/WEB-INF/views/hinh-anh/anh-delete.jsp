@@ -105,8 +105,8 @@
                                     <td>${list.ngayTao}</td>
                                     <td>${list.ngayCapNhat}</td>
                                     <td>
-                                        <c:if test="${list.tinhTrang==0}">Hoạt động</c:if>
-                                        <c:if test="${list.tinhTrang==1}">Ngừng hoạt động</c:if>
+                                        <c:if test="${list.trangThai==0}">Hoạt động</c:if>
+                                        <c:if test="${list.trangThai==1}">Ngừng hoạt động</c:if>
                                     </td>
                                     <td>${list.moTa}</td>
                                     <td>

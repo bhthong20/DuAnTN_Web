@@ -29,7 +29,7 @@ import java.util.UUID;
 public class KhuyenMai {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_khuyen_mai")
     private UUID id;
 
     @Column(name = "ma")
@@ -37,7 +37,7 @@ public class KhuyenMai {
 
     @NotBlank(message = "Không để trống thông tin")
     @Size(min = 6, message = "Tên phải lớn hơn hoặc bằng 6 kí tự")
-    @Column(name = "ten")
+    @Column(name = "ten_khuyen_mai")
     private String ten;
 
     @CreationTimestamp
@@ -53,17 +53,14 @@ public class KhuyenMai {
     @Column(name = "ngay_ket_thuc")
     private Date ngayKetThuc;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
-    @Column(name = "loai_giam_gia")
-    private String loaiGiamGia;
+    @Column(name = "loai_khuyen_mai")
+    private int hinhThucGiamGia;
 
-    @Column(name = "hinh_thuc_giam_gia")
-    private String hinhThucGiamGia;
-
-    @Column(name = "so_tien_giam")
-    private BigDecimal soTienGiam;
+    @Column(name = "gia_tri_giam")
+    private BigDecimal gia_triGiam;
 
     @Column(name = "mo_ta")
     private String moTa;

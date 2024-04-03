@@ -30,11 +30,14 @@ import java.util.UUID;
 public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_hoa_don")
     private UUID id;
 
-    @Column(name = "ma")
+    @Column(name = "ma_hoa_don")
     private String ma;
+
+    @Column(name = "ten_nguoi_nhan")
+    private String tenNguoiNhan;
 
     @Column(name = "sdt")
     private String sdt;
@@ -46,30 +49,28 @@ public class HoaDon {
     @Column(name = "ngay_tao")
     private Date ngayTao;
 
-    @Column(name = "ngay_cap_nhat")
-    private Date ngayCapNhat;
+    @Column(name = "phuong_thuc_thanh_toan")
+    private int phuongThucThanhToan;
 
-    @Column(name = "ngay_nhan")
-    private Date ngayNhan;
-
-    @Column(name = "ngay_ship")
-    private Date ngayShip;
-
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @Column(name = "ghi_chu")
     private String ghiChu;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_khach_hang")
+    @JoinColumn(name = "khach_hang_id")
     private KhachHang khachHang;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_nhan_vien")
+    @JoinColumn(name = "nhan_vien_id")
     private NhanVien nhanVien;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_dia_chi")
-    private DiaChi diaChi;
+    @JoinColumn(name = "khuyen_mai_id")
+    private KhuyenMai khuyenMai;
+
+    @Column(name = "dia_chi")
+    private String diaChi;
+
 }

@@ -27,15 +27,15 @@ import java.util.UUID;
 public class ChatLieu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_chat_lieu")
     private UUID id;
 
     @Column(name = "ma")
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Column(name = "loai_chat_lieu")
-    private String loaiChatLieu;
+    @Column(name = "ten_chat_lieu")
+    private String tenChatLieu;
 
     @CreationTimestamp
     @Column(name = "ngay_tao")
@@ -46,8 +46,8 @@ public class ChatLieu {
     private Date ngayCapNhat;
 
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mo_ta")

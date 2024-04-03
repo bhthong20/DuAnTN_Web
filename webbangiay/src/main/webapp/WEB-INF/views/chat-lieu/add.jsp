@@ -21,9 +21,9 @@
             <div class="col-6">
 
                 <div class="form-floating mb-3 mt-3">
-                    <form:input class="form-control" placeholder="" path="loaiChatLieu"/>
-                    <form:label class="form-label" path="loaiChatLieu">Loại chất liệu:</form:label>
-                    <form:errors path="loaiChatLieu" cssStyle="color: red"/>
+                    <form:input class="form-control" placeholder="" path="tenChatLieu"/>
+                    <form:label class="form-label" path="tenChatLieu">Loại chất liệu:</form:label>
+                    <form:errors path="tenChatLieu" cssStyle="color: red"/>
                 </div>
             </div>
             <div class="col-6">
@@ -33,11 +33,11 @@
                     <form:errors path="moTa" cssStyle="color: red"/>
                 </div>
                 <div class="form-check mb-3 mt-3">
-                    <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                    <form:label class="form-label" path="trangThai">Tình Trạng:</form:label>
                     <br>
-                    <form:radiobutton path="tinhTrang" value="1" checked="true"/>Hoạt động
+                    <form:radiobutton path="trangThai" value="1" checked="true"/>Hoạt động
                     <br>
-                    <form:radiobutton path="tinhTrang" value="0"/>Ngưng hoạt động
+                    <form:radiobutton path="trangThai" value="0"/>Ngưng hoạt động
                 </div>
 
             </div>

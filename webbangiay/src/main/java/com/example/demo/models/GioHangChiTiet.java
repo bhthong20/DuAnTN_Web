@@ -28,20 +28,17 @@ import java.util.UUID;
 public class GioHangChiTiet {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_gio_hang_chi_tiet")
     private UUID id;
 
     @Column(name = "so_luong")
     private int soLuong;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
 
     @Column(name = "don_gia")
     private BigDecimal donGia;
-
-    @Column(name = "don_gia_khi_giam")
-    private BigDecimal donGiaKhiGiam;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_gio_hang")

@@ -29,7 +29,7 @@ import java.util.UUID;
 public class GioHang {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id_gio_hang")
     private UUID id;
 
     @Column(name = "ma")
@@ -39,8 +39,11 @@ public class GioHang {
     @Column(name = "ngay_tao")
     private Date ngayTao;
 
-    @Column(name = "tinh_trang")
-    private int tinhTrang;
+    @Column(name = "trang_thai")
+    private int trangThai;
+
+    @Column(name = "ghi_chu")
+    private String ghiChu;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_khach_hang")
