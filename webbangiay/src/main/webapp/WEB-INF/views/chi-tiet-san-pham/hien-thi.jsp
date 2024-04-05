@@ -46,36 +46,41 @@
 <body>
 <br>
 
-<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-           aria-controls="description" aria-selected="true">Thông tin Chi tiết sản phẩm</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới chi tiết
-            sản phẩm</a>
-    </li>
-</ul>
+<%--<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">--%>
+<%--    <li class="nav-item">--%>
+<%--        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"--%>
+<%--           aria-controls="description" aria-selected="true">Thông tin Chi tiết sản phẩm</a>--%>
+<%--    </li>--%>
+<%--    <li class="nav-item">--%>
+<%--        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab"--%>
+<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>--%>
+<%--    </li>--%>
+<%--    <li class="nav-item">--%>
+<%--        <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab"--%>
+<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới chi tiết--%>
+<%--            sản phẩm</a>--%>
+<%--    </li>--%>
+<%--</ul>--%>
 <div class="card mb-4">
-    <h5 class="card-header" style="text-align: center">Thông tin sản phẩm</h5>
+
     <table class="table container">
         <tbody>
         <tr>
-            <td colspan="2" style="text-align: center">
-            <form action="/chi-tiet-san-pham/search" method="post">
-                <div class="input-group" style="width:100%; text-align: center">
-                    <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                           aria-label="Bạn tìm gì..." name="search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
+            <td colspan="2">
+                <h3 class="card-header">Thông tin sản phẩm</h3>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <form action="/chi-tiet-san-pham/search" method="post">
+                    <div class="input-group" style="width:100%; text-align: center">
+                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                               aria-label="Bạn tìm gì..." name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
             </td>
             <td>
                 <form action="/chi-tiet-san-pham/loc" method="post">
@@ -194,6 +199,12 @@
                 </form>
             </td>
         </tr>
+        <tr class="text-center">
+            <td class="text-center" colspan="2">
+                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>
+                <a type="button" class="btn btn-primary" href="/chi-tiet-san-pham/view-add">Thêm mới sản phẩm</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 
@@ -240,9 +251,9 @@
                     <td>${ctsp.ngayCapNhat}</td>
                     <td>
                         <span class="badge bg-label-warning me-1"><c:if
-                                test="${ctsp.trangThai==0}">Còn hàng</c:if></span>
+                                test="${ctsp.trangThai==1}">Còn hàng</c:if></span>
                         <span class="badge bg-label-success me-1"><c:if
-                                test="${ctsp.trangThai==1}">Hết hàng</c:if></span>
+                                test="${ctsp.trangThai==0}">Hết hàng</c:if></span>
                     </td>
                     <td>${ctsp.moTa}</td>
                     <td colspan="2">

@@ -47,25 +47,25 @@
 </head>
 
 <body>
-<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin chi tiết
-            sản phẩm</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-           aria-controls="description" aria-selected="true" role="tab">Thêm mới chi tiết sản phẩm</a>
-    </li>
-</ul>
+<%--<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">--%>
+<%--    <li class="nav-item">--%>
+<%--        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab"--%>
+<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin chi tiết--%>
+<%--            sản phẩm</a>--%>
+<%--    </li>--%>
+<%--    <li class="nav-item">--%>
+<%--        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"--%>
+<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>--%>
+<%--    </li>--%>
+<%--    <li class="nav-item">--%>
+<%--        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"--%>
+<%--           aria-controls="description" aria-selected="true" role="tab">Thêm mới chi tiết sản phẩm</a>--%>
+<%--    </li>--%>
+<%--</ul>--%>
 <div class="container">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Thêm mới sản phẩm</h4>
+            <h3 class="card-header">Thêm mới sản phẩm</h3>
             <%--@elvariable id="chiTietSanPham" type=""--%>
             <div class="card-body">
                 <form>
@@ -139,6 +139,11 @@
                     </div>
                 </form>
 
+                <div class="row">
+                    <div class="col-12" style="text-align: center">
+                        <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi">Quay lại</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -155,13 +160,9 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <c:forEach var="mauSacItem" items="${listMS}">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" name="mauSac" value="${mauSacItem.id}"
-                                               onclick="addRow(this, '${mauSacItem.ten}', '${mauSacItem.id}', 'COLOR')" id="${mauSacItem.id}" />
-                                        <label class="form-check-label" for="${mauSacItem.id}"> ${mauSacItem.ten} </label>
-                                    </div>
-                                </c:forEach>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalMauSac">
+                                    Chọn màu sắc
+                                </button>
                             </div>
                         </div>
                         <div class="mt-3 col-4 row">
@@ -172,12 +173,9 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <c:forEach var="kichThuoc" items="${listKT}">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" name="kichThuoc" onclick="addRow(this, '${kichThuoc.size}', '${kichThuoc.id}', 'SIZE')" type="checkbox" value="${kichThuoc.id}" id="${kichThuoc.id}" />
-                                        <label class="form-check-label" for="${kichThuoc.id}"> ${kichThuoc.size} </label>
-                                    </div>
-                                </c:forEach>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalKichThuoc">
+                                    Chọn kích thước
+                                </button>
                             </div>
                         </div>
                         <div class="mt-3 col-4 row">
@@ -188,13 +186,9 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <c:forEach var="chatLieu" items="${listCL}">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" name="chatLieu" value="${chatLieu.id}"
-                                               onclick="addRow(this, '${chatLieu.tenChatLieu}', '${chatLieu.id}', 'CATEGORY')" id="${chatLieu.id}" />
-                                        <label class="form-check-label" for="${chatLieu.id}"> ${chatLieu.tenChatLieu} </label>
-                                    </div>
-                                </c:forEach>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalChatLieu">
+                                    Chọn chất liệu
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -213,9 +207,10 @@
                             <th>Tên sản phẩm</th>
                             <th>Giá tiền</th>
                             <th>Số lượng</th>
-                            <th>Thể loại</th>
+                            <th>CHẤT LIỆU</th>
                             <th>Size</th>
                             <th>Màu sắc</th>
+                            <th>Hình ảnh</th>
                             <th>Mô tả</th>
                             <th>Tình trạng</th>
                         </tr>
@@ -230,6 +225,81 @@
                                 id="btt" onclick="return myFunction1()">Thêm mới
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Chon mau sac--%>
+    <div class="modal fade" id="exampleModalMauSac" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Chọn màu Sắc</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <c:forEach var="mauSacItem" items="${listMS}">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="mauSac" value="${mauSacItem.id}"
+                                   onclick="addRow(this, '${mauSacItem.ten}', '${mauSacItem.id}', 'COLOR')" id="${mauSacItem.id}" />
+                            <label class="form-check-label" for="${mauSacItem.id}"> ${mauSacItem.ten} </label>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Chon kich thuoc--%>
+    <div class="modal fade" id="exampleModalKichThuoc" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Chọn kích thước</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <c:forEach var="kichThuoc" items="${listKT}">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" name="kichThuoc"
+                                   onclick="addRow(this, '${kichThuoc.size}', '${kichThuoc.id}', 'SIZE')" type="checkbox" value="${kichThuoc.id}" id="${kichThuoc.id}" />
+                            <label class="form-check-label" for="${kichThuoc.id}"> ${kichThuoc.size} </label>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Chon chat lieu--%>
+    <div class="modal fade" id="exampleModalChatLieu" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Chọn chất liệu</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <c:forEach var="chatLieu" items="${listCL}">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="chatLieu" value="${chatLieu.id}"
+                                   onclick="addRow(this, '${chatLieu.tenChatLieu}', '${chatLieu.id}', 'CATEGORY')" id="${chatLieu.id}" />
+                            <label class="form-check-label" for="${chatLieu.id}"> ${chatLieu.tenChatLieu} </label>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -495,6 +565,7 @@
         getQuantity();
         getNote();
         getStatus();
+        getImages();
         let sanPham = {
             id: null,
             tenSanPham: tenSPValue,
@@ -511,11 +582,11 @@
                     soLuongTon: el.quantity,
                     donGia: el.money,
                     moTa: el.note,
-                    trangThai: el.status
+                    trangThai: el.status,
+                    idHinhAnh: el.image
                 }
             })
         };
-        console.log(sanPham);
 
         let kt = confirm(text);
         if (kt == true) {
@@ -592,7 +663,22 @@
         updateColorTable();
     }
 
+    function genComboboxImage(index) {
+        var htmlSelect = '<select class="form-select productImg" index="' + index + '" >';
+        var selectElement = document.getElementById("hinhAnh");
+
+        var options = selectElement.options;
+        for (var i = 0; i < options.length; i++) {
+            htmlSelect += '<option value="' + options[i].value + '" anh1="' + options[i].getAttribute('anh1') +
+                '" anh2="' + options[i].getAttribute('anh2') + '" anh3="' + options[i].getAttribute('anh3') + '">' + options[i].text + '</option>';
+        }
+        htmlSelect += '</select>'
+
+        return htmlSelect;
+    }
+
     function updateColorTable() {
+
         var tableBody = document.getElementById('colorTableBody');
         var html = '';
         listProductDetail.forEach(function (product) {
@@ -605,6 +691,7 @@
                     '<td>' + product.categoryName + '</td>' +
                     '<td>' + product.sizeName + '</td>' +
                     '<td>' + product.colorName + '</td>' +
+                    '<td>' + genComboboxImage(product.index) + '</td>' +
                     '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
                     '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" checked="' + (product.status) + '" /></div></td>' +
                 '</tr>';
@@ -642,6 +729,7 @@
                             name: tenSPValue,
                             note: "",
                             status: true,
+                            image: ""
                         })
                     })
                 })
@@ -699,6 +787,20 @@
             listProductDetail = listProductDetail.map(el => {
                 if (parseInt(el.index) == parseInt(index)) {
                     el.status = input.checked ? 1 : 0;
+                }
+                return el;
+            })
+        });
+    }
+
+    function getImages() {
+        var inputs = document.querySelectorAll('.productImg');
+        inputs.forEach(function(input) {
+            var index = input.getAttribute('index');
+
+            listProductDetail = listProductDetail.map(el => {
+                if (parseInt(el.index) == parseInt(index)) {
+                    el.image = input.value
                 }
                 return el;
             })

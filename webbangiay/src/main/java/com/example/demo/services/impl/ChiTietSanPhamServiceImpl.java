@@ -135,6 +135,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
                 chiTietSanPham.setTrangThai(dto.getTrangThai());
                 chiTietSanPham.setMoTa(dto.getMoTa());
                 chiTietSanPham.setSanPham(sanPham);
+                chiTietSanPham.setHinhAnh(hinhAnhService.findById(dto.getIdHinhAnh()));
                 chiTietSanPhams.add(chiTietSanPham);
             }
 

@@ -23,7 +23,6 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Getter
 @Setter
 @Entity
@@ -74,4 +73,7 @@ public class ChiTietSanPham {
     @JoinColumn(name = "chat_lieu_id")
     private ChatLieu chatLieu;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hinh_anh_id")
+    private HinhAnh hinhAnh;
 }

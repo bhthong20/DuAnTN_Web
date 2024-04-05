@@ -42,6 +42,12 @@ public class HoaDon {
     @Column(name = "sdt")
     private String sdt;
 
+    @Column(name = "tien_mat")
+    private BigDecimal tienMat;
+
+    @Column(name = "chuyen_khoan")
+    private BigDecimal chuyenKhoan;
+
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 
@@ -54,6 +60,9 @@ public class HoaDon {
 
     @Column(name = "trang_thai")
     private int trangThai;
+
+    @Column(name = "loai")
+    private int loai;
 
     @Column(name = "ghi_chu")
     private String ghiChu;

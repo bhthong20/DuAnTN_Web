@@ -147,7 +147,7 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="../../../index.html" class="menu-link" aria-expanded="false">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
@@ -156,9 +156,9 @@
 
                 <!-- BanHang -->
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="/ban-hang-tai-quay" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-layout"></i>
-                        <div data-i18n="Layouts">Bán hàng</div>
+                        <div data-i18n="Layouts">Bán hàng tại quầy</div>
                     </a>
                 </li>
 
@@ -171,13 +171,13 @@
                 </li>
 
                 <!-- TaiKhoan -->
-                <li class="menu-item">
+                <li class="menu-item active">
                     <a href="javascript:void(0);" class="menu-link menu-toggle" aria-expanded="false">
                         <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                         <div data-i18n="Authentications">Tài Khoản</div>
                     </a>
                     <ul class="menu-sub" aria-expanded="false">
-                        <li class="menu-item">
+                        <li class="menu-item active">
                             <a href="/khach-hang/hien-thi" class="menu-link">
                                 <div data-i18n="Basic">Khách hàng</div>
                             </a>
