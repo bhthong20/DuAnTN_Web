@@ -4,15 +4,11 @@ import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
 import com.example.demo.models.KhachHang;
+import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.SanPhamAddHoaDon;
 import com.example.demo.services.BanHangTaiQuayService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -58,5 +54,15 @@ public class BanHangTaiQuayRestController {
     @GetMapping("/get-all-khach-hang")
     public List<KhachHang> getAllKhachHang() {
         return banHangTaiQuayService.getAllKhachHang();
+    }
+
+    @PostMapping("/luu-hoa-don")
+    public Boolean luuHoaDon(@RequestBody HoaDonRequest request) {
+        return banHangTaiQuayService.changeStatusHoaDon(request);
+    }
+
+    @PostMapping("/tu-choi-hoa-don/{id}")
+    public Boolean tuChoiHoaDon(@RequestBody List<String> idSanPham, @PathVariable(name = "id") String id) {
+        return banHangTaiQuayService.rejectHoaDon(idSanPham.stream().map(el -> UUID.fromString(el)).collect(Collectors.toList()), UUID.fromString(id));
     }
 }

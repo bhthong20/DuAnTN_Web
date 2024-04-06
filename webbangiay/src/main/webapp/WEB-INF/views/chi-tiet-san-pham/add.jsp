@@ -160,7 +160,7 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalMauSac">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleChonModalMauSac">
                                     Chọn màu sắc
                                 </button>
                             </div>
@@ -173,7 +173,7 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalKichThuoc">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleChonModalKichThuoc">
                                     Chọn kích thước
                                 </button>
                             </div>
@@ -186,7 +186,7 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalChatLieu">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleChonModalChatLieu">
                                     Chọn chất liệu
                                 </button>
                             </div>
@@ -231,7 +231,7 @@
     </div>
 
     <%--Chon mau sac--%>
-    <div class="modal fade" id="exampleModalMauSac" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+    <div class="modal fade" id="exampleChonModalMauSac" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
          aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -256,7 +256,7 @@
     </div>
 
     <%--Chon kich thuoc--%>
-    <div class="modal fade" id="exampleModalKichThuoc" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+    <div class="modal fade" id="exampleChonModalKichThuoc" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
          aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -281,7 +281,7 @@
     </div>
 
     <%--Chon chat lieu--%>
-    <div class="modal fade" id="exampleModalChatLieu" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+    <div class="modal fade" id="exampleChonModalChatLieu" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
          aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

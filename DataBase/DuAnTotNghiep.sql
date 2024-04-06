@@ -325,10 +325,11 @@ CREATE TABLE hoa_don_chi_tiet(
 	trang_thai INT Null,
 )
 Go
-
 ALTER TABLE WEB_BAN_GIAY.dbo.chi_tiet_san_pham ADD hinh_anh_id uniqueidentifier NULL;
 GO
 
   ALTER TABLE WEB_BAN_GIAY.dbo.hoa_don ADD tien_mat money NULL;
   ALTER TABLE WEB_BAN_GIAY.dbo.hoa_don ADD chuyen_khoan money NULL;
   GO
+  ALTER TABLE WEB_BAN_GIAY.dbo.khach_hang ALTER COLUMN sdt varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL;
+go

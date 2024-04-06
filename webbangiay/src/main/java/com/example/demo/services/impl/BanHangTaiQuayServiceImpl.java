@@ -5,6 +5,7 @@ import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
 import com.example.demo.models.KhachHang;
 import com.example.demo.models.dto.HoaDonDto;
+import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.SanPhamAddHoaDon;
 import com.example.demo.repositories.ChiTietSanPhamRepository;
 import com.example.demo.repositories.HoaDonChiTietRepository;
@@ -142,10 +143,11 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     }
 
     @Override
-    public Boolean changeStatusHoaDon(List<SanPhamAddHoaDon> sanPhamAddHoaDons, int status) {
+    public Boolean changeStatusHoaDon(HoaDonRequest request) {
+        List<SanPhamAddHoaDon> sanPhamAddHoaDons = request.getSanPhamAddHoaDons();
         if (sanPhamAddHoaDons.size() != 0) {
             sanPhamAddHoaDons.get(0);
-            HoaDon hoaDon = hoaDonService.findById(sanPhamAddHoaDons.get(0).getHoaDonId());
+            HoaDon hoaDon = request.getHoaDon();
             Map<UUID, HoaDonChiTiet> hoaDonChiTietMap = getMapHoaDonChiTietById(hoaDon.getId());
 
             List<HoaDonChiTiet> hoaDonChiTietList = new ArrayList<>();
@@ -180,7 +182,16 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
             hoaDonChiTietRepository.saveAll(hoaDonChiTietList);
             chiTietSanPhamService.saveAll(chiTietSanPhams);
 
-            hoaDon.setTrangThai(status);
+            KhachHang khachHang = request.getKhachHang();
+            if (khachHang.getId() == null) {
+                String maKhachHang = "KH00" + (khachHangService.findAll().size() + 1);
+                khachHang.setMa(maKhachHang);
+                khachHang.setTaiKhoan(maKhachHang);
+                khachHang.setMatKhau(maKhachHang);
+                khachHang.setId(khachHangService.add(khachHang).getId());
+            }
+
+            hoaDon.setKhachHang(khachHang);
             hoaDonService.update(hoaDon.getId(), hoaDon);
             return true;
         }
@@ -191,7 +202,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     public Boolean rejectHoaDon(List<UUID> listId, UUID idHoaDon) {
         try {
             List<HoaDonChiTiet> hoaDonChiTietList = hoaDonChiTietRepository.findHoaDonChiTietByIdIn(listId).stream().map(el -> {
-                el.setTrangThai(1);
+                el.setTrangThai(0);
                 return el;
             }).collect(Collectors.toList());
             List<ChiTietSanPham> chiTietSanPhams = hoaDonChiTietList.stream().map(el -> {

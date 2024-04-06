@@ -92,34 +92,34 @@
                                 <input type="text" class="form-control" disabled id="ngayTao"/>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="statusHoaDon">Ngày tạo</label>
+                                <label class="form-label" for="statusHoaDon">Trạng thái</label>
                                 <input type="text" class="form-control" disabled id="statusHoaDon"/>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="tenNguoiNhan">Tên người nhận</label>
-                                <input type="text" class="form-control" id="tenNguoiNhan"/>
+                                <input type="text" class="form-control checkStatus" id="tenNguoiNhan"/>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="soDienThoai">Số điện thoại</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="text" id="soDienThoai" class="form-control"/>
+                                    <input type="text" id="soDienThoai" class="form-control checkStatus"/>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="ghiChu">Ghi chú</label>
                                 <textarea
                                         id="ghiChu"
-                                        class="form-control"
+                                        class="form-control checkStatus"
                                 ></textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="tienMat">Tiền mặt</label>
-                                <input type="number" id="tienMat" class="form-control phone-mask"
+                                <input type="number" id="tienMat" class="form-control checkStatus phone-mask"
                                 />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="chuyenKhoan">Chuyển khoản</label>
-                                <input type="number" id="chuyenKhoan" class="form-control phone-mask"
+                                <input type="number" id="chuyenKhoan" class="form-control checkStatus phone-mask"
                                 />
                             </div>
                             <div class="mb-3">
@@ -127,10 +127,10 @@
                                 <input type="number" disabled id="tongTien" class="form-control phone-mask"
                                 />
                             </div>
-                            <button onclick="clearFormHoaDon()" class="btn btn-primary">Clear form</button>
-                            <button class="btn btn-primary">Lưu</button>
-                            <button class="btn btn-primary" disabled id="btnThanhToan">Thanh toán</button>
-                            <button class="btn btn-primary">Từ chối hóa đơn</button>
+                            <button onclick="clearFormHoaDon()" class="btn btn-primary checkStatus">Clear form</button>
+                            <button onclick="luuHoaDon(0)" class="btn btn-primary checkStatus">Lưu</button>
+                            <button onclick="luuHoaDon(2)" class="btn btn-primary checkStatus" id="btnThanhToan">Thanh toán</button>
+                            <button onclick="tuChoiHoaDon()" class="btn btn-primary checkStatus">Từ chối hóa đơn</button>
                         </div>
                     </div>
                 </div>
@@ -148,12 +148,12 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="tenKhachHang">Họ tên</label>
-                                <input type="text" id="tenKhachHang" class="form-control phone-mask"
+                                <input type="text" id="tenKhachHang" disabled class="form-control phone-mask"
                                 />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="gioiTinh">Giới tính</label>
-                                <select class="form-select" id="gioiTinh">
+                                <select class="form-select" disabled id="gioiTinh">
                                     <option selected>Choose...</option>
                                     <option value="true">Nam</option>
                                     <option value="false">Nữ</option>
@@ -161,24 +161,24 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="text" id="email" class="form-control phone-mask"
+                                <input type="text" id="email" disabled class="form-control phone-mask"
                                 />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="sdtKhachHang">Số điện thoại</label>
-                                <input type="text" id="sdtKhachHang" class="form-control phone-mask"
+                                <input type="text" id="sdtKhachHang" disabled class="form-control phone-mask"
                                 />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="ngaySinh">Ngày sinh</label>
-                                <input type="date" id="ngaySinh" class="form-control phone-mask"
+                                <input type="date" id="ngaySinh" disabled class="form-control phone-mask"
                                 />
                             </div>
-                            <button onclick="clearFormKhachHang()" class="btn btn-primary">Clear form</button>
-                            <button class="btn btn-primary" onclick="khachHangLaNguoiNhan()">Khách hàng là người nhận
+                            <button onclick="clearFormKhachHang()" class="btn btn-primary checkStatus">KH mới</button>
+                            <button class="btn btn-primary checkStatus" onclick="khachHangLaNguoiNhan()">KH là người nhận
                             </button>
-                            <button class="btn btn-primary" onclick="openModalKhachHang()"
-                                    data-bs-toggle="modal" data-bs-target="#modalDanhSachKhachHang">Chọn khách hàng
+                            <button class="btn btn-primary checkStatus" onclick="openModalKhachHang()"
+                                    data-bs-toggle="modal" data-bs-target="#modalDanhSachKhachHang">Chọn
                             </button>
                         </div>
                     </div>
@@ -190,9 +190,9 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <h3 class="p-4 m-0">Thông tin sản phẩm trong hóa đơn</h3>
                     <span>
-                        <button class="btn btn-primary" onclick="deleteProduct()">Xóa sản phẩm</button>
-                        <button class="btn btn-primary" onclick="updateSoLuong()">Sửa số lượng sản phẩm</button>
-                        <button class="btn btn-primary me-4" onclick="getDanhSachSanPham()"
+                        <button class="btn btn-primary checkStatus" onclick="deleteProduct()">Xóa sản phẩm</button>
+                        <button class="btn btn-primary checkStatus" onclick="updateSoLuong()">Sửa số lượng sản phẩm</button>
+                        <button class="btn btn-primary checkStatus me-4" onclick="getDanhSachSanPham()"
                                 data-bs-toggle="modal" data-bs-target="#modalDanhSachSanPham">Thêm sản phẩm</button>
                     </span>
                 </div>
@@ -230,7 +230,7 @@
 <%-- modalDanhSachSanPham --%>
 <div class="modal fade" id="modalDanhSachSanPham" tabindex="-1" aria-labelledby="modalDanhSachSanPhamLabel"
      aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1500px;">
+    <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1400px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Danh sách sản phẩm</h1>
@@ -255,7 +255,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="mauSacSearch">Màu sắc</label>
                                 <select class="form-select" id="mauSacSearch">
-                                    <option selected disabled>Lựa chọn</option>
+                                    <option selected value="">Lựa chọn</option>
                                     <c:forEach items="${listMS}" var="item">
                                         <option value="${item.id}">${item.ten}</option>
                                     </c:forEach>
@@ -264,7 +264,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="sizeSearch">Kích cỡ</label>
                                 <select class="form-select" id="sizeSearch">
-                                    <option selected disabled>Lựa chọn</option>
+                                    <option selected value="">Lựa chọn</option>
                                     <c:forEach items="${listKT}" var="item">
                                         <option value="${item.id}">${item.size}</option>
                                     </c:forEach>
@@ -275,7 +275,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="chatLieuSearch">Chất liệu</label>
                                 <select class="form-select" id="chatLieuSearch">
-                                    <option selected disabled>Lựa chọn</option>
+                                    <option selected value="">Lựa chọn</option>
                                     <c:forEach items="${listCL}" var="item">
                                         <option value="${item.id}">${item.tenChatLieu}</option>
                                     </c:forEach>
@@ -284,7 +284,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="hinhAnhSearch">Hình ảnh</label>
                                 <select class="form-select" id="hinhAnhSearch">
-                                    <option selected disabled>Lựa chọn</option>
+                                    <option selected value="">Lựa chọn</option>
                                     <c:forEach items="${listHA}" var="item">
                                         <option value="${item.id}">${item.ten}</option>
                                     </c:forEach>
@@ -330,7 +330,7 @@
 <%-- modalDanhSachKhachHang --%>
 <div class="modal fade" id="modalDanhSachKhachHang" tabindex="-1" aria-labelledby="modalDanhSachKhachHangLabel"
      aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1500px;">
+    <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1400px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title">Danh sách khách hàng</h1>
@@ -387,6 +387,7 @@
 <script>
     // form thông tin hóa đơn
     var hoaDon = {};
+    var sanPhamAddHoaDons = []
     const maHoaDon = $('#maHoaDon');
     const ngayTao = $('#ngayTao');
     const trangThai = $('#statusHoaDon');
@@ -397,7 +398,14 @@
     const chuyenKhoan = $('#chuyenKhoan');
     const tongTien = $('#tongTien');
     // form Thông tin khách hàng
-    var khachHang = {};
+    var khachHang = {
+        hoTen: "",
+        gioiTinh: "",
+        email: "",
+        sdt: "",
+        ngaySinh: ""
+    };
+
     const maKhachHang = $('#maKhachHang');
     const tenKhachHang = $('#tenKhachHang');
     const gioiTinh = $('#gioiTinh');
@@ -428,6 +436,173 @@
         sdtKhachHang.val("");
         ngaySinh.val("");
         emailKhachHang.val("");
+
+        tenKhachHang.removeAttr('disabled');
+        gioiTinh.removeAttr('disabled');
+        sdtKhachHang.removeAttr('disabled');
+        ngaySinh.removeAttr('disabled');
+        emailKhachHang.removeAttr('disabled');
+        khachHang = null;
+    }
+
+    const getFormHoaDon = () => {
+        tongTien.val(fillTongTien());
+        hoaDon.tenNguoiNhan = tenNguoiNhan.val();
+        hoaDon.sdt = soDienThoai.val();
+        hoaDon.tienMat = tienMat.val();
+        hoaDon.chuyenKhoan = chuyenKhoan.val();
+        hoaDon.tongTien = tongTien.val();
+        hoaDon.ghiChu = ghiChu.val();
+    }
+
+    const getFormKhachHang = () => {
+        khachHang.hoTen = tenKhachHang.val();
+        khachHang.gioiTinh = gioiTinh.val();
+        khachHang.email = emailKhachHang.val();
+        khachHang.sdt = sdtKhachHang.val();
+        khachHang.ngaySinh = ngaySinh.val();
+    }
+
+    const getFormChiTietSanPham = () => {
+        $('#listHoaDonSanPham').find('tr').each(function () {
+            const lastInput = $(this).find('input:last');
+            checkRecordProduct = true;
+            let product = JSON.parse($(this).attr('item'));
+            const lastInputValue = lastInput.val();
+            if (product.chiTietSanPham.soLuongTon + product.soLuong < parseInt(lastInputValue)) {
+                alert(`Sản phẩm ` + product.chiTietSanPham.ma + ` không đủ số lượng bán`);
+                check = false;
+            } else {
+                sanPhamAddHoaDons.push({
+                    hoaDonId: id,
+                    sanPhamId: product.chiTietSanPham.id,
+                    quantity: parseInt(lastInputValue),
+                    donGia: product.chiTietSanPham.donGia
+                })
+            }
+        });
+    }
+
+    const validateForm = () => {
+        let check = true;
+        // Kiểm tra trường tenNguoiNhan
+        if (!tenNguoiNhan.val()) {
+            check = false;
+        }
+        // Kiểm tra trường soDienThoai
+        if (!soDienThoai.val()) {
+            check = false;
+        }
+        // Kiểm tra trường ghiChu
+        if (!ghiChu.val()) {
+            check = false;
+        }
+        // Kiểm tra trường tienMat
+        if (!tienMat.val()) {
+            check = false;
+        }
+        // Kiểm tra trường chuyenKhoan
+        if (!chuyenKhoan.val()) {
+            check = false;
+        }
+        // Kiểm tra trường tongTien
+        if (!tongTien.val()) {
+            check = false;
+        }
+        // Kiểm tra trường tenKhachHang
+        if (!tenKhachHang.val()) {
+            check = false;
+        }
+        // Kiểm tra trường gioiTinh
+        if (!gioiTinh.val()) {
+            check = false;
+        }
+        // Kiểm tra trường sdtKhachHang
+        if (!sdtKhachHang.val()) {
+            check = false;
+        }
+        // Kiểm tra trường emailKhachHang
+        if (!emailKhachHang.val()) {
+            check = false;
+        }
+        // Kiểm tra trường ngaySinh
+        if (!ngaySinh.val()) {
+            check = false;
+        }
+        // Kết thúc kiểm tra, check sẽ là true nếu tất cả các trường đều có dữ liệu, ngược lại là false
+        if (!check) {
+            alert("Yêu cầu nhập đủ thông tin");
+            return false;
+        }
+        console.log(parseInt(tienMat.val()) + parseInt(chuyenKhoan.val()) , parseInt(tongTien.val()))
+        if (parseInt(tienMat.val()) + parseInt(chuyenKhoan.val()) < parseInt(tongTien.val())) {
+            alert("Thiếu tiền");
+            return false;
+        }
+        if (parseInt(tienMat.val()) + parseInt(chuyenKhoan.val()) > parseInt(tongTien.val())) {
+            alert("Thừa tiền");
+            return false;
+        }
+        return true;
+    }
+
+    const luuHoaDon = (status) => {
+        if (!validateForm()) {
+            return;
+        }
+        let kt = confirm(status == 0 ? "Bạn có chắc chắn muốn lưu hóa đơn không?" : status == 2 ? "Bạn có chắc chắn muốn thanh toán hóa đơn không?" : "");
+        if (kt == true) {
+            hoaDon.trangThai = status;
+            getFormHoaDon();
+            getFormKhachHang();
+            getFormChiTietSanPham();
+
+            const requestBody = {
+                sanPhamAddHoaDons: sanPhamAddHoaDons,
+                hoaDon: hoaDon,
+                khachHang: khachHang
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/ban-hang-tai-quay/rest/luu-hoa-don",
+                contentType: "application/json",
+                data: JSON.stringify(requestBody),
+                success: function (response) {
+                    alert(status == 0 ? "Lưu hóa đơn thành công" : status == 2 ? "Thanh toán hóa đơn thành công" : "")
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert("Lỗi hệ thống !!!")
+                }
+            });
+        }
+    }
+
+    const tuChoiHoaDon = () => {
+        let kt = confirm("Bạn có chắc chắn từ chối hóa đơn không?");
+        if (kt == true) {
+            $('#listHoaDonSanPham').find('tr').each(function () {
+                let product = JSON.parse($(this).attr('item'));
+                productShopping.push(product.id)
+            });
+            $.ajax({
+                type: "POST",
+                url: "/ban-hang-tai-quay/rest/tu-choi-hoa-don/" + hoaDon.id,
+                contentType: "application/json",
+                data: JSON.stringify(productShopping),
+                success: function (response) {
+                    alert("Từ chối hóa đơn thành công")
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert("Lỗi hệ thống !!!")
+                }
+            });
+            productShopping = []
+        }
     }
 
     const openModalKhachHang = () => {
@@ -469,6 +644,11 @@
         let kt = confirm("Bạn có chắc chắn muốn chọn khách hàng không?");
         if (kt == true) {
             this.khachHang = khachHang;
+            tenKhachHang.attr('disabled', 'disabled');
+            gioiTinh.attr('disabled', 'disabled');
+            sdtKhachHang.attr('disabled', 'disabled');
+            ngaySinh.attr('disabled', 'disabled');
+            emailKhachHang.attr('disabled', 'disabled');
             fillKhachHang();
             var myModalEl = document.getElementById('modalDanhSachKhachHang');
             var modal = bootstrap.Modal.getInstance(myModalEl)
@@ -557,13 +737,19 @@
                 response.forEach(el => {
                     if (id && el.id == id) {
                         hoaDon = el;
-                        khachHang = el.khachHang;
-
-                        fillKhachHang();
+                        console.log(hoaDon.loai)
+                        if (hoaDon.loai == 1) {
+                            alert("Đây không phải hóa đơn bán tại quầy.")
+                            window.location.href = "/ban-hang-tai-quay";
+                        }
+                        if (el.khachHang) {
+                            khachHang = el.khachHang;
+                            fillKhachHang();
+                        }
                         fillHoaDon();
                     }
                     // thay đổi trạng thái
-                    let active = id && el.id == id ? "bg-warning" : el.trangThai == 0 ? "bg-danger" : "bg-success"
+                    let active = id && el.id == id ? "bg-warning" : el.trangThai == 0 ? "bg-primary" : el.trangThai == 2 ? "bg-success" : "bg-danger"
 
                     hoaDonItem += '<li class="nav-item">' +
                         '<a class="nav-link text-white ' + (active) + '" href="/ban-hang-tai-quay?id=' + el.id + '" role="tab" >' + el.ma + '</a>' +
@@ -604,7 +790,7 @@
                     response.forEach(el => {
                         index++;
                         html += `<tr item='` + JSON.stringify(el) + `'>
-                                <td><input class="form-check-input" onchange="rowDisabledInput()" type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
+                                <td><input class="form-check-input checkStatus" onchange="rowDisabledInput()" type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
                                 <td>` + (el.chiTietSanPham ? el.chiTietSanPham.ma : "") + `</td>
                                 <td align="center">
                                     <img src="../../../uploads/` + (el.chiTietSanPham.hinhAnh ? el.chiTietSanPham.hinhAnh.anh1 : "") + `" width="100" height="100"
@@ -626,6 +812,10 @@
                     tableProduct.innerHTML = html;
 
                     tongTien.val(fillTongTien());
+
+                    if (hoaDon.trangThai && (hoaDon.trangThai == 2 || hoaDon.trangThai == 8)) {
+                        $(".checkStatus").attr('disabled', 'disabled')
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
@@ -679,13 +869,74 @@
     const searchSanPham = () => {
         let maSanPhamSearch = $("#maSanPhamSearch").val();
         let tenSanPhamSearch = $('#tenSanPhamSearch').val();
-        console.log(maSanPhamSearch)
+        let mauSacSearch = $('#mauSacSearch').val();
+        let kichCoSearch = $('#sizeSearch').val();
+        let chatLieuSearch = $('#chatLieuSearch').val();
+        let hinhAnhSearch = $('#hinhAnhSearch').val();
+        $('#listProduct').find('tr').each(function () {
+            let product = JSON.parse($(this).attr('item'));
+            let check = true;
+
+            // Kiểm tra mã sản phẩm
+            if (maSanPhamSearch) {
+                if (!product.ma.includes(maSanPhamSearch)) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra tên sản phẩm
+            if (tenSanPhamSearch) {
+                if (!product.ten.toLowerCase().includes(tenSanPhamSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra màu sắc
+            if (mauSacSearch) {
+                if (!product.mauSac.toLowerCase().includes(mauSacSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra kích cỡ
+            if (kichCoSearch) {
+                if (!product.kichCo.includes(kichCoSearch)) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra chất liệu
+            if (chatLieuSearch) {
+                if (!product.chatLieu.toLowerCase().includes(chatLieuSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra hình ảnh
+            if (hinhAnhSearch) {
+                if (!product.hinhAnh.toLowerCase().includes(hinhAnhSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Nếu sản phẩm không thỏa mãn các điều kiện tìm kiếm, ẩn nó đi
+            if (!check) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+
     }
+
     // lần đâu load trang load danh sách hóa đơn và chi tiết hóa đơn
     window.onload = function () {
         getAllHoaDon();
         findHoaDonById();
 
+        if (hoaDon.trangThai && (hoaDon.trangThai == 2 || hoaDon.trangThai == 8)) {
+            $(".checkStatus").attr('disabled', 'disabled')
+        }
     };
 
     // tạo mới hóa đơn
