@@ -222,7 +222,10 @@
                 <div class="row">
                     <div class="col-12" style="text-align: center">
                         <button type="button" class="btn btn-success"
-                                id="btt" onclick="return myFunction1()">Thêm mới
+                                id="bttCreate" onclick="return myFunction1()">Thêm mới
+                        </button>
+                        <button type="button" class="btn btn-success"
+                                id="bttUpdate" onclick="return myFunction1()">Update
                         </button>
                     </div>
                 </div>
@@ -628,6 +631,12 @@
     let listCategory = [];
     let listProductDetail = [];
 
+    var url = window.location.href;
+
+    var urlParams = new URLSearchParams(new URL(url).search);
+
+    var id = urlParams.get("idctsp");
+
     function addRow(checkbox, name, id, type) {
         if (checkbox.checked) {
             if (type === 'COLOR') {
@@ -806,6 +815,22 @@
             })
         });
     }
+
+    window.onload = function () {
+        if (id) {
+            $('#bttCreate').hide();
+            $('#bttUpdate').show();
+        } else {
+            $('#bttCreate').show();
+            $('#bttUpdate').show();
+        }
+        // getAllHoaDon();
+        // findHoaDonById();
+        //
+        // if (hoaDon.trangThai && (hoaDon.trangThai == 2 || hoaDon.trangThai == 8)) {
+        //     $(".checkStatus").attr('disabled', 'disabled')
+        // }
+    };
 </script>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->

@@ -119,19 +119,20 @@
             return "home/layout";
         }
 
-        @GetMapping("/view-update/{idctsp}")
-        public String viewUpdate(Model model, @PathVariable("idctsp") UUID id,
+        @GetMapping("/view-update")
+        public String viewUpdate(Model model,
                                  @ModelAttribute("mauSac") MauSac mauSac,
                                  @ModelAttribute("kichThuoc") KichThuoc kichThuoc,
                                  @ModelAttribute("chatLieu") ChatLieu chatLieu) {
-            ChiTietSanPham ctsp = chiTietSanPhamService.findById(id);
-            model.addAttribute("chiTietSanPham", ctsp);
-            model.addAttribute("listSP", sanPhamRepository.findAll());
+
+            model.addAttribute("listTH", thuongHieuService.findAll());
+            model.addAttribute("listPL", phanLoaiService.findAll());
+            model.addAttribute("listHA", hinhAnhService.findAll());
             model.addAttribute("listMS", mauSacService.findAll());
             model.addAttribute("listKT", kichThuocService.findAll());
             model.addAttribute("listCL", chatLieuService.findAll());
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/update.jsp");
-            return "chi-tiet-san-pham/update";
+            model.addAttribute("contentPage", "../chi-tiet-san-pham/add.jsp");
+            return "home/layout";
         }
 
         @PostMapping("/add")

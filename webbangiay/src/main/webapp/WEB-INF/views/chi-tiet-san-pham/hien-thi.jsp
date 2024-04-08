@@ -259,7 +259,7 @@
                     <td colspan="2">
                         <a href="/chi-tiet-san-pham/update-status/${ctsp.id}" class="btn btn-success"
                            onclick="return myFunction2()">Delete</a>
-                        <a href="/chi-tiet-san-pham/view-update/${ctsp.id}" class="btn btn-success"
+                        <a href="/chi-tiet-san-pham/view-update?idctsp=${ctsp.id}" class="btn btn-success"
                            onclick="return myFunction2()">Update</a>
                     </td>
                 </tr>

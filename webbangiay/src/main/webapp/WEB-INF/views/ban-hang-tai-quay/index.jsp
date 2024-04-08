@@ -737,7 +737,6 @@
                 response.forEach(el => {
                     if (id && el.id == id) {
                         hoaDon = el;
-                        console.log(hoaDon.loai)
                         if (hoaDon.loai == 1) {
                             alert("Đây không phải hóa đơn bán tại quầy.")
                             window.location.href = "/ban-hang-tai-quay";

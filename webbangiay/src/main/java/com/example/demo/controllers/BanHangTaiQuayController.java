@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.repositories.SanPhamRepository;
 import com.example.demo.services.ChatLieuService;
 import com.example.demo.services.HinhAnhService;
 import com.example.demo.services.KichThuocService;
