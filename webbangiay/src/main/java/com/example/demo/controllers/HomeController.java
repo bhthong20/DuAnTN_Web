@@ -1,6 +1,11 @@
 package com.example.demo.controllers;
 
-import com.example.demo.services.*;
+import com.example.demo.services.ChatLieuService;
+import com.example.demo.services.HinhAnhService;
+import com.example.demo.services.KichThuocService;
+import com.example.demo.services.MauSacService;
+import com.example.demo.services.PhanLoaiService;
+import com.example.demo.services.ThuongHieuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

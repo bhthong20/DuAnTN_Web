@@ -363,24 +363,24 @@
 
 
 </script>
-<script>
-    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {
-        dropdown.style.display = 'none';
-    });
+<%--<script>--%>
+<%--    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {--%>
+<%--        dropdown.style.display = 'none';--%>
+<%--    });--%>
 
-    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
-    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
-        dropdown.addEventListener('click', function () {
-            const dropdownMenu = dropdown.nextElementSibling;
+<%--    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha--%>
+<%--    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {--%>
+<%--        dropdown.addEventListener('click', function () {--%>
+<%--            const dropdownMenu = dropdown.nextElementSibling;--%>
 
-            if (dropdownMenu.style.display === 'block') {
-                dropdownMenu.style.display = 'none';
-            } else {
-                dropdownMenu.style.display = 'block';
-            }
-        });
-    });
-</script>
+<%--            if (dropdownMenu.style.display === 'block') {--%>
+<%--                dropdownMenu.style.display = 'none';--%>
+<%--            } else {--%>
+<%--                dropdownMenu.style.display = 'block';--%>
+<%--            }--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>
