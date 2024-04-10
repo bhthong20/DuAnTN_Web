@@ -57,6 +57,9 @@ public class ChiTietSanPham {
     @Column(name = "trang_thai")
     private int trangThai;
 
+    @Column(name = "is_delete")
+    private int isDelete;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "san_pham_id")
     private SanPham sanPham;

@@ -69,6 +69,13 @@
     <script src="../assets/js/config.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
     <script src="../js/menu.js"></script>
+    <style>
+        .form-check-input:checked, .form-check-input[type=checkbox]:indeterminate {
+            background-color: #ff3e1d !important;
+            border-color: #ff3e1d !important;
+            box-shadow: 0 2px 4px 0 rgba(255, 105, 105, 0.4) !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -144,7 +151,7 @@
                         <input class="form-control" type="text" value="" id="giaKetThuc" placeholder="Đến"/>
                     </div>
 
-                    <button type="button" onclick="filterSanPham()" class="btn btn-primary w-100">Tìm kiếm</button>
+                    <button type="button" onclick="filterSanPham()" class="btn btn-danger w-100">Tìm kiếm</button>
                 </div>
             </div>
             <div class="col-10 ps-4 ">
@@ -372,20 +379,20 @@
                                     <div class="rating">
                                         <input value="5" name="rate` + index + `" id="star5` + el.idSanPham + `" type="radio">
                                         <label title="text" for="star5` + el.idSanPham + `"></label>
-                                        <input value="4" name="rate` + index + ` id="star4` + el.idSanPham + `" type="radio">
+                                        <input value="4" name="rate` + index + `" id="star4` + el.idSanPham + `" type="radio">
                                         <label title="text" for="star4` + el.idSanPham + `"></label>
-                                        <input value="3" name="rate` + index + ` id="star3` + el.idSanPham + `" type="radio" checked="">
+                                        <input value="3" name="rate` + index + `" id="star3` + el.idSanPham + `" type="radio" checked="">
                                         <label title="text" for="star3` + el.idSanPham + `"></label>
-                                        <input value="2" name="rate` + index + ` id="star2` + el.idSanPham + `" type="radio">
+                                        <input value="2" name="rate` + index + `" id="star2` + el.idSanPham + `" type="radio">
                                         <label title="text" for="star2` + el.idSanPham + `"></label>
-                                        <input value="1" name="rate` + index + ` id="star1` + el.idSanPham + `" type="radio">
+                                        <input value="1" name="rate` + index + `" id="star1` + el.idSanPham + `" type="radio">
                                         <label title="text" for="star1` + el.idSanPham + `"></label>
                                     </div>
                                     <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
                                         Đã bán ` + el.luotMua + `
                                     </div>
                                 </div>
-                                <a href="/san-pham/` + el.idSanPham + `" class="btn btn-primary">Mua Ngay</a>
+                                <a href="/san-pham/` + el.idSanPham + `" class="btn btn-danger">Mua Ngay</a>
                             </div>
                         </div>
                     </div>

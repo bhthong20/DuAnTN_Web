@@ -40,4 +40,9 @@ public class HomeController {
         model.addAttribute("listMS", mauSacService.findAll());
         return "quang-ba/san-pham";
     }
+
+    @GetMapping("/san-pham/{id}")
+    private String showSanPhamDetail(Model model) {
+        return "quang-ba/detail-san-pham";
+    }
 }

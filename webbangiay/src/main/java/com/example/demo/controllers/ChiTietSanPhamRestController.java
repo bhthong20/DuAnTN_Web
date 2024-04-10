@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.SanPham;
+import com.example.demo.models.dto.SanPhamDetail;
 import com.example.demo.models.dto.SanPhamDto;
 import com.example.demo.services.ChiTietSanPhamService;
 import com.example.demo.services.SanPhamService;
@@ -25,12 +27,15 @@ public class ChiTietSanPhamRestController {
     }
 
     @GetMapping("/detail-san-pham")
-    public SanPham detailSanPham(@RequestParam("idctsp") UUID id) {
-        return sanPhamService.findById(id);
+    public SanPhamDetail detailSanPham(@RequestParam("idctsp") UUID id) {
+        SanPhamDetail sanPhamDetail = new SanPhamDetail();
+        sanPhamDetail.setSanPham(sanPhamService.findById(id));
+        sanPhamDetail.setChiTietSanPham(chiTietSanPhamService.findChiTietSanPhamBySanPham(sanPhamDetail.getSanPham()));
+        return sanPhamDetail;
     }
 
-    @GetMapping("/test")
-    public String testNha() {
-        return "test nha !!!";
+    @PostMapping("/update-san-pham")
+    public Boolean updateSanPham(@RequestBody SanPhamDto sanPhamDto) {
+        return chiTietSanPhamService.updateAllChiTietSanPham(sanPhamDto);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.SanPham;
 import com.example.demo.models.dto.SanPhamDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,8 @@ public interface ChiTietSanPhamService {
 
     //tìm theo id
     public ChiTietSanPham findById(UUID id);
+
+    List<ChiTietSanPham> findChiTietSanPhamBySanPham(SanPham sanPham);
 
     //thêm
     public ChiTietSanPham add(ChiTietSanPham chiTietSanPham);
@@ -48,4 +51,6 @@ public interface ChiTietSanPhamService {
     public Boolean delete(UUID id);
 
     Boolean addAllChiTietSanPham(SanPhamDto sanPhamDto);
+
+    Boolean updateAllChiTietSanPham(SanPhamDto sanPhamDto);
 }

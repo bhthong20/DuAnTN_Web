@@ -69,7 +69,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
 
     @Override
     public List<ChiTietSanPham> getChiTietSanPham() {
-        return chiTietSanPhamService.findAll();
+        return chiTietSanPhamService.findAllByIsDelete(1);
     }
 
     @Override
@@ -90,7 +90,11 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                     if (hoaDonChiTietMap.containsKey(chiTietSanPham.getId())) {
                         HoaDonChiTiet hoaDonChiTiet = hoaDonChiTietMap.get(chiTietSanPham.getId());
                         chiTietSanPham.setSoLuongTon(hoaDonChiTiet.getSoLuong() + hoaDonChiTiet.getChiTietSanPham().getSoLuongTon() - el.getQuantity());
-
+                        if (chiTietSanPham.getSoLuongTon() <= 0) {
+                            chiTietSanPham.setIsDelete(0);
+                        } else {
+                            chiTietSanPham.setIsDelete(1);
+                        }
                         hoaDonChiTiet.setDonGia(el.getDonGia());
                         hoaDonChiTiet.setSoLuong(el.getQuantity());
                         hoaDonChiTietList.add(hoaDonChiTiet);
@@ -104,6 +108,12 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                         hoaDonChiTiet.setSoLuong(el.getQuantity());
                         hoaDonChiTietList.add(hoaDonChiTiet);
                         chiTietSanPham.setSoLuongTon(chiTietSanPham.getSoLuongTon() - el.getQuantity());
+                        if (chiTietSanPham.getSoLuongTon() <= 0) {
+                            chiTietSanPham.setIsDelete(0);
+                        } else {
+                            chiTietSanPham.setIsDelete(1);
+                        }
+
                         chiTietSanPhams.add(chiTietSanPham);
                     }
                 }
@@ -126,6 +136,13 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
             List<ChiTietSanPham> chiTietSanPhams = hoaDonChiTietList.stream().map(el -> {
                 ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
                 chiTietSanPham.setSoLuongTon(chiTietSanPham.getSoLuongTon() + el.getSoLuong());
+
+                if (chiTietSanPham.getSoLuongTon() <= 0) {
+                    chiTietSanPham.setIsDelete(0);
+                } else {
+                    chiTietSanPham.setIsDelete(1);
+                }
+
                 return chiTietSanPham;
             }).collect(Collectors.toList());
             hoaDonChiTietRepository.saveAll(hoaDonChiTietList);
@@ -162,6 +179,12 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                         chiTietSanPham.setSoLuongTon(hoaDonChiTiet.getSoLuong() +
                                 hoaDonChiTiet.getChiTietSanPham().getSoLuongTon() - el.getQuantity());
 
+                        if (chiTietSanPham.getSoLuongTon() <= 0) {
+                            chiTietSanPham.setIsDelete(0);
+                        } else {
+                            chiTietSanPham.setIsDelete(1);
+                        }
+
                         hoaDonChiTiet.setDonGia(el.getDonGia());
                         hoaDonChiTiet.setSoLuong(el.getQuantity());
                         hoaDonChiTietList.add(hoaDonChiTiet);
@@ -175,6 +198,13 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                         hoaDonChiTiet.setSoLuong(el.getQuantity());
                         hoaDonChiTietList.add(hoaDonChiTiet);
                         chiTietSanPham.setSoLuongTon(chiTietSanPham.getSoLuongTon() - el.getQuantity());
+
+                        if (chiTietSanPham.getSoLuongTon() <= 0) {
+                            chiTietSanPham.setIsDelete(0);
+                        } else {
+                            chiTietSanPham.setIsDelete(1);
+                        }
+
                         chiTietSanPhams.add(chiTietSanPham);
                     }
                 }
@@ -208,6 +238,13 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
             List<ChiTietSanPham> chiTietSanPhams = hoaDonChiTietList.stream().map(el -> {
                 ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
                 chiTietSanPham.setSoLuongTon(chiTietSanPham.getSoLuongTon() + el.getSoLuong());
+
+                if (chiTietSanPham.getSoLuongTon() <= 0) {
+                    chiTietSanPham.setIsDelete(0);
+                } else {
+                    chiTietSanPham.setIsDelete(1);
+                }
+
                 return chiTietSanPham;
             }).collect(Collectors.toList());
             chiTietSanPhamService.saveAll(chiTietSanPhams);

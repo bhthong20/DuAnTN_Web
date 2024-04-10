@@ -164,7 +164,7 @@
 
                 <!-- Hoa don -->
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="/hoa-don" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
                         <div data-i18n="Account Settings">Hóa đơn</div>
                     </a>
@@ -464,12 +464,13 @@
         var menuItem = $('.menu-item')
         menuItem.each(function () {
             var hrefMenu = $(this).find("a").attr("href");
-
-            if (domain.includes(hrefMenu)) {
-                $(this).addClass("active")
-                console.log("zoooo")
-            } else {
-                $(this).removeClass("active")
+            var parts = hrefMenu.split('/');
+            if (parts.length > 0) {
+                if (domain.includes(parts[1])) {
+                    $(this).addClass("active open")
+                } else {
+                    $(this).removeClass("active open")
+                }
             }
         })
 </script>

@@ -201,7 +201,7 @@
         </tr>
         <tr class="text-center">
             <td class="text-center" colspan="2">
-                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>
+<%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
                 <a type="button" class="btn btn-primary" href="/chi-tiet-san-pham/view-add">Thêm mới sản phẩm</a>
             </td>
         </tr>
@@ -219,14 +219,9 @@
                 <th>Mã</th>
                 <th>Ảnh</th>
                 <th>Tên sản phẩm</th>
-                <th>Màu sắc</th>
-                <th>Kích cỡ</th>
-                <th>Chất liệu</th>
-                <th>Số lượng</th>
-                <th>Đơn giá</th>
+                <th>Thương hiệu</th>
+                <th>Loại</th>
                 <th>Ngày tạo</th>
-                <th>Ngày cập nhật</th>
-                <th>Tình trạng</th>
                 <th>Mô tả</th>
                 <th colspan="2">Chức năng</th>
             </tr>
@@ -237,27 +232,17 @@
                     <td>${stt.index+1}</td>
                     <td>${ctsp.ma}</td>
                     <td align="center">
-                        <img src="../../../uploads/${ctsp.sanPham.hinhAnh.anh1}" width="100" height="100"
+                        <img src="../../../uploads/${ctsp.hinhAnh.anh1}" width="100" height="100"
                              style="border-radius:50% 50% 50% 50%">
 
                     </td>
-                    <td>${ctsp.sanPham.tenSP}</td>
-                    <td>${ctsp.mauSac.ten}</td>
-                    <td>${ctsp.kichThuoc.size}</td>
-                    <td>${ctsp.chatLieu.tenChatLieu}</td>
-                    <td>${ctsp.soLuongTon}</td>
-                    <td><strong>${ctsp.donGia}</strong></td>
+                    <td>${ctsp.tenSP}</td>
+                    <td>${ctsp.thuongHieu.ten}</td>
+                    <td>${ctsp.phanLoai.tenLoai}</td>
                     <td>${ctsp.ngayTao}</td>
-                    <td>${ctsp.ngayCapNhat}</td>
-                    <td>
-                        <span class="badge bg-label-warning me-1"><c:if
-                                test="${ctsp.trangThai==1}">Còn hàng</c:if></span>
-                        <span class="badge bg-label-success me-1"><c:if
-                                test="${ctsp.trangThai==0}">Hết hàng</c:if></span>
-                    </td>
                     <td>${ctsp.moTa}</td>
                     <td colspan="2">
-                        <a href="/chi-tiet-san-pham/update-status/${ctsp.id}" class="btn btn-success"
+                        <a href="/chi-tiet-san-pham/delete/${ctsp.id}" class="btn btn-success"
                            onclick="return myFunction2()">Delete</a>
                         <a href="/chi-tiet-san-pham/view-update?idctsp=${ctsp.id}" class="btn btn-success"
                            onclick="return myFunction2()">Update</a>

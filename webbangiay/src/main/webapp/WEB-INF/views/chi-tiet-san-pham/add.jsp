@@ -72,21 +72,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
+                                <input id="ma" disabled class="form-control" placeholder=""/>
+                                <label for="ma" path="sanPham">Mã sản phẩm:</label>
+                                <span path="sanPham" cssStyle="color: red"></span>
+                            </div>
+
+                            <div class="form-floating mb-3 mt-3">
                                 <input id="tenSP" class="form-control" placeholder="" path="sanPham"/>
                                 <label for="tenSP" path="sanPham">Tên sản phẩm:</label>
                                 <span path="sanPham" cssStyle="color: red"></span>
                             </div>
 
-                            <div class="form-floating mb-3 mt-3">
-                                <input id="soLuongTon" type="number" class="form-control" placeholder="" path="soLuongTon"/>
-                                <label for="soLuongTon" path="soLuongTon">Số lượng tồn:</label>
-                                <span path="soLuongTon" cssStyle="color: red"></span>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <input id="donGia" class="form-control" type="number" placeholder="" path="donGia"/>
-                                <label for="donGia" path="donGia">Đơn giá:</label>
-                                <span path="donGia" cssStyle="color: red"></span>
-                            </div>
+                            <%--                            <div class="form-floating mb-3 mt-3">--%>
+                            <%--                                <input id="soLuongTon" type="number" class="form-control" placeholder="" path="soLuongTon"/>--%>
+                            <%--                                <label for="soLuongTon" path="soLuongTon">Số lượng tồn:</label>--%>
+                            <%--                                <span path="soLuongTon" cssStyle="color: red"></span>--%>
+                            <%--                            </div>--%>
+                            <%--                            <div class="form-floating mb-3 mt-3">--%>
+                            <%--                                <input id="donGia" class="form-control" type="number" placeholder="" path="donGia"/>--%>
+                            <%--                                <label for="donGia" path="donGia">Đơn giá:</label>--%>
+                            <%--                                <span path="donGia" cssStyle="color: red"></span>--%>
+                            <%--                            </div>--%>
                             <div class="form-floating mb-3 mt-3">
                                 <select class="form-select" id="phanLoai">
                                     <option selected disabled value="">Phân loại</option>
@@ -95,6 +101,22 @@
                                     </c:forEach>
                                 </select>
                                 <label for="phanLoai" path="phanLoai">Phân loại:</label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <select class="form-select" id="thuongHieu">
+                                    <option selected disabled>Thương hiệu</option>
+                                    <c:forEach items="${listTH}" var="thuongHieu">
+                                        <option value="${thuongHieu.id}">${thuongHieu.ten}</option>
+                                    </c:forEach>
+                                </select>
+                                <label for="thuongHieu" path="thuongHieu">Thương hiệu:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mt-3">
+                                <textarea id="moTa" class="form-control" path="moTa"></textarea>
+                                <label for="moTa" path="moTa">Mô tả quảng bá:</label>
+                                <span path="moTa" cssStyle="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
                                 <select class="form-select" id="hinhAnh">
@@ -106,23 +128,7 @@
                                                 anh3="${hinhAnh.anh3}">${hinhAnh.ten}</option>
                                     </c:forEach>
                                 </select>
-                                <label for="hinhAnh" path="hinhAnh">Hình ảnh:</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating mb-3 mt-3">
-                                <textarea id="moTa" class="form-control" path="moTa"></textarea>
-                                <label for="moTa" path="moTa">Mô tả:</label>
-                                <span path="moTa" cssStyle="color: red"></span>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <select class="form-select" id="thuongHieu">
-                                    <option selected disabled>Thương hiệu</option>
-                                    <c:forEach items="${listTH}" var="thuongHieu">
-                                        <option value="${thuongHieu.id}">${thuongHieu.ten}</option>
-                                    </c:forEach>
-                                </select>
-                                <label for="thuongHieu" path="thuongHieu">Thương hiệu:</label>
+                                <label for="hinhAnh" path="hinhAnh">Hình ảnh quảng bá:</label>
                             </div>
                             <div class="form-floating mb-3 mt-3 d-flex justify-content-between">
                                 <img id="preview-anh1" class="preview-image"
@@ -160,7 +166,8 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleChonModalMauSac">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleChonModalMauSac">
                                     Chọn màu sắc
                                 </button>
                             </div>
@@ -173,7 +180,8 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleChonModalKichThuoc">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleChonModalKichThuoc">
                                     Chọn kích thước
                                 </button>
                             </div>
@@ -186,7 +194,8 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleChonModalChatLieu">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleChonModalChatLieu">
                                     Chọn chất liệu
                                 </button>
                             </div>
@@ -220,12 +229,12 @@
                     </table>
                 </div>
                 <div class="row">
-                    <div class="col-12" style="text-align: center">
+                    <div class="col-12 mt-2" style="text-align: center">
                         <button type="button" class="btn btn-success"
                                 id="bttCreate" onclick="return myFunction1()">Thêm mới
                         </button>
                         <button type="button" class="btn btn-success"
-                                id="bttUpdate" onclick="return myFunction1()">Update
+                                id="bttUpdate" onclick="return myFunction2()">Update
                         </button>
                     </div>
                 </div>
@@ -246,7 +255,8 @@
                     <c:forEach var="mauSacItem" items="${listMS}">
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" name="mauSac" value="${mauSacItem.id}"
-                                   onclick="addRow(this, '${mauSacItem.ten}', '${mauSacItem.id}', 'COLOR')" id="${mauSacItem.id}" />
+                                   onclick="addRow(this, '${mauSacItem.ten}', '${mauSacItem.id}', 'COLOR')"
+                                   id="${mauSacItem.id}"/>
                             <label class="form-check-label" for="${mauSacItem.id}"> ${mauSacItem.ten} </label>
                         </div>
                     </c:forEach>
@@ -271,7 +281,8 @@
                     <c:forEach var="kichThuoc" items="${listKT}">
                         <div class="form-check mb-3">
                             <input class="form-check-input" name="kichThuoc"
-                                   onclick="addRow(this, '${kichThuoc.size}', '${kichThuoc.id}', 'SIZE')" type="checkbox" value="${kichThuoc.id}" id="${kichThuoc.id}" />
+                                   onclick="addRow(this, '${kichThuoc.size}', '${kichThuoc.id}', 'SIZE')"
+                                   type="checkbox" value="${kichThuoc.id}" id="${kichThuoc.id}"/>
                             <label class="form-check-label" for="${kichThuoc.id}"> ${kichThuoc.size} </label>
                         </div>
                     </c:forEach>
@@ -296,7 +307,8 @@
                     <c:forEach var="chatLieu" items="${listCL}">
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" name="chatLieu" value="${chatLieu.id}"
-                                   onclick="addRow(this, '${chatLieu.tenChatLieu}', '${chatLieu.id}', 'CATEGORY')" id="${chatLieu.id}" />
+                                   onclick="addRow(this, '${chatLieu.tenChatLieu}', '${chatLieu.id}', 'CATEGORY')"
+                                   id="${chatLieu.id}"/>
                             <label class="form-check-label" for="${chatLieu.id}"> ${chatLieu.tenChatLieu} </label>
                         </div>
                     </c:forEach>
@@ -483,16 +495,6 @@
 </body>
 <script>
 
-    function myFunction2() {
-        let text = "Bạn chắc chắn muốn sửa";
-        let kt = confirm(text);
-        if (kt == true) {
-            return true
-        } else {
-            return false;
-        }
-    }
-
     function myFunction3() {
         let text = "Bạn chắc chắn muốn thay đổi trạng thái";
         let kt = confirm(text);
@@ -557,6 +559,53 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
+    function validateSanPham(sanPham) {
+        if (!sanPham.tenSanPham) {
+            alert("Tên sản phẩm không được để trống");
+            return false;
+        }
+        if (!sanPham.idLoaiSanPham) {
+            alert("Loại sản phẩm không được để trống");
+            return false;
+        }
+        if (!sanPham.idHinhAnh) {
+            alert("Hình ảnh quảng bá không được để trống")
+            return false;
+        }
+        if (!sanPham.idThuongHieu) {
+            alert("Thương hiệu không được để trống")
+            return false;
+        }
+        if (!sanPham.moTa) {
+            alert("Mô tả quảng bá không được để trống");
+            return false;
+        }
+        if (!sanPham.chiTietSanPhamDtos) {
+            alert("Chi tiết sản phẩm không được để trống")
+            return false;
+        }
+        let check = true;
+        sanPham.chiTietSanPhamDtos.forEach(el => {
+            if (!el.soLuongTon) {
+                check = false;
+            }
+            if (!el.donGia) {
+                check = false;
+            }
+            if (!el.moTa) {
+                check = false;
+            }
+            if (!el.idHinhAnh) {
+                check = false;
+            }
+        })
+        if (!check) {
+            alert("Chi tiết sản phẩm phải nhập đủ thông tin");
+            return false;
+        }
+        return true;
+    }
+
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
         var tenSPValue = document.getElementById('tenSP').value;
@@ -590,7 +639,9 @@
                 }
             })
         };
-
+        if (!validateSanPham(sanPham)) {
+            return
+        }
         let kt = confirm(text);
         if (kt == true) {
             $.ajax({
@@ -598,12 +649,12 @@
                 url: "/chi-tiet-san-pham/rest/them-san-pham",
                 contentType: "application/json",
                 data: JSON.stringify(sanPham),
-                success: function(response){
+                success: function (response) {
                     alert("Thêm sản phẩm mới thành công");
                     console.log(response)
                     window.location.href = "/chi-tiet-san-pham/hien-thi";
                 },
-                error: function(xhr, status, error){
+                error: function (xhr, status, error) {
                     console.log(xhr.responseText);
                 }
             });
@@ -613,8 +664,68 @@
         }
     }
 
-    document.getElementById("hinhAnh").addEventListener("change", function() {
-        var selectedOptionValue = this.value;
+    function myFunction2() {
+        let text = "Bạn chắc chắn muốn sửa";
+        var tenSPValue = document.getElementById('tenSP').value;
+        var moTaValue = document.getElementById('moTa').value;
+        var thuongHieu = document.getElementById('thuongHieu').value;
+        var hinhAnh = document.getElementById('hinhAnh').value;
+        var phanLoai = document.getElementById('phanLoai').value;
+        getMoney();
+        getQuantity();
+        getNote();
+        getStatus();
+        getImages();
+        let sanPham = {
+            id: id,
+            tenSanPham: tenSPValue,
+            idLoaiSanPham: phanLoai,
+            idHinhAnh: hinhAnh,
+            idThuongHieu: thuongHieu,
+            moTa: moTaValue,
+            chiTietSanPhamDtos: listProductDetail.map(el => {
+                var listDetail = dataProductDetailUpdate.filter(detail => detail.sizeId === el.sizeId && detail.colorId === el.colorId && detail.categoryId === el.categoryId);
+                return {
+                    id: listDetail.length === 0 ? null : listDetail[0].id,
+                    idKichThuoc: el.sizeId,
+                    idMauSac: el.colorId,
+                    idChatLieu: el.categoryId,
+                    soLuongTon: el.quantity,
+                    donGia: el.money,
+                    moTa: el.note,
+                    trangThai: el.status,
+                    idHinhAnh: el.image
+                }
+            })
+        };
+
+        if (!validateSanPham(sanPham)) {
+            return
+        }
+
+        let kt = confirm(text);
+        if (kt == true) {
+            $.ajax({
+                type: "POST",
+                url: "/chi-tiet-san-pham/rest/update-san-pham",
+                contentType: "application/json",
+                data: JSON.stringify(sanPham),
+                success: function (response) {
+                    alert("Update sản phẩm thành công");
+                    console.log(response)
+                    window.location.href = "/chi-tiet-san-pham/hien-thi";
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    document.getElementById("hinhAnh").addEventListener("change", function () {
         var selectedOption = this.options[this.selectedIndex];
 
         var anh1Value = selectedOption.getAttribute("anh1");
@@ -630,6 +741,8 @@
     let listSize = [];
     let listCategory = [];
     let listProductDetail = [];
+
+    let dataProductDetailUpdate = [];
 
     var url = window.location.href;
 
@@ -693,16 +806,16 @@
         listProductDetail.forEach(function (product) {
             html +=
                 '<tr>' +
-                    '<td>' + product.index + '</td>' +
-                    '<td>' + product.name + '</td>' +
-                    '<td> <input class="form-control productMoney" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.money + '" /></td>' +
-                    '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
-                    '<td>' + product.categoryName + '</td>' +
-                    '<td>' + product.sizeName + '</td>' +
-                    '<td>' + product.colorName + '</td>' +
-                    '<td>' + genComboboxImage(product.index) + '</td>' +
-                    '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
-                    '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" checked="' + (product.status) + '" /></div></td>' +
+                '<td>' + product.index + '</td>' +
+                '<td>' + product.name + '</td>' +
+                '<td> <input class="form-control productMoney" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.money + '" /></td>' +
+                '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
+                '<td>' + product.categoryName + '</td>' +
+                '<td>' + product.sizeName + '</td>' +
+                '<td>' + product.colorName + '</td>' +
+                '<td>' + genComboboxImage(product.index) + '</td>' +
+                '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
+                '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" ' + (product.status ? `checked`: ``) + ' /></div></td>' +
                 '</tr>';
         });
 
@@ -717,9 +830,8 @@
         if (listMauSac.length !== 0 && listSize.length !== 0 && listCategory.length !== 0) {
             let index = 0;
             var tenSPValue = document.getElementById('tenSP').value;
-            var donGia = document.getElementById('donGia').value;
-            var soLuongTon = document.getElementById('soLuongTon').value;
-
+            // var donGia = document.getElementById('donGia').value;
+            // var soLuongTon = document.getElementById('soLuongTon').value;
             tableCreate.style.display = 'block';
             listMauSac.forEach(color => {
                 listSize.forEach(size => {
@@ -733,8 +845,8 @@
                             sizeName: size.name,
                             categoryId: category.id,
                             categoryName: category.name,
-                            quantity: soLuongTon,
-                            money: donGia,
+                            quantity: 1,
+                            money: 1,
                             name: tenSPValue,
                             note: "",
                             status: true,
@@ -748,7 +860,7 @@
 
     function getMoney() {
         var inputs = document.querySelectorAll('.productMoney');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -762,7 +874,7 @@
 
     function getQuantity() {
         var inputs = document.querySelectorAll('.productQuantity');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -776,7 +888,7 @@
 
     function getNote() {
         var inputs = document.querySelectorAll('.productNote');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -790,7 +902,7 @@
 
     function getStatus() {
         var inputs = document.querySelectorAll('.productStatus');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -804,7 +916,7 @@
 
     function getImages() {
         var inputs = document.querySelectorAll('.productImg');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -820,9 +932,114 @@
         if (id) {
             $('#bttCreate').hide();
             $('#bttUpdate').show();
+
+            var tableCreate = document.getElementById('tableCreate');
+            tableCreate.style.display = 'block';
+            $.ajax({
+                type: "GET",
+                url: "/chi-tiet-san-pham/rest/detail-san-pham?idctsp=" + id,
+                success: function (response) {
+                    console.log(response);
+                    if (response.sanPham) {
+                        $('#tenSP').val(response.sanPham.tenSP);
+                        $('#ma').val(response.sanPham.ma);
+                        $('#moTa').val(response.sanPham.moTa);
+                        $('#hinhAnh').val(response.sanPham.hinhAnh ? response.sanPham.hinhAnh.id : "");
+                        $('#thuongHieu').val(response.sanPham.thuongHieu ? response.sanPham.thuongHieu.id : "");
+                        $('#phanLoai').val(response.sanPham.phanLoai ? response.sanPham.phanLoai.id : "");
+                        if (response.sanPham.hinhAnh) {
+                            document.getElementById("preview-anh1").src = '../../../uploads/' + response.sanPham.hinhAnh.anh1;
+                            document.getElementById("preview-anh2").src = '../../../uploads/' + response.sanPham.hinhAnh.anh2;
+                            document.getElementById("preview-anh3").src = '../../../uploads/' + response.sanPham.hinhAnh.anh3;
+                        }
+                    }
+                    if (response.chiTietSanPham) {
+                        var mauSacElements = $('input[name="mauSac"]');
+                        var kichThuocElements = $('input[name="kichThuoc"]');
+                        var chatLieuElements = $('input[name="chatLieu"]');
+                        let index = 0;
+                        response.chiTietSanPham.forEach(el => {
+                            console.log(el)
+                            mauSacElements.each(function () {
+                                if (el.mauSac.id.toString() === $(this).val()) {
+                                    $(this).prop('checked', true);
+                                    if (listMauSac.filter(color => color.id == el.mauSac.id).length == 0) {
+                                        listMauSac.push({
+                                            id: el.mauSac.id,
+                                            name: el.mauSac.ten
+                                        });
+                                    }
+                                }
+                            });
+                            kichThuocElements.each(function () {
+                                if (el.kichThuoc.id.toString() === $(this).val()) {
+                                    $(this).prop('checked', true);
+                                    if (listSize.filter(size => size.id == el.kichThuoc.id).length == 0) {
+                                        listSize.push({
+                                            id: el.kichThuoc.id,
+                                            name: el.kichThuoc.size
+                                        });
+                                    }
+                                }
+                            });
+                            chatLieuElements.each(function () {
+                                if (el.chatLieu.id.toString() === $(this).val()) {
+                                    $(this).prop('checked', true);
+                                    if (listCategory.filter(category => category.id == el.chatLieu.id).length == 0) {
+                                        listCategory.push({
+                                            id: el.chatLieu.id,
+                                            name: el.chatLieu.tenChatLieu
+                                        });
+                                    }
+                                }
+                            });
+
+                            index++;
+                            listProductDetail.push({
+                                index: index,
+                                colorId: el.mauSac.id,
+                                colorName: el.mauSac.ten,
+                                sizeId: el.kichThuoc.id,
+                                sizeName: el.kichThuoc.size,
+                                categoryId: el.chatLieu.id,
+                                categoryName: el.chatLieu.tenChatLieu,
+                                quantity: el.soLuongTon,
+                                money: el.donGia,
+                                name: el.sanPham.tenSP,
+                                note: el.moTa,
+                                status: el.trangThai === 1,
+                                image: el.hinhAnh.id
+                            });
+                            dataProductDetailUpdate.push({
+                                id: el.id,
+                                colorId: el.mauSac.id,
+                                sizeId: el.kichThuoc.id,
+                                categoryId: el.chatLieu.id,
+                                image: el.hinhAnh.id
+                            })
+                        });
+                        updateColorTable();
+                        var inputs = $('.productImg');
+                        inputs.each(function () {
+                            var currentIndex = $(this).attr('index');
+
+                            var matchedProductDetail = listProductDetail.find(function(el) {
+                                return parseInt(el.index) === parseInt(currentIndex);
+                            });
+
+                            if (matchedProductDetail) {
+                                 $(this).val(matchedProductDetail.image);
+                            }
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         } else {
             $('#bttCreate').show();
-            $('#bttUpdate').show();
+            $('#bttUpdate').hide();
         }
         // getAllHoaDon();
         // findHoaDonById();

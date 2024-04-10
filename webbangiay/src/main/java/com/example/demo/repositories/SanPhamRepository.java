@@ -1,6 +1,8 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.SanPham;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.example.demo.models.dto.HomeQuangBaRequest;
 import com.example.demo.models.dto.HomeQuangBaRespose;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,8 @@ import java.util.UUID;
 public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     @Query("select sp from SanPham sp where sp.ma like %:search% or sp.tenSP like %:search%")
     List<SanPham> search(String search);
+
+    Page<SanPham> findAllByTrangThai(int trangThai, Pageable pageable);
 
     @Query(value = """
             WITH luotMua AS (
@@ -108,7 +112,8 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
             JOIN
                 thuong_hieu th ON th.id_thuong_hieu = sp.id_thuong_hieu
             WHERE 
-                (:#{#req.ma} IS NULL OR :#{#req.ma} = '' OR sp.ma_san_pham LIKE %:#{#req.ma}%)
+                sp.trang_thai = 1
+                AND (:#{#req.ma} IS NULL OR :#{#req.ma} = '' OR sp.ma_san_pham LIKE %:#{#req.ma}%)
                 AND (:#{#req.ten} IS NULL OR :#{#req.ten} = '' OR sp.ten_san_pham LIKE %:#{#req.ten}%)
                 AND (ctsp.mau_sac_id IN (:#{#req.listIdMauSac}))
                 AND ( sp.id_loai IN (:#{#req.listIdPhanLoai}))

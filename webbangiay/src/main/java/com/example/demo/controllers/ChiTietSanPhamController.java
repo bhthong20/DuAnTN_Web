@@ -4,6 +4,7 @@
     import com.example.demo.models.ChiTietSanPham;
     import com.example.demo.models.KichThuoc;
     import com.example.demo.models.MauSac;
+    import com.example.demo.models.SanPham;
     import com.example.demo.repositories.SanPhamRepository;
     import com.example.demo.services.ChatLieuService;
     import com.example.demo.services.ChiTietSanPhamService;
@@ -27,12 +28,9 @@
     import org.springframework.web.bind.annotation.ModelAttribute;
     import org.springframework.web.bind.annotation.PathVariable;
     import org.springframework.web.bind.annotation.PostMapping;
-    import org.springframework.web.bind.annotation.RequestBody;
     import org.springframework.web.bind.annotation.RequestMapping;
     import org.springframework.web.bind.annotation.RequestParam;
-    import org.springframework.web.bind.annotation.ResponseBody;
     import org.springframework.web.servlet.ModelAndView;
-    import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
     import java.sql.Date;
     import java.time.LocalDate;
@@ -48,6 +46,9 @@
 
         @Autowired
         private SanPhamRepository sanPhamRepository;
+
+        @Autowired
+        private SanPhamService sanPhamService;
 
         @Autowired
         private MauSacService mauSacService;
@@ -69,14 +70,13 @@
 
         @GetMapping("/hien-thi")
         public String hienThi(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-            model.addAttribute("listSP", sanPhamRepository.findAll());
             model.addAttribute("listMS", mauSacService.findAll());
             model.addAttribute("listKT", kichThuocService.findAll());
             model.addAttribute("listCL", chatLieuService.findAll());
 
             Sort sort = Sort.by("ngayTao").descending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<ChiTietSanPham> list = chiTietSanPhamService.getAll(pageable);
+            Page<SanPham> list = sanPhamService.getAll(pageable);
             model.addAttribute("listCTSP"                                                                                                                                                                                   , list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");

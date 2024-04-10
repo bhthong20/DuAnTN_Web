@@ -5,6 +5,7 @@ import com.example.demo.models.SanPham;
 import com.example.demo.models.dto.ChiTietSanPhamDto;
 import com.example.demo.models.dto.SanPhamDto;
 import com.example.demo.repositories.ChiTietSanPhamRepository;
+import com.example.demo.repositories.SanPhamRepository;
 import com.example.demo.services.ChatLieuService;
 import com.example.demo.services.ChiTietSanPhamService;
 import com.example.demo.services.HinhAnhService;
@@ -25,6 +26,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
@@ -33,6 +35,9 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
     @Autowired
     private SanPhamService sanPhamService;
+
+    @Autowired
+    private SanPhamRepository sanPhamRepository;
 
     @Autowired
     private HinhAnhService hinhAnhService;
@@ -95,9 +100,10 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Override
     public Boolean delete(UUID id) {
         if (id != null) {
-            ChiTietSanPham sanPhamUpdate = repository.findById(id).orElse(null);
+            SanPham sanPhamUpdate = sanPhamService.findById(id);
             if (sanPhamUpdate != null) {
-                repository.delete(sanPhamUpdate);
+                sanPhamUpdate.setTrangThai(0);
+                sanPhamRepository.save(sanPhamUpdate);
                 return true;
             }
         }
@@ -135,6 +141,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
                 chiTietSanPham.setTrangThai(dto.getTrangThai());
                 chiTietSanPham.setMoTa(dto.getMoTa());
                 chiTietSanPham.setSanPham(sanPham);
+                chiTietSanPham.setIsDelete(1);
                 chiTietSanPham.setHinhAnh(hinhAnhService.findById(dto.getIdHinhAnh()));
                 chiTietSanPhams.add(chiTietSanPham);
             }
@@ -147,8 +154,69 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
+    @Transactional
+    public Boolean updateAllChiTietSanPham(SanPhamDto sanPhamDto) {
+        try {
+            SanPham sanPham = sanPhamRepository.findById(sanPhamDto.getId()).orElse(null);
+            if (sanPham != null) {
+                sanPham.setTenSP(sanPhamDto.getTenSanPham());
+                sanPham.setNgayTao(Date.valueOf(LocalDate.now()));
+                sanPham.setMoTa(sanPhamDto.getMoTa());
+                sanPham.setHinhAnh(hinhAnhService.findById(sanPhamDto.getIdHinhAnh()));
+                sanPham.setPhanLoai(phanLoaiService.findById(sanPhamDto.getIdLoaiSanPham()));
+                sanPham.setThuongHieu(thuongHieuService.findById(sanPhamDto.getIdThuongHieu()));
+                sanPham.setTrangThai(1);
+                sanPhamRepository.save(sanPham);
+
+                List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
+                List<UUID> listIdSave = new ArrayList<>();
+
+                for (ChiTietSanPhamDto dto: sanPhamDto.getChiTietSanPhamDtos()) {
+                    ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+                    if (dto.getId() == null) {
+                        String maCTSP = "CTSP" + (findAll().size() + 1);
+                        chiTietSanPham.setMa(maCTSP);
+                        chiTietSanPham.setSanPham(sanPham);
+                    } else {
+                        chiTietSanPham = repository.findById(dto.getId()).orElse(null);
+                        listIdSave.add(chiTietSanPham.getId());
+                    }
+                    chiTietSanPham.setNgayTao(Date.valueOf(LocalDate.now()));
+                    chiTietSanPham.setChatLieu(chatLieuService.findById(dto.getIdChatLieu()));
+                    chiTietSanPham.setDonGia(dto.getDonGia());
+                    chiTietSanPham.setKichThuoc(kichThuocService.findById(dto.getIdKichThuoc()));
+                    chiTietSanPham.setMauSac(mauSacService.findById(dto.getIdMauSac()));
+                    chiTietSanPham.setSoLuongTon(dto.getSoLuongTon());
+                    chiTietSanPham.setTrangThai(dto.getTrangThai());
+                    chiTietSanPham.setIsDelete(1);
+                    chiTietSanPham.setMoTa(dto.getMoTa());
+                    chiTietSanPham.setHinhAnh(hinhAnhService.findById(dto.getIdHinhAnh()));
+                    chiTietSanPhams.add(chiTietSanPham);
+                }
+
+                List<ChiTietSanPham> listChiTietSanPhamDelete = repository.findAllByIdNotIn(listIdSave).stream().map(el -> {
+                    el.setIsDelete(0);
+                    return el;
+                }).collect(Collectors.toList());
+
+                chiTietSanPhams.addAll(listChiTietSanPhamDelete);
+
+                repository.saveAll(chiTietSanPhams);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    @Override
     public ChiTietSanPham findById(UUID id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<ChiTietSanPham> findChiTietSanPhamBySanPham(SanPham sanPham) {
+        return repository.findAllBySanPhamAndIsDelete(sanPham, 1);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.SanPham;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,4 +47,10 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Modifying
     @Query(value = "update chi_tiet_san_pham set tinh_trang=0", nativeQuery = true)
     void updateTT();
+
+    List<ChiTietSanPham> findAllBySanPhamAndIsDelete(SanPham sanPham, int delete);
+
+    List<ChiTietSanPham> findAllByIsDelete(int delete);
+
+    List<ChiTietSanPham> findAllByIdNotIn(List<UUID> listId);
 }
