@@ -958,7 +958,6 @@
                         var chatLieuElements = $('input[name="chatLieu"]');
                         let index = 0;
                         response.chiTietSanPham.forEach(el => {
-                            console.log(el)
                             mauSacElements.each(function () {
                                 if (el.mauSac.id.toString() === $(this).val()) {
                                     $(this).prop('checked', true);
