@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class HomeServiceImpl implements HomeService {
 
@@ -21,6 +23,11 @@ public class HomeServiceImpl implements HomeService {
     public Page<HomeQuangBaRespose> getSanPhamQuangBan(HomeQuangBaRequest request) {
         Pageable pageable = getPageable(request.getPage(), request.getSize(), request.getSortField(), request.getSortType());
         return sanPhamRepository.getSanPhamQuangBa(request, pageable);
+    }
+
+    @Override
+    public Long getSoLuongDaBan(UUID id) {
+        return sanPhamRepository.getSoLuongDaBa(id);
     }
 
     public static Pageable getPageable(int page, int size, String sortField, String sortType) {

@@ -705,3 +705,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+button.sApkZm.SkhBL1.checked {
+  background: #ff3e1d;
+  color: white;
+}

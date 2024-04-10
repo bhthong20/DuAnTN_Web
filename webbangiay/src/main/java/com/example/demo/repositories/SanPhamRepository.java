@@ -133,4 +133,14 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
                 AND (:#{#req.giaKetThuc} IS NULL OR MAX(ctsp.don_gia) <= :#{#req.giaKetThuc}) 
             """)
     Page<HomeQuangBaRespose> getSanPhamQuangBa(@Param("req") HomeQuangBaRequest req, Pageable pageable);
+
+    @Query(value = """
+            SELECT
+                COUNT(hdct.id_hoa_don_chi_tiet) AS countLuotMua
+            FROM hoa_don_chi_tiet hdct
+            JOIN chi_tiet_san_pham ctsp ON hdct.chi_tiet_san_pham_id = ctsp.id_chi_tiet_san_pham
+            JOIN hoa_don hd on hdct.hoa_don_id = hd.id_hoa_don
+            where hd.trang_thai = 2 and ctsp.san_pham_id = :idSp
+""", nativeQuery = true)
+    Long getSoLuongDaBa(@Param("idSp") UUID idSp);
 }

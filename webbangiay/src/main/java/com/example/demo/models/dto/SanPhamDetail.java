@@ -13,4 +13,5 @@ public class SanPhamDetail {
 
     private SanPham sanPham;
     private List<ChiTietSanPham> chiTietSanPham;
+    private Long soLuongDaBan;
 }

@@ -153,8 +153,7 @@
             <div class="col-7 px-4">
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="title">[ Siêu rẻ + hình thật] Áo thun trơn form ÔM babytee đủ màu basic chất liệu
-                            thun con giãn 4 chiều fit dáng siêu đẹp</h3>
+                        <h3 class="title" id="tenSp"></h3>
                     </div>
                 </div>
                 <div class="row">
@@ -261,16 +260,16 @@
                             </div>
                             <div class="col-8">
                                 <div class="d-flex align-items-center j7HL5Q">
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 mauSac" aria-label="Đen" onclick="changeMauSac(this)" aria-disabled="false"
                                             fdprocessedid="wb3xko"><img class="nk0Z0T"
                                                                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ls14cnzl6xll72">Đen
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Xanh đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 mauSac" aria-label="Xanh đen" onclick="changeMauSac(this)" aria-disabled="false"
                                             fdprocessedid="jmvq5"><img class="nk0Z0T"
                                                                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ls14cqn19uop99">Xanh
                                         đen
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Ghi" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 mauSac" aria-label="Ghi" onclick="changeMauSac(this)" aria-disabled="false"
                                             fdprocessedid="usdn9m"><img class="nk0Z0T"
                                                                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-ls14cwaoztms85">Ghi
                                     </button>
@@ -283,23 +282,23 @@
                             </div>
                             <div class="col-8">
                                 <div class="d-flex align-items-center j7HL5Q">
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnSize" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         39
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnSize" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         40
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnSize" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         41
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnSize" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         42
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnSize" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         43
                                     </button>
@@ -312,15 +311,15 @@
                             </div>
                             <div class="col-8">
                                 <div class="d-flex align-items-center j7HL5Q">
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnChatLieu" onclick="changeChatLieu(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         Giấy
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnChatLieu" onclick="changeChatLieu(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         Báo
                                     </button>
-                                    <button class="sApkZm SkhBL1" aria-label="Đen" aria-disabled="false"
+                                    <button class="sApkZm SkhBL1 btnChatLieu" onclick="changeChatLieu(this)" aria-label="Đen" aria-disabled="false"
                                             fdprocessedid="wb3xko">
                                         Xi măng
                                     </button>
@@ -404,4 +403,76 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
+<script>
+    var url = window.location.href;
+    var parts = url.split("/");
+    var id = parts[parts.length - 1];
+
+    let sanPham = {
+        tenSp: "",
+        daBan: 0,
+        donGia: 0,
+        sale: 30,
+        mauSac: "",
+        size: "",
+        chatLieu: "",
+        soLuong: 0,
+        moTa: "",
+        anh1: "",
+        anh2: "",
+        anh3: "",
+    }
+
+    let mauSac = [];
+    let size = [];
+    let chatLieu = [];
+    let chiTietSanPham = [];
+
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: "/home/rest/" + id,
+            success: function (response) {
+                console.log(response)
+                if (response.sanPham) {
+
+                    // $('#tenSP').val(response.sanPham.tenSP);
+                    // $('#ma').val(response.sanPham.ma);
+                    // $('#moTa').val(response.sanPham.moTa);
+                    // $('#hinhAnh').val(response.sanPham.hinhAnh ? response.sanPham.hinhAnh.id : "");
+                    // $('#thuongHieu').val(response.sanPham.thuongHieu ? response.sanPham.thuongHieu.id : "");
+                    // $('#phanLoai').val(response.sanPham.phanLoai ? response.sanPham.phanLoai.id : "");
+                    // if (response.sanPham.hinhAnh) {
+                    //     document.getElementById("preview-anh1").src = '../../../uploads/' + response.sanPham.hinhAnh.anh1;
+                    //     document.getElementById("preview-anh2").src = '../../../uploads/' + response.sanPham.hinhAnh.anh2;
+                    //     document.getElementById("preview-anh3").src = '../../../uploads/' + response.sanPham.hinhAnh.anh3;
+                    // }
+                }
+                if (response.chiTietSanPham) {
+                    chiTietSanPham = response.chiTietSanPham
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    function changeMauSac(button) {
+        $('.mauSac').removeClass("checked");
+        $(button).addClass("checked");
+    }
+
+    function changeSize(button) {
+        console.log(button)
+        $('.btnSize').removeClass("checked");
+        $(button).addClass("checked");
+    }
+
+    function changeChatLieu(button) {
+        console.log(button)
+        $('.btnChatLieu').removeClass("checked");
+        $(button).addClass("checked");
+    }
+</script>
 </html>

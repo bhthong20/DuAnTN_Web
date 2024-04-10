@@ -939,7 +939,6 @@
                 type: "GET",
                 url: "/chi-tiet-san-pham/rest/detail-san-pham?idctsp=" + id,
                 success: function (response) {
-                    console.log(response);
                     if (response.sanPham) {
                         $('#tenSP').val(response.sanPham.tenSP);
                         $('#ma').val(response.sanPham.ma);
