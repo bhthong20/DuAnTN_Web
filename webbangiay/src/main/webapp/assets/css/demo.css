@@ -136,7 +136,7 @@
   margin-left: .625rem;
 }
 .shopee-sort-by-options__option--selected.shopee-sort-by-options__option {
-  background: #ee4d2d;
+  background: #696cff;
   color: #fff;
 }
 .shopee-sort-by-options .select-with-status__holder, .shopee-sort-by-options__option {
@@ -418,4 +418,8 @@
 .card__product:hover {
   transform: scale(1.01);
   box-shadow: 0 0 10px #696cff;
+}
+.page-link.bg-white.active {
+  background: #6d70ff !important;
+  color: #ffffff !important;
 }

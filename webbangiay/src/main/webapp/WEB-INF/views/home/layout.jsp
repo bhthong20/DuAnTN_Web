@@ -171,13 +171,13 @@
                 </li>
 
                 <!-- TaiKhoan -->
-                <li class="menu-item active">
+                <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link menu-toggle" aria-expanded="false">
                         <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                         <div data-i18n="Authentications">Tài Khoản</div>
                     </a>
                     <ul class="menu-sub" aria-expanded="false">
-                        <li class="menu-item active">
+                        <li class="menu-item">
                             <a href="/khach-hang/hien-thi" class="menu-link">
                                 <div data-i18n="Basic">Khách hàng</div>
                             </a>
@@ -192,7 +192,7 @@
 
                 <!-- SanPham -->
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle" aria-expanded="false">
+                    <a href="/chi-tiet-san-pham" class="menu-link menu-toggle" aria-expanded="false">
                         <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                         <div data-i18n="Misc">Quản lý sản phẩm</div>
                     </a>
@@ -458,4 +458,19 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
+<script>
+        var url = window.location.href;
+        var domain = new URL(url).pathname;
+        var menuItem = $('.menu-item')
+        menuItem.each(function () {
+            var hrefMenu = $(this).find("a").attr("href");
+
+            if (domain.includes(hrefMenu)) {
+                $(this).addClass("active")
+                console.log("zoooo")
+            } else {
+                $(this).removeClass("active")
+            }
+        })
+</script>
 </html>

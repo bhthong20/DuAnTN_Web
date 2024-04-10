@@ -534,7 +534,7 @@
             alert("Yêu cầu nhập đủ thông tin");
             return false;
         }
-        console.log(parseInt(tienMat.val()) + parseInt(chuyenKhoan.val()) , parseInt(tongTien.val()))
+
         if (parseInt(tienMat.val()) + parseInt(chuyenKhoan.val()) < parseInt(tongTien.val())) {
             alert("Thiếu tiền");
             return false;
