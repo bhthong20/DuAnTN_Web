@@ -58,7 +58,8 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
             JOIN
                 thuong_hieu th ON th.id_thuong_hieu = sp.id_thuong_hieu
             WHERE 
-                (:#{#req.ma} IS NULL OR :#{#req.ma} = '' OR sp.ma_san_pham LIKE %:#{#req.ma}%)
+                sp.trang_thai = 1
+                AND (:#{#req.ma} IS NULL OR :#{#req.ma} = '' OR sp.ma_san_pham LIKE %:#{#req.ma}%)
                 AND (:#{#req.ten} IS NULL OR :#{#req.ten} = '' OR sp.ten_san_pham LIKE %:#{#req.ten}%)
                 AND (ctsp.mau_sac_id IN (:#{#req.listIdMauSac}))
                 AND ( sp.id_loai IN (:#{#req.listIdPhanLoai}))

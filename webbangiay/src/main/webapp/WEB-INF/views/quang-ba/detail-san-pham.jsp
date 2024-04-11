@@ -87,24 +87,18 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="../assets/img/elements/13.jpg" alt="First slide"/>
+                            <img id="anh1" class="d-block w-100" src="../assets/img/elements/13.jpg" alt="First slide"/>
                             <div class="carousel-caption d-none d-md-block">
-                                <h3>First slide</h3>
-                                <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="../assets/img/elements/2.jpg" alt="Second slide"/>
+                            <img id="anh2" class="d-block w-100" src="../assets/img/elements/2.jpg" alt="Second slide"/>
                             <div class="carousel-caption d-none d-md-block">
-                                <h3>Second slide</h3>
-                                <p>In numquam omittam sea.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="../assets/img/elements/18.jpg" alt="Third slide"/>
+                            <img id="anh3" class="d-block w-100" src="../assets/img/elements/18.jpg" alt="Third slide"/>
                             <div class="carousel-caption d-none d-md-block">
-                                <h3>Third slide</h3>
-                                <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco mel no.</p>
                             </div>
                         </div>
                     </div>
@@ -153,7 +147,7 @@
             <div class="col-7 px-4">
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="title" id="tenSp">[ Siêu rẻ + hình thật] Áo thun trơn form ÔM babytee đủ màu basic chất liệu thun con giãn 4 chiều fit dáng siêu đẹp</h3>
+                        <h3 class="title" id="tenSanPham"></h3>
                     </div>
                 </div>
                 <div class="row">
@@ -181,7 +175,7 @@
                                 </div>
                             </div>
                             <div class=" text-sub-title-detail">
-                                Đã bán 38.3k
+                                Đã bán <span id="daBan"></span>
                             </div>
                         </div>
 
@@ -194,10 +188,10 @@
                                 <section class="d-flex align-items-center" aria-live="polite"><h2 class="Bf9ap6">Price
                                     Section</h2>
                                     <div class="d-flex align-items-center QAc7_y">
-                                        <div class="qg2n76">₫49.840</div>
+                                        <div class="qg2n76" id="donGiaTruocSale">₫</div>
                                         <div class="d-flex align-items-center">
-                                            <div class="G27FPf">₫43.700</div>
-                                            <div class="o_z7q9">12% giảm</div>
+                                            <div class="G27FPf">₫<span id="donGia"></span></div>
+                                            <div class="o_z7q9"><span id="giamGia"></span>% giảm</div>
                                         </div>
                                     </div>
                                 </section>
@@ -289,18 +283,16 @@
                                 <div class="d-flex align-items-center">
                                     <div style="margin-right: 15px;">
                                         <div class="_9m0o30 shopee-input-quantity">
-                                            <button aria-label="Decrease" class="suQW3X" fdprocessedid="yi4z8l">
+                                            <button aria-label="Decrease" class="suQW3X" onclick="validateInputTru()" fdprocessedid="yi4z8l">
                                                 -
                                             </button>
-                                            <input class="suQW3X u00pLG" type="text" role="spinbutton"
-                                                   aria-live="assertive" aria-valuenow="1" value="1"
-                                                   fdprocessedid="720z0c"><span aria-live="polite" class="Bf9ap6">Số lượng 1</span>
-                                            <button aria-label="Increase" class="suQW3X" fdprocessedid="qikb1a">
+                                            <input class="suQW3X u00pLG" id="soLuongInput" min="0" type="text" value="1" onchange="validateInput(this)">
+                                            <button aria-label="Increase" onclick="validateInputCong()" class="suQW3X" fdprocessedid="qikb1a">
                                                 +
                                             </button>
                                         </div>
                                     </div>
-                                    <div>240 sản phẩm có sẵn</div>
+                                    <div><span id="soLuong"></span> sản phẩm có sẵn</div>
                                 </div>
                             </div>
                         </div>
@@ -309,8 +301,7 @@
                                 Mô tả
                             </div>
                             <div class="col-8">
-                                <div class="d-flex align-items-center">
-                                    [ Siêu rẻ + hình thật] Áo thun trơn form ÔM babytee đủ màu basic chất liệu thun con giãn 4 chiều fit dáng siêu đẹp
+                                <div class="d-flex align-items-center" id="moTa">
                                 </div>
                             </div>
                         </div>
@@ -319,8 +310,8 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="text-center">
-                            <button type="button" class="btn btn-danger">Thêm vào giỏ hàng</button>
-                            <button type="button" class="btn btn-danger">Mua ngay</button>
+                            <button type="button" onclick="themVaoGioHang()" class="btn btn-danger">Thêm vào giỏ hàng</button>
+                            <button type="button" onclick="muaNgay()" class="btn btn-danger">Mua ngay</button>
                         </div>
                     </div>
                 </div>
@@ -384,14 +375,32 @@
     let chiTietSanPham = [];
     let idChiTietSanPham = ""
 
+    function muaNgay() {
+        console.log(getChiTietSanPhamSelect())
+    }
+
+    function themVaoGioHang() {
+        console.log(getChiTietSanPhamSelect())
+    }
+
+    function getChiTietSanPhamSelect() {
+        const btnChatLieu = $('.btnChatLieu.checked').first().attr("identity");
+        const btnSize = $('.btnSize.checked').first().attr("identity");
+        const mauSac = $('.mauSac.checked').first().attr("identity");
+
+        const chiTietSanPhamSelect = chiTietSanPham.filter(el => el.mauSac.id === mauSac && el.kichThuoc.id === btnSize && el.chatLieu.id === btnChatLieu)[0];
+        chiTietSanPhamSelect.soLuongMua = parseInt($('#soLuongInput').val());
+
+        return chiTietSanPhamSelect;
+    }
+
     window.onload = function () {
         $.ajax({
             type: "GET",
             url: "/home/rest/" + id,
             success: function (response) {
-                console.log(response)
                 if (response.sanPham) {
-                    sanPham.tenSp = response.sanPham.ten
+                    sanPham.tenSp = response.sanPham.tenSP
                     sanPham.daBan = response.soLuongDaBan
                 }
                 if (response.chiTietSanPham) {
@@ -407,35 +416,13 @@
                     sanPham.anh1 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh1
                     sanPham.anh2 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh2
                     sanPham.anh3 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh3
-
-                    response.chiTietSanPham.forEach(el => {
-                        if (mauSac.filter(color => color.identity == el.mauSac.id).length == 0) {
-                            mauSac.push({
-                                id: el.id,
-                                ten: el.mauSac.ten,
-                                image: '../../../uploads/' + el.hinhAnh.anh1,
-                                identity: el.mauSac.id
-                            });
-                        }
-                        if (size.filter(size => size.identity == el.kichThuoc.id).length == 0) {
-                            size.push({
-                                id: el.id,
-                                ten: el.kichThuoc.size,
-                                identity: el.kichThuoc.id
-                            });
-                        }
-                        if (chatLieu.filter(category => category.identity == el.chatLieu.id).length == 0) {
-                            chatLieu.push({
-                                id: el.id,
-                                ten: el.chatLieu.tenChatLieu,
-                                identity: el.chatLieu.id
-                            });
-                        }
-                        renderMauSac();
-                        renderKichThuoc();
-                        renderChatLieu();
-                    })
                 }
+                renderListCombobox(response.chiTietSanPham);
+
+                renderMauSac();
+                renderKichThuoc();
+                renderChatLieu();
+                renderSanPham();
             },
             error: function (xhr, status, error) {
                 console.log(xhr.responseText);
@@ -443,14 +430,73 @@
         });
     }
 
+    function validateInput(input) {
+        var value = input.value;
+        const matched = value.match(/^[0-9]+$/);
+
+        if (!matched) {
+            input.value = 1;
+        } else {
+            if (parseInt(input.value) <= 0) {
+                input.value = 1;
+            } else if (parseInt(input.value) > sanPham.soLuong) {
+                input.value = sanPham.soLuong;
+            }
+        }
+    }
+
+    function validateInputCong() {
+        if ($('#soLuongInput').val() >= sanPham.soLuong) {
+            $('#soLuongInput').val(sanPham.soLuong);
+        } else {
+            $('#soLuongInput').val(parseInt($('#soLuongInput').val()) + 1)
+        }
+    }
+
+    function validateInputTru() {
+        if ($('#soLuongInput').val() <= 1) {
+            $('#soLuongInput').val(1);
+        } else {
+            $('#soLuongInput').val(parseInt($('#soLuongInput').val()) - 1)
+        }
+    }
+
+    function renderListCombobox(listChiTietSanPham) {
+        listChiTietSanPham.forEach(el => {
+            if (mauSac.filter(color => color.identity == el.mauSac.id).length == 0) {
+                mauSac.push({
+                    id: el.id,
+                    ten: el.mauSac.ten,
+                    image: '../../../uploads/' + el.hinhAnh.anh1,
+                    image2: '../../../uploads/' + el.hinhAnh.anh2,
+                    image3: '../../../uploads/' + el.hinhAnh.anh3,
+                    identity: el.mauSac.id
+                });
+            }
+            if (size.filter(size => size.identity == el.kichThuoc.id).length == 0) {
+                size.push({
+                    id: el.id,
+                    ten: el.kichThuoc.size,
+                    identity: el.kichThuoc.id
+                });
+            }
+            if (chatLieu.filter(category => category.identity == el.chatLieu.id).length == 0) {
+                chatLieu.push({
+                    id: el.id,
+                    ten: el.chatLieu.tenChatLieu,
+                    identity: el.chatLieu.id
+                });
+            }
+        })
+    }
+
     function renderMauSac() {
         const listMauSac = document.getElementById("listMauSac");
         let html = '';
         if (mauSac && mauSac.length !== 0) {
             mauSac.forEach(el => {
-
                 html += `
-                    <button class="sApkZm SkhBL1 mauSac ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" idCtsp="` + el.id + `" aria-label="Đen" onclick="changeMauSac(this)" aria-disabled="false"
+                    <button class="sApkZm SkhBL1 mauSac ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" aria-label="Đen" onclick="changeMauSac(this)" aria-disabled="false"
                             fdprocessedid="wb3xko"><img class="nk0Z0T"
                                                         src="` + el.image + `">` + el.ten + `
                     </button>
@@ -466,7 +512,7 @@
         if (size && size.length !== 0) {
             size.forEach(el => {
                 html += `
-                    <button class="sApkZm SkhBL1 btnSize ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" idCtsp="` + el.id + `" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
+                    <button class="sApkZm SkhBL1 btnSize ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
                             fdprocessedid="wb3xko">
                         ` + el.ten + `
                     </button>
@@ -482,7 +528,7 @@
         if (chatLieu && chatLieu.length !== 0) {
             chatLieu.forEach(el => {
                 html += `
-                    <button class="sApkZm SkhBL1 btnChatLieu ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" idCtsp="` + el.id + `" onclick="changeChatLieu(this)" aria-label="Đen" aria-disabled="false"
+                    <button class="sApkZm SkhBL1 btnChatLieu ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeChatLieu(this)" aria-label="Đen" aria-disabled="false"
                             fdprocessedid="wb3xko">
                         ` + el.ten + `
                     </button>
@@ -492,19 +538,44 @@
         }
     }
 
+    function renderSanPham() {
+            $('#tenSanPham').html(sanPham.tenSp);
+            $('#daBan').html(sanPham.daBan);
+            $('#giamGia').html(sanPham.sale);
+            $('#donGia').html(sanPham.donGia);
+            $('#donGiaTruocSale').html(sanPham.donGia * sanPham.sale);
+            $('#anh1').attr('src', sanPham.anh1);
+            $('#anh2').attr('src', sanPham.anh2);
+            $('#anh3').attr('src', sanPham.anh3);
+            $('#moTa').html(sanPham.moTa);
+            $('#soLuong').html(sanPham.soLuong);
+    }
+
     function changeMauSac(button) {
         $('.mauSac').removeClass("checked");
         $(button).addClass("checked");
+        const mauSacSelect = getChiTietSanPhamSelect()
+        $('#anh1').attr('src', mauSacSelect.anh1);
+        $('#anh2').attr('src', mauSacSelect.anh2);
+        $('#anh3').attr('src', mauSacSelect.anh3);
     }
 
     function changeSize(button) {
         $('.btnSize').removeClass("checked");
         $(button).addClass("checked");
+        const sizeSelect = getChiTietSanPhamSelect()
+        $('#anh1').attr('src', sizeSelect.anh1);
+        $('#anh2').attr('src', sizeSelect.anh2);
+        $('#anh3').attr('src', sizeSelect.anh3);
     }
 
     function changeChatLieu(button) {
         $('.btnChatLieu').removeClass("checked");
         $(button).addClass("checked");
+        const chatLieuSelect = getChiTietSanPhamSelect()
+        $('#anh1').attr('src', chatLieuSelect.anh1);
+        $('#anh2').attr('src', chatLieuSelect.anh2);
+        $('#anh3').attr('src', chatLieuSelect.anh3);
     }
 </script>
 </html>
