@@ -80,7 +80,6 @@
             model.addAttribute("listCTSP"                                                                                                                                                                                   , list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-    //        return "chi-tiet-san-pham/hien-thi";
             return "home/layout";
         }
 
@@ -236,8 +235,8 @@
 
             List<ChiTietSanPham> list = chiTietSanPhamService.search0(search);
             model.addAttribute("listCTSP", list);
-            model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
-            return "layout";
+            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
+            return "home/layout";
         }
 
         @PostMapping("/search1")

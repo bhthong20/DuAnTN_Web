@@ -47,26 +47,10 @@
 </head>
 
 <body>
-<%--<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">--%>
-<%--    <li class="nav-item">--%>
-<%--        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab"--%>
-<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin chi tiết--%>
-<%--            sản phẩm</a>--%>
-<%--    </li>--%>
-<%--    <li class="nav-item">--%>
-<%--        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"--%>
-<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>--%>
-<%--    </li>--%>
-<%--    <li class="nav-item">--%>
-<%--        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"--%>
-<%--           aria-controls="description" aria-selected="true" role="tab">Thêm mới chi tiết sản phẩm</a>--%>
-<%--    </li>--%>
-<%--</ul>--%>
 <div class="container">
     <div class="col-md-12">
         <div class="card">
             <h3 class="card-header">Thêm mới sản phẩm</h3>
-            <%--@elvariable id="chiTietSanPham" type=""--%>
             <div class="card-body">
                 <form>
                     <div class="row">
@@ -800,7 +784,6 @@
     }
 
     function updateColorTable() {
-
         var tableBody = document.getElementById('colorTableBody');
         var html = '';
         listProductDetail.forEach(function (product) {

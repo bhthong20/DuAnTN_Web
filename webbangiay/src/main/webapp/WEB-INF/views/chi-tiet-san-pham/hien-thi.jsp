@@ -62,7 +62,6 @@
 <%--    </li>--%>
 <%--</ul>--%>
 <div class="card mb-4">
-
     <table class="table container">
         <tbody>
         <tr>
@@ -96,103 +95,56 @@
                         </div>
 
                         <div class="btn-group">
-                            <button
-                                    type="button"
-                                    class="btn btn-outline-secondary dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Secondary
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                            </ul>
+                            <select class="form-select">
+                                <option selected disabled>Chất Liệu</option>
+                                <c:forEach items="${listCL}" var="cl">
+                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="btn-group">
-                            <button
-                                    type="button"
-                                    class="btn btn-outline-success dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Success
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                            </ul>
+                            <select class="form-select">
+                                <option selected disabled>Chất Liệu</option>
+                                <c:forEach items="${listCL}" var="cl">
+                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="btn-group">
-                            <button
-                                    type="button"
-                                    class="btn btn-outline-danger dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Danger
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                            </ul>
+                            <select class="form-select">
+                                <option selected disabled>Chất Liệu</option>
+                                <c:forEach items="${listCL}" var="cl">
+                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="btn-group">
-                            <button
-                                    type="button"
-                                    class="btn btn-outline-warning dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Warning
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                            </ul>
+                            <select class="form-select">
+                                <option selected disabled>Chất Liệu</option>
+                                <c:forEach items="${listCL}" var="cl">
+                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="btn-group">
-                            <button
-                                    type="button"
-                                    class="btn btn-outline-info dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                Info
+                            <select class="form-select">
+                                <option selected disabled>Chất Liệu</option>
+                                <c:forEach items="${listCL}" var="cl">
+                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary mr-2"
+                                    onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                Lọc
                             </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
