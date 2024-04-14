@@ -30,7 +30,7 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query("select c from ChiTietSanPham c  where  c.trangThai = 0 ")
     List<ChiTietSanPham> findAll0();
 
-    @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 0 and (ctsp.sanPham.tenSP like %:search% or ctsp.ma like %:search% )")
+    @Query("select ctsp from ChiTietSanPham ctsp where ctsp.sanPham.tenSP like %:search% or ctsp.ma like %:search%")
     List<ChiTietSanPham> search(String search);
 
     @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 1 and (ctsp.kichThuoc.size like %:search% or ctsp.sanPham.tenSP like %:search% or ctsp.mauSac.ten like %:search% or ctsp.chatLieu.tenChatLieu like %:search%)")

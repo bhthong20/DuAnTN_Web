@@ -346,7 +346,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    >Add
+                                                    onclick="myFunction1()" >Add
                                             </button>
                                         </div>
                                     </div>
@@ -403,7 +403,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    >Add
+                                                   onclick="myFunction1()" >Add
                                             </button>
                                         </div>
                                     </div>
@@ -461,7 +461,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    >Add
+                                                    onclick="myFunction1()" >Add
                                             </button>
                                         </div>
                                     </div>
@@ -591,6 +591,7 @@
     }
 
     function myFunction1() {
+        let text = "Bạn chắc chắn muốn thêm";
         var tenSPValue = document.getElementById('tenSP').value;
         var moTaValue = document.getElementById('moTa').value;
         var thuongHieu = document.getElementById('thuongHieu').value;
