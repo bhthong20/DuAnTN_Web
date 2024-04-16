@@ -78,7 +78,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public List<ChiTietSanPham> search0(String search) {
+    public List<SanPham> search0(String search) {
         return repository.search(search);
     }
 
@@ -88,8 +88,8 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public List<ChiTietSanPham> loc(String locSP, String locMS, String locKT, String locCL) {
-        return repository.loc(locSP, locMS, locKT, locCL);
+    public List<SanPham> loc( String locPL, String locTH) {
+        return repository.loc( locPL,locTH);
     }
 
     @Override

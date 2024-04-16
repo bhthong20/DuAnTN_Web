@@ -73,6 +73,8 @@
             model.addAttribute("listMS", mauSacService.findAll());
             model.addAttribute("listKT", kichThuocService.findAll());
             model.addAttribute("listCL", chatLieuService.findAll());
+            model.addAttribute("listPL", phanLoaiService.findAll());
+            model.addAttribute("listTH", thuongHieuService.findAll());
 
             Sort sort = Sort.by("ngayTao").descending();
             Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
@@ -168,63 +170,6 @@
             return "redirect:/chi-tiet-san-pham/hien-thi";
         }
 
-        @GetMapping("/update-all")
-        public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                               @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
-                               @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham) {
-            Sort sort = Sort.by("ngayTao").ascending();
-            Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-            long millis = System.currentTimeMillis();
-            Date date = new Date(millis);
-            chiTietSanPham.setNgayCapNhat(date);
-            chiTietSanPhamService.updateTT();
-            Page<ChiTietSanPham> page = chiTietSanPhamService.getAll1(pageable);
-            model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
-            model.addAttribute("listCTSP", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
-            return "layout";
-        }
-
-        @GetMapping("/update-status/{id}")
-        public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                                   @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham) {
-            Sort sort = Sort.by("ngayTao").ascending();
-            Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-
-            ChiTietSanPham ctsp = chiTietSanPhamService.findById(id);
-            long millis = System.currentTimeMillis();
-            Date date = new Date(millis);
-            ctsp.setNgayCapNhat(date);
-            ctsp.setTrangThai(1);
-            chiTietSanPhamService.update(id, ctsp);
-            Page<ChiTietSanPham> page = chiTietSanPhamService.getAll(pageable);
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/view-trang-thai.jsp");
-            model.addAttribute("listCTSP", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
-            return "home/layout";
-        }
-
-        @GetMapping("/reset-status/{id}")
-        public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                                  @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham) {
-            Sort sort = Sort.by("ngayTao").ascending();
-            Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-            ChiTietSanPham ctsp = chiTietSanPhamService.findById(id);
-            long millis = System.currentTimeMillis();
-            Date date = new Date(millis);
-            ctsp.setNgayCapNhat(date);
-
-            ctsp.setTrangThai(0);
-            chiTietSanPhamService.update(id, chiTietSanPham);
-            Page<ChiTietSanPham> page = chiTietSanPhamService.getAll1(pageable);
-            model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
-            model.addAttribute("listCTSP", page.getContent());
-            model.addAttribute("page", page.getNumber());
-            model.addAttribute("total", page.getTotalPages());
-            return "layout";
-        }
 
         @PostMapping("/search")
         public String search(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @RequestParam("search") String search){
@@ -233,7 +178,7 @@
             model.addAttribute("listKT", kichThuocService.findAll());
             model.addAttribute("listCL", chatLieuService.findAll());
 
-            List<ChiTietSanPham> list = chiTietSanPhamService.search0(search);
+            List<SanPham> list = chiTietSanPhamService.search0(search);
             model.addAttribute("listCTSP", list);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
             return "home/layout";
@@ -252,22 +197,26 @@
         }
 
         @PostMapping("/loc")
-        public String loc(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @RequestParam("locSP") String locSP,
-                          @RequestParam("locMS") String locMS,
-                          @RequestParam("locKT") String locKT,
-                          @RequestParam("locCL") String locCL){
-            if(locSP.equals("null") && locMS.equals("null") &&  locKT.equals("null") && locCL.equals("null")){
-                return "redirect:/chi-tiet-san-pham/hien-thi";
-            }
-            model.addAttribute("listSP", sanPhamRepository.findAll());
-            model.addAttribute("listMS", mauSacService.findAll());
-            model.addAttribute("listKT", kichThuocService.findAll());
-            model.addAttribute("listCL", chatLieuService.findAll());
-
-            List<ChiTietSanPham> list = chiTietSanPhamService.loc(locSP, locMS, locKT, locCL);
-            model.addAttribute("contentPage", "chi-tiet-san-pham/hien-thi.jsp");
+        public String loc(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham,
+                          @RequestParam("locTH") String locTH,
+                          @RequestParam("locPL") String locPL){
+//            if(locTH.isEmpty() && locPL.isEmpty() ){
+//                return "redirect:/chi-tiet-san-pham/hien-thi";
+//            }
+//            if (locPL.equals("null")){
+//                model.addAttribute("listTH", thuongHieuService.findAll());
+//                model.addAttribute("listPL", phanLoaiService.findAll());
+//                List<SanPham> list = chiTietSanPhamService.loc(locTH,"");
+//                model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
+//                model.addAttribute("listCTSP", list);
+//                return "home/layout";
+//            }
+            model.addAttribute("listTH", thuongHieuService.findAll());
+            model.addAttribute("listPL", phanLoaiService.findAll());
+            List<SanPham> list = chiTietSanPhamService.loc(locTH,locPL);
+            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
             model.addAttribute("listCTSP", list);
-            return "layout";
+            return "home/layout";
         }
 
         @PostMapping("/loc1")
@@ -283,7 +232,7 @@
             model.addAttribute("listKT", kichThuocService.findAll());
             model.addAttribute("listCL", chatLieuService.findAll());
 
-            List<ChiTietSanPham> list = chiTietSanPhamService.loc(locSP, locMS, locKT, locCL);
+            List<ChiTietSanPham> list = chiTietSanPhamService.loc1(locSP, locMS, locKT, locCL);
             model.addAttribute("listCTSP", list);
             model.addAttribute("contentPage", "chi-tiet-san-pham/view-trang-thai.jsp");
             return "layout";

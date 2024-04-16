@@ -37,13 +37,13 @@ public interface ChiTietSanPhamService {
     public void updateTT();
 
     //tìm kiếm bên trang trạng thái
-    public List<ChiTietSanPham> search0(String search);
+    public List<SanPham> search0(String search);
 
     //tìm kiếm bên trang view trạng thái
     public List<ChiTietSanPham> search1(String search);
 
     //lọc bên trang trạng thái
-    public List<ChiTietSanPham> loc(String locSP, String locMS, String locKT, String locCL);
+    public List<SanPham> loc(String locTH, String locPL);
 
     //lọc bên trang view trạng thái
     public List<ChiTietSanPham> loc1(String locSP, String locMS, String locKT, String locCL);

@@ -10,5 +10,5 @@ import java.util.UUID;
 @Repository
 public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
-    List<HoaDon> findAllByLoai(int loai);
+    List<HoaDon> findAllByLoaiAndTrangThai(int loai, int trangThai);
 }

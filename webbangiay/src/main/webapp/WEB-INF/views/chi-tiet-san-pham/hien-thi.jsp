@@ -64,11 +64,7 @@
 <div class="card mb-4">
     <table class="table container">
         <tbody>
-        <tr>
-            <td colspan="2">
                 <h3 class="card-header">Thông tin sản phẩm</h3>
-            </td>
-        </tr>
         <tr>
             <td style="text-align: center">
                 <form action="/chi-tiet-san-pham/search" method="post">
@@ -86,59 +82,22 @@
                 <div class="card-body" style="text-align: center">
                     <div class="demo-inline-spacing">
                         <div class="btn-group">
-                            <select class="form-select">
-                                <option selected disabled>Chất Liệu</option>
-                                <c:forEach items="${listCL}" var="cl">
-                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                            <select class="form-select" name="locTH">
+                                <option selected disabled>Thương hiệu</option>
+                                <c:forEach items="${listTH}" var="th">
+                                    <option value="${th.ten}">${th.ten}</option>
                                 </c:forEach>
                             </select>
                         </div>
 
                         <div class="btn-group">
-                            <select class="form-select">
-                                <option selected disabled>Chất Liệu</option>
-                                <c:forEach items="${listCL}" var="cl">
-                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                            <select class="form-select" name="locPL">
+                                <option selected disabled>Phân loại</option>
+                                <c:forEach items="${listPL}" var="pl">
+                                    <option value="${pl.tenLoai}">${pl.tenLoai}</option>
                                 </c:forEach>
                             </select>
                         </div>
-
-                        <div class="btn-group">
-                            <select class="form-select">
-                                <option selected disabled>Chất Liệu</option>
-                                <c:forEach items="${listCL}" var="cl">
-                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="btn-group">
-                            <select class="form-select">
-                                <option selected disabled>Chất Liệu</option>
-                                <c:forEach items="${listCL}" var="cl">
-                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="btn-group">
-                            <select class="form-select">
-                                <option selected disabled>Chất Liệu</option>
-                                <c:forEach items="${listCL}" var="cl">
-                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
-                        <div class="btn-group">
-                            <select class="form-select">
-                                <option selected disabled>Chất Liệu</option>
-                                <c:forEach items="${listCL}" var="cl">
-                                    <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-
 
                         <div class="btn-group">
                             <button type="submit" class="btn btn-primary mr-2"

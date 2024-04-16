@@ -442,7 +442,14 @@
         sdtKhachHang.removeAttr('disabled');
         ngaySinh.removeAttr('disabled');
         emailKhachHang.removeAttr('disabled');
-        khachHang = null;
+
+        khachHang = {
+            hoTen: "",
+            gioiTinh: "",
+            email: "",
+            sdt: "",
+            ngaySinh: ""
+        }
     }
 
     const getFormHoaDon = () => {
@@ -613,9 +620,7 @@
             url: "/ban-hang-tai-quay/rest/get-all-khach-hang",
             success: function (response) {
                 let index = 0;
-                console.log(response)
                 response.forEach(el => {
-                    console.log(el)
                     index++;
                     html += `<tr item='` + JSON.stringify(el) + `'>
                                 <td>` + index + `</td>
@@ -721,6 +726,7 @@
     }
 
     const khachHangLaNguoiNhan = () => {
+        getFormKhachHang();
         hoaDon.tenNguoiNhan = khachHang.hoTen;
         hoaDon.sdt = khachHang.sdt;
         fillHoaDon();
@@ -743,8 +749,16 @@
                         }
                         if (el.khachHang) {
                             khachHang = el.khachHang;
-                            fillKhachHang();
+                        } else {
+                            khachHang = {
+                                hoTen: "",
+                                gioiTinh: "",
+                                email: "",
+                                sdt: "",
+                                ngaySinh: ""
+                            }
                         }
+                        fillKhachHang();
                         fillHoaDon();
                     }
                     // thay đổi trạng thái
@@ -892,28 +906,28 @@
 
             // Kiểm tra màu sắc
             if (mauSacSearch) {
-                if (!product.mauSac.toLowerCase().includes(mauSacSearch.toLowerCase())) {
+                if (!product.mauSac.id.toLowerCase().includes(mauSacSearch.toLowerCase())) {
                     check = false;
                 }
             }
 
             // Kiểm tra kích cỡ
             if (kichCoSearch) {
-                if (!product.kichCo.includes(kichCoSearch)) {
+                if (!product.kichThuoc.id.includes(kichCoSearch)) {
                     check = false;
                 }
             }
 
             // Kiểm tra chất liệu
             if (chatLieuSearch) {
-                if (!product.chatLieu.toLowerCase().includes(chatLieuSearch.toLowerCase())) {
+                if (!product.chatLieu.id.toLowerCase().includes(chatLieuSearch.toLowerCase())) {
                     check = false;
                 }
             }
 
             // Kiểm tra hình ảnh
             if (hinhAnhSearch) {
-                if (!product.hinhAnh.toLowerCase().includes(hinhAnhSearch.toLowerCase())) {
+                if (!product.hinhAnh.id.toLowerCase().includes(hinhAnhSearch.toLowerCase())) {
                     check = false;
                 }
             }

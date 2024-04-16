@@ -30,14 +30,14 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query("select c from ChiTietSanPham c  where  c.trangThai = 0 ")
     List<ChiTietSanPham> findAll0();
 
-    @Query("select ctsp from ChiTietSanPham ctsp where ctsp.sanPham.tenSP like %:search% or ctsp.ma like %:search%")
-    List<ChiTietSanPham> search(String search);
+    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 1 and (ctsp.ma like %:search% or ctsp.tenSP like %:search%)")
+    List<SanPham> search(String search);
 
     @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 1 and (ctsp.kichThuoc.size like %:search% or ctsp.sanPham.tenSP like %:search% or ctsp.mauSac.ten like %:search% or ctsp.chatLieu.tenChatLieu like %:search%)")
     List<ChiTietSanPham> search1(String search);
 
-    @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 0 and (ctsp.sanPham.tenSP like ?1 or ctsp.mauSac.ten like ?2 or ctsp.kichThuoc.size like ?3 or ctsp.chatLieu.tenChatLieu like ?4)")
-    List<ChiTietSanPham> loc(String locSP, String locMS, String locSize, String locDe);
+    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 0 and (ctsp.thuongHieu.ten like ?1 or ctsp.phanLoai.tenLoai like ?2)")
+    List<SanPham> loc(String locTH, String locPL);
 
     @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 1 and (ctsp.sanPham.tenSP like ?1 or ctsp.mauSac.ten like ?2 or ctsp.kichThuoc.size like ?3 or ctsp.chatLieu.tenChatLieu like ?4)")
     List<ChiTietSanPham> loc1(String locSP, String locMS, String locSize, String locDe);
