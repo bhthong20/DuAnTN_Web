@@ -20,110 +20,104 @@
 </head>
 <body>
 <div>
-    <h1 style="text-align: center">Ảnh</h1>
-    <br>
-    <div>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link" href="/hinh-anh/hien-thi" role="tab" onclick="return myFunction4()">Thông tin ảnh </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/hinh-anh/hien-thi-delete" role="tab" onclick="return myFunction3()">Ảnh đã
-                    xóa </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-                   aria-controls="description" aria-selected="true">Thêm thông tin ảnh</a>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
-                <div>
-                    <form:form action="/hinh-anh/add" method="post" modelAttribute="anh" enctype="multipart/form-data">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Thêm Ảnh</h4>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div align="center" >
-                                                <br>
-                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi1" >
-                                                    <img id="preview-anh1-2" class="preview-image" src="" alt=""
-                                                         width="100%" height="100%"
-                                                         style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                                    <br><br>
-                                                    ẢNH
-                                                </label>
-                                                <br>
+    <div class="card">
+        <h1 style="text-align: center">Ảnh</h1>
+        <br>
+        <div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+                    <div>
+                        <form:form action="/hinh-anh/add" method="post" modelAttribute="anh"
+                                   enctype="multipart/form-data">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Thêm Ảnh</h4>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div align="center">
+                                                    <br>
+                                                    <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
+                                                           for="anhmoi1">
+                                                        <img id="preview-anh1-2" class="preview-image" src="" alt=""
+                                                             width="100%" height="100%"
+                                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                                        <br><br>
+                                                        ẢNH
+                                                    </label>
+                                                    <br>
+                                                    <div style="display: none">
+                                                        <input type="file" name="anh1s" accept="image/jpeg, image/png"
+                                                               id="anhmoi1">
+                                                    </div>
+                                                </div>
                                                 <div style="display: none">
-                                                    <input type="file"  name="anh1s"  accept="image/jpeg, image/png" id="anhmoi1"  >
+                                                    <form:input path="anh1"/>
                                                 </div>
                                             </div>
-                                            <div style="display: none">
-                                                <form:input path="anh1"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div align="center" >
-                                                <br>
-                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi2" >
-                                                    <img id="preview-anh2-2" class="preview-image" src="" alt=""
-                                                         width="100%" height="100%"
-                                                         style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                                    <br><br>
-                                                    ẢNH
-                                                </label>
-                                                <br>
+                                            <div class="col-4">
+                                                <div align="center">
+                                                    <br>
+                                                    <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
+                                                           for="anhmoi2">
+                                                        <img id="preview-anh2-2" class="preview-image" src="" alt=""
+                                                             width="100%" height="100%"
+                                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                                        <br><br>
+                                                        ẢNH
+                                                    </label>
+                                                    <br>
+                                                    <div style="display: none">
+                                                        <input type="file" name="anh2s" accept="image/jpeg, image/png"
+                                                               id="anhmoi2">
+                                                    </div>
+                                                </div>
                                                 <div style="display: none">
-                                                    <input type="file"  name="anh2s"  accept="image/jpeg, image/png" id="anhmoi2"  >
+                                                    <form:input path="anh2"/>
                                                 </div>
                                             </div>
-                                            <div style="display: none">
-                                                <form:input path="anh2"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div align="center" >
-                                                <br>
-                                                <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;" for="anhmoi3" >
-                                                    <img id="preview-anh3-2" class="preview-image" src="" alt=""
-                                                         width="100%" height="100%"
-                                                         style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                                    <br><br>
-                                                    ẢNH
-                                                </label>
-                                                <br>
-                                                <div style="display: none">
-                                                    <input type="file"  name="anh3s"  accept="image/jpeg, image/png" id="anhmoi3"  >
+                                            <div class="col-4">
+                                                <div align="center">
+                                                    <br>
+                                                    <label style="border: 5px solid white;width: 150px;height: 150px;border-radius:50% 50% 50% 50%;"
+                                                           for="anhmoi3">
+                                                        <img id="preview-anh3-2" class="preview-image" src="" alt=""
+                                                             width="100%" height="100%"
+                                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                                        <br><br>
+                                                        ẢNH
+                                                    </label>
+                                                    <br>
+                                                    <div style="display: none">
+                                                        <input type="file" name="anh3s" accept="image/jpeg, image/png"
+                                                               id="anhmoi3">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div style="display: none">
-                                                <form:input path="anh3"/>
+                                                <div style="display: none">
+                                                    <form:input path="anh3"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <form:label path="ten"><b>Tên:</b></form:label>
+                                        <form:input class="form-control" placeholder="" path="ten"/>
+                                        <form:errors path="ten" cssClass="text-danger"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="moTa"><b>Mô tả:</b></form:label>
+                                        <form:input class="form-control" placeholder="" path="moTa"/>
+                                        <form:errors path="moTa" cssClass="text-danger"/>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <form:label path="ten"><b>Tên:</b></form:label>
-                                    <form:input class="form-control" placeholder="" path="ten"/>
-                                    <form:errors path="ten" cssClass="text-danger"/>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="moTa"><b>Mô tả:</b></form:label>
-                                    <form:input class="form-control" placeholder="" path="moTa"/>
-                                    <form:errors path="moTa" cssClass="text-danger"/>
+                                <div style="text-align: center">
+                                    <button type="submit" class="btn btn-primary mr-2" onclick="return myFunction1()">
+                                        ADD
+                                    </button>
                                 </div>
                             </div>
-                            <div style="text-align: center">
-                                <button type="submit" class="btn btn-primary mr-2" onclick="return myFunction1()">
-                                    ADD
-                                </button>
-                            </div>
-                        </div>
-                    </form:form>
+                        </form:form>
+                    </div>
                 </div>
             </div>
         </div>

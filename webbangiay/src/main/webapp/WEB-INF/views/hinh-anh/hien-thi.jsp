@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,152 +8,166 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ảnh</title>
-    <link rel="stylesheet" href="../../vendors/feather/feather.css">
-    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
-    <link rel="shortcut icon" href="../../images/favicon.png"/>
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../../images/favicon.png"/>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico"/>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css"/>
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
+    <link rel="stylesheet" href="../assets/css/demo.css"/>
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
 </head>
 <body>
-<div>
-    <div>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-                   aria-controls="description" aria-selected="true">Thông tin ảnh</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/hinh-anh/view-add" role="tab" onclick="return myFunction1()">Thêm thông tin
-                    ảnh</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/hinh-anh/hien-thi-delete" role="tab" onclick="return myFunction3()">Ảnh đã xoá</a>
-            </li>
-        </ul>
-    </div>
-    <div>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="description" role="tabpanel"
-                 aria-labelledby="description-tab">
-                <div class="col-lg-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="float: left">Danh sách Màn hình</h4>
-                            <%--            Tìm kiếm               --%>
-                            <form action="/hinh-anh/search-0" method="post">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <h6 style="float: right; margin: 14px;color: red">${thongBao}</h6></div>
-                                    <div class="col-4">
-                                        <div class="input-group" style="width: 100%; float: left">
-                                            <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                                                   aria-label="Bạn tìm gì..." name="search">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-sm btn-primary" type="submit"
-                                                        onclick="return myFunction5()">Search
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <%--           kết thúc tìm kiếm         --%>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Mã</th>
-                                        <th>Tên</th>
-                                        <th>Ảnh 1</th>
-                                        <th>Ảnh 2</th>
-                                        <th>Ảnh 3</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Ngày cập nhật</th>
-                                        <th>Tình trạng</th>
-                                        <th>Mô tả</th>
-                                        <th colspan="2">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="list" varStatus="i" items="${listAnh}">
-                                        <tr>
-                                            <td>${list.ma}</td>
-                                            <td>${list.ten}</td>
-                                            <td align="center">
-                                                <img src="../../../uploads/${list.anh1}" width="40" height="40"
-                                                     style="border-radius:50% 50% 50% 50%">
-
-                                            </td>
-                                            <td align="center">
-                                                <img src="../../../uploads/${list.anh2}" width="40" height="40"
-                                                     style="border-radius:50% 50% 50% 50%">
-
-                                            </td>
-                                            <td align="center">
-                                                <img src="../../../uploads/${list.anh3}" width="40" height="40"
-                                                     style="border-radius:50% 50% 50% 50%">
-
-                                            </td>
-                                            <td>${list.ngayTao}</td>
-                                            <td>${list.ngayCapNhat}</td>
-                                            <td>
-                                                <c:if test="${list.trangThai==0}">Hoạt động</c:if>
-                                                <c:if test="${list.trangThai==1}">Ngừng hoạt động</c:if>
-                                            </td>
-                                            <td>${list.moTa}</td>
-                                            <td>
-                                                <a class="btn btn-warning btn-icon-text"
-                                                   href="/hinh-anh/detail/${list.id}"
-                                                   onclick="return myFunction2()">
-                                                    <i class="ti-file btn-icon-prepend"></i>
-                                                    Update</a>
-                                                <a class="btn btn-danger btn-icon-text"
-                                                   href="/hinh-anh/update-status/${list.id}"
-                                                   onclick="return myFunction6()"><i
-                                                        class="ti-reload btn-icon-prepend"></i>
-                                                    Status</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+<br>
+<div class="card mb-4">
+    <table class="table container">
+        <tbody>
+        <h3 class="card-header" style="text-align: center">Thông tin hình ảnh</h3>
+        <tr>
+            <td style="text-align: center">
+                <form action="/hinh-anh/search-0" method="post">
+                    <div class="input-group" style="width:100%; text-align: center">
+                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                               aria-label="Bạn tìm gì..." name="search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
                         </div>
                     </div>
-                </div>
-                <div align="center">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <c:if test="${total!= 0}">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center pagination-lg">
-                                    <li class="page-item"><a class="page-link" href="/hinh-anh/hien-thi?num=0"><</a>
-                                    </li>
+                </form>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td class="text-center" colspan="2">
+                <%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
+                <a type="button" class="btn btn-primary" href="/hinh-anh/view-add">Thêm mới sản phẩm</a>
+            </td>
+        </tr>
 
-                                    <c:forEach begin="1" end="${total}" varStatus="status">
-                                        <li class="page-item">
-                                            <a href="${pageContext.request.contextPath}/hinh-anh/hien-thi?num=${status.index -1}"
-                                               class="page-link">${status.index}</a>
-                                        </li>
-                                    </c:forEach>
+        </tbody>
+    </table>
+</div>
+<div class="card">
+    <div class="table-responsive text-nowrap">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Tên</th>
+                <th style="text-align: center">Ảnh 1</th>
+                <th style="text-align: center">Ảnh 2</th>
+                <th style="text-align: center">Ảnh 3</th>
+                <th>Ngày tạo</th>
+                <th>Ngày cập nhật</th>
+                <th>Tình trạng</th>
+                <th>Mô tả</th>
+                <th colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody class="table-border-bottom-2">
+            <c:forEach var="list" varStatus="i" items="${listAnh}">
+                <tr>
+                    <td>${list.ma}</td>
+                    <td>${list.ten}</td>
+                    <td align="center">
+                        <img src="../../../uploads/${list.anh1}" width="150" height="150">
+                    </td>
+                    <td align="center">
+                        <img src="../../../uploads/${list.anh2}" width="150" height="150">
 
-                                    <li class="page-item"><a class="page-link" href="/hinh-anh/hien-thi?num=${total-1}">></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </c:if>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </td>
+                    <td align="center">
+                        <img src="../../../uploads/${list.anh3}" width="150" height="150">
+
+                    </td>
+                    <td>${list.ngayTao}</td>
+                    <td>${list.ngayCapNhat}</td>
+                    <td>
+                        <c:if test="${list.trangThai==0}">Hoạt động</c:if>
+                        <c:if test="${list.trangThai==1}">Ngừng hoạt động</c:if>
+                    </td>
+                    <td>${list.moTa}</td>
+                    <td>
+                        <a class="btn btn-warning btn-icon-text"
+                           href="/hinh-anh/detail/${list.id}"
+                           onclick="return myFunction2()">
+                            <i class="ti-file btn-icon-prepend"></i>
+                            Update</a>
+                        <a class="btn btn-danger btn-icon-text"
+                           href="/hinh-anh/delete/${list.id}"
+                           onclick="return myFunction6()"><i
+                                class="ti-reload btn-icon-prepend"></i>
+                            Status</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center pagination-lg">
+        <li class="page-item"><a class="page-link" href="/hinh-anh/hien-thi?num=0">First</a>
+        </li>
+        <c:forEach begin="1" end="${total}" varStatus="status">
+            <li class="page-item">
+                <a href="${pageContext.request.contextPath}/hinh-anh/hien-thi?num=${status.index -1}"
+                   class="page-link">${status.index}</a>
+            </li>
+        </c:forEach>
+        <li class="page-item"><a class="page-link" href="/hinh-anh/hien-thi?num=${total-1}">Last</a>
+        </li>
+    </ul>
+</nav>
+
 </body>
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="../assets/vendor/libs/jquery/jquery.js"></script>
+<script src="../assets/vendor/libs/popper/popper.js"></script>
+<script src="../assets/vendor/js/bootstrap.js"></script>
+<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+<script src="../assets/vendor/js/menu.js"></script>
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+
+<!-- Main JS -->
+<script src="../assets/js/main.js"></script>
+
+<!-- Page JS -->
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 <script>
     function myFunction1() {
-        let text = "Bạn chắc chắn muốn sang trang thêm thêm";
+        let text = "Bạn chắc chắn muốn thêm";
         let kt = confirm(text);
         if (kt == true) {
             return true
@@ -174,9 +187,10 @@
     }
 
     function myFunction3() {
-        let text = "Bạn chắc chắn muốn sang trang trạng thái đã xóa";
+        let text = "Bạn chắc chắn muốn thay đổi trạng thái";
         let kt = confirm(text);
         if (kt == true) {
+            confirm("Thay đổi trạng thái thành công");
             return true
         } else {
             return false;
@@ -204,7 +218,17 @@
     }
 
     function myFunction6() {
-        let text = "Bạn chắc chắn muốn thay đổi trạng thái";
+        let text = "Bạn chắc chắn muốn sang trang thêm thông tin";
+        let kt = confirm(text);
+        if (kt == true) {
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    function myFunction7() {
+        let text = "Bạn chắc chắn muốn sang trang thông tin đã thay đổi";
         let kt = confirm(text);
         if (kt == true) {
             return true
@@ -215,12 +239,11 @@
 
 
 </script>
+
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>
 <script src="../../js/template.js"></script>
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </html>

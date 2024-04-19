@@ -255,7 +255,6 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
         }
         return null;
     }
-
     private Map<UUID, HoaDonChiTiet> getMapHoaDonChiTietById(UUID idHoaDon) {
         Map<UUID, HoaDonChiTiet> map = new HashMap<>();
         findHoaDonDto(idHoaDon).forEach(el -> {
