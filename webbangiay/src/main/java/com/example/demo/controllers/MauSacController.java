@@ -29,57 +29,80 @@ import java.util.UUID;
 @RequestMapping("/mau-sac")
 public class MauSacController {
     @Autowired
-    private MauSacService khuyenMaiService;
+    private MauSacService mauSacService;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<MauSac> list = khuyenMaiService.getAll(pageable);
+        Page<MauSac> list = mauSacService.getAll(pageable);
         model.addAttribute("listMauSac", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "mau-sac/hien-thi";
+        model.addAttribute("contentPage", "../mau-sac/hien-thi.jsp");
+        return "home/layout";
     }
     @GetMapping("/view-add")
     public String viewAdd(Model model , @ModelAttribute("MauSac") MauSac mauSac){
         model.addAttribute("MauSac", new MauSac());
-        return "mau-sac/add";
+        model.addAttribute("contentPage", "../mau-sac/add.jsp");
+        return "home/layout";
     }
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute(name = "MauSac") MauSac mauSac , BindingResult bindingResult ){
         if(bindingResult.hasErrors()){
             return "mau-sac/add";
         }
-        mauSac.setId(UUID.randomUUID());
+        String maTH = "MS" + (mauSacService.findAll().size()+1);
+        mauSac.setMa(maTH);
         mauSac.setNgayTao(Date.valueOf(LocalDate.now()));
-        khuyenMaiService.add(mauSac);
+        mauSacService.add(mauSac);
         return "redirect:/mau-sac/hien-thi";
     }
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") UUID id){
-        khuyenMaiService.delete(id);
+        mauSacService.delete(id);
         return "redirect:/mau-sac/hien-thi";
     }
-    @GetMapping("/view-update/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id){
-        MauSac mauSac = khuyenMaiService.findById(id);
+    @GetMapping("/view-update")
+    public String detail(Model model, @RequestParam("id") UUID id){
+        MauSac mauSac = mauSacService.findById(id);
         model.addAttribute("mauSac", mauSac);
-        return "mau-sac/update";
+        model.addAttribute("contentPage", "../mau-sac/update.jsp");
+        return "home/layout";
     }
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "mauSac") MauSac mauSac,
-                         @PathVariable(name = "id")UUID id){
-        MauSac sizeUpdate = khuyenMaiService.findById(id);
+                         @PathVariable(name = "id")UUID id,BindingResult result,Model model){
+        if (result.hasErrors()){
+            System.out.println("Co loi");
+            model.addAttribute("contentPage", "../mau-sac/update.jsp");
+            return "home/layout";
+        }
+        MauSac sizeUpdate = mauSacService.findById(id);
+        mauSac.setId(id);
+        mauSac.setMa(sizeUpdate.getMa());
+        mauSac.setNgayTao(sizeUpdate.getNgayTao());
         mauSac.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         System.out.println(sizeUpdate.toString());
-        khuyenMaiService.update(id, mauSac);
+        mauSacService.update(id, mauSac);
         return "redirect:/mau-sac/hien-thi";
     }
     @PostMapping("/search")
-    public String search(Model model, @ModelAttribute("size") MauSac size,@RequestParam("search") String search){
-        List<MauSac> list = khuyenMaiService.search(search);
+    public String search(Model model,@RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size){
+        if (search.isEmpty()) {
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<MauSac> list = mauSacService.getAll(pageable);
+            model.addAttribute("listMauSac", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "../mau-sac/hien-thi.jsp");
+            return "home/layout";
+        }
+        List<MauSac> list = mauSacService.search(search);
         model.addAttribute("listMauSac",list);
-        return "mau-sac/hien-thi";
+        model.addAttribute("contentPage", "../mau-sac/hien-thi.jsp");
+        return "home/layout";
     }
 }

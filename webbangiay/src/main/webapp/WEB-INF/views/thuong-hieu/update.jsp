@@ -50,7 +50,7 @@
 <div  class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h4>
+            <h4 class="card-header" style="text-align: center">Update thương hiệu</h4>
             <%--@elvariable id="chiTietSanPham" type=""--%>
             <div class="card-body">
                 <form:form action="/thuong-hieu/update/${thuongHieu.id}" method="post" modelAttribute="thuongHieu">

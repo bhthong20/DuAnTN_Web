@@ -50,7 +50,7 @@
 <div  class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h4>
+            <h4 class="card-header" style="text-align: center">Update phân loại</h4>
             <%--@elvariable id="chiTietSanPham" type=""--%>
             <div class="card-body">
                 <form:form action="/loai/update/${PhanLoai.id}" method="post" modelAttribute="PhanLoai">
@@ -74,9 +74,9 @@
                             <div class="form-check mb-3 mt-3">
                                 <form:label class="form-label" path="trangThai">Trạng thái:</form:label>
                                 <br>
-                                <form:radiobutton path="trangThai" value="1" />Hoạt động
+                                <form:radiobutton path="trangThai" value="0" />Hoạt động
                                 <br>
-                                <form:radiobutton path="trangThai" value="0"/>Ngưng hoạt động
+                                <form:radiobutton path="trangThai" value="1"/>Ngưng hoạt động
                             </div>
                         </div>
                     </div>

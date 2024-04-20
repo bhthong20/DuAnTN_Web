@@ -72,9 +72,9 @@
                             <div class="form-check mb-3 mt-3">
                                 <form:label class="form-label" path="trangThai">Trạng thái:</form:label>
                                 <br>
-                                <form:radiobutton path="trangThai" value="1" checked="true"/>Hoạt động
+                                <form:radiobutton path="trangThai" value="0" checked="true"/>Hoạt động
                                 <br>
-                                <form:radiobutton path="trangThai" value="0"/>Ngưng hoạt động
+                                <form:radiobutton path="trangThai" value="1"/>Ngưng hoạt động
                             </div>
                         </div>
                     </div>

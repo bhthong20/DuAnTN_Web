@@ -48,7 +48,7 @@
 <div class="card mb-4">
     <table class="table container">
         <tbody>
-        <h3 class="card-header" style="text-align: center">Thông tin hình ảnh</h3>
+        <h3 class="card-header" style="text-align: center">Thông tin phân loại</h3>
         <tr>
             <td style="text-align: center">
                 <form action="/loai/search" method="post">
@@ -97,8 +97,8 @@
                     <td>${i.ngayCapNhat}</td>
                     <td>${i.moTa}</td>
                     <td>
-                        <c:if test="${i.trangThai==0}">Ngừng hoạt động</c:if>
-                        <c:if test="${i.trangThai==1}">Hoạt động</c:if>
+                        <c:if test="${i.trangThai==0}">Hoạt động</c:if>
+                        <c:if test="${i.trangThai==1}">Ngừng hoạt động</c:if>
                     </td>
                     <td>
                         <a href="/loai/delete/${i.id}" class="btn btn-success" onclick="myFunction7()"

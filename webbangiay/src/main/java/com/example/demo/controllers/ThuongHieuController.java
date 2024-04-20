@@ -1,7 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.HinhAnh;
-import com.example.demo.models.SanPham;
 import com.example.demo.models.ThuongHieu;
 import com.example.demo.services.ThuongHieuService;
 import jakarta.validation.Valid;

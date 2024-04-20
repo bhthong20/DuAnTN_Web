@@ -30,56 +30,88 @@ import java.util.UUID;
 public class KichThuocController {
 
     @Autowired
-    private KichThuocService khuyenMaiService;
+    private KichThuocService kichThuocService;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<KichThuoc> list = khuyenMaiService.getAll(pageable);
+        Page<KichThuoc> list = kichThuocService.getAll(pageable);
         model.addAttribute("listSize", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "size/hien-thi";
+        model.addAttribute("contentPage", "../size/hien-thi.jsp");
+        return "home/layout";
     }
+
     @GetMapping("/view-add")
-    public String viewAdd(Model model , @ModelAttribute("Size") KichThuoc size){
+    public String viewAdd(Model model, @ModelAttribute("Size") KichThuoc size) {
         model.addAttribute("size", new KichThuoc());
-        return "size/add";
+        model.addAttribute("contentPage", "../size/add.jsp");
+        return "home/layout";
     }
+
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute(name = "Size") KichThuoc size , BindingResult bindingResult ){
-        if(bindingResult.hasErrors()){
-            return "size/add";
+    public String add(@Valid @ModelAttribute(name = "Size") KichThuoc size, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contentPage", "../size/add.jsp");
+            return "home/layout";
         }
-        size.setId(UUID.randomUUID());
+        String makt = "KT" + (kichThuocService.findAll().size() + 1);
+        size.setMa(makt);
         size.setNgayTao(Date.valueOf(LocalDate.now()));
-        khuyenMaiService.add(size);
+        kichThuocService.add(size);
         return "redirect:/kich-thuoc/hien-thi";
     }
+
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(name = "id") UUID id){
-        khuyenMaiService.delete(id);
+    public String delete(@PathVariable(name = "id") UUID id) {
+        kichThuocService.delete(id);
         return "redirect:/kich-thuoc/hien-thi";
     }
-    @GetMapping("/view-update/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id){
-        KichThuoc size = khuyenMaiService.findById(id);
+
+    @GetMapping("/view-update")
+    public String detail(Model model, @RequestParam("id") UUID id) {
+        KichThuoc size = kichThuocService.findById(id);
         model.addAttribute("Size", size);
-        return "size/update";
+        model.addAttribute("contentPage", "../size/update.jsp");
+        return "home/layout";
     }
+
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "Size") KichThuoc size,
-                         @PathVariable(name = "id")UUID id){
-        KichThuoc sizeUpdate = khuyenMaiService.findById(id);
+                         @PathVariable(name = "id") UUID id, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            System.out.println("Co loi");
+            model.addAttribute("contentPage", "../size/update.jsp");
+            return "home/layout";
+        }
+        KichThuoc clUd = kichThuocService.findById(id);
+        size.setId(id);
+        size.setMa(clUd.getMa());
+        size.setNgayTao(clUd.getNgayTao());
         size.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        khuyenMaiService.update(id, size);
+        kichThuocService.update(id, size);
         return "redirect:/kich-thuoc/hien-thi";
     }
+
     @PostMapping("/search")
-    public String search(Model model, @ModelAttribute("size") KichThuoc size,@RequestParam("search") String search){
-        List<KichThuoc> list = khuyenMaiService.search(search);
-        model.addAttribute("listSize",list);
-        return "kich-thuoc/hien-thi";
+    public String search(Model model, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+
+        if (search.isEmpty()) {
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<KichThuoc> list = kichThuocService.getAll(pageable);
+            model.addAttribute("listSize", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "../size/hien-thi.jsp");
+            return "home/layout";
+        }
+        List<KichThuoc> list = kichThuocService.search(search);
+        model.addAttribute("listSize", list);
+        model.addAttribute("contentPage", "../size/hien-thi.jsp");
+        return "home/layout";
+
     }
 }

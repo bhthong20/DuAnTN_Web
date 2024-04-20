@@ -48,7 +48,7 @@
 <div class="card mb-4">
     <table class="table container">
         <tbody>
-        <h3 class="card-header" style="text-align: center">Thông tin hình ảnh</h3>
+        <h3 class="card-header" style="text-align: center">Thông tin thương hiệu</h3>
         <tr>
             <td style="text-align: center">
                 <form action="/thuong-hieu/search" method="post">
