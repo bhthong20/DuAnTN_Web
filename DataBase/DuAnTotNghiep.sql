@@ -66,19 +66,6 @@ CREATE TABLE gio_hang
 Go
 
 --Giỏ Hàng Chi Tiết 
-CREATE TABLE gio_hang_chi_tiet
-(
-	id_gio_hang_chi_tiet UNIQUEIDENTIFIER
-        DEFAULT NEWID() PRIMARY KEY,
-	id_gio_hang   UNIQUEIDENTIFIER
-        REFERENCES gio_hang (id_gio_hang),
-	id_chi_tiet_san_pham   UNIQUEIDENTIFIER
-        REFERENCES chi_tiet_san_pham (id_chi_tiet_san_pham),
-	so_luong INT Null,
-	don_gia DECIMAL(10, 2),
-	trang_thai INT Null,
-)
-Go
 
 --Hình Ảnh
 CREATE TABLE hinh_anh
@@ -325,6 +312,21 @@ CREATE TABLE hoa_don_chi_tiet(
 	trang_thai INT Null,
 )
 Go
+
+CREATE TABLE gio_hang_chi_tiet
+(
+	id_gio_hang_chi_tiet UNIQUEIDENTIFIER
+        DEFAULT NEWID() PRIMARY KEY,
+	id_gio_hang   UNIQUEIDENTIFIER
+        REFERENCES gio_hang (id_gio_hang),
+	id_chi_tiet_san_pham   UNIQUEIDENTIFIER
+        REFERENCES chi_tiet_san_pham (id_chi_tiet_san_pham),
+	so_luong INT Null,
+	don_gia DECIMAL(10, 2),
+	trang_thai INT Null,
+)
+Go
+
 ALTER TABLE WEB_BAN_GIAY.dbo.chi_tiet_san_pham ADD hinh_anh_id uniqueidentifier NULL;
 GO
 
