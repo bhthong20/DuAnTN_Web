@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.HinhAnh;
+import com.example.demo.models.dto.SanPhamDetail;
 import com.example.demo.services.HinhAnhService;
 import com.example.demo.util.FileUploadUtil;
 import jakarta.validation.Valid;
@@ -48,15 +49,23 @@ public class HinhAnhController {
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("anh") HinhAnh anh) {
         model.addAttribute("anh", new HinhAnh());
-        model.addAttribute("contentPage", "hinh-anh/add.jsp");
-        return "hinh-anh/add";
+        model.addAttribute("contentPage", "../hinh-anh/add.jsp");
+        return "home/layout";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detail(Model model, @ModelAttribute("anh") HinhAnh anh, @PathVariable("id") UUID id) {
+//    @GetMapping("/detail-san-pham")
+//    public SanPhamDetail detailSanPham(@RequestParam("id") UUID id) {
+//        SanPhamDetail sanPhamDetail = new SanPhamDetail();
+////        sanPhamDetail.setSanPham(sanPhamService.findById(id));
+//        sanPhamDetail.setChiTietSanPham(chiTietSanPhamService.findChiTietSanPhamBySanPham(sanPhamDetail.getSanPham()));
+//        return sanPhamDetail;
+//    }
+
+    @GetMapping("/detail")
+    public String detail(Model model, @ModelAttribute("anh") HinhAnh anh, @RequestParam("id") UUID id) {
         model.addAttribute("anh", anhService.findById(id));
-        model.addAttribute("contentPage", "hinh-anh/update.jsp");
-        return "hinh-anh/update";
+        model.addAttribute("contentPage", "../hinh-anh/update.jsp");
+        return "home/layout";
     }
 
     @GetMapping("/delete/{id}")
@@ -81,8 +90,8 @@ public class HinhAnhController {
         } else {
             List<HinhAnh> list = anhService.search0(search);
             model.addAttribute("listAnh", list);
-            model.addAttribute("contentPage", "hinh-anh/hien-thi.jsp");
-            return "hinh-anh/hien-thi";
+            model.addAttribute("contentPage", "../hinh-anh/hien-thi.jsp");
+            return "home/layout";
         }
 
     }

@@ -65,7 +65,7 @@
         <tr class="text-center">
             <td class="text-center" colspan="2">
                 <%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
-                <a type="button" class="btn btn-primary" href="/hinh-anh/view-add">Thêm mới sản phẩm</a>
+                <a type="button" class="btn btn-primary" href="/hinh-anh/view-add" onclick="return myFunction6()">Thêm mới sản phẩm</a>
             </td>
         </tr>
 
@@ -114,13 +114,13 @@
                     <td>${list.moTa}</td>
                     <td>
                         <a class="btn btn-warning btn-icon-text"
-                           href="/hinh-anh/detail/${list.id}"
+                           href="/hinh-anh/detail?id=${list.id}"
                            onclick="return myFunction2()">
                             <i class="ti-file btn-icon-prepend"></i>
                             Update</a>
                         <a class="btn btn-danger btn-icon-text"
                            href="/hinh-anh/delete/${list.id}"
-                           onclick="return myFunction6()"><i
+                           onclick="return myFunction7()"><i
                                 class="ti-reload btn-icon-prepend"></i>
                             Status</a>
                     </td>
@@ -228,7 +228,7 @@
     }
 
     function myFunction7() {
-        let text = "Bạn chắc chắn muốn sang trang thông tin đã thay đổi";
+        let text = "Bạn chắc chắn muốn xóa thông tin";
         let kt = confirm(text);
         if (kt == true) {
             return true

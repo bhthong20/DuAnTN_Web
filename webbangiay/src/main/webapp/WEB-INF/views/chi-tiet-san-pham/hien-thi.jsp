@@ -45,22 +45,6 @@
 </head>
 <body>
 <br>
-
-<%--<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">--%>
-<%--    <li class="nav-item">--%>
-<%--        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"--%>
-<%--           aria-controls="description" aria-selected="true">Thông tin Chi tiết sản phẩm</a>--%>
-<%--    </li>--%>
-<%--    <li class="nav-item">--%>
-<%--        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab"--%>
-<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>--%>
-<%--    </li>--%>
-<%--    <li class="nav-item">--%>
-<%--        <a class="nav-link" href="/chi-tiet-san-pham/view-add" role="tab"--%>
-<%--           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới chi tiết--%>
-<%--            sản phẩm</a>--%>
-<%--    </li>--%>
-<%--</ul>--%>
 <div class="card mb-4">
     <table class="table container">
         <tbody>
