@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.models.PhanLoai;
+import com.example.demo.models.ThuongHieu;
 import com.example.demo.services.PhanLoaiService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,58 +30,87 @@ import java.util.UUID;
 @RequestMapping("/loai")
 public class LoaiController {
     @Autowired
-    private PhanLoaiService khuyenMaiService;
+    private PhanLoaiService phanLoaiService;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<PhanLoai> list = khuyenMaiService.getAll(pageable);
+        Page<PhanLoai> list = phanLoaiService.getAll(pageable);
         model.addAttribute("listMauSac", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "loai/hien-thi";
+        model.addAttribute("contentPage", "../loai/hien-thi.jsp");
+        return "home/layout";
     }
+
     @GetMapping("/view-add")
-    public String viewAdd(Model model , @ModelAttribute("PhanLoai") PhanLoai mauSac){
+    public String viewAdd(Model model, @ModelAttribute("PhanLoai") PhanLoai mauSac) {
         model.addAttribute("PhanLoai", new PhanLoai());
-        return "loai/add";
+        model.addAttribute("contentPage", "../loai/add.jsp");
+        return "home/layout";
     }
+
     @PostMapping("/add")
-    public String add(@Valid @ModelAttribute(name = "PhanLoai") PhanLoai phanLoai , BindingResult bindingResult ){
-        if(bindingResult.hasErrors()){
-            return "loai/add";
+    public String add(@Valid @ModelAttribute(name = "PhanLoai") PhanLoai phanLoai, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("contentPage", "../loai/add.jsp");
+            return "home/layout";
         }
-        phanLoai.setId(UUID.randomUUID());
+        String maPL = "PL" + (phanLoaiService.findAll().size()+1);
+        phanLoai.setMa(maPL);
         phanLoai.setNgayTao(Date.valueOf(LocalDate.now()));
-        khuyenMaiService.add(phanLoai);
+        phanLoaiService.add(phanLoai);
         return "redirect:/loai/hien-thi";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(name = "id") UUID id){
-        khuyenMaiService.delete(id);
+    public String delete(@PathVariable(name = "id") UUID id) {
+        phanLoaiService.delete(id);
         return "redirect:/loai/hien-thi";
     }
-    @GetMapping("/view-update/{id}")
-    public String detail(Model model, @PathVariable("id") UUID id){
-        PhanLoai mauSac = khuyenMaiService.findById(id);
-        model.addAttribute("mauSac", mauSac);
-        return "loai/update";
+
+    @GetMapping("/view-update")
+    public String detail(Model model, @RequestParam("id") UUID id ) {
+        PhanLoai mauSac = phanLoaiService.findById(id);
+        model.addAttribute("PhanLoai", mauSac);
+        model.addAttribute("contentPage", "../loai/update.jsp");
+        return "home/layout";
     }
+
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute(name = "mauSac") PhanLoai mauSac,
-                         @PathVariable(name = "id")UUID id){
-        PhanLoai sizeUpdate = khuyenMaiService.findById(id);
-        mauSac.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        System.out.println(sizeUpdate.toString());
-        khuyenMaiService.update(id, mauSac);
+    public String update(@Valid@ModelAttribute(name = "PhanLoai") PhanLoai phanLoai,
+                         @PathVariable(name = "id") UUID id, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Co loi");
+            model.addAttribute("contentPage", "../loai/update.jsp");
+            return "home/layout";
+        }
+        PhanLoai pl = phanLoaiService.findById(id);
+        phanLoai.setId(id);
+        phanLoai.setMa(pl.getMa());
+        phanLoai.setNgayTao(pl.getNgayTao());
+        phanLoai.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+        System.out.println(pl.toString());
+        phanLoaiService.update(id, phanLoai);
         return "redirect:/loai/hien-thi";
     }
+
     @PostMapping("/search")
-    public String search(Model model, @ModelAttribute("size") PhanLoai size,@RequestParam("search") String search){
-        List<PhanLoai> list = khuyenMaiService.search(search);
-        model.addAttribute("listMauSac",list);
-        return "loai/hien-thi";
+    public String search(Model model, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
+                         @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        if (search.isEmpty()) {
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<PhanLoai> list = phanLoaiService.getAll(pageable);
+            model.addAttribute("listMauSac", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "../loai/hien-thi.jsp");
+            return "home/layout";
+        }
+        List<PhanLoai> list = phanLoaiService.search(search);
+        model.addAttribute("listMauSac", list);
+        model.addAttribute("contentPage", "../loai/hien-thi.jsp");
+        return "home/layout";
     }
 }

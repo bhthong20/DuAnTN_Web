@@ -47,7 +47,7 @@
 </head>
 
 <body>
-<div  class="container-xxl flex-grow-1 container-p-y">
+<div class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12">
         <div class="card">
             <h4 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h4>
@@ -166,7 +166,7 @@
             </div>
         </div>
     </div>
-
+</div>
 </body>
 <script>
     function myFunction1() {
