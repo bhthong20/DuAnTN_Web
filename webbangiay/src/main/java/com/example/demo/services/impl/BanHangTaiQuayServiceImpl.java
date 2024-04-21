@@ -12,6 +12,7 @@ import com.example.demo.repositories.HoaDonRepository;
 import com.example.demo.services.BanHangTaiQuayService;
 import com.example.demo.services.HoaDonService;
 import com.example.demo.services.KhachHangService;
+import com.example.demo.util.RolesConstant;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -217,6 +218,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                 khachHang.setMatKhau(maKhachHang);
                 khachHang.setId(khachHangService.add(khachHang).getId());
             }
+            khachHang.setRole(RolesConstant.ROLE_USER);
 
             hoaDon.setKhachHang(khachHang);
             hoaDonService.update(hoaDon.getId(), hoaDon);

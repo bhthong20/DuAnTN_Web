@@ -53,9 +53,11 @@ public class KhachHang {
     @Column(name = "ngay_sinh")
     private Date ngaySinh;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "tai_khoan")
     private String taiKhoan;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mat_khau")
     private String matKhau;
 
@@ -67,4 +69,7 @@ public class KhachHang {
 
     @Column(name = "trang_thai")
     private String trangThai;
+
+    @Column(name = "roles")
+    private String role;
 }

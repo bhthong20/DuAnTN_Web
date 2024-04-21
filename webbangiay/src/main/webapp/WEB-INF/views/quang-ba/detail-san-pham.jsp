@@ -283,11 +283,14 @@
                                 <div class="d-flex align-items-center">
                                     <div style="margin-right: 15px;">
                                         <div class="_9m0o30 shopee-input-quantity">
-                                            <button aria-label="Decrease" class="suQW3X" onclick="validateInputTru()" fdprocessedid="yi4z8l">
+                                            <button aria-label="Decrease" class="suQW3X" onclick="validateInputTru()"
+                                                    fdprocessedid="yi4z8l">
                                                 -
                                             </button>
-                                            <input class="suQW3X u00pLG" id="soLuongInput" min="0" type="text" value="1" onchange="validateInput(this)">
-                                            <button aria-label="Increase" onclick="validateInputCong()" class="suQW3X" fdprocessedid="qikb1a">
+                                            <input class="suQW3X u00pLG" id="soLuongInput" min="0" type="text" value="1"
+                                                   onchange="validateInput(this)">
+                                            <button aria-label="Increase" onclick="validateInputCong()" class="suQW3X"
+                                                    fdprocessedid="qikb1a">
                                                 +
                                             </button>
                                         </div>
@@ -310,7 +313,8 @@
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="text-center">
-                            <button type="button" onclick="themVaoGioHang()" class="btn btn-danger">Thêm vào giỏ hàng</button>
+                            <button type="button" onclick="themVaoGioHang()" class="btn btn-danger">Thêm vào giỏ hàng
+                            </button>
                             <button type="button" onclick="muaNgay()" class="btn btn-danger">Mua ngay</button>
                         </div>
                     </div>
@@ -380,7 +384,33 @@
     }
 
     function themVaoGioHang() {
-        console.log(getChiTietSanPhamSelect())
+        let chiTiet = getChiTietSanPhamSelect();
+        let data = {
+            chiTietSanPham: chiTiet.id,
+            soLuong: chiTiet.soLuongMua,
+            donGia: chiTiet.donGia
+        };
+
+        let kt = confirm("Bạn có chắc chắn muốn thêm vào giỏ hàng không?");
+        if (kt) {
+            $.ajax({
+                type: "POST",
+                url: "/ban-hang-online/rest/them-gio-hang",
+                contentType: "application/json",
+                data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
+                success: function (response) {
+                    alert("Sản phẩm đã được thêm vào giỏ hàng");
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     function getChiTietSanPhamSelect() {
@@ -539,16 +569,16 @@
     }
 
     function renderSanPham() {
-            $('#tenSanPham').html(sanPham.tenSp);
-            $('#daBan').html(sanPham.daBan);
-            $('#giamGia').html(sanPham.sale);
-            $('#donGia').html(sanPham.donGia);
-            $('#donGiaTruocSale').html(sanPham.donGia * sanPham.sale);
-            $('#anh1').attr('src', sanPham.anh1);
-            $('#anh2').attr('src', sanPham.anh2);
-            $('#anh3').attr('src', sanPham.anh3);
-            $('#moTa').html(sanPham.moTa);
-            $('#soLuong').html(sanPham.soLuong);
+        $('#tenSanPham').html(sanPham.tenSp);
+        $('#daBan').html(sanPham.daBan);
+        $('#giamGia').html(sanPham.sale);
+        $('#donGia').html(sanPham.donGia);
+        $('#donGiaTruocSale').html(sanPham.donGia * sanPham.sale);
+        $('#anh1').attr('src', sanPham.anh1);
+        $('#anh2').attr('src', sanPham.anh2);
+        $('#anh3').attr('src', sanPham.anh3);
+        $('#moTa').html(sanPham.moTa);
+        $('#soLuong').html(sanPham.soLuong);
     }
 
     function changeMauSac(button) {

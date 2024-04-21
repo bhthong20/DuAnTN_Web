@@ -530,7 +530,8 @@
 .mini-vouchers__vouchers {
   display: flex;
   flex-shrink: 1;
-  overflow: hidden;
+  overflow: auto;
+  flex-wrap: wrap;
   position: relative;
 }
 .flex-auto {

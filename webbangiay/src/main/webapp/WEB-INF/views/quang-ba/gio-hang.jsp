@@ -69,55 +69,22 @@
     <script src="../assets/js/config.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
     <script src="../js/menu.js"></script>
+    <style>
+        .form-check-input:checked, .form-check-input[type=checkbox]:indeterminate {
+            background-color: #ff3e1d !important;
+            border-color: #ff3e1d !important;
+            box-shadow: 0 2px 4px 0 rgba(255, 105, 105, 0.4) !important;
+        }
+    </style>
 </head>
 
 <body>
 
-<section>
-    <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container justify-content-between p-0">
-            <div class="d-flex">
-                <div class="site-brand">
-                    <a href="https://ivymoda.com/"><img src="https://pubcdn.ivymoda.com/ivy2/images/logo.png" alt="Trang chủ | IVY moda"></a>
-                </div>
-                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                    <ul class="navbar-nav text-center mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/home">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Sản phẩm</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Giới thiệu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Tin tức</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Liên hệ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Tra cứu</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <span>
-                        <i style="font-size: 30px" class='bx bxs-user' ></i> <span id="taiKhoan">Tài khoản</span>
-                    </span>
-                    <a href="/gio-hang" class="position-relative"><i style="font-size: 30px" class='bx bx-cart'></i>
-                        <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger">
-                        <span id="soLuongGioHang"></span>
-                      </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-</section>
+<jsp:include page="header.jsp"></jsp:include>
+
+<jsp:include page="gio-hang-content.jsp"></jsp:include>
+
+<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
 <!-- Core JS -->
@@ -146,50 +113,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
 <script>
-    var url = window.location.href;
-    var domain = new URL(url).pathname;
-    var menuItem = $('.nav-link')
-    menuItem.each(function () {
-        var hrefMenu = $(this).attr("href");
-        var parts = hrefMenu.split('/');
-        if (parts.length > 0) {
-            if (domain.includes(parts[1])) {
-                $(this).addClass("active open")
-            } else {
-                $(this).removeClass("active open")
-            }
-        }
-    })
 
-        var userInfoCookie = getCookie("user_info");
-        if (userInfoCookie) {
-            var userInfo = JSON.parse(userInfoCookie);
-            $('#taiKhoan').text(userInfo.hoTen)
-        } else {
-            $.ajax({
-                type: "GET",
-                url: "/user-infor",
-                success: function (response) {
-                    if (response) {
-                        setCookie("user_info", JSON.stringify(response));
-                        $('#taiKhoan').text(userInfo.hoTen)
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            });
-        }
 
-        $.ajax({
-            type: "GET",
-            url: "/ban-hang-online/rest/count-gio-hang",
-            success: function (response) {
-                $('#soLuongGioHang').text(response)
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
+    // validate số lượng
+    const validateInputSoLuong = (input) => {
+        const soLuong = parseInt(input.value, 10);
+        if (isNaN(soLuong) || soLuong <= 0) {
+            alert("Vui lòng nhập vào một số nguyên dương.");
+            input.value = 1;
+        }
+    }
 </script>
 </html>

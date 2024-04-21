@@ -29,6 +29,12 @@ public class GioHangController {
     @Autowired
     private GioHangService gioHangService;
 
+    @GetMapping
+    public String viewGioHang() {
+
+        return "quang-ba/gio-hang";
+    }
+
     @GetMapping("hien-thi")
     public String hienThi(Model model,
                           @RequestParam("page") Optional<Integer> pageParam) {

@@ -3,6 +3,7 @@ package com.example.demo.services.impl;
 import com.example.demo.models.KhachHang;
 import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.services.KhachHangService;
+import com.example.demo.util.RolesConstant;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +41,7 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public KhachHang add(KhachHang khachHang) {
+        khachHang.setRole(RolesConstant.ROLE_USER);
         return khachHangRepository.save(khachHang);
     }
 
@@ -49,9 +51,11 @@ public class KhachHangServiceImpl implements KhachHangService {
             KhachHang khachHang1 = khachHangRepository.findById(id).orElse(null);
             if (khachHang1 != null) {
                 BeanUtils.copyProperties(khachHang, khachHang1);
+                khachHang.setRole(RolesConstant.ROLE_USER);
                 khachHangRepository.save(khachHang);
             }
         }
+        khachHang.setRole(RolesConstant.ROLE_USER);
         return khachHangRepository.save(khachHang);
     }
 
