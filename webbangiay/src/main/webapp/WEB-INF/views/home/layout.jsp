@@ -236,7 +236,7 @@
 
                 <!-- Khuyên mai -->
                 <li class="menu-item">
-                    <a href="cards-basic.html" class="menu-link">
+                    <a href="/khuyen-mai/hien-thi" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-collection"></i>
                         <div data-i18n="Basic">Quản lý khuyến mại</div>
                     </a>

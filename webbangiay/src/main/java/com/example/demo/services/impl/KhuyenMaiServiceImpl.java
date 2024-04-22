@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,9 +50,10 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
         if (id != null) {
             KhuyenMai hangSanPhamUpadte = khuyenMaiRepository.findById(id).orElse(null);
             if (hangSanPham != null){
-                BeanUtils.copyProperties(hangSanPham, hangSanPhamUpadte);
-                khuyenMaiRepository.save(hangSanPhamUpadte);
-
+                hangSanPham.setId(hangSanPhamUpadte.getId());
+                hangSanPham.setNgayTao(hangSanPhamUpadte.getNgayTao());
+                hangSanPham.setNgayCapNhat(Date.valueOf(LocalDate.now()));
+                khuyenMaiRepository.save(hangSanPham);
             }
 
         }
@@ -62,10 +65,17 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
         if (id != null) {
             KhuyenMai khuyenMai = khuyenMaiRepository.findById(id).orElse(null);
             if (khuyenMai != null) {
-                khuyenMaiRepository.delete(khuyenMai);
+                khuyenMai.setTrangThai(0);
+                khuyenMaiRepository.save(khuyenMai);
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public List<KhuyenMai> getComboboxKhuyenMai() {
+        Long ngayHienTai = System.currentTimeMillis();
+        return khuyenMaiRepository.findByNgayBatDauLessThanEqualAndNgayKetThucGreaterThanEqualAndTrangThaiAndNgayBatDauIsNotNullAndNgayKetThucIsNotNullOrderByNgayTaoDesc(ngayHienTai ,ngayHienTai ,1);
     }
 }

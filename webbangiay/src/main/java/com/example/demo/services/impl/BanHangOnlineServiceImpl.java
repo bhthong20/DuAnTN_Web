@@ -9,6 +9,7 @@ import com.example.demo.repositories.GioHangChiTietRepository;
 import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.util.UserLoginCommon;
 import jakarta.transaction.Transactional;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     @Transactional
-    public Boolean themVaoGioHang(BanHangRequest banHangRequest) {
+    public Boolean themVaoGioHang(BanHangRequest banHangRequest) throws BadRequestException {
         try {
             ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(banHangRequest.getChiTietSanPham())).get();
             Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
@@ -53,6 +54,9 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
                 gioHangChiTietNew.setSoLuong(banHangRequest.getSoLuong());
                 gioHangChiTietRepository.save(gioHangChiTietNew);
             } else {
+                if (gioHangChiTiet.get().getSoLuong() + banHangRequest.getSoLuong() > chiTietSanPham.getSoLuongTon()) {
+                    throw new BadRequestException("Số lượng sản phẩm không đủ");
+                }
                 gioHangChiTiet.get().setSoLuong(gioHangChiTiet.get().getSoLuong() + banHangRequest.getSoLuong());
                 gioHangChiTietRepository.save(gioHangChiTiet.get());
             }
@@ -64,20 +68,22 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     @Transactional
-    public Boolean updateGioHang(List<BanHangRequest> list) {
-        list.stream().forEach(el -> {
-
-            try {
+    public Boolean updateGioHang(List<BanHangRequest> list) throws BadRequestException {
+        try {
+            for (BanHangRequest el: list) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
                 Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
                         findByKhachHangAndChiTietSanPham(common.getUserLogin(), chiTietSanPham);
 
+                if (el.getSoLuong() > chiTietSanPham.getSoLuongTon()) {
+                    throw new BadRequestException("Số lượng sản phẩm không đủ");
+                }
                 gioHangChiTiet.get().setSoLuong(el.getSoLuong());
                 gioHangChiTietRepository.save(gioHangChiTiet.get());
-            } catch (Exception e) {
-                throw e;
             }
-        });
+        } catch (Exception e) {
+            throw e;
+        }
         return true;
     }
 

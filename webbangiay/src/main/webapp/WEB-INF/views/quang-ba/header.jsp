@@ -163,16 +163,15 @@
 
         var userInfoCookie = getCookie("user_info");
         if (userInfoCookie) {
-            var userInfo = JSON.parse(userInfoCookie);
-            $('#taiKhoan').text(userInfo.hoTen)
+            $('#taiKhoan').text(JSON.parse(userInfoCookie))
         } else {
             $.ajax({
                 type: "GET",
                 url: "/user-infor",
                 success: function (response) {
                     if (response) {
-                        setCookie("user_info", JSON.stringify(response));
-                        $('#taiKhoan').text(userInfo.hoTen)
+                        setCookie("user_info", JSON.stringify(response.taiKhoan));
+                        $('#taiKhoan').text(response.taiKhoan)
                     }
                 },
                 error: function (xhr, status, error) {

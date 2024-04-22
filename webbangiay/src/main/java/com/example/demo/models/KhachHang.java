@@ -55,6 +55,7 @@ public class KhachHang {
 
     @NotBlank(message = "Không để trống thông tin")
     @Column(name = "tai_khoan")
+    @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Tài khoản không được chứa ký tự đặc biệt")
     private String taiKhoan;
 
     @NotBlank(message = "Không để trống thông tin")

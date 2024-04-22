@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.models.GioHangChiTiet;
 import com.example.demo.models.dto.BanHangRequest;
 import com.example.demo.services.BanHangOnlineService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class BanHangOnlineRestController {
     }
 
     @PostMapping("/them-gio-hang")
-    public Boolean themVaoGioHang(@RequestBody BanHangRequest banHangRequest) {
+    public Boolean themVaoGioHang(@RequestBody BanHangRequest banHangRequest) throws BadRequestException {
         return service.themVaoGioHang(banHangRequest);
     }
 
@@ -37,7 +38,7 @@ public class BanHangOnlineRestController {
     }
 
     @PostMapping("/update-gio-hang")
-    public Boolean updateGioHang(@RequestBody List<BanHangRequest> list) {
+    public Boolean updateGioHang(@RequestBody List<BanHangRequest> list) throws BadRequestException {
         return service.updateGioHang(list);
     }
 }

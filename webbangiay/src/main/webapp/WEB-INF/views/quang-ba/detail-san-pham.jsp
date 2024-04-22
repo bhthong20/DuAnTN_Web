@@ -403,7 +403,9 @@
                     location.reload();
                 },
                 error: function (xhr, status, error) {
-                    console.log(xhr.responseText);
+                    if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
+                        alert(xhr.responseJSON.message)
+                    }
                 }
             });
             return true;

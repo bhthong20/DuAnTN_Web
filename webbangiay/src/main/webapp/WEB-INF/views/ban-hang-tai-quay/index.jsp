@@ -123,6 +123,18 @@
                                 />
                             </div>
                             <div class="mb-3">
+                                <label class="form-label" for="khuyenMai">Khuyến mại</label>
+                                <select class="form-select" onchange="fillTongTien()" id="khuyenMai">
+                                    <option selected value="">Lựa chọn</option>
+                                    <c:forEach items="${listKM}" var="item">
+                                        <option value="${item.id}"
+                                                giaTriGiam="${item.giaTriGiam}"
+                                                hinhThucGiam="${item.hinhThucGiamGia}">Giảm ${item.giaTriGiam} <c:if test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
+                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label" for="tongTien">Tổng tiền</label>
                                 <input type="number" disabled id="tongTien" class="form-control phone-mask"
                                 />
@@ -397,6 +409,8 @@
     const tienMat = $('#tienMat');
     const chuyenKhoan = $('#chuyenKhoan');
     const tongTien = $('#tongTien');
+    const khuyenMai = $('#khuyenMai');
+
     // form Thông tin khách hàng
     var khachHang = {
         hoTen: "",
@@ -710,6 +724,7 @@
 
             tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
         });
+        console.log(khuyenMai)
         return tongTien;
     }
 

@@ -36,7 +36,6 @@ public class KhuyenMai {
     private String ma;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Size(min = 6, message = "Tên phải lớn hơn hoặc bằng 6 kí tự")
     @Column(name = "ten_khuyen_mai")
     private String ten;
 
@@ -48,19 +47,19 @@ public class KhuyenMai {
     private Date ngayCapNhat;
 
     @Column(name = "ngay_bat_dau")
-    private Date ngayBatDau;
+    private Long ngayBatDau;
 
     @Column(name = "ngay_ket_thuc")
-    private Date ngayKetThuc;
+    private Long ngayKetThuc;
 
     @Column(name = "trang_thai")
     private int trangThai;
 
     @Column(name = "loai_khuyen_mai")
-    private int hinhThucGiamGia;
+    private int hinhThucGiamGia; // 1 là giảm theo phần trăm, 0 là giảm theo VNĐ
 
     @Column(name = "gia_tri_giam")
-    private BigDecimal gia_triGiam;
+    private BigDecimal giaTriGiam;
 
     @Column(name = "mo_ta")
     private String moTa;

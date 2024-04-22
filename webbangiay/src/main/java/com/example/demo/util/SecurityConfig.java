@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/WEB-INF/**").permitAll()
                 .requestMatchers("/auth-register").permitAll()
+                .requestMatchers("/**").permitAll()
                 .requestMatchers("/user-infor").permitAll()
                 .requestMatchers("/assets/**").permitAll()
                 .anyRequest().authenticated()

@@ -24,7 +24,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("gio-hang")
+@RequestMapping("/admin/gio-hang")
 public class GioHangController {
     @Autowired
     private GioHangService gioHangService;
