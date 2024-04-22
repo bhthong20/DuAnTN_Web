@@ -715,6 +715,25 @@
         }
     }
 
+    let khuyenMaiSelect = {
+        id: "",
+        hinhThucGiamGia: 1,
+        giaTriGiam: 0,
+    }
+
+    document.getElementById("khuyenMai").addEventListener("change", function () {
+        var selectedOption = this.options[this.selectedIndex];
+
+        var hinhThucGiam = selectedOption.getAttribute("hinhThucGiam");
+        var giaTriGiam = selectedOption.getAttribute("giaTriGiam");
+        var id = selectedOption.getAttribute("value");
+        khuyenMaiSelect.giaTriGiam = parseInt(giaTriGiam);
+        khuyenMaiSelect.id = id;
+        khuyenMaiSelect.hinhThucGiamGia = parseInt(hinhThucGiam);
+
+        tongTien.val(fillTongTien());
+    });
+
     const fillTongTien = () => {
         let tongTien = 0;
         $('#listHoaDonSanPham').find('tr').each(function () {
@@ -724,7 +743,14 @@
 
             tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
         });
-        console.log(khuyenMai)
+        if (khuyenMaiSelect.hinhThucGiamGia == 1) {
+            tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
+        } else {
+            tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
+            if (tongTien < 0) {
+                tongTien = 0;
+            }
+        }
         return tongTien;
     }
 
