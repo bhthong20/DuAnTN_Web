@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.services.ChatLieuService;
 import com.example.demo.services.HinhAnhService;
+import com.example.demo.services.KhuyenMaiService;
 import com.example.demo.services.KichThuocService;
 import com.example.demo.services.MauSacService;
 import com.example.demo.services.PhanLoaiService;
@@ -33,6 +34,9 @@ public class HomeController {
     @Autowired
     private ThuongHieuService thuongHieuService;
 
+    @Autowired
+    private KhuyenMaiService khuyenMaiService;
+
     @GetMapping("/home")
     private String showHome() {
         return "quang-ba/home";
@@ -48,6 +52,7 @@ public class HomeController {
 
     @GetMapping("/san-pham/{id}")
     private String showSanPhamDetail(Model model) {
+        model.addAttribute("listKM", khuyenMaiService.getComboboxKhuyenMai());
         return "quang-ba/detail-san-pham";
     }
 }

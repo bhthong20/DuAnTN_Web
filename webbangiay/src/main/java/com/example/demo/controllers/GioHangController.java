@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.GioHang;
 import com.example.demo.services.GioHangService;
+import com.example.demo.services.KhuyenMaiService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,13 +25,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/admin/gio-hang")
+@RequestMapping("/gio-hang")
 public class GioHangController {
     @Autowired
     private GioHangService gioHangService;
 
+    @Autowired
+    private KhuyenMaiService khuyenMaiService;
+
     @GetMapping
-    public String viewGioHang() {
+    public String viewGioHang(Model model) {
+        model.addAttribute("listKM", khuyenMaiService.getComboboxKhuyenMai());
 
         return "quang-ba/gio-hang";
     }

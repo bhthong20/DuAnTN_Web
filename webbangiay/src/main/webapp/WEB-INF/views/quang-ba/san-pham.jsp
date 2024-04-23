@@ -82,13 +82,13 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 
-    <section id="content" class="mt-4" style="background-color: #f5f5f9;">
+<section id="content" class="mt-4" style="background-color: #f5f5f9;">
     <section class="container-fluid">
         <div class="row">
             <div class="col-2 min-vh-100 card">
                 <h5 class="card-header">
                     Tìm kiếm sản phẩm</h5>
-                <hr class="m-0" />
+                <hr class="m-0"/>
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="ma" class="col-form-label">Mã giày</label>
@@ -115,8 +115,9 @@
 
                     <c:forEach var="mauSacItem" items="${listMS}">
                         <div class="form-check mb-3">
-                            <input class="form-check-input mauSac" checked type="checkbox" name="mauSac" value="${mauSacItem.id}"
-                                   id="${mauSacItem.id}" />
+                            <input class="form-check-input mauSac" checked type="checkbox" name="mauSac"
+                                   value="${mauSacItem.id}"
+                                   id="${mauSacItem.id}"/>
                             <label class="form-check-label" for="${mauSacItem.id}"> ${mauSacItem.ten} </label>
                         </div>
                     </c:forEach>
@@ -126,8 +127,9 @@
                     </div>
                     <c:forEach items="${listPL}" var="phanLoai">
                         <div class="form-check mb-3">
-                            <input class="form-check-input phanLoai" checked type="checkbox" name="mauSac" value="${phanLoai.id}"
-                                   id="${phanLoai.id}" />
+                            <input class="form-check-input phanLoai" checked type="checkbox" name="mauSac"
+                                   value="${phanLoai.id}"
+                                   id="${phanLoai.id}"/>
                             <label class="form-check-label" for="${phanLoai.id}"> ${phanLoai.tenLoai} </label>
                         </div>
                     </c:forEach>
@@ -137,8 +139,9 @@
                     </div>
                     <c:forEach items="${listTH}" var="thuongHieu">
                         <div class="form-check mb-3">
-                            <input class="form-check-input thuongHieu" checked type="checkbox" name="mauSac" value="${thuongHieu.id}"
-                                   id="${thuongHieu.id}" />
+                            <input class="form-check-input thuongHieu" checked type="checkbox" name="mauSac"
+                                   value="${thuongHieu.id}"
+                                   id="${thuongHieu.id}"/>
                             <label class="form-check-label" for="${thuongHieu.id}"> ${thuongHieu.ten} </label>
                         </div>
                     </c:forEach>
@@ -146,7 +149,7 @@
                         <div class="divider-text">Giá thành</div>
                     </div>
                     <div class="form-check mb-3 p-0 d-flex justify-between align-items-center">
-                        <input class="form-control" type="text" value="" id="giaBatDau" placeholder="Từ" />
+                        <input class="form-control" type="text" value="" id="giaBatDau" placeholder="Từ"/>
                         <span class="d-flex justify-between align-items-center mx-2"> - </span>
                         <input class="form-control" type="text" value="" id="giaKetThuc" placeholder="Đến"/>
                     </div>
@@ -171,13 +174,16 @@
                             <div class="shopee-sort-by-options">
                                 <section class="shopee-sort-by-options__option-group">
                                     <button aria-label=""
-                                            onclick="orderBy(this, 'ngay_tao')" aria-pressed="false" class="shopee-sort-by-options__option shopee-sort-by-options__option--selected">
+                                            onclick="orderBy(this, 'ngay_tao')" aria-pressed="false"
+                                            class="shopee-sort-by-options__option shopee-sort-by-options__option--selected">
                                         <span aria-hidden="true">Mới nhất</span></button>
                                     <button aria-label=""
-                                            onclick="orderBy(this, 'luotMua')" aria-pressed="false" class="shopee-sort-by-options__option">
+                                            onclick="orderBy(this, 'luotMua')" aria-pressed="false"
+                                            class="shopee-sort-by-options__option">
                                         <span aria-hidden="true">Bán chạy</span></button>
                                     <button aria-label=""
-                                            onclick="orderBy(this, 'donGia')" aria-pressed="false" class="shopee-sort-by-options__option">
+                                            onclick="orderBy(this, 'donGia')" aria-pressed="false"
+                                            class="shopee-sort-by-options__option">
                                         <span aria-hidden="true">Giá bán</span></button>
                                 </section>
                                 <section>
@@ -197,7 +203,8 @@
                     <section>
                         <div class="row" id="listSanPham">
                         </div>
-                        <nav aria-label="Page navigation example" class="pt-4 d-flex align-items-end justify-content-center">
+                        <nav aria-label="Page navigation example"
+                             class="pt-4 d-flex align-items-end justify-content-center">
                             <ul id="pagination" class="pagination m-0">
                             </ul>
                         </nav>
@@ -251,7 +258,8 @@
         sortType: "DESC"
     }
     let total = 0;
-    function getListData () {
+
+    function getListData() {
         const pageing = document.getElementById("pagination");
         let renderPage = '';
 
@@ -260,20 +268,20 @@
             url: "/home/rest",
             contentType: "application/json",
             data: JSON.stringify(filter),
-            success: function(response){
+            success: function (response) {
                 console.log(response)
                 renderCard(response.content);
                 if (response.totalPages > 1) {
                     for (let i = 0; i < response.totalPages; i++) {
                         renderPage += `
-                        <li class="page-item"><button onclick="currentPage(`+ i +`)"
-                        class="page-link bg-white `+ (response.pageable.pageNumber == i ? 'active' : '') + `" href="#">`+ (i + 1) +`</button></li>
+                        <li class="page-item"><button onclick="currentPage(` + i + `)"
+                        class="page-link bg-white ` + (response.pageable.pageNumber == i ? 'active' : '') + `" href="#">` + (i + 1) + `</button></li>
                     `;
                     }
                     pageing.innerHTML = renderPage;
                 }
             },
-            error: function(xhr, status, error){
+            error: function (xhr, status, error) {
                 console.log(xhr.responseText);
             }
         });
@@ -340,14 +348,18 @@
         let index = 0;
         if (listCard && listCard.length !== 0) {
             listCard.forEach(el => {
+                console.log(el)
                 index++;
                 html += `
                 <div class="col-3 mt-4">
                     <div class="card card__product">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                             class="card-img-top" alt="...">
-                        <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                             class="position-absolute w-100"/>
+                        <div class="position-relative" style="overflow: hidden">
+                            <img src="../../../uploads/` + el.hinhAnh + `"
+                                 class="card-img-top" alt="...">
+                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
+                                 class="position-absolute w-100" style="left: 0;
+    bottom: 0;"/>
+                        </div>
                         <div class="card-body shopee_ic">
                             <h5 class="card-title">` + el.tenSanPham + `</h5>
                             <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
@@ -361,18 +373,9 @@
                                         <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
                                             <span aria-label="promotion price"></span>
                                             <div class="truncate flex items-baseline"><span
-                                                    class="text-xs/sp14">₫</span><span
-                                                    class="text-base/5 truncate">` + (el.donGia) + `</span><span
+                                                    class="text-base/5 truncate">` + (el.donGia) + ` VNĐ</span><span
                                                     class="text-xs/sp14"></span></div>
                                         </div>
-                                        <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                             aria-hidden="true">
-                                            <div class="truncate flex items-baseline"><span>₫</span><span
-                                                    class="truncate">` + (el.donGia * el.sale) + `</span><span></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                        <span aria-label="-50%"></span>-` + el.sale + `%
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">

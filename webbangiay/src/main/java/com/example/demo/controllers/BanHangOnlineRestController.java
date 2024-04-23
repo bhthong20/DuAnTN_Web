@@ -41,4 +41,6 @@ public class BanHangOnlineRestController {
     public Boolean updateGioHang(@RequestBody List<BanHangRequest> list) throws BadRequestException {
         return service.updateGioHang(list);
     }
+
+
 }

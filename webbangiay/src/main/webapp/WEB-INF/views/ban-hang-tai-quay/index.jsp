@@ -122,27 +122,18 @@
                                 <input type="number" id="chuyenKhoan" class="form-control checkStatus phone-mask"
                                 />
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="khuyenMai">Khuyến mại</label>
-                                <select class="form-select" onchange="fillTongTien()" id="khuyenMai">
-                                    <option selected value="">Lựa chọn</option>
-                                    <c:forEach items="${listKM}" var="item">
-                                        <option value="${item.id}"
-                                                giaTriGiam="${item.giaTriGiam}"
-                                                hinhThucGiam="${item.hinhThucGiamGia}">Giảm ${item.giaTriGiam} <c:if test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
-                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if></option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label class="form-label" for="tongTien">Tổng tiền</label>
                                 <input type="number" disabled id="tongTien" class="form-control phone-mask"
                                 />
                             </div>
-                            <button onclick="clearFormHoaDon()" class="btn btn-primary checkStatus">Clear form</button>
+                            <button onclick="clearFormHoaDon()" class="btn btn-primary checkStatus">Clear</button>
                             <button onclick="luuHoaDon(0)" class="btn btn-primary checkStatus">Lưu</button>
-                            <button onclick="luuHoaDon(2)" class="btn btn-primary checkStatus" id="btnThanhToan">Thanh toán</button>
-                            <button onclick="tuChoiHoaDon()" class="btn btn-primary checkStatus">Từ chối hóa đơn</button>
+                            <button onclick="luuHoaDon(2)" class="btn btn-primary checkStatus" id="btnThanhToan">Thanh
+                                toán
+                            </button>
+                            <button onclick="tuChoiHoaDon()" class="btn btn-primary checkStatus">Từ chối
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -187,11 +178,37 @@
                                 />
                             </div>
                             <button onclick="clearFormKhachHang()" class="btn btn-primary checkStatus">KH mới</button>
-                            <button class="btn btn-primary checkStatus" onclick="khachHangLaNguoiNhan()">KH là người nhận
+                            <button class="btn btn-primary checkStatus" onclick="khachHangLaNguoiNhan()">KH là người
+                                nhận
                             </button>
                             <button class="btn btn-primary checkStatus" onclick="openModalKhachHang()"
                                     data-bs-toggle="modal" data-bs-target="#modalDanhSachKhachHang">Chọn
                             </button>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Thông tin Khuyến mại</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label" for="khuyenMai">Khuyến mại</label>
+                                <select class="form-select" id="khuyenMai">
+                                    <option selected value="">Lựa chọn</option>
+                                    <c:forEach items="${listKM}" var="item">
+                                        <option value="${item.id}"
+                                                giaTriGiam="${item.giaTriGiam}"
+                                                hinhThucGiam="${item.hinhThucGiamGia}">Giảm ${item.giaTriGiam} <c:if
+                                                test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
+                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if></option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="tienGiam">Tiền được giảm</label>
+                                <input type="number" disabled id="tienGiam" class="form-control phone-mask"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,7 +220,8 @@
                     <h3 class="p-4 m-0">Thông tin sản phẩm trong hóa đơn</h3>
                     <span>
                         <button class="btn btn-primary checkStatus" onclick="deleteProduct()">Xóa sản phẩm</button>
-                        <button class="btn btn-primary checkStatus" onclick="updateSoLuong()">Sửa số lượng sản phẩm</button>
+                        <button class="btn btn-primary checkStatus"
+                                onclick="updateSoLuong()">Sửa số lượng sản phẩm</button>
                         <button class="btn btn-primary checkStatus me-4" onclick="getDanhSachSanPham()"
                                 data-bs-toggle="modal" data-bs-target="#modalDanhSachSanPham">Thêm sản phẩm</button>
                     </span>
@@ -410,6 +428,7 @@
     const chuyenKhoan = $('#chuyenKhoan');
     const tongTien = $('#tongTien');
     const khuyenMai = $('#khuyenMai');
+    const tienGiam = $('#tienGiam');
 
     // form Thông tin khách hàng
     var khachHang = {
@@ -427,11 +446,11 @@
     const emailKhachHang = $('#email')
     const ngaySinh = $('#ngaySinh');
 
-    var url = window.location.href;
+    let urlBanHangTaiQuay = window.location.href;
 
-    var urlParams = new URLSearchParams(new URL(url).search);
+    let urlParams = new URLSearchParams(new URL(urlBanHangTaiQuay).search);
 
-    var id = urlParams.get("id");
+    let id = urlParams.get("id");
 
     let productShopping = [];
 
@@ -474,6 +493,7 @@
         hoaDon.chuyenKhoan = chuyenKhoan.val();
         hoaDon.tongTien = tongTien.val();
         hoaDon.ghiChu = ghiChu.val();
+        hoaDon.tienGiam = tienGiam.val();
     }
 
     const getFormKhachHang = () => {
@@ -530,25 +550,27 @@
         if (!tongTien.val()) {
             check = false;
         }
-        // Kiểm tra trường tenKhachHang
-        if (!tenKhachHang.val()) {
-            check = false;
-        }
-        // Kiểm tra trường gioiTinh
-        if (!gioiTinh.val()) {
-            check = false;
-        }
-        // Kiểm tra trường sdtKhachHang
-        if (!sdtKhachHang.val()) {
-            check = false;
-        }
-        // Kiểm tra trường emailKhachHang
-        if (!emailKhachHang.val()) {
-            check = false;
-        }
-        // Kiểm tra trường ngaySinh
-        if (!ngaySinh.val()) {
-            check = false;
+        if (!khachHang.id) {
+            // Kiểm tra trường tenKhachHang
+            if (!tenKhachHang.val()) {
+                check = false;
+            }
+            // Kiểm tra trường gioiTinh
+            if (!gioiTinh.val()) {
+                check = false;
+            }
+            // Kiểm tra trường sdtKhachHang
+            if (!sdtKhachHang.val()) {
+                check = false;
+            }
+            // Kiểm tra trường emailKhachHang
+            if (!emailKhachHang.val()) {
+                check = false;
+            }
+            // Kiểm tra trường ngaySinh
+            if (!ngaySinh.val()) {
+                check = false;
+            }
         }
         // Kết thúc kiểm tra, check sẽ là true nếu tất cả các trường đều có dữ liệu, ngược lại là false
         if (!check) {
@@ -581,7 +603,8 @@
             const requestBody = {
                 sanPhamAddHoaDons: sanPhamAddHoaDons,
                 hoaDon: hoaDon,
-                khachHang: khachHang
+                khachHang: khachHang,
+                idKhuyenMai: khuyenMaiSelect.id
             }
 
             $.ajax({
@@ -641,10 +664,10 @@
                                 <td>` + (el.ma) + `</td>
                                 <td>` + el.taiKhoan + `</td>
                                 <td>` + (el.hoTen) + `</td>
-                                <td>` + (el.gioiTinh ? "Nam" : "Nữ") + `</td>
+                                <td>` + (!el.gioiTinh ? "Chưa nhập" : el.gioiTinh == 1 ? "Nam" : "Nữ") + `</td>
                                 <td>` + (el.email) + `</td>
                                 <td>` + (el.sdt) + `</td>
-                                <td>` + el.ngaySinh + `</td>
+                                <td>` + (el.ngaySinh ? el.ngaySinh : "Chưa nhập") + `</td>
                                 <td colspan="2">
                                     <button class="btn btn-primary" onclick='chonKhachHang(` + JSON.stringify(el) + `)' >Chọn</button>
                                 </td>
@@ -743,13 +766,19 @@
 
             tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
         });
-        if (khuyenMaiSelect.hinhThucGiamGia == 1) {
-            tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
-        } else {
-            tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
-            if (tongTien < 0) {
-                tongTien = 0;
+        if (khuyenMaiSelect.id) {
+            if (khuyenMaiSelect.hinhThucGiamGia == 1) {
+                tienGiam.val(tongTien * (khuyenMaiSelect.giaTriGiam) / 100);
+                tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
+            } else {
+                tienGiam.val(khuyenMaiSelect.giaTriGiam);
+                tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
+                if (tongTien < 0) {
+                    tongTien = 0;
+                }
             }
+        } else {
+            tienGiam.val(0);
         }
         return tongTien;
     }
@@ -763,6 +792,7 @@
         ghiChu.val(hoaDon.ghiChu);
         tienMat.val(hoaDon.tienMat);
         chuyenKhoan.val(hoaDon.chuyenKhoan);
+        khuyenMai.val(hoaDon.khuyenMai ? hoaDon.khuyenMai.id : "")
         tongTien.val(fillTongTien());
     }
 
@@ -774,10 +804,10 @@
     }
 
     // lấy ra danh sách hóa đơn
-    const getAllHoaDon = () => {
+    const getAllHoaDon = async () => {
         const hoaDonHere = document.getElementById('list-hoa-don');
         let hoaDonItem = '';
-        $.ajax({
+        await $.ajax({
             type: "GET",
             url: "/ban-hang-tai-quay/rest/danh-sach-hoa-don",
             success: function (response) {
@@ -832,10 +862,10 @@
     }
 
     // xem chi tiết hóa đơn
-    const findHoaDonById = () => {
+    const findHoaDonById = async () => {
         const tableProduct = document.getElementById("listHoaDonSanPham");
         if (id) {
-            $.ajax({
+            await $.ajax({
                 type: "GET",
                 url: "/ban-hang-tai-quay/rest/hoa-don-chi-tiet?id=" + id,
                 success: function (response) {
@@ -984,10 +1014,17 @@
     }
 
     // lần đâu load trang load danh sách hóa đơn và chi tiết hóa đơn
-    window.onload = function () {
-        getAllHoaDon();
-        findHoaDonById();
-
+    window.onload = async function () {
+        await getAllHoaDon();
+        await findHoaDonById();
+        if (id) {
+            if (hoaDon.tienGiam) {
+                tienGiam.val(hoaDon.tienGiam);
+            }
+            if (hoaDon.tongTien != undefined) {
+                tongTien.val(hoaDon.tongTien);
+            }
+        }
         if (hoaDon.trangThai && (hoaDon.trangThai == 2 || hoaDon.trangThai == 8)) {
             $(".checkStatus").attr('disabled', 'disabled')
         }

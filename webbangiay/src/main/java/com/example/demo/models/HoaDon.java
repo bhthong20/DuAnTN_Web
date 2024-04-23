@@ -48,6 +48,9 @@ public class HoaDon {
     @Column(name = "chuyen_khoan")
     private BigDecimal chuyenKhoan;
 
+    @Column(name = "tien_giam")
+    private BigDecimal tienGiam;
+
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 
@@ -73,7 +76,7 @@ public class HoaDon {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nhan_vien_id")
-    private NhanVien nhanVien;
+    private KhachHang nhanVien;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "khuyen_mai_id")

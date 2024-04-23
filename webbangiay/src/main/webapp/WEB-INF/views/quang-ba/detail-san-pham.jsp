@@ -188,54 +188,54 @@
                                 <section class="d-flex align-items-center" aria-live="polite"><h2 class="Bf9ap6">Price
                                     Section</h2>
                                     <div class="d-flex align-items-center QAc7_y">
-                                        <div class="qg2n76" id="donGiaTruocSale">₫</div>
+                                        <div class="qg2n76" style="display: none" id="donGiaTruocSale">₫</div>
                                         <div class="d-flex align-items-center">
                                             <div class="G27FPf">₫<span id="donGia"></span></div>
-                                            <div class="o_z7q9"><span id="giamGia"></span>% giảm</div>
+                                            <div class="o_z7q9" style="display: none" id="giamGia"></div>
                                         </div>
                                     </div>
                                 </section>
-                                <a class="d-flex align-items-center ZRb8YF"
-                                   href="/flash_sale?fromItem=21780863951&amp;promotionId=213928579891201"><span
-                                        class="DFQfff BhIewg"></span>
-                                    <div class="eLrI5y">BẮT ĐẦU SAU 17:00, 10 Th04</div>
+                                <span class="d-flex align-items-center ZRb8YF"><span
+                                        style="color: #ff3e1d;
+                                        font-size: xx-large;
+                                        font-weight: bolder;" id="tenMaGiamGia"></span>
+                                    <div class="eLrI5y" id="thoiGianKetThuc">Chưa có đợt giảm giá</div>
                                     <img alt="icon arrow right" class="d24OWs"
-                                         src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/966fbe37fe1c72e3f2dd.svg"></a>
+                                         src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/966fbe37fe1c72e3f2dd.svg"></span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
+                        <c:if
+                                test="${not empty listKM}">
                         <div class="row mt-4">
                             <div class="col-4">
                                 Mã giảm giá của shop
                             </div>
                             <div class="col-8">
                                 <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
-                                    <div class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover">
-                                        <div class=""><span
-                                                class="voucher-promo-value voucher-promo-value--percent">20</span><span
-                                                class="voucher-promo-label">%</span><span
-                                                class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>
-                                    </div>
-
-                                    <div class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover">
-                                        <div class=""><span
-                                                class="voucher-promo-value voucher-promo-value--percent">50</span><span
-                                                class="voucher-promo-label">%</span><span
-                                                class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>
-                                    </div>
-
-                                    <div class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover">
-                                        <div class=""><span
-                                                class="voucher-promo-value voucher-promo-value--percent">100</span><span
-                                                class="voucher-promo-label">%</span><span
-                                                class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>
-                                    </div>
+                                    <c:forEach items="${listKM}" var="item" varStatus="loop">
+                                        <div onclick="renderSale(this)" class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover <c:if test='${loop.first}'>checked</c:if>"
+                                            hinhThucGiam="${item.hinhThucGiamGia}"
+                                             giaTriGiam="${item.giaTriGiam}"
+                                             ngayKetThuc="${item.ngayKetThuc}"
+                                             ten="${item.ten}"
+                                             id="${item.id}"
+                                        >
+                                            <div class=""><span
+                                                    class="voucher-promo-value voucher-promo-value--percent">${item.giaTriGiam}</span><span
+                                                    class="voucher-promo-label"><c:if
+                                                    test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
+                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if></span><span
+                                                    class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>
+                                        </div>
+                                    </c:forEach>
                                 </span>
                             </div>
                         </div>
+                        </c:if>
                         <div class="row mt-4">
                             <div class="col-4">
                                 Vận chuyển
@@ -377,7 +377,35 @@
     let size = [];
     let chatLieu = [];
     let chiTietSanPham = [];
-    let idChiTietSanPham = ""
+    let idChiTietSanPham = "";
+
+    function renderSale(sale) {
+        const listSale = $('.voucher-ticket');
+        const saleSelect = $(sale);
+        const hinhThucGiam = parseInt(saleSelect.attr('hinhThucGiam'));
+        const giaTriGiam = parseInt(saleSelect.attr('giaTriGiam'));
+
+        listSale.removeClass('checked');
+        saleSelect.addClass('checked');
+
+        $('#tenMaGiamGia').text(saleSelect.attr('ten'));
+        $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect.attr('ngayKetThuc'))).toLocaleString());
+        $('#donGiaTruocSale').text("₫" + sanPham.donGia);
+
+        if (hinhThucGiam == 1) {
+            $('#donGia').text(sanPham.donGia * (100 - giaTriGiam) / 100);
+            $('#giamGia').text('' + giaTriGiam  + ' % giảm');
+        } else {
+            $('#donGia').text(sanPham.donGia - giaTriGiam);
+            $('#giamGia').text('' + giaTriGiam  + ' VNĐ giảm');
+            if (sanPham.donGia - giaTriGiam < 0) {
+                $('#donGia').text(0);
+            }
+        }
+
+        $('#donGiaTruocSale').show();
+        $('#giamGia').show();
+    }
 
     function muaNgay() {
         console.log(getChiTietSanPhamSelect())
@@ -572,15 +600,16 @@
 
     function renderSanPham() {
         $('#tenSanPham').html(sanPham.tenSp);
-        $('#daBan').html(sanPham.daBan);
-        $('#giamGia').html(sanPham.sale);
         $('#donGia').html(sanPham.donGia);
-        $('#donGiaTruocSale').html(sanPham.donGia * sanPham.sale);
         $('#anh1').attr('src', sanPham.anh1);
         $('#anh2').attr('src', sanPham.anh2);
         $('#anh3').attr('src', sanPham.anh3);
         $('#moTa').html(sanPham.moTa);
         $('#soLuong').html(sanPham.soLuong);
+
+        if ($('.voucher-ticket').length !== 0) {
+            renderSale($('.voucher-ticket').first());
+        }
     }
 
     function changeMauSac(button) {
