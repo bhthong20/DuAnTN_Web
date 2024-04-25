@@ -34,7 +34,7 @@ public class NhanVienController {
     private ChucVuService chucVuService;
 
 
-    @GetMapping("/hien-thi/nhan-vien")
+    @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
@@ -42,8 +42,8 @@ public class NhanVienController {
         Page<NhanVien> list = nhanVienService.FindAll(pageable);
         model.addAttribute("nhanVien", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        model.addAttribute("contentPage", "nhan-vien/hien-thi.jsp");
-        return "nhan-vien/hien-thi";
+        model.addAttribute("contentPage", "../nhan-vien/hien-thi.jsp");
+        return "home/layout";
     }
 
     @GetMapping("/nhan-vien/delete/{id}")
