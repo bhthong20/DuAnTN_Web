@@ -267,6 +267,11 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Transactional
     public Boolean thayDoiTrangThaiHoaDon(UUID idHoaDon, int trangThai) {
         HoaDon hoaDon = hoaDonRepository.findById(idHoaDon).get();
+        if (common.getUserLogin().getRole().equals("ADMIN")) {
+            hoaDon.setNhanVien(common.getUserLogin());
+        } else {
+            hoaDon.setKhachHang(common.getUserLogin());
+        }
         hoaDon.setTrangThai(trangThai);
         return true;
     }
