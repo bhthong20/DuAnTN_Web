@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentRequest {
+public class TrangThaiHoaDonRequest {
 
-    private int total;
-    private String idHoaDon;
-    private int status;
+    private UUID idHoaDon;
+    private int trangThai;
 }

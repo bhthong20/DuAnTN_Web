@@ -69,35 +69,56 @@
     <script src="../assets/js/config.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
     <script src="../js/menu.js"></script>
+    <style>
+        section {
+            text-align: center;
+        }
+        h1 {
+            color: #ff3e1d;
+            font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+            font-weight: 900;
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .checkmark {
+            font-size: 130px;
+            color: red;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+        }
+        p {
+            color: #404F5E;
+            font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+            font-size:20px;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 60px;
+            border-radius: 4px;
+            box-shadow: 0 2px 3px #C8D0D8;
+            display: inline-block;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
-<body style="background-color: #EBF0F5 !important;">
+<body>
+<jsp:include page="../quang-ba/header.jsp"></jsp:include>
 
-    <jsp:include page="header.jsp"></jsp:include>
+<section class="mt-5">
+    <div class="card container">
+        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+            <span class="checkmark">x</span>
+        </div>
+        <h1>Thanh toán hóa đơn thất bại</h1>
+        <p>Cảm ơn bạn đã mua sản phẩm 😘😘😘😘<br/> <a href="/ban-hang-online/hoa-don-detail?id=${id}" class="btn btn-danger">Xem hóa đơn</a></p>
+    </div>
+</section>
 
-        <section id="content" class="mt-4">
-            <section id="banner__page"  style="height: 100%" >
-                <img class="w-100" data-src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png" src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png" alt="">
-                <div style="    right: 200px;
-    bottom: 200px;" class="item-content-wrap position-absolute item-content-center">
-                    <div class="item-content-title main-subheader" style="color: #ffffff;text-align: right;font-size: 70px;
-    line-height: 70px; font-weight: bolder;font-family: 'LibreItalic', 'Libre Bodoni', serif !important; font-style: italic;">Introducing<br>ZERØGRAND<br>REMASTERED</div>
-                    <div class="item-content-des" style="color: #ffffff;text-align: right;font-size: 30px;">Our Best Just Got Better</div>
-                    <div class="item-content-btn" style="color: #ffffff;text-align: right">
-                        <span>
-                            <a href="#" class="btn btn-dark">MUA NGAY</a>
-                        </span>
-                        <span style="font-size: 22px; margin: 0 10px;line-height: 60px;"> | </span>
-                        <span>
-                            <a href="#" class="btn btn-dark">TÌM HIỂU THÊM</a>
-                        </span>
-                    </div>
-                </div>
-            </section>
-        </section>
-
-    <jsp:include page="footer.jsp"></jsp:include>
-
+<jsp:include page="../quang-ba/footer.jsp"></jsp:include>
 </body>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->

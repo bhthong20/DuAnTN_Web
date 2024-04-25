@@ -128,8 +128,8 @@
                                 />
                             </div>
                             <button onclick="clearFormHoaDon()" class="btn btn-primary checkStatus">Clear</button>
-                            <button onclick="luuHoaDon(0)" class="btn btn-primary checkStatus">Lưu</button>
-                            <button onclick="luuHoaDon(2)" class="btn btn-primary checkStatus" id="btnThanhToan">Thanh
+                            <button onclick="luuHoaDon(9)" class="btn btn-primary checkStatus">Lưu</button>
+                            <button onclick="luuHoaDon(10)" class="btn btn-primary checkStatus" id="btnThanhToan">Thanh
                                 toán
                             </button>
                             <button onclick="tuChoiHoaDon()" class="btn btn-primary checkStatus">Từ chối
@@ -198,9 +198,10 @@
                                     <c:forEach items="${listKM}" var="item">
                                         <option value="${item.id}"
                                                 giaTriGiam="${item.giaTriGiam}"
+                                                dieuKienGia="${item.dieuKienGia}"
                                                 hinhThucGiam="${item.hinhThucGiamGia}">Giảm ${item.giaTriGiam} <c:if
                                                 test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
-                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if></option>
+                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if> - dùng cho hóa đơn > ${item.dieuKienGia} VNĐ</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -715,26 +716,18 @@
 
     const fillTrangThaiHoaDon = (trangThai) => {
         switch (trangThai) {
-            case 0:
-                return "Đang chờ";
-            case 1:
-                return "Đã xác nhận";
-            case 2:
-                return "Đã thanh toán";
-            case 3:
-                return "Chờ thanh toán";
-            case 4:
-                return "Chờ vận chuyển";
-            case 5:
-                return "Đang vận chuyển";
-            case 6:
-                return "Vẫn chuyển hoàn tất";
-            case 7:
-                return "Giao trễ";
-            case 8:
-                return "Đã hủy";
-            default:
-                return "";
+            case 0: return "Đang chờ xác nhận";
+            case 1: return "Đã xác nhận";
+            case 2: return "Đã thanh toán";
+            case 3: return "Chờ thanh toán";
+            case 4: return "Chờ vẫn chuyển";
+            case 5: return "Đang vận chuyển";
+            case 6: return "Vận chuyển hoàn tất";
+            case 7: return "Giao trễ";
+            case 8: return "Đã hủy";
+            case 9: return "Mới tạo";
+            case 10: return "Hoàn tất";
+            default: return "";
         }
     }
 
@@ -742,6 +735,16 @@
         id: "",
         hinhThucGiamGia: 1,
         giaTriGiam: 0,
+        dieuKienGia: 0,
+    }
+
+    let clearKhuyenMai = () => {
+        khuyenMaiSelect = {
+            id: "",
+            hinhThucGiamGia: 1,
+            giaTriGiam: 0,
+            dieuKienGia: 0,
+        }
     }
 
     document.getElementById("khuyenMai").addEventListener("change", function () {
@@ -749,10 +752,13 @@
 
         var hinhThucGiam = selectedOption.getAttribute("hinhThucGiam");
         var giaTriGiam = selectedOption.getAttribute("giaTriGiam");
+        var dieuKienGia = selectedOption.getAttribute("dieuKienGia");
         var id = selectedOption.getAttribute("value");
+
         khuyenMaiSelect.giaTriGiam = parseInt(giaTriGiam);
         khuyenMaiSelect.id = id;
         khuyenMaiSelect.hinhThucGiamGia = parseInt(hinhThucGiam);
+        khuyenMaiSelect.dieuKienGia = parseInt(dieuKienGia);
 
         tongTien.val(fillTongTien());
     });
@@ -767,15 +773,22 @@
             tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
         });
         if (khuyenMaiSelect.id) {
-            if (khuyenMaiSelect.hinhThucGiamGia == 1) {
-                tienGiam.val(tongTien * (khuyenMaiSelect.giaTriGiam) / 100);
-                tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
-            } else {
-                tienGiam.val(khuyenMaiSelect.giaTriGiam);
-                tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
-                if (tongTien < 0) {
-                    tongTien = 0;
+            if (tongTien >= khuyenMaiSelect.dieuKienGia) {
+                if (khuyenMaiSelect.hinhThucGiamGia == 1) {
+                    tienGiam.val(tongTien * (khuyenMaiSelect.giaTriGiam) / 100);
+                    tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
+                } else {
+                    tienGiam.val(khuyenMaiSelect.giaTriGiam);
+                    tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
+                    if (tongTien < 0) {
+                        tongTien = 0;
+                    }
                 }
+            } else {
+                alert("Hóa đơn không đủ điều kiện để áp dụng mã giảm giá")
+                clearKhuyenMai();
+                khuyenMai.val("");
+                tienGiam.val(0);
             }
         } else {
             tienGiam.val(0);
@@ -833,7 +846,7 @@
                         fillHoaDon();
                     }
                     // thay đổi trạng thái
-                    let active = id && el.id == id ? "bg-warning" : el.trangThai == 0 ? "bg-primary" : el.trangThai == 2 ? "bg-success" : "bg-danger"
+                    let active = id && el.id == id ? "bg-warning" : el.trangThai == 9 ? "bg-primary" : el.trangThai == 2 ? "bg-success" : "bg-danger"
 
                     hoaDonItem += '<li class="nav-item">' +
                         '<a class="nav-link text-white ' + (active) + '" href="/ban-hang-tai-quay?id=' + el.id + '" role="tab" >' + el.ma + '</a>' +

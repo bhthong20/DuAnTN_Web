@@ -80,8 +80,14 @@
 
 <body>
 <section id="content" class="mt-4" style="background-color: #f5f5f9;">
-    <section class="container-fluid">
-        <h4 class="fw-bold py-3 mb-4">Giỏ hàng</h4>
+    <section class="container">
+        <h4 class="fw-bold py-3 m-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
+                 style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                <path d="M4 6h2v2H4zm0 5h2v2H4zm0 5h2v2H4zm16-8V6H8.023v2H18.8zM8 11h12v2H8zm0 5h12v2H8z"></path>
+            </svg>
+            <span class="">Giỏ hàng</span>
+        </h4>
         <div class="row" style="display: none" id="gioHangShow">
             <div class="col-8">
                 <div class="card">
@@ -90,8 +96,10 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-0">Danh sách sản phẩm</h5>
                                 <span>
-                                    <button class="btn btn-danger checkStatus" onclick="deleteProduct()">Xóa sản phẩm</button>
-                                    <button class="btn btn-danger checkStatus" onclick="updateProduct()">Sửa số lượng</button>
+                                    <button class="btn btn-danger checkStatus"
+                                            onclick="deleteProduct()">Xóa sản phẩm</button>
+                                    <button class="btn btn-danger checkStatus"
+                                            onclick="updateProduct()">Sửa số lượng</button>
                                     <a href="/san-pham" class="btn btn-danger checkStatus">Mua Hàng</a>
                                 </span>
                             </div>
@@ -101,7 +109,8 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><input class="form-check-input" type="checkbox" id="checkAll" onchange="checkAll(this)" type="checkbox"/></th>
+                                <th><input class="form-check-input" type="checkbox" id="checkAll"
+                                           onchange="checkAll(this)" type="checkbox"/></th>
                                 <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Màu sắc</th>
@@ -120,91 +129,17 @@
             <div class="col-4">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Hóa đơn</h5>
+                        <h5 class="mb-0">Thông tin giá</h5>
                     </div>
                     <div class="card-body">
                         <form>
-                            <div class="divider">
-                                <div class="divider-text">Thông tin khách hàng</div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label" for="tenNguoiNhan">Tên người nhận</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="tenNguoiNhan"
-                                           placeholder="Nhập thông tin"/>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label" for="soDienThoai">Số điện thoại</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="soDienThoai"
-                                           placeholder="Nhập thông tin"/>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label" for="email">Email</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="email"
-                                           placeholder="Nhập thông tin"/>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label" for="diaChi">Địa chỉ</label>
-                                <div class="col-sm-7">
-                                    <input type="text" class="form-control" id="diaChi"
-                                           placeholder="Nhập thông tin"/>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label" for="moTa">Mô tả</label>
-                                <div class="col-sm-7">
-                                    <textarea type="text" class="form-control" id="moTa"
-                                              placeholder="Nhập thông tin"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="divider">
-                                <div class="divider-text">Thông tin hóa đơn</div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label">Trạng thái</label>
-                                <div class="col-sm-7">
-                                    <span>Chưa thanh toán</span>
-                                </div>
-                            </div>
+                            <%--                            <div class="divider">--%>
+                            <%--                                <div class="divider-text">Thông tin khách hàng</div>--%>
+                            <%--                            </div>--%>
                             <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label">Đơn giá</label>
                                 <div class="col-sm-7">
                                     <span id="donGia">0</span><span>VNĐ</span>
-                                </div>
-                            </div>
-                            <c:if test="${not empty listKM}">
-                                <div class="row mb-3">
-                                    <label class="col-sm-5 col-form-label">Mã giảm giá</label>
-                                    <div class="col-sm-7">
-                                        <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
-                                            <span id="renderMaGiamGia">
-<%--                                                <div class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover">--%>
-<%--                                                    <div class=""><span--%>
-<%--                                                            class="voucher-promo-value voucher-promo-value--percent">20</span><span--%>
-<%--                                                            class="voucher-promo-label">%</span><span--%>
-<%--                                                            class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>--%>
-<%--                                                </div>--%>
-                                            </span>
-                                            <span>
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                        data-bs-target="#ModalChonMaGiamGia">Chọn</button>
-                                            </span>
-                                        </span>
-
-                                    </div>
-                                </div>
-                            </c:if>
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label">Tiền giảm</label>
-                                <div class="col-sm-7">
-                                    <span id="tienGiam">0</span><span>VNĐ</span>
                                 </div>
                             </div>
 
@@ -215,38 +150,17 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-5 col-form-label">Phương thức thanh
-                                    toán</label>
-                                <div class="col-sm-7">
-                                    <div class="form-check">
-                                        <input
-                                                name="default-radio-1"
-                                                class="form-check-input"
-                                                type="radio"
-                                                value=""
-                                                id="defaultRadio1"
-                                        />
-                                        <label class="form-check-label" for="defaultRadio1"> Thanh toán khi nhận
-                                            hàng </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input
-                                                name="default-radio-1"
-                                                class="form-check-input"
-                                                type="radio"
-                                                value=""
-                                                id="defaultRadio2"
-                                                checked
-                                        />
-                                        <label class="form-check-label" for="defaultRadio2"> Thanh toán online </label>
-                                    </div>
-                                </div>
+                            <div class="divider">
+                                <div class="divider-text">Thông tin sản phẩm</div>
                             </div>
+                            <span id="sanPhamThanhToan">
+                            </span>
 
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <button type="button" class="btn btn-danger">Tạo hóa đơn</button>
+                                    <button type="button" onclick="taoHoaDonThanhToan()" class="btn btn-danger">Tạo hóa
+                                        đơn
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -256,42 +170,6 @@
         </div>
     </section>
 </section>
-
-<%--Chon ma giam gia--%>
-<div class="modal fade" id="ModalChonMaGiamGia" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
-     aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Chọn Mã giảm giá</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
-                    <c:forEach items="${listKM}" var="item" varStatus="loop">
-                        <div onclick="renderSale(this)" class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover"
-                             hinhThucGiam="${item.hinhThucGiamGia}"
-                             giaTriGiam="${item.giaTriGiam}"
-                             ngayKetThuc="${item.ngayKetThuc}"
-                             ten="${item.ten}"
-                             value="${item.id}"
-                        >
-                            <div class=""><span
-                                    class="voucher-promo-value voucher-promo-value--percent">${item.giaTriGiam}</span><span
-                                    class="voucher-promo-label"><c:if
-                                    test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
-                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if></span><span
-                                    class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>
-                        </div>
-                    </c:forEach>
-                </span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 </body>
 <!-- Core JS -->
@@ -320,70 +198,59 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
 <script>
-    let khuyenMaiSelect = {
-        id: "",
-        hinhThucGiamGia: 1,
-        giaTriGiam: 0,
-    }
-
-    const tenNguoiNhan = $('#tenNguoiNhan');
-    const soDienThoai = $('#soDienThoai');
-    const email = $('#email');
-    const diaChi = $("#diaChi");
-    const moTa = $("#moTa");
-    const tienGiam = $('#tienGiam');
+    // let khuyenMaiSelect = {
+    //     id: "",
+    //     hinhThucGiamGia: 1,
+    //     giaTriGiam: 0,
+    // }
+    //
+    // const tenNguoiNhan = $('#tenNguoiNhan');
+    // const soDienThoai = $('#soDienThoai');
+    // const email = $('#email');
+    // const diaChi = $("#diaChi");
+    // const moTa = $("#moTa");
+    // const tienGiam = $('#tienGiam');
 
     window.onload = function () {
         loadChiTietSanPham();
     };
 
-    function validateFields() {
-        const tenNguoiNhanVal = tenNguoiNhan.val();
-        const soDienThoaiVal = soDienThoai.val();
-        const emailVal = email.val();
-        const diaChiVal = diaChi.val();
-        const moTaVal = moTa.val();
+    function taoHoaDonThanhToan() {
+        let productShopping = []
+        let kt = confirm("Bạn có chắc chắn muốn tạo hóa đơn không?");
+        if (kt) {
+            let check = true;
+            let checkRecordProduct = false;
+            $('#listChiTietSanPham').find('tr').each(function () {
+                const firstCheckbox = $(this).find('input[type="checkbox"]:first');
+                if (firstCheckbox.is(':checked')) {
+                    checkRecordProduct = true;
+                    let product = JSON.parse($(this).attr('item'));
 
-        if (!tenNguoiNhanVal.trim()) {
-            alert("Vui lòng nhập tên người nhận.");
-            return false;
-        }
+                    const lastInput = $(this).find('input:last');
+                    const lastInputValue = lastInput.val();
 
-        if (!soDienThoaiVal.trim()) {
-            alert("Vui lòng nhập số điện thoại.");
-            return false;
-        }
+                    productShopping.push({
+                        chiTietSanPham: product.chiTietSanPham.id,
+                        soLuong: parseInt(lastInputValue),
+                        donGia: product.chiTietSanPham.donGia
+                    })
+                }
+            });
+            if (!checkRecordProduct) {
+                alert("Bạn phải chọn ít nhất một sản phẩm");
+                return;
+            }
 
-        if (!emailVal.trim()) {
-            alert("Vui lòng nhập địa chỉ email.");
-            return false;
-        }
-
-        if (!diaChiVal.trim()) {
-            alert("Vui lòng nhập địa chỉ.");
-            return false;
-        }
-
-        if (!moTaVal.trim()) {
-            alert("Vui lòng nhập mô tả.");
-            return false;
-        }
-
-        return true;
-    }
-
-    function thanhToan() {
-        // if (validateFields()) {
-            let kt = confirm("Bạn có chắc chắn muốn thanh toán không?");
-            if (kt) {
+            if (check) {
                 $.ajax({
                     type: "POST",
-                    url: "/ban-hang-online/rest/them-gio-hang",
+                    url: "/ban-hang-online/rest/tao-hoa-don",
                     contentType: "application/json",
-                    data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
+                    data: JSON.stringify(productShopping),
                     success: function (response) {
-                        alert("Sản phẩm đã được thêm vào giỏ hàng");
-                        location.reload();
+                        alert("Tạo hóa đơn thành công");
+                        window.location.href = "/ban-hang-online/hoa-don-detail?id=" + response;
                     },
                     error: function (xhr, status, error) {
                         if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
@@ -392,27 +259,7 @@
                     }
                 });
             }
-        // }
-    }
-
-    function renderSale(sale) {
-        const listSale = $('.voucher-ticket');
-        const saleSelect = $(sale);
-
-        var hinhThucGiam = saleSelect.attr("hinhThucGiam");
-        var giaTriGiam = saleSelect.attr("giaTriGiam");
-        var id = saleSelect.attr("value");
-
-        khuyenMaiSelect.giaTriGiam = parseInt(giaTriGiam);
-        khuyenMaiSelect.id = id;
-        khuyenMaiSelect.hinhThucGiamGia = parseInt(hinhThucGiam);
-
-        $('#renderMaGiamGia').html(saleSelect.clone());
-
-        listSale.removeClass('checked');
-        saleSelect.addClass('checked');
-
-        fillTongTien();
+        }
     }
 
     const loadChiTietSanPham = () => {
@@ -458,36 +305,39 @@
 
     const fillTongTien = () => {
         let tongTien = 0;
+        let products = [];
         $('#listChiTietSanPham').find('tr').each(function () {
             const firstCheckbox = $(this).find('input[type="checkbox"]:first');
             if (firstCheckbox.is(':checked')) {
                 const lastInput = $(this).find('input:last');
                 const lastInputValue = lastInput.val();
                 let product = JSON.parse($(this).attr('item'));
-
+                product.soLuong = parseInt(lastInputValue);
+                products.push(product);
                 tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
             } else {
                 $('#checkAll').prop('checked', false);
             }
         });
 
-        $('#donGia').text(tongTien)
-
-        if (khuyenMaiSelect.id) {
-            if (khuyenMaiSelect.hinhThucGiamGia == 1) {
-                tienGiam.text(tongTien * (khuyenMaiSelect.giaTriGiam) / 100);
-                tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
-            } else {
-                tienGiam.text(khuyenMaiSelect.giaTriGiam);
-                tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
-                if (tongTien < 0) {
-                    tongTien = 0;
-                }
-            }
-        } else {
-            tienGiam.val(0);
-        }
+        $('#donGia').text(tongTien);
+        renderSanPhamThanhToan(products);
         $('#tongTien').text(tongTien);
+    }
+
+    const renderSanPhamThanhToan = (listProduct) => {
+        let html = "";
+        listProduct.forEach(el => {
+            html += `
+                <div class="row mb-3">
+                    <label class="col-sm-5 col-form-label"><span>` + el.chiTietSanPham.sanPham.tenSP + `</span> x<span>` + el.soLuong + `</span></label>
+                    <div class="col-sm-7">
+                        <span>` + el.chiTietSanPham.donGia * el.soLuong + `</span><span>VNĐ</span>
+                    </div>
+                </div>
+           `
+        });
+        $('#sanPhamThanhToan').html(html);
     }
 
     const deleteProduct = () => {

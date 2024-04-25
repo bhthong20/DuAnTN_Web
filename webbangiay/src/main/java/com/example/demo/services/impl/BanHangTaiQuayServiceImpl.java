@@ -54,16 +54,17 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
 
     @Override
     public List<HoaDon> getAllHoaDon() {
-        return hoaDonRepository.findAllByLoaiAndTrangThai(0, 0);
+        return hoaDonRepository.findAllByLoaiAndTrangThai(0, 9);
     }
 
     @Override
     public List<HoaDon> createHoaDon() {
         HoaDon hoaDon = new HoaDon();
-        String maHD = "HD" + (hoaDonService.findAll().size() + 1);
+        String maHD = "HĐ" + (hoaDonService.findAll().size() + 1);
         hoaDon.setMa(maHD);
         hoaDon.setLoai(0);
         hoaDon.setNgayTao(Date.valueOf(LocalDate.now()));
+        hoaDon.setTrangThai(9);
         hoaDonService.add(hoaDon);
         return hoaDonService.findAll();
     }
@@ -227,7 +228,9 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                 khachHang.setId(khachHangService.add(khachHang).getId());
             }
             khachHang.setRole(RolesConstant.ROLE_USER);
-            hoaDon.setKhuyenMai(khuyenMaiRepository.findById(request.getIdKhuyenMai()).orElse(null));
+            if (request.getIdKhuyenMai() != null) {
+                hoaDon.setKhuyenMai(khuyenMaiRepository.findById(request.getIdKhuyenMai()).orElse(null));
+            }
             hoaDon.setKhachHang(khachHang);
             hoaDon.setNhanVien(common.getUserLogin());
             hoaDonService.update(hoaDon.getId(), hoaDon);

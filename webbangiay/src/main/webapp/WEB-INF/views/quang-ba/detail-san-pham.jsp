@@ -210,15 +210,16 @@
                     <div class="col-12">
                         <c:if
                                 test="${not empty listKM}">
-                        <div class="row mt-4">
-                            <div class="col-4">
-                                Mã giảm giá của shop
-                            </div>
-                            <div class="col-8">
+                            <div class="row mt-4">
+                                <div class="col-4">
+                                    Mã giảm giá của shop
+                                </div>
+                                <div class="col-8">
                                 <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
                                     <c:forEach items="${listKM}" var="item" varStatus="loop">
-                                        <div onclick="renderSale(this)" class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover <c:if test='${loop.first}'>checked</c:if>"
-                                            hinhThucGiam="${item.hinhThucGiamGia}"
+                                        <div onclick="renderSale(this)"
+                                             class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover <c:if test='${loop.first}'>checked</c:if>"
+                                             hinhThucGiam="${item.hinhThucGiamGia}"
                                              giaTriGiam="${item.giaTriGiam}"
                                              ngayKetThuc="${item.ngayKetThuc}"
                                              ten="${item.ten}"
@@ -233,8 +234,8 @@
                                         </div>
                                     </c:forEach>
                                 </span>
+                                </div>
                             </div>
-                        </div>
                         </c:if>
                         <div class="row mt-4">
                             <div class="col-4">
@@ -394,10 +395,10 @@
 
         if (hinhThucGiam == 1) {
             $('#donGia').text(sanPham.donGia * (100 - giaTriGiam) / 100);
-            $('#giamGia').text('' + giaTriGiam  + ' % giảm');
+            $('#giamGia').text('' + giaTriGiam + ' % giảm');
         } else {
             $('#donGia').text(sanPham.donGia - giaTriGiam);
-            $('#giamGia').text('' + giaTriGiam  + ' VNĐ giảm');
+            $('#giamGia').text('' + giaTriGiam + ' VNĐ giảm');
             if (sanPham.donGia - giaTriGiam < 0) {
                 $('#donGia').text(0);
             }
@@ -408,7 +409,32 @@
     }
 
     function muaNgay() {
-        console.log(getChiTietSanPhamSelect())
+        let sanPham = getChiTietSanPhamSelect();
+
+        let productShopping = []
+        let kt = confirm("Bạn có chắc chắn muốn tạo hóa đơn không?");
+        if (kt) {
+            productShopping.push({
+                chiTietSanPham: sanPham.id,
+                soLuong: sanPham.soLuongMua,
+                donGia: sanPham.donGia
+            })
+            $.ajax({
+                type: "POST",
+                url: "/ban-hang-online/rest/tao-hoa-don",
+                contentType: "application/json",
+                data: JSON.stringify(productShopping),
+                success: function (response) {
+                    alert("Tạo hóa đơn thành công");
+                    window.location.href = "/ban-hang-online/hoa-don-detail?id=" + response;
+                },
+                error: function (xhr, status, error) {
+                    if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
+                        alert(xhr.responseJSON.message)
+                    }
+                }
+            });
+        }
     }
 
     function themVaoGioHang() {
@@ -463,7 +489,7 @@
                     sanPham.tenSp = response.sanPham.tenSP
                     sanPham.daBan = response.soLuongDaBan
                 }
-                if (response.chiTietSanPham) {
+                if (response.chiTietSanPham && response.chiTietSanPham.length !== 0) {
                     chiTietSanPham = response.chiTietSanPham
                     idChiTietSanPham = response.chiTietSanPham[0].id
                     sanPham.mauSac = response.chiTietSanPham[0].mauSac.ten

@@ -29,7 +29,8 @@ public class SecurityConfig {
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/WEB-INF/**").permitAll()
                 .requestMatchers("/auth-register").permitAll()
-                .requestMatchers("/**").permitAll()
+                .requestMatchers("/js").permitAll()
+//                .requestMatchers("/**").permitAll()
                 .requestMatchers("/user-infor").permitAll()
                 .requestMatchers("/assets/**").permitAll()
                 .anyRequest().authenticated()
@@ -54,7 +55,7 @@ public class SecurityConfig {
             protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
                 // Kiểm tra vai trò của người dùng và chuyển hướng đến đường dẫn tương ứng
                 if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                    return "/admin/home"; // Chuyển hướng đến trang "/admin/home" nếu người dùng có vai trò ADMIN
+                    return "/hoa-don"; // Chuyển hướng đến trang "/admin/home" nếu người dùng có vai trò ADMIN
                 } else {
                     return "/home"; // Chuyển hướng đến trang "/home" mặc định
                 }

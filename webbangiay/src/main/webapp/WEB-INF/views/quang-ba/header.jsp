@@ -106,11 +106,11 @@
             </div>
             <div>
                 <div class="dropdown">
-                    <span role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span role="button" onclick="showDropdow()" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <i style="font-size: 30px" class='bx bxs-user'></i> <span id="taiKhoan">Tài khoản</span>
                     </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Danh sách hóa đơn</a></li>
+                    <ul class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="/ban-hang-online/hoa-don">Danh sách hóa đơn</a></li>
                         <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
                         <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                     </ul>
@@ -166,6 +166,16 @@
             }
         }
     })
+
+    let show = 0
+    const showDropdow = () => {
+        show++;
+        if (show % 2 == 0) {
+            $('#dropdown-menu').hide();
+        } else {
+            $('#dropdown-menu').show();
+        }
+    }
 
     var userInfoCookie = getCookie("user_info");
     if (userInfoCookie) {

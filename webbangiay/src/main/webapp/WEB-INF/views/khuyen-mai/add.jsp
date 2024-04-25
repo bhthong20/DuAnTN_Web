@@ -107,6 +107,11 @@
                                 <span  id="giaTriGiamError" style="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
+                                <input id="dieuKienGia" type="number" class="form-control" placeholder="" path="sanPham"/>
+                                <label for="giaTriGiam">Điều kiện giảm:</label>
+                                <span  id="dieuKienGiaError" style="color: red"></span>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
                                 <textarea id="moTa" class="form-control" path="moTa"></textarea>
                                 <label for="moTa" path="moTa">Mô tả:</label>
                                 <span  id="moTaError" style="color: red"></span>
@@ -117,7 +122,7 @@
 
                 <div class="row">
                     <div class="col-12" style="text-align: center">
-                        <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi">Quay lại</a>
+                        <a class="btn btn-primary" href="/khuyen-mai/hien-thi">Quay lại</a>
                         <button type="button" class="btn btn-primary"
                                 id="bttCreate" onclick="return createKhuyenMai()">Thêm mới
                         </button>
@@ -167,6 +172,7 @@
                     response.hinhThucGiamGia === 1 ? giamTheoPhamTram.attr("checked", true) : giamTheoTien.attr("checked", true);
                     giaTriGiam.val(response.giaTriGiam);
                     moTa.val(response.moTa);
+                    dieuKienGia.val(response.dieuKienGia);
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
@@ -186,6 +192,7 @@
     const giamTheoTien = $('#giamTheoTien');
     const giaTriGiam = $('#giaTriGiam');
     const moTa = $('#moTa');
+    const dieuKienGia = $('#dieuKienGia');
 
     const maError = $('#maError');
     const tenError = $('#tenError');
@@ -193,6 +200,7 @@
     const ngayKetThucError = $('#ngayKetThucError');
     const giaTriGiamError = $('#giaTriGiamError');
     const moTaError = $('#moTaError');
+    const dieuKienGiaError = $('#dieuKienGiaError');
 
     const validate = () => {
         let isValid = true;
@@ -202,6 +210,7 @@
         ngayKetThucError.text('');
         giaTriGiamError.text('');
         moTaError.text('');
+        dieuKienGiaError.text('');
 
         if (ten.val() === '') {
             isValid = false;
@@ -218,6 +227,10 @@
         if (giaTriGiam.val() === '') {
             isValid = false;
             giaTriGiamError.text('Trường Giá trị giảm không được bỏ trống');
+        }
+        if (dieuKienGia.val() === '') {
+            isValid = false;
+            dieuKienGiaError.text('Điều kiện giá không được bỏ trống');
         }
         if (moTa.val() === '') {
             isValid = false;
@@ -253,6 +266,7 @@
             trangThai: 1,
             hinhThucGiamGia: giamTheoPhamTram.is(':checked') ? 1 : 0,
             giaTriGiam: giaTriGiam.val(),
+            dieuKienGia: dieuKienGia.val(),
             moTa: moTa.val(),
         }
     }

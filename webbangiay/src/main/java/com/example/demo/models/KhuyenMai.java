@@ -61,6 +61,9 @@ public class KhuyenMai {
     @Column(name = "gia_tri_giam")
     private BigDecimal giaTriGiam;
 
+    @Column(name = "dieu_kien_gia")
+    private BigDecimal dieuKienGia;
+
     @Column(name = "mo_ta")
     private String moTa;
 }
