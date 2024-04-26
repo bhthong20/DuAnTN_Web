@@ -80,7 +80,9 @@
 
 <body>
 
+<button id="exportButton">Export to PDF</button>
 <section id="content" >
+
     <section class="container" style="display: none" id="gioHangShow">
         <h4 class="fw-bold py-3 mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
@@ -327,7 +329,6 @@
         </div>
     </div>
 </div>
-
 </body>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -356,7 +357,18 @@
 <script src="../../../js/select-2.js"></script>
 <script src="../assets/vendor/api-province/data.json"></script>
 <script src="../assets/vendor/api-province/api.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+
+    function exportHTMLtoPDF() {
+        let htmlElement = document.getElementById('content');
+
+        html2pdf().from(htmlElement).save('exported_file.pdf');
+    }
+
+    document.getElementById('exportButton').addEventListener('click', exportHTMLtoPDF);
+
+
     let urlBanHangTaiQuay = window.location.href;
 
     let urlParams = new URLSearchParams(new URL(urlBanHangTaiQuay).search);
