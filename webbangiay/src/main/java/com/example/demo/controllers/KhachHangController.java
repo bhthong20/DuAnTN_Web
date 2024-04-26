@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
@@ -23,14 +24,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-//@RequestMapping("/khach-hang")
+@RequestMapping("/khach-hang")
 public class KhachHangController {
 
     @Autowired
     private KhachHangService khachHangService;
 
 
-    @GetMapping("/hien-thi/khach-hang")
+    @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").descending();
@@ -39,17 +40,17 @@ public class KhachHangController {
         model.addAttribute("khachHang", list.getContent());
         model.addAttribute("total", list.getTotalPages());
 //        model.addAttribute("khachHang" , khachHangService.getAll());
-        model.addAttribute("contentPage", "khach-hang/hien-thi.jsp");
-        return "/khach-hang/hien-thi";
+        model.addAttribute("contentPage", "../khach-hang/hien-thi.jsp");
+        return "home/layout";
     }
 
-    @GetMapping("/khach-hang/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteChucVu(@PathVariable(name = "id") UUID id) {
         khachHangService.deleteKhachHang(id);
         return "redirect:/hien-thi/khach-hang";
     }
 
-    @GetMapping("/khach-hang/view-update/{id}")
+    @GetMapping("/view-update/{id}")
     public String viewUpdate(Model model, @PathVariable("id") UUID id) {
         KhachHang kh = khachHangService.findById(id);
         model.addAttribute("khachHang", kh);;
@@ -57,7 +58,7 @@ public class KhachHangController {
         return "/khach-hang/update";
     }
 
-    @PostMapping("/khach-hang/update/{id}")
+    @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "khachHang") KhachHang khachHang,
                          @PathVariable(name = "id") UUID id ) {
         KhachHang kh = khachHangService.findById(id);
@@ -68,19 +69,19 @@ public class KhachHangController {
     }
 
 
-    @GetMapping("/khach-hang/view-add")
+    @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("khachHang") KhachHang khachHang) {
         model.addAttribute("khachHang", new KhachHang());
-        model.addAttribute("contentPage", "khach-hang/add.jsp");
-        return "khach-hang/add";
+        model.addAttribute("contentPage", "../khach-hang/add.jsp");
+        return "home/layout";
     }
 
 
-    @PostMapping("/khach-hang/add")
+    @PostMapping("/add")
     public String add(Model model , @ModelAttribute("khachHang") KhachHang khachHang, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("contentPage", "chuc-vu/add.jsp");
-            return "khach-hang/add";
+            return "/khach-hang/add";
         }
         String maKhachHang = "KH00" + (khachHangService.findAll().size() + 1);
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
