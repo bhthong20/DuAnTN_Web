@@ -140,7 +140,9 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
                             ". Chỉ còn lại " + chiTietSanPham.getSoLuongTon());
                 }
 
-                gioHangChiTietRepository.deleteById(gioHangChiTiet.get().getId());
+                if (!gioHangChiTiet.isEmpty()) {
+                    gioHangChiTietRepository.deleteById(gioHangChiTiet.get().getId());
+                }
 
                 HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
                 hoaDonChiTiet.setHoaDon(hoaDon);

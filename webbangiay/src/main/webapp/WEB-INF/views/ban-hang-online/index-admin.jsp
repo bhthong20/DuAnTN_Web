@@ -136,6 +136,14 @@
                             </div>
 
                             <div class="row mb-3">
+                                <label class="col-sm-5 col-form-label" title="(Không được áp dụng mã giảm giá)">Tiền
+                                    Ship</label>
+                                <div class="col-sm-7">
+                                    <span id="tienShip">0</span><span>VNĐ</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label">Thành tiền</label>
                                 <div class="col-sm-7">
                                     <span id="tongTien">0</span><span>VNĐ</span>
@@ -210,6 +218,12 @@
                             <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label" for="diaChi">Địa chỉ</label>
                                 <div class="col-sm-7">
+                                    <select name="" class="form-select mb-2" disabled onchange="clearTienShip()" id="province">
+                                        <option value="-1">Chọn tỉnh thành</option>
+                                    </select>
+                                    <select name="" class="form-select mb-2" disabled onchange="getTienShip()" id="district">
+                                        <option value="-1">Chọn quận/huyện</option>
+                                    </select>
                                     <input type="text" class="form-control" id="diaChi" disabled
                                            placeholder="Nhập thông tin"/>
                                 </div>
@@ -340,6 +354,8 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
+<script src="../assets/vendor/api-province/data.json"></script>
+<script src="../assets/vendor/api-province/api.js"></script>
 <script>
     let urlBanHangTaiQuay = window.location.href;
 
@@ -472,6 +488,14 @@
         soDienThoai.val(hoaDon.sdt);
         diaChi.val(hoaDon.diaChi);
         moTa.val(hoaDon.ghiChu);
+        if (hoaDon.diaChi) {
+            let diaChiData = hoaDon.diaChi.split("{,} ");
+            if (diaChiData.length === 3) {
+                diaChi.val(diaChiData[0]);
+                $('#province').html('<option value="-1">'+ diaChiData[2] +'</option>');
+                $('#district').html('<option value="-1">'+ diaChiData[1] +'</option>')
+            }
+        }
         $('#maKhachHang').val(hoaDon.khachHang.ma)
         $('#tenKhachHang').val(hoaDon.khachHang.hoTen)
         hoaDon.phuongThucThanhToan == 1 ? $('#defaultRadio2').attr("checked", true) : $('#defaultRadio1').attr("checked", true)
@@ -479,6 +503,7 @@
         if (hoaDon.khuyenMai) {
             renderSale($('#' + hoaDon.khuyenMai.id));
         }
+        $('#tienShip').text(hoaDon.tienShip ? hoaDon.tienShip : 0)
     }
 
     const fillTongTien = () => {

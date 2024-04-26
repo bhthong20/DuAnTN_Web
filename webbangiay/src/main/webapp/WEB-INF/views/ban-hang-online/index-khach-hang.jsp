@@ -97,8 +97,10 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-0">Danh sách sản phẩm</h5>
                                 <span>
-                                    <button class="btn btn-danger checkHidden" onclick="deleteProduct()">Xóa sản phẩm</button>
-                                    <button class="btn btn-danger checkHidden" onclick="updateProduct()">Sửa số lượng</button>
+                                    <button class="btn btn-danger checkHidden"
+                                            onclick="deleteProduct()">Xóa sản phẩm</button>
+                                    <button class="btn btn-danger checkHidden"
+                                            onclick="updateProduct()">Sửa số lượng</button>
                                 </span>
                             </div>
                         </div>
@@ -107,7 +109,8 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><input class="form-check-input checkStatus" type="checkbox" id="checkAll" onchange="checkAll(this)" type="checkbox"/></th>
+                                <th><input class="form-check-input checkStatus" type="checkbox" id="checkAll"
+                                           onchange="checkAll(this)" type="checkbox"/></th>
                                 <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Màu sắc</th>
@@ -150,6 +153,12 @@
                             <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label" for="diaChi">Địa chỉ</label>
                                 <div class="col-sm-7">
+                                    <select name="" class="form-select mb-2" onchange="clearTienShip()" id="province">
+                                        <option value="-1">Chọn tỉnh thành</option>
+                                    </select>
+                                    <select name="" class="form-select mb-2" onchange="getTienShip()" id="district">
+                                        <option value="-1">Chọn quận/huyện</option>
+                                    </select>
                                     <input type="text" class="form-control" id="diaChi"
                                            placeholder="Nhập thông tin"/>
                                 </div>
@@ -180,7 +189,7 @@
                             </div>
                             <c:if test="${not empty listKM}">
                                 <div class="row mb-3">
-                                    <label class="col-sm-5 col-form-label">Mã giảm giá</label>
+                                    <label class="col-sm-5 col-form-label">Mã giảm giá SP</label>
                                     <div class="col-sm-7">
                                         <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
                                             <span id="renderMaGiamGia">
@@ -192,7 +201,8 @@
 <%--                                                </div>--%>
                                             </span>
                                             <span>
-                                                <button type="button" class="btn btn-danger checkHidden" data-bs-toggle="modal"
+                                                <button type="button" class="btn btn-danger checkHidden"
+                                                        data-bs-toggle="modal"
                                                         data-bs-target="#ModalChonMaGiamGia">Chọn</button>
                                             </span>
                                         </span>
@@ -204,6 +214,14 @@
                                 <label class="col-sm-5 col-form-label">Tiền giảm</label>
                                 <div class="col-sm-7">
                                     <span id="tienGiam">0</span><span>VNĐ</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-5 col-form-label" title="(Không được áp dụng mã giảm giá)">Tiền
+                                    Ship</label>
+                                <div class="col-sm-7">
+                                    <span id="tienShip">0</span><span>VNĐ</span>
                                 </div>
                             </div>
 
@@ -246,9 +264,15 @@
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <a href="/ban-hang-online/hoa-don" type="button" class="btn btn-danger">Quay lại</a>
-                                    <button type="button" id="btnHuyDonHang" onclick="huyDonHang()" class="btn btn-danger">Hủy hóa đơn</button>
-                                    <button type="button" id="btnThanhToan"  onclick="thanhToan()" class="btn btn-danger">Thanh toán</button>
-                                    <button type="button" id="hoanThanhDonHang" onclick="hoanThanhDonHangKhachHang()" class="btn btn-danger">Đã nhận đơn hàng</button>
+                                    <button type="button" id="btnHuyDonHang" onclick="huyDonHang()"
+                                            class="btn btn-danger">Hủy hóa đơn
+                                    </button>
+                                    <button type="button" id="btnThanhToan" onclick="thanhToan()"
+                                            class="btn btn-danger">Thanh toán
+                                    </button>
+                                    <button type="button" id="hoanThanhDonHang" onclick="hoanThanhDonHangKhachHang()"
+                                            class="btn btn-danger">Đã nhận đơn hàng
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -273,7 +297,8 @@
                 <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
                     <c:forEach items="${listKM}" var="item" varStatus="loop">
                         <div data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
-                            <div onclick="renderSale(this)" class="voucher-ticket mb-1 voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover"
+                            <div onclick="renderSale(this)"
+                                 class="voucher-ticket mb-1 voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover"
                                  id="${item.id}"
                                  hinhThucGiam="${item.hinhThucGiamGia}"
                                  giaTriGiam="${item.giaTriGiam}"
@@ -326,6 +351,14 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="../assets/vendor/api-province/data.json"></script>
+<script src="../assets/vendor/api-province/api.js"></script>
 <script>
     let urlBanHangTaiQuay = window.location.href;
 
@@ -385,49 +418,53 @@
         if (validateFields()) {
             let kt = confirm("Bạn có chắc chắn muốn thanh toán không?");
             if (kt) {
-            let sanPhamAddHoaDons = []
-            $('#listChiTietSanPham').find('tr').each(function () {
-                const lastInput = $(this).find('input:last');
-                const lastInputValue = lastInput.val();
-                let product = JSON.parse($(this).attr('item'));
-                sanPhamAddHoaDons.push({
-                    hoaDonId: product.id,
-                    sanPhamId: product.chiTietSanPham.id,
-                    quantity: parseInt(lastInputValue),
-                    donGia: product.chiTietSanPham.donGia
-                })
-            });
+                let sanPhamAddHoaDons = []
+                $('#listChiTietSanPham').find('tr').each(function () {
+                    const lastInput = $(this).find('input:last');
+                    const lastInputValue = lastInput.val();
+                    let product = JSON.parse($(this).attr('item'));
+                    sanPhamAddHoaDons.push({
+                        hoaDonId: product.id,
+                        sanPhamId: product.chiTietSanPham.id,
+                        quantity: parseInt(lastInputValue),
+                        donGia: product.chiTietSanPham.donGia
+                    })
+                });
 
-            hoaDonSelect.loai = 1
-            hoaDonSelect.phuongThucThanhToan = $("#defaultRadio2").is(':checked') ? 1 : 0
-            hoaDonSelect.tenNguoiNhan = tenNguoiNhan.val();
-            hoaDonSelect.sdt = soDienThoai.val();
-            hoaDonSelect.diaChi = diaChi.val();
-            hoaDonSelect.ghiChu = moTa.val();
-            hoaDonSelect.tienGiam = tienGiam.text();
-            hoaDonSelect.tongTien = $('#tongTien').text();
+                var selectedProvinceText = $("#province option:selected").text();
+                var selectedDistrictText = $("#district option:selected").text();
 
-            let data = {
-                sanPhamAddHoaDons: sanPhamAddHoaDons,
-                hoaDon: hoaDonSelect,
-                idKhuyenMai: khuyenMaiSelect.id
-            }
-            $.ajax({
-                type: "POST",
-                url: "/ban-hang-online/rest/thanh-toan-hoa-don",
-                contentType: "application/json",
-                data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
-                success: function (response) {
-                    console.log(response)
-                    window.location.href = response;
-                },
-                error: function (xhr, status, error) {
-                    if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
-                        alert(xhr.responseJSON.message)
-                    }
+                hoaDonSelect.loai = 1
+                hoaDonSelect.phuongThucThanhToan = $("#defaultRadio2").is(':checked') ? 1 : 0
+                hoaDonSelect.tenNguoiNhan = tenNguoiNhan.val();
+                hoaDonSelect.sdt = soDienThoai.val();
+                hoaDonSelect.diaChi = diaChi.val() + "{,} " + selectedDistrictText + "{,} " + selectedProvinceText;
+                hoaDonSelect.ghiChu = moTa.val();
+                hoaDonSelect.tienGiam = tienGiam.text();
+                hoaDonSelect.tongTien = $('#tongTien').text();
+                hoaDonSelect.tienShip = $('#tienShip').text();
+
+                let data = {
+                    sanPhamAddHoaDons: sanPhamAddHoaDons,
+                    hoaDon: hoaDonSelect,
+                    idKhuyenMai: khuyenMaiSelect.id
                 }
-            });
-        }
+                $.ajax({
+                    type: "POST",
+                    url: "/ban-hang-online/rest/thanh-toan-hoa-don",
+                    contentType: "application/json",
+                    data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
+                    success: function (response) {
+                        console.log(response)
+                        window.location.href = response;
+                    },
+                    error: function (xhr, status, error) {
+                        if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
+                            alert(xhr.responseJSON.message)
+                        }
+                    }
+                });
+            }
         }
     }
 
@@ -569,10 +606,13 @@
         diaChi.attr("disabled", true);
         moTa.attr("disabled", true);
         tienGiam.attr("disabled", true);
-        $('.checkStatus').each(function() {
+        $('#district').attr("disabled", true);
+        $('#province').attr("disabled", true);
+
+        $('.checkStatus').each(function () {
             $(this).prop("disabled", true);
         });
-        $('.checkHidden').each(function() {
+        $('.checkHidden').each(function () {
             $(this).hide();
         });
     }
@@ -580,12 +620,20 @@
     const fillDataFiled = (hoaDon) => {
         tenNguoiNhan.val(hoaDon.tenNguoiNhan);
         soDienThoai.val(hoaDon.sdt);
-        diaChi.val(hoaDon.diaChi);
+        if (hoaDon.diaChi) {
+            let diaChiData = hoaDon.diaChi.split("{,} ");
+            if (diaChiData.length === 3) {
+                diaChi.val(diaChiData[0]);
+                $('#province').html('<option value="-1">'+ diaChiData[2] +'</option>');
+                $('#district').html('<option value="-1">'+ diaChiData[1] +'</option>')
+            }
+        }
         moTa.val(hoaDon.ghiChu);
         hoaDon.phuongThucThanhToan == 1 ? $('#defaultRadio2').attr("checked", true) : $('#defaultRadio1').attr("checked", true)
         if (hoaDon.khuyenMai) {
             renderSale($('#' + hoaDon.khuyenMai.id))
         }
+        $('#tienShip').text(hoaDon.tienShip ? hoaDon.tienShip : 0)
     }
 
     const fillTongTien = () => {
@@ -601,6 +649,8 @@
 
             tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
         });
+
+        tongTien += parseInt($('#tienShip').text());
 
         $('#donGia').text(tongTien)
 
@@ -637,7 +687,7 @@
             $('#listChiTietSanPham').find('tr').each(function () {
                 const firstCheckbox = $(this).find('input[type="checkbox"]:first');
                 if (firstCheckbox.is(':checked')) {
-                    checkRecordProduct ++;
+                    checkRecordProduct++;
                     let product = JSON.parse($(this).attr('item'));
                     productShopping.push(product.id)
                 }
@@ -740,18 +790,30 @@
 
     function switchTrangThai(trangThai) {
         switch (trangThai) {
-            case 0: return "Đang chờ xác nhận";
-            case 1: return "Đã xác nhận";
-            case 2: return "Đã thanh toán";
-            case 3: return "Chờ thanh toán";
-            case 4: return "Chờ vẫn chuyển";
-            case 5: return "Đang vận chuyển";
-            case 6: return "Vận chuyển hoàn tất";
-            case 7: return "Giao trễ";
-            case 8: return "Đã hủy";
-            case 9: return "Mới tạo";
-            case 10: return "Hoàn tất";
-            default: return "";
+            case 0:
+                return "Đang chờ xác nhận";
+            case 1:
+                return "Đã xác nhận";
+            case 2:
+                return "Đã thanh toán";
+            case 3:
+                return "Chờ thanh toán";
+            case 4:
+                return "Chờ vẫn chuyển";
+            case 5:
+                return "Đang vận chuyển";
+            case 6:
+                return "Vận chuyển hoàn tất";
+            case 7:
+                return "Giao trễ";
+            case 8:
+                return "Đã hủy";
+            case 9:
+                return "Mới tạo";
+            case 10:
+                return "Hoàn tất";
+            default:
+                return "";
         }
     }
 
@@ -823,8 +885,35 @@
                 $('#hoanThanhDonHang').hide();
                 break;
             }
-            default: return "";
+            default:
+                return "";
         }
+    }
+
+    function clearTienShip() {
+        $('#tienShip').text(0);
+        fillTongTien();
+    }
+
+    function getTienShip() {
+        var selectedProvinceText = $("#province option:selected").text();
+        var selectedDistrictText = $("#district option:selected").text();
+        var params = {
+            province: selectedProvinceText,
+            district: selectedDistrictText
+        };
+        $.ajax({
+            url: "/ban-hang-online/rest/phi-giao-hang",
+            type: "GET",
+            data: params,
+            success: function(response) {
+                $('#tienShip').text(response.fee.fee);
+                fillTongTien();
+            },
+            error: function(xhr, status, error) {
+                console.error("Đã có lỗi xảy ra:", status, error);
+            }
+        });
     }
 </script>
 </html>

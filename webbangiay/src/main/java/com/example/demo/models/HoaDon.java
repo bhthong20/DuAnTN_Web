@@ -85,4 +85,6 @@ public class HoaDon {
     @Column(name = "dia_chi")
     private String diaChi;
 
+    @Column(name = "tien_ship")
+    private BigDecimal tienShip;
 }

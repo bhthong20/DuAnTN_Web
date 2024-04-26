@@ -258,6 +258,7 @@ CREATE TABLE hoa_don (
 	tien_mat money NULL,
 	chuyen_khoan money NULL,
 	tien_giam money NULL,
+	tien_ship money NULL,
 	CONSTRAINT PK__hoa_don__342B812A66836C5A PRIMARY KEY (id_hoa_don),
 	CONSTRAINT FK__hoa_don__khach_h__7F2BE32F FOREIGN KEY (khach_hang_id) REFERENCES khach_hang(id_khach_hang),
 	CONSTRAINT FK__hoa_don__khuyen___00200768 FOREIGN KEY (khuyen_mai_id) REFERENCES khuyen_mai(id_khuyen_mai),

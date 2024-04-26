@@ -7,6 +7,7 @@ import com.example.demo.models.dto.BanHangRequest;
 import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.TrangThaiHoaDonRequest;
 import com.example.demo.services.BanHangOnlineService;
+import com.example.demo.util.CallApiGiaHangTietKiem;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,14 @@ public class BanHangOnlineRestController {
 
     @Autowired
     private BanHangOnlineService service;
+
+    @Autowired
+    private CallApiGiaHangTietKiem giaHangTietKiem;
+
+    @GetMapping("/phi-giao-hang")
+    public Map<String, Object> getPhiGiaoHang(@RequestParam(name = "province") String province, @RequestParam(name = "district") String district) {
+        return giaHangTietKiem.getPhiGiaoHang(province, district);
+    }
 
     @GetMapping("/count-gio-hang")
     public Long countGioHang() {
