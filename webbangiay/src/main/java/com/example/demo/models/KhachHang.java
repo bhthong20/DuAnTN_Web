@@ -41,12 +41,12 @@ public class KhachHang {
     private Boolean gioiTinh;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "Email phải có ít nhất 8 ký tự và phải có đuôi @gmail.com")
+//    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "Email phải có ít nhất 8 ký tự và phải có đuôi @gmail.com")
     @Column(name = "email")
     private String email;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Pattern(regexp = "^0[0-9]{9}$", message = "Sdt phải 10 số và bắt đầu bằng 0")
+//    @Pattern(regexp = "^0[0-9]{9}$", message = "Sdt phải 10 số và bắt đầu bằng 0")
     @Column(name = "sdt")
     private String sdt;
 

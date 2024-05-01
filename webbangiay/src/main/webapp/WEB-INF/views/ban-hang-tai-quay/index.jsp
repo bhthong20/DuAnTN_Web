@@ -594,7 +594,7 @@
         if (!validateForm()) {
             return;
         }
-        let kt = confirm(status == 0 ? "Bạn có chắc chắn muốn lưu hóa đơn không?" : status == 2 ? "Bạn có chắc chắn muốn thanh toán hóa đơn không?" : "");
+        let kt = confirm(status == 9 ? "Bạn có chắc chắn muốn lưu hóa đơn không?" : status == 10 ? "Bạn có chắc chắn muốn thanh toán hóa đơn không?" : "");
         if (kt == true) {
             hoaDon.trangThai = status;
             getFormHoaDon();
