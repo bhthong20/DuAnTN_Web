@@ -36,6 +36,11 @@ public class BanHangTaiQuayRestController {
         return banHangTaiQuayService.findHoaDonDto(UUID.fromString(id));
     }
 
+    @GetMapping("/get-detail-san-pham/{id}")
+    public ChiTietSanPham getDetailSanPham(@PathVariable(name = "id") UUID id) {
+        return banHangTaiQuayService.getDetailSanPham(id);
+    }
+
     @GetMapping("/get-all-san-pham")
     public List<ChiTietSanPham> getChiTietSanPham() {
         return banHangTaiQuayService.getChiTietSanPham();

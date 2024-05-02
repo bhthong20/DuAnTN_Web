@@ -80,6 +80,11 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     }
 
     @Override
+    public ChiTietSanPham getDetailSanPham(UUID id) {
+        return chiTietSanPhamService.findById(id).orElse(null);
+    }
+
+    @Override
     @Transactional
     public List<HoaDonChiTiet> shoppingProduct(List<SanPhamAddHoaDon> sanPhamAddHoaDons) {
         if (sanPhamAddHoaDons.size() != 0) {

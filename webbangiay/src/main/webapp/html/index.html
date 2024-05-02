@@ -135,7 +135,7 @@
                 <h5>0328843156</h5>
             </div>
         </div>
-<!--        row 5-->
+        <!--        row 5-->
 
         <div class="divider">
             <div class="divider-text">Thông tin giá</div>
@@ -195,88 +195,199 @@
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-2" id="listChiTietSanPham">
-                        <tr>
-                            <td align="center">
-                                <img src="../uploads/download.png" width="50" height="50"
-                                     style="border-radius:50% 50% 50% 50%">
-                            </td>
-                            <td>Sản phẩm 1</td>
-                            <td>Xanh</td>
-                            <td>12</td>
-                            <td>Giày da</td>
-                            <td><strong>100</strong></td>
-                            <td><strong>10</strong></td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                <img src="../uploads/download.png" width="50" height="50"
-                                     style="border-radius:50% 50% 50% 50%">
-                            </td>
-                            <td>Sản phẩm 1</td>
-                            <td>Xanh</td>
-                            <td>12</td>
-                            <td>Giày da</td>
-                            <td><strong>100</strong></td>
-                            <td><strong>10</strong></td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                <img src="../uploads/download.png" width="50" height="50"
-                                     style="border-radius:50% 50% 50% 50%">
-                            </td>
-                            <td>Sản phẩm 1</td>
-                            <td>Xanh</td>
-                            <td>12</td>
-                            <td>Giày da</td>
-                            <td><strong>100</strong></td>
-                            <td><strong>10</strong></td>
-                        </tr>
+                    <tr>
+                        <td align="center">
+                            <img src="../uploads/download.png" width="50" height="50"
+                                 style="border-radius:50% 50% 50% 50%">
+                        </td>
+                        <td>Sản phẩm 1</td>
+                        <td>Xanh</td>
+                        <td>12</td>
+                        <td>Giày da</td>
+                        <td><strong>100</strong></td>
+                        <td><strong>10</strong></td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <img src="../uploads/download.png" width="50" height="50"
+                                 style="border-radius:50% 50% 50% 50%">
+                        </td>
+                        <td>Sản phẩm 1</td>
+                        <td>Xanh</td>
+                        <td>12</td>
+                        <td>Giày da</td>
+                        <td><strong>100</strong></td>
+                        <td><strong>10</strong></td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <img src="../uploads/download.png" width="50" height="50"
+                                 style="border-radius:50% 50% 50% 50%">
+                        </td>
+                        <td>Sản phẩm 1</td>
+                        <td>Xanh</td>
+                        <td>12</td>
+                        <td>Giày da</td>
+                        <td><strong>100</strong></td>
+                        <td><strong>10</strong></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="buy-now">
-        <button id="exportButton"
-                target="_blank"
-                class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro
-        </button
-        >
+
+
+    <div
+            class="flex flex-col-reverse align-center justify-content m-auto md:max-w-4xl md:flex-row mt-24 p-10"
+    >
+        <div id="Generate" class="w-full md:w-2/3 mr-24">
+            <h1 class="text-3xl font-bold mb-4 md:text-4xl text-center">
+                QR Code Generator
+            </h1>
+            <p class="mt-7">Enter your Url to generate your QR code</p>
+
+
+            <form id="Form" class="mt-4">
+                <input
+                        id="formData"
+                        type="text"
+                        placeholder="Enter your url"
+                        class="mr-3 focus:outline-none mb-5 rounded p-4 w-full border-2 border-gray-200"
+                />
+
+
+                <button
+                        id="button"
+                        type="submit"
+                        class="bg-gray-600 rounded-md p-4 w-full text-white"
+                >
+                    Generate your QR code
+                </button>
+            </form>
+        </div>
+        <div class="w-full md:w-1/3 self-center">
+            <img
+                    src="Turing logo2.png"
+                    class="-mt-20 m-auto md:align-center"
+                    alt="Turing logo"
+            />
+        </div>
     </div>
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- Where the generated QR code will be. -->
+    <div id="qr-code" class="m-auto"></div>
 
-    <script src="../assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
 
-    <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <div class="container">
+        <h1>Scan QR Codes</h1>
+        <div class="section">
+            <div id="my-qr-reader">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="buy-now">
+    <button id="exportButton"
+            target="_blank"
+            class="btn btn-danger btn-buy-now"
+    >Upgrade to Pro
+    </button
+    >
+</div>
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="../assets/vendor/libs/jquery/jquery.js"></script>
+<script src="../assets/vendor/libs/popper/popper.js"></script>
+<script src="../assets/vendor/js/bootstrap.js"></script>
+<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
+<script src="../assets/vendor/js/menu.js"></script>
+<!-- endbuild -->
 
-    <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
+<!-- Vendors JS -->
+<script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
+<!-- Main JS -->
+<script src="../assets/js/main.js"></script>
 
-        function exportHTMLtoPDF() {
-            let htmlElement = document.getElementById('content');
+<!-- Page JS -->
+<script src="../assets/js/dashboards-analytics.js"></script>
 
-            html2pdf().from(htmlElement).save('exported_file.pdf');
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+></script>
+
+<script
+        src="https://unpkg.com/html5-qrcode">
+</script>
+
+<script>
+
+    function domReady(fn) {
+        if (
+            document.readyState === "complete" ||
+            document.readyState === "interactive"
+        ) {
+            setTimeout(fn, 1000);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    domReady(function () {
+
+        // If found you qr code
+        function onScanSuccess(decodeText, decodeResult) {
+            alert("You Qr is : " + decodeText, decodeResult);
         }
 
-        document.getElementById('exportButton').addEventListener('click', exportHTMLtoPDF);
-    </script>
+        let htmlscanner = new Html5QrcodeScanner(
+            "my-qr-reader",
+            { fps: 10, qrbos: 250 }
+        );
+        htmlscanner.render(onScanSuccess);
+    });
+    const form = document.querySelector("#Form");
+    const qrCode = document.querySelector("#qr-code");
+
+    const generateSubmit = (e) => {
+        e.preventDefault();
+        const url = document.querySelector("#formData").value;
+        console.log(url);
+//form validation
+        if (url === "") {
+            alert("please enter a valid url");
+        } else {
+            generateQrCode(url);
+        }
+    };
+
+    const generateQrCode = (url) => {
+        const qr = new QRCode(document.getElementById("qr-code"), {
+            text: url,
+            width: 300,
+            height: 300,
+        });
+    };
+
+    function exportHTMLtoPDF() {
+        let htmlElement = document.getElementById('content');
+
+        html2pdf().from(htmlElement).save('exported_file.pdf');
+    }
+
+    form.addEventListener("submit", generateSubmit);
+    document.getElementById('exportButton').addEventListener('click', exportHTMLtoPDF);
+</script>
 </body>
 </html>

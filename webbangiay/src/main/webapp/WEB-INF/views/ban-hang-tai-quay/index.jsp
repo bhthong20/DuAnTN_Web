@@ -223,8 +223,10 @@
                         <button class="btn btn-primary checkStatus" onclick="deleteProduct()">Xóa sản phẩm</button>
                         <button class="btn btn-primary checkStatus"
                                 onclick="updateSoLuong()">Sửa số lượng sản phẩm</button>
-                        <button class="btn btn-primary checkStatus me-4" onclick="getDanhSachSanPham()"
+                        <button class="btn btn-primary checkStatus" onclick="getDanhSachSanPham()"
                                 data-bs-toggle="modal" data-bs-target="#modalDanhSachSanPham">Thêm sản phẩm</button>
+                        <button class="btn btn-primary checkStatus me-4"
+                                data-bs-toggle="modal" data-bs-target="#modalScanQrcode">Quét qr</button>
                     </span>
                 </div>
             </div>
@@ -257,6 +259,80 @@
         </div>
     </section>
 </section>
+
+<%-- modalScanQrcode --%>
+<div class="modal fade" id="modalScanQrcode" tabindex="-1" aria-labelledby="modalScanQrcodeLabel"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Scan QR Codes</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="section">
+                        <div id="my-qr-reader">
+                        </div>
+                    </div>
+
+                    <div class="row" id="thongTinSanPhamQr">
+                        <h2 class="text-center mt-3 col-12">Thông tin sản phẩm</h2>
+
+                        <div class="mb-3 col-6">
+                                <label class="form-label" for="maSanPhamQr">Mã sản phẩm</label>
+                                <input type="text" disabled id="maSanPhamQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="tenSanPhamQr">Tên sản phẩm</label>
+                                <input type="text" disabled id="tenSanPhamQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="mauSacQr">Màu sắc</label>
+                                <input type="text" disabled id="mauSacQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="chatLieuQr">Chất liệu</label>
+                                <input type="text" disabled id="chatLieuQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="kichThuocQr">Kích thước</label>
+                                <input type="text" disabled id="kichThuocQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="moTaQr">Mô tả</label>
+                                <input type="text" disabled id="moTaQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="donGiaQr">Đơn giá</label>
+                                <input type="text" disabled id="donGiaQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-6">
+                                <label class="form-label" for="soLuongTonQr">Số lượng tổn</label>
+                                <input type="text" disabled id="soLuongTonQr" class="form-control phone-mask"
+                                />
+                            </div>
+                            <div class="mb-3 col-12">
+                                <label class="form-label" for="soLuongMuaQr">Số lượng Mua</label>
+                                <input class="form-control" type="number" id="soLuongMuaQr" value="1" onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" />
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button onclick="muaHangQr()" type="button" class="btn btn-primary">Mua hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%-- modalDanhSachSanPham --%>
 <div class="modal fade" id="modalDanhSachSanPham" tabindex="-1" aria-labelledby="modalDanhSachSanPhamLabel"
@@ -415,7 +491,95 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script
+        src="https://unpkg.com/html5-qrcode">
+</script>
 <script>
+    let sanPhamQrSelected = null;
+    // QR code
+    function domReady(fn) {
+        if (
+            document.readyState === "complete" ||
+            document.readyState === "interactive"
+        ) {
+            setTimeout(fn, 1000);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+
+    domReady(function () {
+        // If found you qr code
+        function onScanSuccess(decodeText, decodeResult) {
+            let thongTinSanPhamQr = $('#thongTinSanPhamQr')
+
+            $.ajax({
+                type: "GET",
+                url: "/ban-hang-tai-quay/rest/get-detail-san-pham/" + decodeText,
+                success: function (response) {
+                    thongTinSanPhamQr.show();
+                    $('#maSanPhamQr').val(response.ma);
+                    $('#tenSanPhamQr').val(response.sanPham.tenSP);
+                    $('#kichThuocQr').val(response.kichThuoc.size);
+                    $('#mauSacQr').val(response.mauSac.ten);
+                    $('#chatLieuQr').val(response.chatLieu.tenChatLieu);
+                    $('#moTaQr').val(response.moTa);
+                    $('#donGiaQr').val(response.donGia);
+                    $('#soLuongTonQr').val(response.soLuongTon);
+                    sanPhamQrSelected = response;
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                    alert("Lỗi hệ thống !!!")
+                }
+            });
+        }
+
+        let htmlscanner = new Html5QrcodeScanner(
+            "my-qr-reader",
+            { fps: 10, qrbos: 250 }
+        );
+        htmlscanner.render(onScanSuccess);
+    });
+
+    function muaHangQr() {
+        if (!sanPhamQrSelected) {
+            alert("Bạn chưa chọn sản phẩm nào.")
+            return;
+        }
+
+
+        let kt = confirm("Bạn có chắc chắn muốn mua hàng không?");
+        if (kt == true) {
+            let check = true;
+
+            productShopping.push({
+                hoaDonId: id,
+                sanPhamId: sanPhamQrSelected.id,
+                quantity: parseInt($('#soLuongMuaQr').val()),
+                donGia: sanPhamQrSelected.donGia
+            })
+
+            if (check) {
+                $.ajax({
+                    type: "POST",
+                    url: "/ban-hang-tai-quay/rest/mua-san-pham",
+                    contentType: "application/json",
+                    data: JSON.stringify(productShopping),
+                    success: function (response) {
+                        alert("Thêm sản phẩm vào hóa đơn thành công")
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert("Lỗi hệ thống !!!")
+                    }
+                });
+            }
+            productShopping = []
+        }
+    };
+
     // form thông tin hóa đơn
     var hoaDon = {};
     var sanPhamAddHoaDons = []

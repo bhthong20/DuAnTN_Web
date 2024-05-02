@@ -226,6 +226,23 @@
         </div>
     </div>
 
+    <%-- modalOpenQrCode --%>
+    <div class="modal fade" id="modalOpenQrCode" tabindex="-1" aria-labelledby="modalOpenQrCode"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h1 class="modal-title">QR code sản phẩm</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="qr-code" class="m-auto d-flex justify-content-center"></div>
+                    <a href="#"><h3 onclick="downloadQrCode()" class="mt-3 text-primary">DOWNLOAD QR CODE HERE !!!</h3></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <%--Chon mau sac--%>
     <div class="modal fade" id="exampleChonModalMauSac" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
          aria-hidden="true" data-backdrop="static">
@@ -542,7 +559,33 @@
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+></script>
+
 <script>
+    const generateQrCode = (content) => {
+        document.getElementById("qr-code").innerHTML = ''
+        const qr = new QRCode(document.getElementById("qr-code"), {
+            text: content,
+            width: 300,
+            height: 300,
+        });
+    };
+
+    const downloadQrCode = () => {
+        var qrCodeDataURI = document.getElementById("qr-code").getElementsByTagName("img")[0].src;
+
+        var downloadLink = document.createElement("a");
+        downloadLink.href = qrCodeDataURI;
+        downloadLink.download = "qrcode.png";
+
+        downloadLink.click();
+    }
+
     function validateSanPham(sanPham) {
         if (!sanPham.tenSanPham) {
             alert("Tên sản phẩm không được để trống");
@@ -786,11 +829,14 @@
     function updateColorTable() {
         var tableBody = document.getElementById('colorTableBody');
         var html = '';
+
         listProductDetail.forEach(function (product) {
             html +=
                 '<tr>' +
                 '<td>' + product.index + '</td>' +
-                '<td>' + product.name + '</td>' +
+                '<td>' + product.name +
+                '<a style="display: ' + (product.id ? 'inline-block' : 'none') + '" onclick="generateQrCode(`' + product.id + '`)" data-bs-toggle="modal" data-bs-target="#modalOpenQrCode"><img src="/uploads/plus.png"></a>' +
+                '</td>' +
                 '<td> <input class="form-control productMoney" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.money + '" /></td>' +
                 '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
                 '<td>' + product.categoryName + '</td>' +
@@ -977,6 +1023,7 @@
 
                             index++;
                             listProductDetail.push({
+                                id: el.id,
                                 index: index,
                                 colorId: el.mauSac.id,
                                 colorName: el.mauSac.ten,
