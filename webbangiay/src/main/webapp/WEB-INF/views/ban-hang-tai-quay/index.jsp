@@ -60,7 +60,8 @@
         <div class="card-title">
             <div class="d-flex align-items-center justify-content-between">
                 <h3 class="p-4 m-0">Bán hàng tại quầy</h3>
-                <span> <button class="btn btn-primary mx-4" onclick="createHoaDon()">Thêm HD</button></span>
+                <span>
+                    <button class="btn btn-primary me-4" onclick="createHoaDon()">Thêm HD</button></span>
             </div>
         </div>
         <div class="card-body">
@@ -134,6 +135,8 @@
                             </button>
                             <button onclick="tuChoiHoaDon()" class="btn btn-primary checkStatus">Từ chối
                             </button>
+                            <button type="button" onclick="exportHTMLtoPDF()" class="btn btn-primary btnExport">In hóa đơn</button>
+
                         </div>
                     </div>
                 </div>
@@ -201,7 +204,9 @@
                                                 dieuKienGia="${item.dieuKienGia}"
                                                 hinhThucGiam="${item.hinhThucGiamGia}">Giảm ${item.giaTriGiam} <c:if
                                                 test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
-                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if> - dùng cho hóa đơn > ${item.dieuKienGia} VNĐ</option>
+                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if> - dùng cho hóa đơn
+                                            > ${item.dieuKienGia} VNĐ
+                                        </option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -280,49 +285,50 @@
                         <h2 class="text-center mt-3 col-12">Thông tin sản phẩm</h2>
 
                         <div class="mb-3 col-6">
-                                <label class="form-label" for="maSanPhamQr">Mã sản phẩm</label>
-                                <input type="text" disabled id="maSanPhamQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="tenSanPhamQr">Tên sản phẩm</label>
-                                <input type="text" disabled id="tenSanPhamQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="mauSacQr">Màu sắc</label>
-                                <input type="text" disabled id="mauSacQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="chatLieuQr">Chất liệu</label>
-                                <input type="text" disabled id="chatLieuQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="kichThuocQr">Kích thước</label>
-                                <input type="text" disabled id="kichThuocQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="moTaQr">Mô tả</label>
-                                <input type="text" disabled id="moTaQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="donGiaQr">Đơn giá</label>
-                                <input type="text" disabled id="donGiaQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label class="form-label" for="soLuongTonQr">Số lượng tổn</label>
-                                <input type="text" disabled id="soLuongTonQr" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3 col-12">
-                                <label class="form-label" for="soLuongMuaQr">Số lượng Mua</label>
-                                <input class="form-control" type="number" id="soLuongMuaQr" value="1" onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" />
-                            </div>
+                            <label class="form-label" for="maSanPhamQr">Mã sản phẩm</label>
+                            <input type="text" disabled id="maSanPhamQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label" for="tenSanPhamQr">Tên sản phẩm</label>
+                            <input type="text" disabled id="tenSanPhamQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label" for="mauSacQr">Màu sắc</label>
+                            <input type="text" disabled id="mauSacQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label" for="chatLieuQr">Chất liệu</label>
+                            <input type="text" disabled id="chatLieuQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label" for="kichThuocQr">Kích thước</label>
+                            <input type="text" disabled id="kichThuocQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label" for="moTaQr">Mô tả</label>
+                            <input type="text" disabled id="moTaQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label" for="donGiaQr">Đơn giá</label>
+                            <input type="text" disabled id="donGiaQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label" for="soLuongTonQr">Số lượng tổn</label>
+                            <input type="text" disabled id="soLuongTonQr" class="form-control phone-mask"
+                            />
+                        </div>
+                        <div class="mb-3 col-12">
+                            <label class="form-label" for="soLuongMuaQr">Số lượng Mua</label>
+                            <input class="form-control" type="number" id="soLuongMuaQr" value="1"
+                                   onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -471,6 +477,157 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="inhoadon"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1400px;">
+        <div class="modal-content">
+            <div id="content">
+                <div style="width: 100%; text-align: center; padding: 30px 0">
+                    <h1>THÔNG TIN HÓA ĐƠN</h1>
+                </div>
+                <div class="container">
+
+                    <div class="divider">
+                        <div class="divider-text">Thông tin hóa đơn</div>
+                    </div>
+                    <!--        row 1-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Mã hóa đơn</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="maHoaDonPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Ngày tạo</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="ngayTaoPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 2-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Mã người đặt hàng</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="maKhachHangPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Tên người nhận</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tenNguoiNhanPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 3-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Tên người đặt hàng</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tenKhachHangPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Địa chỉ người nhận</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="diaChiNhanPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 4-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Số điện thoại người đặt</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="soDienThoaiNguoiDatPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Số điện thoại người nhận</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="soDienThoaiNguoiNhanPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 5-->
+
+                    <div class="divider">
+                        <div class="divider-text">Thông tin giá</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Đơn giá</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="donGiaPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Phí ship</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="phiShipPdf"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Mã giảm giá</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tenMaGiamGiaPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Tiền được giảm</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tienDuocGiamPdf"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Tổng tiền thanh toán</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tongTienPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Trạng thái</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="trangThaiPdf"></h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="divider">
+                            <div class="divider-text">Danh sách sản phẩm</div>
+                        </div>
+                        <div class="text-nowrap">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Màu sắc</th>
+                                    <th>Kích cỡ</th>
+                                    <th>Chất liệu</th>
+                                    <th>Giá(VNĐ)</th>
+                                    <th>Sl Mua</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-2" id="listSanPhamPdf">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </body>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -490,12 +647,28 @@
 <!-- Page JS -->
 
 <!-- Place this tag in your head or just before your close body tag. -->
+<%--Qr Code--%>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script
         src="https://unpkg.com/html5-qrcode">
 </script>
+<%--Xuất hóa đơn--%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    function exportHTMLtoPDF() {
+        window.scrollTo(0, 0);
+        fillExportHoaDon();
+        setTimeout(function () {
+            let htmlElement = document.getElementById('content');
+
+            html2pdf().from(htmlElement).save('exported_file.pdf');
+        }, 500);
+    }
+
     let sanPhamQrSelected = null;
+
     // QR code
     function domReady(fn) {
         if (
@@ -537,7 +710,7 @@
 
         let htmlscanner = new Html5QrcodeScanner(
             "my-qr-reader",
-            { fps: 10, qrbos: 250 }
+            {fps: 10, qrbos: 250}
         );
         htmlscanner.render(onScanSuccess);
     });
@@ -689,6 +862,78 @@
         });
     }
 
+    const fillExportHoaDon = () => {
+        fillTongTien();
+
+        $("#maHoaDonPdf").text(hoaDon.ma);
+        $("#ngayTaoPdf").text(hoaDon.ngayTao);
+        $("#maKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.ma : "Không có dữ liệu");
+        $("#tenKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.hoTen : "Không có dữ liệu");
+        $("#tenNguoiNhanPdf").text(hoaDon.tenNguoiNhan ? hoaDon.tenNguoiNhan : "Không có dữ liệu");
+        $("#diaChiNhanPdf").text("Không có dữ liệu");
+        $("#soDienThoaiNguoiDatPdf").text(hoaDon.khachHang ? hoaDon.khachHang.sdt : "Không có dữ liệu");
+        $("#soDienThoaiNguoiNhanPdf").text(hoaDon.sdt ? hoaDon.sdt : "Không có dữ liệu");
+        $("#donGiaPdf").text((hoaDon.tongTien + hoaDon.tienGiam).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ");
+        $("#phiShipPdf").text(hoaDon.tienShip ? hoaDon.tienShip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
+        $("#tenMaGiamGiaPdf").text(hoaDon.khuyenMai ? hoaDon.khuyenMai.ten : "Không có dữ liệu");
+        $("#tienDuocGiamPdf").text(hoaDon.tienGiam ? hoaDon.tienGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
+        $("#tongTienPdf").text(hoaDon.tongTien ? hoaDon.tongTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
+        $("#trangThaiPdf").text(switchTrangThai(hoaDon.trangThai));
+        console.log(hoaDon)
+        const tableProduct = document.getElementById("listSanPhamPdf");
+        let html = '';
+        $('#listHoaDonSanPham').find('tr').each(function () {
+            const lastInput = $(this).find('input:last');
+            checkRecordProduct = true;
+            let product = JSON.parse($(this).attr('item'));
+            const lastInputValue = lastInput.val();
+            html += `
+                <tr>
+                    <td align="center">
+                        <img src="../uploads/` + product.chiTietSanPham.hinhAnh.anh1 + `" width="50" height="50"
+                             style="border-radius:50% 50% 50% 50%">
+                    </td>
+                    <td>` + product.chiTietSanPham.sanPham.tenSP + `</td>
+                    <td>` + product.chiTietSanPham.mauSac.ten + `</td>
+                    <td>` + product.chiTietSanPham.kichThuoc.size + `</td>
+                    <td>` + product.chiTietSanPham.chatLieu.tenChatLieu + `</td>
+                    <td><strong>` +  product.chiTietSanPham.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
+                    <td><strong>` + lastInputValue + `</strong></td>
+                </tr>
+            `
+        });
+        tableProduct.innerHTML = html;
+    }
+
+    function switchTrangThai(trangThai) {
+        switch (trangThai) {
+            case 0:
+                return "Đang chờ xác nhận";
+            case 1:
+                return "Đã xác nhận";
+            case 2:
+                return "Đã thanh toán";
+            case 3:
+                return "Chờ thanh toán";
+            case 4:
+                return "Chờ vẫn chuyển";
+            case 5:
+                return "Đang vận chuyển";
+            case 6:
+                return "Vận chuyển hoàn tất";
+            case 7:
+                return "Giao trễ";
+            case 8:
+                return "Đã hủy";
+            case 9:
+                return "Mới tạo";
+            case 10:
+                return "Hoàn tất";
+            default:
+                return "";
+        }
+    }
+
     const validateForm = () => {
         let check = true;
         // Kiểm tra trường tenNguoiNhan
@@ -778,7 +1023,7 @@
                 contentType: "application/json",
                 data: JSON.stringify(requestBody),
                 success: function (response) {
-                    alert(status == 0 ? "Lưu hóa đơn thành công" : status == 2 ? "Thanh toán hóa đơn thành công" : "")
+                    alert(status == 9 ? "Lưu hóa đơn thành công" : status == 10 ? "Thanh toán hóa đơn thành công" : "")
                     location.reload();
                 },
                 error: function (xhr, status, error) {
@@ -880,18 +1125,30 @@
 
     const fillTrangThaiHoaDon = (trangThai) => {
         switch (trangThai) {
-            case 0: return "Đang chờ xác nhận";
-            case 1: return "Đã xác nhận";
-            case 2: return "Đã thanh toán";
-            case 3: return "Chờ thanh toán";
-            case 4: return "Chờ vẫn chuyển";
-            case 5: return "Đang vận chuyển";
-            case 6: return "Vận chuyển hoàn tất";
-            case 7: return "Giao trễ";
-            case 8: return "Đã hủy";
-            case 9: return "Mới tạo";
-            case 10: return "Hoàn tất";
-            default: return "";
+            case 0:
+                return "Đang chờ xác nhận";
+            case 1:
+                return "Đã xác nhận";
+            case 2:
+                return "Đã thanh toán";
+            case 3:
+                return "Chờ thanh toán";
+            case 4:
+                return "Chờ vẫn chuyển";
+            case 5:
+                return "Đang vận chuyển";
+            case 6:
+                return "Vận chuyển hoàn tất";
+            case 7:
+                return "Giao trễ";
+            case 8:
+                return "Đã hủy";
+            case 9:
+                return "Mới tạo";
+            case 10:
+                return "Hoàn tất";
+            default:
+                return "";
         }
     }
 
@@ -1010,7 +1267,7 @@
                         fillHoaDon();
                     }
                     // thay đổi trạng thái
-                    let active = id && el.id == id ? "bg-warning" : el.trangThai == 9 ? "bg-primary" : el.trangThai == 2 ? "bg-success" : "bg-danger"
+                    let active = id && (el.trangThai == 9 && el.id == id) ? "bg-warning" : el.trangThai == 9 ? "bg-primary" : el.trangThai == 10 ? " d-none" : " d-none"
 
                     hoaDonItem += '<li class="nav-item">' +
                         '<a class="nav-link text-white ' + (active) + '" href="/ban-hang-tai-quay?id=' + el.id + '" role="tab" >' + el.ma + '</a>' +
@@ -1192,6 +1449,7 @@
 
     // lần đâu load trang load danh sách hóa đơn và chi tiết hóa đơn
     window.onload = async function () {
+        $(".btnExport").hide();
         await getAllHoaDon();
         await findHoaDonById();
         if (id) {
@@ -1202,8 +1460,12 @@
                 tongTien.val(hoaDon.tongTien);
             }
         }
-        if (hoaDon.trangThai && (hoaDon.trangThai == 2 || hoaDon.trangThai == 8)) {
-            $(".checkStatus").attr('disabled', 'disabled')
+
+        if (hoaDon.trangThai && (hoaDon.trangThai == 8 || hoaDon.trangThai == 10)) {
+            $(".checkStatus").attr('disabled', 'disabled');
+            if (hoaDon.trangThai == 10) {
+                $(".btnExport").show();
+            }
         }
     };
 

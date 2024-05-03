@@ -125,7 +125,9 @@
                         <c:if test="${item.loai==1}">online</c:if>
                     </td>
                     <td>
-                        <a href="/hoa-don/detail?id=${item.id}" class="btn btn-success">Chi tiết</a>
+                        <c:if test="${item.loai==0}"><a href="/ban-hang-tai-quay?id=${item.id}" class="btn btn-success">Chi tiết</a></c:if>
+                        <c:if test="${item.loai==1}"><a href="/hoa-don/detail?id=${item.id}" class="btn btn-success">Chi tiết</a></c:if>
+
                     </td>
                 </tr>
             </c:forEach>

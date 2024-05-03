@@ -52,7 +52,7 @@ public class HoaDonController {
 
     @GetMapping("/detail")
     public String quanLyBanHangDetail(Model model) {
-        model.addAttribute("listKM", khuyenMaiService.getComboboxKhuyenMai());
+        model.addAttribute("listKM", khuyenMaiService.findAll());
         model.addAttribute("contentPage", "../ban-hang-online/index-admin.jsp");
         return "home/layout";
     }

@@ -54,7 +54,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
 
     @Override
     public List<HoaDon> getAllHoaDon() {
-        return hoaDonRepository.findAllByLoaiAndTrangThai(0, 9);
+        return hoaDonRepository.findAllByLoai(0);
     }
 
     @Override

@@ -79,9 +79,7 @@
 </head>
 
 <body>
-
-<button id="exportButton">Export to PDF</button>
-<section id="content" >
+<section>
 
     <section class="container" style="display: none" id="gioHangShow">
         <h4 class="fw-bold py-3 mb-4">
@@ -190,6 +188,7 @@
                                     <button type="button" onclick="thayDoiTrangThai(1)" id="btnXacNhan" class="btn btn-danger">Xác nhận đơn hàng</button>
                                     <button type="button" onclick="thayDoiTrangThai(5)" id="btnXacNhanGiao" class="btn btn-danger">Xác nhận giao hàng</button>
                                     <button type="button" onclick="thayDoiTrangThai(6)" id="btnGiaoHang" class="btn btn-danger">Giao hàng thành công</button>
+                                    <button type="button" onclick="exportHTMLtoPDF()" class="btn btn-danger btnExport">In hóa đơn</button>
                                 </div>
                             </div>
                         </form>
@@ -329,6 +328,156 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="inhoadon"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1400px;">
+        <div class="modal-content">
+            <div id="content">
+                <div style="width: 100%; text-align: center; padding: 30px 0">
+                    <h1>THÔNG TIN HÓA ĐƠN</h1>
+                </div>
+                <div class="container">
+
+                    <div class="divider">
+                        <div class="divider-text">Thông tin hóa đơn</div>
+                    </div>
+                    <!--        row 1-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Mã hóa đơn</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="maHoaDonPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Ngày tạo</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="ngayTaoPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 2-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Mã người đặt hàng</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="maKhachHangPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Tên người nhận</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tenNguoiNhanPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 3-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Tên người đặt hàng</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tenKhachHangPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Địa chỉ người nhận</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="diaChiNhanPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 4-->
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Số điện thoại người đặt</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="soDienThoaiNguoiDatPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Số điện thoại người nhận</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="soDienThoaiNguoiNhanPdf"></h5>
+                        </div>
+                    </div>
+                    <!--        row 5-->
+
+                    <div class="divider">
+                        <div class="divider-text">Thông tin giá</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Đơn giá</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="donGiaPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Phí ship</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="phiShipPdf"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Mã giảm giá</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tenMaGiamGiaPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Tiền được giảm</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tienDuocGiamPdf"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <h5 class="text-end">Tổng tiền thanh toán</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="tongTienPdf"></h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 class="text-end">Trạng thái</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5 id="trangThaiPdf"></h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="divider">
+                            <div class="divider-text">Danh sách sản phẩm</div>
+                        </div>
+                        <div class="text-nowrap">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Màu sắc</th>
+                                    <th>Kích cỡ</th>
+                                    <th>Chất liệu</th>
+                                    <th>Giá(VNĐ)</th>
+                                    <th>Sl Mua</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-2" id="listSanPhamPdf">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -359,15 +508,55 @@
 <script src="../assets/vendor/api-province/api.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-
     function exportHTMLtoPDF() {
-        let htmlElement = document.getElementById('content');
+        window.scrollTo(0, 0);
+        fillExportHoaDon(hoaDonSelect);
+        setTimeout(function () {
+            let htmlElement = document.getElementById('content');
 
-        html2pdf().from(htmlElement).save('exported_file.pdf');
+            html2pdf().from(htmlElement).save('exported_file.pdf');
+        }, 500);
     }
 
-    document.getElementById('exportButton').addEventListener('click', exportHTMLtoPDF);
+    const fillExportHoaDon = (hoaDon) => {
+        $("#maHoaDonPdf").text(hoaDon.ma);
+        $("#ngayTaoPdf").text(hoaDon.ngayTao);
+        $("#maKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.ma : "Không có dữ liệu");
+        $("#tenKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.hoTen : "Không có dữ liệu");
+        $("#tenNguoiNhanPdf").text(hoaDon.tenNguoiNhan ? hoaDon.tenNguoiNhan : "Không có dữ liệu");
+        $("#diaChiNhanPdf").text("Không có dữ liệu");
+        $("#soDienThoaiNguoiDatPdf").text(hoaDon.khachHang ? hoaDon.khachHang.sdt : "Không có dữ liệu");
+        $("#soDienThoaiNguoiNhanPdf").text(hoaDon.sdt ? hoaDon.sdt : "Không có dữ liệu");
+        $("#donGiaPdf").text((hoaDon.tongTien + hoaDon.tienGiam).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ");
+        $("#phiShipPdf").text(hoaDon.tienShip ? hoaDon.tienShip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
+        $("#tenMaGiamGiaPdf").text(hoaDon.khuyenMai ? hoaDon.khuyenMai.ten : "Không có dữ liệu");
+        $("#tienDuocGiamPdf").text(hoaDon.tienGiam ? hoaDon.tienGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
+        $("#tongTienPdf").text(hoaDon.tongTien ? hoaDon.tongTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
+        $("#trangThaiPdf").text(switchTrangThai(hoaDon.trangThai));
 
+        const tableProduct = document.getElementById("listSanPhamPdf");
+        let html = '';
+        $('#listChiTietSanPham').find('tr').each(function () {
+            const lastInput = $(this).find('input:last');
+            let product = JSON.parse($(this).attr('item'));
+            const lastInputValue = lastInput.val();
+            html += `
+                <tr>
+                    <td align="center">
+                        <img src="../uploads/` + product.chiTietSanPham.hinhAnh.anh1 + `" width="50" height="50"
+                             style="border-radius:50% 50% 50% 50%">
+                    </td>
+                    <td>` + product.chiTietSanPham.sanPham.tenSP + `</td>
+                    <td>` + product.chiTietSanPham.mauSac.ten + `</td>
+                    <td>` + product.chiTietSanPham.kichThuoc.size + `</td>
+                    <td>` + product.chiTietSanPham.chatLieu.tenChatLieu + `</td>
+                    <td><strong>` +  product.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
+                    <td><strong>` + product.soLuong + `</strong></td>
+                </tr>
+            `
+        });
+        tableProduct.innerHTML = html;
+    }
 
     let urlBanHangTaiQuay = window.location.href;
 
@@ -390,7 +579,6 @@
 
     window.onload = async function () {
         await loadChiTietSanPham();
-        fillTongTien();
     };
 
     function thanhToan() {
@@ -443,8 +631,6 @@
 
         listSale.removeClass('checked');
         saleSelect.addClass('checked');
-
-        fillTongTien();
     }
 
     const loadChiTietSanPham = async () => {
@@ -465,7 +651,7 @@
                     response.hoaDonChiTiet.forEach(el => {
                         index++;
                         html += `<tr item='` + JSON.stringify(el) + `'>
-                                <td><input class="form-check-input checkStatus" disabled onchange="fillTongTien()" type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
+                                <td><input class="form-check-input checkStatus" disabled type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
                                 <td align="center">
                                     <img src="../../../uploads/` + (el.chiTietSanPham.hinhAnh ? el.chiTietSanPham.hinhAnh.anh1 : "") + `" width="100" height="100"
                                          style="border-radius:50% 50% 50% 50%">
@@ -475,7 +661,7 @@
                                 <td>` + (el.chiTietSanPham.mauSac ? el.chiTietSanPham.mauSac.ten : "") + `</td>
                                 <td>` + (el.chiTietSanPham.kichThuoc ? el.chiTietSanPham.kichThuoc.size : "") + `</td>
                                 <td>` + (el.chiTietSanPham.chatLieu ? el.chiTietSanPham.chatLieu.tenChatLieu : "") + `</td>
-                                <td><strong>` + el.chiTietSanPham.donGia + `</strong></td>
+                                <td><strong>` + el.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
                                 <td colspan="2">
                                     <input class="form-control" type="number" disabled onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" value="` + el.soLuong + `" />
                                 </td>
@@ -496,6 +682,7 @@
     }
 
     const fillDataFiled = (hoaDon) => {
+        $(".btnExport").hide();
         tenNguoiNhan.val(hoaDon.tenNguoiNhan);
         soDienThoai.val(hoaDon.sdt);
         diaChi.val(hoaDon.diaChi);
@@ -511,51 +698,19 @@
         $('#maKhachHang').val(hoaDon.khachHang.ma)
         $('#tenKhachHang').val(hoaDon.khachHang.hoTen)
         hoaDon.phuongThucThanhToan == 1 ? $('#defaultRadio2').attr("checked", true) : $('#defaultRadio1').attr("checked", true)
-        console.log(hoaDon.khuyenMai)
+
         if (hoaDon.khuyenMai) {
             renderSale($('#' + hoaDon.khuyenMai.id));
         }
-        $('#tienShip').text(hoaDon.tienShip ? hoaDon.tienShip : 0)
-    }
+        $('#tienShip').text(hoaDon.tienShip ? hoaDon.tienShip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
 
-    const fillTongTien = () => {
-        let tongTien = 0;
-        $('#listChiTietSanPham').find('tr').each(function () {
-            const firstCheckbox = $(this).find('input[type="checkbox"]:first');
-            if (!firstCheckbox.is(':checked')) {
-                $('#checkAll').prop('checked', false);
-            }
-            const lastInput = $(this).find('input:last');
-            const lastInputValue = lastInput.val();
-            let product = JSON.parse($(this).attr('item'));
+        $('#tienGiam').text(hoaDon.tienGiam ? hoaDon.tienGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
+        $('#tongTien').text(hoaDon.tongTien ? hoaDon.tongTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
+        $('#donGia').text((hoaDon.tienGiam + hoaDon.tongTien + hoaDon.tienShip).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 
-            tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
-        });
-
-        $('#donGia').text(tongTien)
-
-        if (khuyenMaiSelect.id) {
-            if (tongTien >= khuyenMaiSelect.dieuKienGia) {
-                if (khuyenMaiSelect.hinhThucGiamGia == 1) {
-                    tienGiam.text(tongTien * (khuyenMaiSelect.giaTriGiam) / 100);
-                    tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
-                } else {
-                    tienGiam.text(khuyenMaiSelect.giaTriGiam);
-                    tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
-                    if (tongTien < 0) {
-                        tongTien = 0;
-                    }
-                }
-            } else {
-                alert("Hóa đơn không đủ điều kiện để áp dụng mã giảm giá")
-                clearKhuyenMai();
-                $('#renderMaGiamGia').html('');
-                tienGiam.val(0);
-            }
-        } else {
-            tienGiam.val(0);
+        if (hoaDon.trangThai && hoaDon.trangThai == 10) {
+            $(".btnExport").show();
         }
-        $('#tongTien').text(tongTien);
     }
 
     function thayDoiTrangThai(trangThai) {
@@ -588,7 +743,6 @@
             const firstCheckbox = $(this).find('input[type="checkbox"]:first');
             firstCheckbox.prop('checked', $(checkbox).is(':checked'));
         });
-        fillTongTien();
     }
 
     // validate số lượng
@@ -598,7 +752,6 @@
             alert("Vui lòng nhập vào một số nguyên dương.");
             input.value = 1;
         }
-        fillTongTien();
     }
 
     function switchTrangThai(trangThai) {
