@@ -23,7 +23,7 @@ public class ExcelDownloadController {
     // Excel
     @GetMapping("/download/san-pham")
     public ResponseEntity<byte[]> getFile() throws IOException {
-        String filename = "file_import_user_registration" + new Random().nextInt(100) + ".xlsx";
+        String filename = "danh_sach_san_pham" + new Random().nextInt(100) + ".xlsx";
         ByteArrayOutputStream file = templateExcelService.downloadExcelSanPham();
 
         return ResponseEntity.ok()
