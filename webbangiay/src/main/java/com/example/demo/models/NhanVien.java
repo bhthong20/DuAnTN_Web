@@ -89,7 +89,7 @@ public class NhanVien {
     @NotNull(message = "Không để trống thông tin")
     @Column(name = "trang_thai")
     private int tinhTrang;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chuc_vu_id")
     private ChucVu chucVu;
