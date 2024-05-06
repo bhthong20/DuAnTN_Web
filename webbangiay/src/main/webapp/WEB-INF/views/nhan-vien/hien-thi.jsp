@@ -20,8 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet"
-    />
+            rel="stylesheet"/>
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
@@ -45,28 +44,13 @@
 </head>
 <body>
 <br>
-
-<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-           aria-controls="description" aria-selected="true">Thông tin Nhân Viên</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/nhan-vien/view-add" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới Nhân Viên</a>
-    </li>
-</ul>
 <div class="card mb-4">
-    <h5 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h5>
     <table class="table container">
         <tbody>
+        <h3 class="card-header">Thông tin nhân viên</h3>
         <tr>
-            <td colspan="2" style="text-align: center">
-                <form action="/chi-tiet-san-pham/search" method="post">
+            <td style="text-align: center">
+                <form action="/khach-hang/search" method="post">
                     <div class="input-group" style="width:100%; text-align: center">
                         <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                aria-label="Bạn tìm gì..." name="search">
@@ -77,126 +61,46 @@
                 </form>
             </td>
             <td>
-                <form action="/chi-tiet-san-pham/loc" method="post">
+                <form action="/khach-hang/loc" method="post">
                     <div class="card-body" style="text-align: center">
                         <div class="demo-inline-spacing">
                             <div class="btn-group">
-                                <select class="form-select">
-                                    <option selected disabled>Chất Liệu</option>
-                                    <c:forEach items="${listCL}" var="cl">
-                                        <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
+                                <select class="form-select" name="locTT">
+                                    <option selected disabled>Trạng thái</option>
+                                    <c:forEach items="${listTT}" var="tt">
+                                        <option value="${tt.trangThai}">${tt.trangThai}</option>
                                     </c:forEach>
                                 </select>
                             </div>
 
                             <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Secondary
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
+                                <select class="form-select" name="locPL">
+                                    <option selected disabled>Giới tính</option>
+                                    <c:forEach items="${listGT}" var="gt">
+                                        <option value="${pl.gioiTinh}">${pl.gioiTinh}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
 
                             <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-success dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Success
+                                <button type="submit" class="btn btn-primary mr-2"
+                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                    Lọc
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-danger dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Danger
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-warning dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Warning
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-info dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Info
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </form>
             </td>
         </tr>
+        <tr class="text-center">
+            <td class="text-center" colspan="2">
+                <%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
+                <a type="button" class="btn btn-primary" href="/nhan-vien/view-add">Thêm mới nhân viên</a>
+            </td>
+        </tr>
         </tbody>
     </table>
-
-
 </div>
 <div class="card">
     <div class="table-responsive text-nowrap">
@@ -238,7 +142,9 @@
                     <td>${nv.chucVu.ten}</td>
                     <td>${nv.diaChi}</td>
                     <td>${nv.canCuoc}</td>
-                    <td>${nv.urlAnh}</td>
+                    <td align="center">
+                        <img src="../../../uploads/${nv.urlAnh}" width="100" height="100">
+                    </td>
                     <td>${nv.taiKhoan}</td>
                     <td>${nv.matKhau}</td>
                     <td>${nv.ngayTao}</td>
@@ -250,8 +156,8 @@
                     <td colspan="2">
                         <a href="/nhan-vien/delete/${nv.id}" class="btn btn-success"
                            onclick="return tbxd()">Delete</a>
-                        <a href="/nhan-vien/view-update/${nv.id}" class="btn btn-success"
-                           onclick="return tbxd()">Update</a>
+                        <a href="/nhan-vien/view-update?id=${nv.id}" class="btn btn-success"
+                           onclick="return myFunction2()">Update</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -369,24 +275,6 @@
 
 
 </script>
-<script>
-    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {
-        dropdown.style.display = 'none';
-    });
-
-    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
-    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
-        dropdown.addEventListener('click', function () {
-            const dropdownMenu = dropdown.nextElementSibling;
-
-            if (dropdownMenu.style.display === 'block') {
-                dropdownMenu.style.display = 'none';
-            } else {
-                dropdownMenu.style.display = 'block';
-            }
-        });
-    });
-</script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>
@@ -394,3 +282,4 @@
 <script src="../../js/settings.js"></script>
 <script src="../../js/todolist.js"></script>
 </html>
+

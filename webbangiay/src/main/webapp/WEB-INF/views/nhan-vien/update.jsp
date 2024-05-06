@@ -45,47 +45,52 @@
     <script src="../assets/js/config.js"></script>
 </head>
 </head>
-
 <body>
-<div  class="container-xxl flex-grow-1 container-p-y">
+<div class="container">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Update Nhana Viên</h4>
-            <%--@elvariable id="chiTietSanPham" type=""--%>
+            <h3 class="card-header">Update nhân viên</h3>
             <div class="card-body">
                 <form:form action="/nhan-vien/update/${nhanVien.id}" method="post" modelAttribute="nhanVien">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="ma"/>
-                            <form:label class="form-label" path="ma">Mã Nhân Viên:</form:label>
-                            <form:errors path="ma" cssStyle="color: red"/>
-                        </div>
-                        <div class="form-floating mb-3 mt-3">
                             <form:input class="form-control" placeholder="" path="hoTen"/>
-                            <form:label class="form-label" path="hoTen">Họ Tên:</form:label>
+                            <form:label class="" path="hoTen">Họ Tên:</form:label>
                             <form:errors path="hoTen" cssStyle="color: red"/>
                         </div>
-                    </div>
-                    <div class="col-6">
+                        <div class="form-floating mb-3 mt-3">
+                            <form:input class="form-control" placeholder="" path="email"/>
+                            <form:label class="" path="email">Email:</form:label>
+                            <form:errors path="email" cssStyle="color: #ff0000"/>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <form:input class="form-control" placeholder="" path="sdt"/>
+                            <form:label class="" path="sdt">Số điện thoại:</form:label>
+                            <form:errors path="sdt" cssStyle="color: #ff0000"/>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <form:input class="form-control" placeholder="" path="canCuoc"/>
+                            <form:label class="" path="canCuoc">CCCD:</form:label>
+                            <form:errors path="canCuoc" cssStyle="color: #ff0000"/>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <form:textarea class="form-control" placeholder="" path="diaChi"/>
+                            <form:label class="" path="diaChi">Địa Chỉ:</form:label>
+                            <form:errors path="diaChi" cssStyle="color: #ff0000"/>
+                        </div>
+                        <div class="form-check-inline mb-3 mt-3">
+                            <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
+                            <form:radiobutton path="gioiTinh" value="0" checked="true"/>Nam
+                            <form:radiobutton path="gioiTinh" value="1"/>Nữ
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating mb-3 mt-3">
-                            <form:textarea class="form-control" placeholder="" path="email"/>
-                            <form:label class="form-label" path="email">Email:</form:label>
-                            <form:errors path="email" cssStyle="color: #ff0000"/>
+                            <form:input class="form-control" type="date" placeholder="" path="ngaySinh"/>
+                            <form:label for="ngaySinh" path="ngaySinh">Ngày sinh:</form:label>
+                            <form:errors path="ngaySinh" cssStyle="color: red"></form:errors>
                         </div>
-
-                            <%--                <div class="form-floating mb-3 mt-3">--%>
-                            <%--                    <form:input class="form-control" placeholder="" path="sdt"/>--%>
-                            <%--                    <form:label class="form-label" path="sdt">Số Điện Thoại:</form:label>--%>
-                            <%--                    <form:errors path="sdt" cssStyle="color: #ff0000"/>--%>
-                            <%--                </div>--%>
-
-                        <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
-                        <form:radiobutton path="gioiTinh" value="0" checked="true"/>Nam
-                        <form:radiobutton path="gioiTinh" value="1"/>Nữ
-
                         <div class="form-floating mb-3 mt-3">
                             <form:select class="form-select" path="chucVu">
                                 <option selected disabled>Sản phẩm</option>
@@ -93,59 +98,29 @@
                             </form:select>
                             <form:label class="form-label" path="chucVu">Chức Vụ:</form:label>
                         </div>
-                    </div>
-
-                    <div class="col-6">
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-floating mb-3 mt-3">
-                            <form:textarea class="form-control" placeholder="" path="diaChi"/>
-                            <form:label class="form-label" path="diaChi">Địa Chỉ:</form:label>
-                            <form:errors path="diaChi" cssStyle="color: #ff0000"/>
-                        </div>
-
-                            <%--                <div class="form-floating mb-3 mt-3">--%>
-                            <%--                    <form:input class="form-control" placeholder="" path="canCuoc"/>--%>
-                            <%--                    <form:label class="form-label" path="canCuoc">Căn Cước Công Dân:</form:label>--%>
-                            <%--                    <form:errors path="canCuoc" cssStyle="color: #ff0000"/>--%>
-                            <%--                </div>--%>
-                            <%--                <div class="form-floating mb-3 mt-3">--%>
-                            <%--                    <form:input class="form-control" placeholder="" path="urlAnh"/>--%>
-                            <%--                    <form:label class="form-label" path="urlAnh">Hình Ảnh:</form:label>--%>
-                            <%--                    <form:errors path="urlAnh" cssStyle="color: #ff0000"/>--%>
-                            <%--                </div>--%>
-                    </div>
-                    <div class="col-6">
-                    </div>
-                    <div class="col-md-6">
                         <div class="form-floating mb-3 mt-3">
                             <form:textarea class="form-control" placeholder="" path="taiKhoan"/>
-                            <form:label class="form-label" path="taiKhoan">Tài Khoản:</form:label>
+                            <form:label class="" path="taiKhoan">Tài Khoản:</form:label>
                             <form:errors path="taiKhoan" cssStyle="color: #ff0000"/>
                         </div>
 
                         <div class="form-floating mb-3 mt-3">
                             <form:input class="form-control" placeholder="" path="matKhau"/>
-                            <form:label class="form-label" path="matKhau">Mật Khẩu:</form:label>
+                            <form:label class="" path="matKhau">Mật Khẩu:</form:label>
                             <form:errors path="matKhau" cssStyle="color: #ff0000"/>
-                        </div>
-                            <%--                <div class="form-floating mb-3 mt-3">--%>
-                            <%--                    <form:input class="form-control" placeholder="" path="ngayCapNhat"/>--%>
-                            <%--                    <form:label class="form-label" path="ngayCapNhat">Ngày Cập Nhập:</form:label>--%>
-                            <%--                    <form:errors path="ngayCapNhat" cssStyle="color: #ff0000"/>--%>
-                            <%--                </div>--%>
-
+                        </div
                         <div class="form-check mb-3 mt-3">
-                            <form:label class="form-label" path="tinhTrang">Tình Trạng:</form:label>
+                            <form:label class="" path="tinhTrang">Tình Trạng:</form:label>
                             <br>
-                            <form:radiobutton path="tinhTrang" value="1" checked="true"/>Hoạt động
+                            <form:radiobutton path="tinhTrang" value="0" checked="true"/>Hoạt động
                             <br>
-                            <form:radiobutton path="tinhTrang" value="0"/>Ngưng hoạt động
+                            <form:radiobutton path="tinhTrang" value="1"/>Ngưng hoạt động
                         </div>
+
                     </div>
-                    <div class="col-6">
-                    </div>
+
+
+
                 </div>
                 <div class="row">
                     <div class="col-12" style="text-align: center">
@@ -156,31 +131,36 @@
                 </div>
             </div>
             </form:form>
-            </table>
         </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    </div>
-</div>
+
 </div>
 </div>
 </body>
 <script>
-    function myFunction1() {
-        let text = "Bạn chắc chắn muốn thêm";
-        let kt = confirm(text);
-        if (kt == true) {
-            return true
-        } else {
-            return false;
-        }
-    }
+    const imageInput1 = document.getElementById('anhmoi');
 
-    function myFunction2() {
-        let text = "Bạn chắc chắn muốn sửa";
+    const previewAnh12 = document.getElementById('preview-anh1-2');
+
+    imageInput1.addEventListener('change', function () {
+        const file = imageInput1.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewAnh12.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewAnh12.src = '';
+        }
+        document.getElementById('cucheck1').value = 'moi1';
+    });
+
+    function myFunction1() {
+        let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);
         if (kt == true) {
+            confirm("Thêm thành công");
             return true
         } else {
             return false;
@@ -250,14 +230,7 @@
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#selectMauSac').select2();
-        $('#selectKichThuoc').select2();
-        $('#selectChatLieu').select2();
-    });
 
-</script>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="../assets/vendor/libs/jquery/jquery.js"></script>
@@ -278,3 +251,5 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </html>
+
+

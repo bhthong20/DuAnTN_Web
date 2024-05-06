@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -46,47 +47,46 @@ public class NhanVienController {
         return "home/layout";
     }
 
-    @GetMapping("/nhan-vien/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteNhanVien(@PathVariable(name = "id") UUID id) {
         nhanVienService.deleteNhanVien(id);
-        return "redirect:/hien-thi/nhan-vien";
+        return "redirect:/nhan-vien/hien-thi";
     }
 
-    @GetMapping("/nhan-vien/view-update/{id}")
-    public String viewUpdate(Model model, @PathVariable("id") UUID id, @ModelAttribute("chucVu") ChucVu chucVu) {
+    @GetMapping("/view-update")
+    public String viewUpdate(Model model, @RequestParam("id") UUID id, @ModelAttribute("chucVu") ChucVu chucVu) {
         NhanVien nv = nhanVienService.findById(id);
         model.addAttribute("nhanVien", nv);
-        ;
         model.addAttribute("listCv", chucVuService.getAll());
-        model.addAttribute("contentPage", "/nhan-vien/update.jsp");
-        return "/nhan-vien/update";
+        model.addAttribute("contentPage", "../nhan-vien/update.jsp");
+        return "home/layout";
     }
 
-    @PostMapping("/nhan-vien/update/{id}")
+    @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "nhanVien") NhanVien nhanVien,
                          @PathVariable(name = "id") UUID id, @ModelAttribute("chucVu") ChucVu chucVu) {
         NhanVien nv = nhanVienService.findById(id);
         nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         System.out.println(nv.toString());
         nhanVienService.update(id, nhanVien);
-        return "redirect:/hien-thi/nhan-vien";
+        return "redirect:/nhan-vien/hien-thi";
     }
 
-    @GetMapping("/nhan-vien/view-add")
+    @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("nhanVien") NhanVien nhanVien,
                           @ModelAttribute("chucVu") ChucVu chucVu) {
         model.addAttribute("nhanVien", new NhanVien());
         model.addAttribute("listCv", chucVuService.getAll());
-        model.addAttribute("contentPage", "nhan-vien/add.jsp");
-        return "nhan-vien/add";
+        model.addAttribute("contentPage", "../nhan-vien/add.jsp");
+        return "home/layout";
     }
 
-    @PostMapping("/nhan-vien/add")
+    @PostMapping("/add")
     public String add(Model model, @ModelAttribute(name = "nhanVien") NhanVien nhanVien
-            , @ModelAttribute("chucVu") ChucVu chucVu, BindingResult result) {
+            , @ModelAttribute("chucVu") ChucVu chucVu, BindingResult result, @RequestParam("anh") MultipartFile anh1) {
         if (result.hasErrors()) {
             model.addAttribute("listChucVu", chucVuService.getAll());
-            model.addAttribute("contentPage", "nhan-vien/add.jsp");
+            model.addAttribute("contentPage", "../nhan-vien/add.jsp");
             return "nhan-vien/add";
         }
         String maNhanVien = "nhanVien" + (nhanVienService.getAll().size() + 1);
@@ -95,7 +95,7 @@ public class NhanVienController {
         nhanVien.setNgayTao(Date.valueOf(LocalDate.now()));
         nhanVienService.add(nhanVien);
         System.out.println("listChucVu");
-        return "redirect:/hien-thi/nhan-vien";
+        return "redirect:/nhan-vien/hien-thi";
     }
 }
 
