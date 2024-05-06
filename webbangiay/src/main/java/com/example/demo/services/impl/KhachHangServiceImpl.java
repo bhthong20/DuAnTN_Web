@@ -41,7 +41,6 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public KhachHang add(KhachHang khachHang) {
-        khachHang.setRole(RolesConstant.ROLE_USER);
         return khachHangRepository.save(khachHang);
     }
 
@@ -51,11 +50,9 @@ public class KhachHangServiceImpl implements KhachHangService {
             KhachHang khachHang1 = khachHangRepository.findById(id).orElse(null);
             if (khachHang1 != null) {
                 BeanUtils.copyProperties(khachHang, khachHang1);
-                khachHang.setRole(RolesConstant.ROLE_USER);
                 khachHangRepository.save(khachHang);
             }
         }
-        khachHang.setRole(RolesConstant.ROLE_USER);
         return khachHangRepository.save(khachHang);
     }
 
