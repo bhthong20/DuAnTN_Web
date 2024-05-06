@@ -53,11 +53,16 @@ public class ThongKeServiceImpl implements ThongKeService {
         Optional<HoaDon> hoaDonMinNgayTao = hoaDons.stream()
                 .min((hd1, hd2) -> hd1.getNgayTao().compareTo(hd2.getNgayTao()));
 
-        HoaDon hoaDonMin = hoaDonMinNgayTao.get();
-
         // Tìm HoaDon có ngayTao lớn nhất
         Optional<HoaDon> hoaDonMaxNgayTao = hoaDons.stream()
                 .max((hd1, hd2) -> hd1.getNgayTao().compareTo(hd2.getNgayTao()));
+
+        // Nếu không có hóa đơn thì bỏ qua
+        if (hoaDonMaxNgayTao.isEmpty() || hoaDonMinNgayTao.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        HoaDon hoaDonMin = hoaDonMinNgayTao.get();
         HoaDon hoaDonMax = hoaDonMaxNgayTao.get();
 
         LocalDate ngayTaoNhoNhat = hoaDonMin.getNgayTao().toLocalDate();
