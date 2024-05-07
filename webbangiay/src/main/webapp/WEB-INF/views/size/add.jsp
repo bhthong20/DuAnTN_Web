@@ -51,11 +51,11 @@
         <div class="card">
             <h3 class="card-header">Thêm mới kích thước</h3>
             <div class="card-body">
-                <form:form action="/kich-thuoc/add" method="post" modelAttribute="Size">
+                <form:form action="/kich-thuoc/add" method="post" modelAttribute="Size" onsubmit="return validateForm()">
                 <div class="row">
                     <div class="col-6">
                         <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="size"/>
+                            <form:input class="form-control" id="size" placeholder="" path="size"/>
                             <form:label  path="size">Kích thước</form:label>
                             <form:errors path="size" cssStyle="color: red"/>
                         </div>
@@ -87,6 +87,7 @@
                 </div>
             </div>
             </form:form>
+
         </div>
     </div>
 
@@ -94,10 +95,25 @@
 </div>
 </body>
 <script>
+
+    function validateForm() {
+        var newValue = document.getElementById("size").value;
+        var existingValues = [
+            <c:forEach items="${listKT}" var="value" varStatus="status">
+            '${value.size}'<c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+        ];
+        if(existingValues.includes(newValue)) {
+            alert("Giá trị đã tồn tại!");
+            return false;
+        }
+        return true;
+    }
+
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);
-        if (kt == true) {
+        if (kt == true && validateForm() == true) {
             confirm("Thêm thành công");
             return true
         } else {
