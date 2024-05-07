@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.dto.ThongKeAllDto;
 import com.example.demo.services.ThongKeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,12 @@ public class ThongKeController {
     @GetMapping
     public String getThongKe(Model model) {
         model.addAttribute("contentPage", "../thong-ke/index.jsp");
-        thongKeService.getTongThongKe();
         return "home/layout";
+    }
+
+    @GetMapping("/api")
+    @ResponseBody
+    public ThongKeAllDto getAllTongApi() {
+        return thongKeService.getTongThongKe();
     }
 }

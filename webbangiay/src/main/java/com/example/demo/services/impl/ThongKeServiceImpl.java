@@ -1,7 +1,12 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
+import com.example.demo.models.SanPham;
+import com.example.demo.models.dto.LineChartDto;
+import com.example.demo.models.dto.SanPhamThongKeDto;
+import com.example.demo.models.dto.ThongKeAllDto;
 import com.example.demo.models.dto.ThongKeTongDto;
 import com.example.demo.repositories.ThongKeRepository;
 import com.example.demo.services.ThongKeService;
@@ -27,7 +32,7 @@ public class ThongKeServiceImpl implements ThongKeService {
     private ThongKeRepository repository;
 
     @Override
-    public ThongKeTongDto getTongThongKe() {
+    public ThongKeAllDto getTongThongKe() {
         List<HoaDonChiTiet> list = repository.getAllHoaDonChiTiet();
 
         Set<HoaDon> set = new HashSet<>(list.stream().map(el -> el.getHoaDon()).collect(Collectors.toList()));
@@ -36,16 +41,19 @@ public class ThongKeServiceImpl implements ThongKeService {
 
         List<Long> taiQuayTongTien = new ArrayList<>();
         List<Long> onlineTongTien = new ArrayList<>();
-
+        List<LineChartDto> getLineChartTong = new ArrayList<>();
         listNgayTao.forEach(el -> {
             taiQuayTongTien.add(countTongTienTheoThangByLoai(el, set, 1));
             onlineTongTien.add(countTongTienTheoThangByLoai(el, set, 0));
         });
+        getLineChartTong.add(new LineChartDto(null, "Bán tại quầy", taiQuayTongTien));
+        getLineChartTong.add(new LineChartDto(null, "Bán online", onlineTongTien));
 
         ThongKeTongDto thongKeTongDto = getTongQuatThongKe(set, list);
+        List<SanPhamThongKeDto> getAllSanPham = getAllSanPhamThongKe(list);
+        List<LineChartDto> getLineChartSanPham = getLineChartSanPham(list, listNgayTao);
 
-
-        return null;
+        return new ThongKeAllDto(thongKeTongDto, getAllSanPham, getLineChartSanPham, getLineChartTong, listNgayTao);
     }
 
     public List<YearMonth> listNgayTao(Set<HoaDon> hoaDons) {
@@ -111,4 +119,83 @@ public class ThongKeServiceImpl implements ThongKeService {
         }
         return tongTien;
     }
+
+    // lấy danh sách chi tiết sản phẩm
+    public List<ChiTietSanPham> getAllChiTietSanPhamByListHoaDon(List<HoaDonChiTiet> list) {
+        return list.stream().map(el -> {
+            ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
+            chiTietSanPham.setNgayTao(el.getHoaDon().getNgayTao());
+            return chiTietSanPham;
+        }).collect(Collectors.toList());
+    }
+
+    public List<SanPhamThongKeDto> getAllSanPhamThongKe(List<HoaDonChiTiet> hoaDonChiTiets) {
+        List<SanPhamThongKeDto> sanPhamThongKeDtos = new ArrayList<>();
+
+        hoaDonChiTiets.forEach(el -> {
+            SanPhamThongKeDto sanPhamThongKeDto = new SanPhamThongKeDto();
+
+            sanPhamThongKeDto.setTenSanPham(el.getChiTietSanPham().getSanPham().getTenSP());
+            sanPhamThongKeDto.setId(el.getChiTietSanPham().getSanPham().getId());
+            sanPhamThongKeDto.setUrl(el.getChiTietSanPham().getSanPham().getHinhAnh().getAnh1());
+            sanPhamThongKeDto.setSoLuongTon(el.getChiTietSanPham().getSoLuongTon());
+            sanPhamThongKeDto.setSoLuongBan(el.getSoLuong());
+            BigDecimal doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia());
+            sanPhamThongKeDto.setDoanhThu(doanhThu.longValue());
+
+            Optional<SanPhamThongKeDto> existingItem = sanPhamThongKeDtos.stream()
+                    .filter(data -> data.getId().equals(el.getChiTietSanPham().getSanPham().getId()))
+                    .findFirst();
+
+            if (existingItem.isPresent()) {
+                int index = sanPhamThongKeDtos.indexOf(existingItem.get());
+
+                sanPhamThongKeDto.setSoLuongTon(sanPhamThongKeDto.getSoLuongTon() + existingItem.get().getSoLuongTon());
+                sanPhamThongKeDto.setSoLuongBan(sanPhamThongKeDto.getSoLuongBan() + existingItem.get().getSoLuongBan());
+                sanPhamThongKeDto.setDoanhThu(sanPhamThongKeDto.getDoanhThu() + existingItem.get().getDoanhThu());
+
+                sanPhamThongKeDtos.set(index, sanPhamThongKeDto);
+            } else {
+                sanPhamThongKeDtos.add(sanPhamThongKeDto);
+            }
+        });
+        return sanPhamThongKeDtos;
+    }
+
+    // Thống kê sản phẩm theo tháng
+    public List<LineChartDto> getLineChartSanPham(List<HoaDonChiTiet> hoaDonChiTiets, List<YearMonth> thangTrongKhoang) {
+        List<LineChartDto> listReturn = new ArrayList<>();
+
+        hoaDonChiTiets.forEach(el -> {
+            if (listReturn.stream().filter(sp -> sp.getId().equals(el.getChiTietSanPham().getSanPham().getId())).count() == 0) {
+                LineChartDto lineChartDto = new LineChartDto();
+                lineChartDto.setId(el.getChiTietSanPham().getSanPham().getId());
+                lineChartDto.setName(el.getChiTietSanPham().getSanPham().getTenSP());
+                listReturn.add(lineChartDto);
+            }
+        });
+
+        thangTrongKhoang.forEach(yearMonth -> {
+            hoaDonChiTiets
+                    .stream()
+                    .filter(el -> YearMonth.from(el.getHoaDon().getNgayTao().toLocalDate()).equals(yearMonth))
+                    .collect(Collectors.toList())
+                    .forEach(el -> {
+                Optional<LineChartDto> lineChartDto = listReturn
+                        .stream()
+                        .filter(sp -> sp.getId().equals(el.getChiTietSanPham().getSanPham().getId())).findFirst();
+//                if (lineChartDto.isPresent()) {
+//                    if (lineChartDto.get().getData() == null) {
+//                        lineChartDto.get().setData(new ArrayList<>());
+//                    }
+//                    lineChartDto.get()
+//                            .getData()
+//                            .add(BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia()).longValue());
+//                }
+            });
+        });
+
+        return listReturn;
+    }
+
 }

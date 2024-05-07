@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
-import com.example.demo.models.dto.ThongKeTongDto;
+import com.example.demo.models.dto.ThongKeAllDto;
 
 public interface ThongKeService {
-    ThongKeTongDto getTongThongKe();
+    ThongKeAllDto getTongThongKe();
 }
