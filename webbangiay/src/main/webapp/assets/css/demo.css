@@ -519,7 +519,7 @@
   cursor: default;
   display: flex;
   justify-content: center;
-  padding: 3px 7px;
+  padding: 7px 10px;
   position: relative;
   white-space: nowrap;
   z-index: 1;
@@ -530,7 +530,8 @@
 .mini-vouchers__vouchers {
   display: flex;
   flex-shrink: 1;
-  overflow: hidden;
+  overflow: auto;
+  flex-wrap: wrap;
   position: relative;
 }
 .flex-auto {
@@ -709,4 +710,14 @@
 button.sApkZm.SkhBL1.checked {
   background: #ff3e1d;
   color: white;
+}
+.voucher-ticket.voucher-ticket--VN.voucher-ticket--seller-mini-solid.mini-voucher-with-popover:hover {
+  background: #ff3e1d;
+  color: white;
+  cursor: pointer;
+}
+.voucher-ticket.voucher-ticket--VN.voucher-ticket--seller-mini-solid.mini-voucher-with-popover.checked {
+  background: #ff3e1d;
+  color: white;
+  cursor: pointer;
 }

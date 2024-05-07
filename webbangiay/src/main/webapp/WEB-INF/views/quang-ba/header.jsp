@@ -78,7 +78,8 @@
         <div class="container justify-content-between p-0">
             <div class="d-flex">
                 <div class="site-brand">
-                    <a href="https://ivymoda.com/"><img src="https://pubcdn.ivymoda.com/ivy2/images/logo.png" alt="Trang chủ | IVY moda"></a>
+                    <a href="https://ivymoda.com/"><img src="https://pubcdn.ivymoda.com/ivy2/images/logo.png"
+                                                        alt="Trang chủ | IVY moda"></a>
                 </div>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                     <ul class="navbar-nav text-center mb-2 mb-lg-0">
@@ -104,15 +105,20 @@
                 </div>
             </div>
             <div>
-                <div>
-                    <span>
-                        <i style="font-size: 30px" class='bx bxs-user' ></i> Tài khoản
+                <div class="dropdown">
+                    <span role="button" onclick="showDropdow()" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i style="font-size: 30px" class='bx bxs-user'></i> <span id="taiKhoan">Tài khoản</span>
                     </span>
-                    <span class="position-relative"><i style="font-size: 30px" class='bx bx-cart'></i>
+                    <ul class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="/ban-hang-online/hoa-don">Danh sách hóa đơn</a></li>
+                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                    </ul>
+                    <a href="/gio-hang" class="position-relative"><i style="font-size: 30px" class='bx bx-cart'></i>
                         <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger">
-                        9
+                        <span id="soLuongGioHang"></span>
                       </span>
-                    </span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -160,5 +166,45 @@
             }
         }
     })
+
+    let show = 0
+    const showDropdow = () => {
+        show++;
+        if (show % 2 == 0) {
+            $('#dropdown-menu').hide();
+        } else {
+            $('#dropdown-menu').show();
+        }
+    }
+
+    var userInfoCookie = getCookie("user_info");
+    if (userInfoCookie) {
+        $('#taiKhoan').text(JSON.parse(userInfoCookie))
+    } else {
+        $.ajax({
+            type: "GET",
+            url: "/user-infor",
+            success: function (response) {
+                if (response) {
+                    setCookie("user_info", JSON.stringify(response.taiKhoan));
+                    $('#taiKhoan').text(response.taiKhoan)
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "/ban-hang-online/rest/count-gio-hang",
+        success: function (response) {
+            $('#soLuongGioHang').text(response)
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+        }
+    });
 </script>
 </html>

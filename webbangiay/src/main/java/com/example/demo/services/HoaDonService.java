@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface HoaDonService {
     public Page<HoaDon> getAll(Pageable pageable);
+    public Page<HoaDon> getAllAdmin(Pageable pageable);
     public List<HoaDon> findAll();
     public HoaDon findById(UUID id);
     public HoaDon add(HoaDon hoaDon);

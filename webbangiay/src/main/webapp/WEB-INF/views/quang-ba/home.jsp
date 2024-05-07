@@ -71,7 +71,7 @@
     <script src="../js/menu.js"></script>
 </head>
 
-<body>
+<body style="background-color: #EBF0F5 !important;">
 
     <jsp:include page="header.jsp"></jsp:include>
 

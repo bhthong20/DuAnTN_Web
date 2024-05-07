@@ -41,21 +41,24 @@ public class KhachHang {
     private Boolean gioiTinh;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "Email phải có ít nhất 8 ký tự và phải có đuôi @gmail.com")
+//    @Pattern(regexp = "^.{8,}@gmail\\.com$", message = "Email phải có ít nhất 8 ký tự và phải có đuôi @gmail.com")
     @Column(name = "email")
     private String email;
 
     @NotBlank(message = "Không để trống thông tin")
-    @Pattern(regexp = "^0[0-9]{9}$", message = "Sdt phải 10 số và bắt đầu bằng 0")
+//    @Pattern(regexp = "^0[0-9]{9}$", message = "Sdt phải 10 số và bắt đầu bằng 0")
     @Column(name = "sdt")
     private String sdt;
 
     @Column(name = "ngay_sinh")
     private Date ngaySinh;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "tai_khoan")
+    @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Tài khoản không được chứa ký tự đặc biệt")
     private String taiKhoan;
 
+    @NotBlank(message = "Không để trống thông tin")
     @Column(name = "mat_khau")
     private String matKhau;
 
@@ -67,4 +70,7 @@ public class KhachHang {
 
     @Column(name = "trang_thai")
     private String trangThai;
+
+    @Column(name = "roles")
+    private String role;
 }

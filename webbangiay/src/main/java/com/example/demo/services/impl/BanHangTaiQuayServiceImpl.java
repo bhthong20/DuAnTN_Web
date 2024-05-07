@@ -9,9 +9,12 @@ import com.example.demo.models.dto.SanPhamAddHoaDon;
 import com.example.demo.repositories.ChiTietSanPhamRepository;
 import com.example.demo.repositories.HoaDonChiTietRepository;
 import com.example.demo.repositories.HoaDonRepository;
+import com.example.demo.repositories.KhuyenMaiRepository;
 import com.example.demo.services.BanHangTaiQuayService;
 import com.example.demo.services.HoaDonService;
 import com.example.demo.services.KhachHangService;
+import com.example.demo.util.RolesConstant;
+import com.example.demo.util.UserLoginCommon;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,18 +46,25 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     @Autowired
     private KhachHangService khachHangService;
 
+    @Autowired
+    private KhuyenMaiRepository khuyenMaiRepository;
+
+    @Autowired
+    private UserLoginCommon common;
+
     @Override
     public List<HoaDon> getAllHoaDon() {
-        return hoaDonRepository.findAllByLoaiAndTrangThai(0, 0);
+        return hoaDonRepository.findAllByLoai(0);
     }
 
     @Override
     public List<HoaDon> createHoaDon() {
         HoaDon hoaDon = new HoaDon();
-        String maHD = "HD" + (hoaDonService.findAll().size() + 1);
+        String maHD = "HĐ" + (hoaDonService.findAll().size() + 1);
         hoaDon.setMa(maHD);
         hoaDon.setLoai(0);
         hoaDon.setNgayTao(Date.valueOf(LocalDate.now()));
+        hoaDon.setTrangThai(9);
         hoaDonService.add(hoaDon);
         return hoaDonService.findAll();
     }
@@ -67,6 +77,11 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     @Override
     public List<ChiTietSanPham> getChiTietSanPham() {
         return chiTietSanPhamService.findAllByIsDelete(1);
+    }
+
+    @Override
+    public ChiTietSanPham getDetailSanPham(UUID id) {
+        return chiTietSanPhamService.findById(id).orElse(null);
     }
 
     @Override
@@ -217,8 +232,12 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                 khachHang.setMatKhau(maKhachHang);
                 khachHang.setId(khachHangService.add(khachHang).getId());
             }
-
+            khachHang.setRole(RolesConstant.ROLE_USER);
+            if (request.getIdKhuyenMai() != null) {
+                hoaDon.setKhuyenMai(khuyenMaiRepository.findById(request.getIdKhuyenMai()).orElse(null));
+            }
             hoaDon.setKhachHang(khachHang);
+            hoaDon.setNhanVien(common.getUserLogin());
             hoaDonService.update(hoaDon.getId(), hoaDon);
             return true;
         }

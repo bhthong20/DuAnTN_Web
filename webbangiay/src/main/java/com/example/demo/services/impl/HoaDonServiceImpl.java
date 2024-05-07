@@ -22,6 +22,12 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public Page<HoaDon> getAllAdmin(Pageable pageable) {
+        int[] c = {3,9};
+        return hoaDonRepository.findAllByTrangThaiNotIn(c, pageable);
+    }
+
+    @Override
     public List<HoaDon> findAll() {
         return hoaDonRepository.findAll();
     }

@@ -15,6 +15,7 @@ public interface BanHangTaiQuayService {
     List<HoaDon> createHoaDon();
     List<HoaDonChiTiet> findHoaDonDto(UUID id);
     List<ChiTietSanPham> getChiTietSanPham();
+    ChiTietSanPham getDetailSanPham(UUID id);
     List<HoaDonChiTiet> shoppingProduct(List<SanPhamAddHoaDon> sanPhamAddHoaDons);
     Boolean deleteProduct(List<UUID> listId);
     List<KhachHang> getAllKhachHang();

@@ -147,9 +147,9 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item">
-                    <a href="../../../index.html" class="menu-link" aria-expanded="false">
+                    <a href="/thong-ke" class="menu-link" aria-expanded="false">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Dashboard</div>
+                        <div data-i18n="Analytics">Thống kê</div>
                     </a>
                 </li>
 
@@ -236,7 +236,7 @@
 
                 <!-- Khuyên mai -->
                 <li class="menu-item">
-                    <a href="cards-basic.html" class="menu-link">
+                    <a href="/khuyen-mai/hien-thi" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-collection"></i>
                         <div data-i18n="Basic">Quản lý khuyến mại</div>
                     </a>
@@ -312,14 +312,13 @@
                         </li>
 
                         <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                               data-bs-toggle="dropdown">
+                        <li class="nav-item navbar-dropdown dropdown-user ">
+                            <a class="nav-link" onclick="showDropdow()" href="javascript:void(0);">
                                 <div class="avatar avatar-online">
                                     <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle"/>
                                 </div>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu dropdown-menu-end" id="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item" href="#">
                                         <div class="d-flex">
@@ -472,5 +471,15 @@
                 }
             }
         })
+
+        let show = 0
+        const showDropdow = () => {
+            show++;
+            if (show % 2 == 0) {
+                $('#dropdown-menu').hide();
+            } else {
+                $('#dropdown-menu').show();
+            }
+        }
 </script>
 </html>

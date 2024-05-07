@@ -13,4 +13,9 @@ public interface KhuyenMaiRepository extends JpaRepository<KhuyenMai, UUID> {
     @Query("select hsp from KhuyenMai hsp where hsp.ma like %:search% or hsp.ten like %:search%")
     List<KhuyenMai> search(String search);
 
+    List<KhuyenMai> findByNgayBatDauLessThanEqualAndNgayKetThucGreaterThanEqualAndTrangThaiAndNgayBatDauIsNotNullAndNgayKetThucIsNotNullOrderByNgayTaoDesc(
+            Long ngayBatDau,
+            Long ngayKetThuc,
+            int trangThai
+    );
 }

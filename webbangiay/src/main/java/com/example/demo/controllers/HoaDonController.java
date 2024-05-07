@@ -26,14 +26,37 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/hoa-don")
 public class HoaDonController {
+
     @Autowired
     private HoaDonService hoaDonService;
+
     @Autowired
     private NhanVienService nhanVienService;
+
     @Autowired
     private KhuyenMaiService khuyenMaiService;
+
     @Autowired
     private KhachHangService khachHangService;
+
+    @GetMapping()
+    public String quanLyBanHang(Model model,@RequestParam("num")Optional<Integer>num, @RequestParam(name = "size",defaultValue = "5",required = false)Integer size) {
+        Sort sort = Sort.by("ngayTao").descending();
+        Pageable pageable = PageRequest.of(num.orElse(0),size,sort);
+        Page<HoaDon> list = hoaDonService.getAllAdmin(pageable);
+        model.addAttribute("listhoaDon", list.getContent());
+        model.addAttribute("total", list.getTotalPages());
+        model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
+        return "home/layout";
+    }
+
+    @GetMapping("/detail")
+    public String quanLyBanHangDetail(Model model) {
+        model.addAttribute("listKM", khuyenMaiService.findAll());
+        model.addAttribute("contentPage", "../ban-hang-online/index-admin.jsp");
+        return "home/layout";
+    }
+
     @GetMapping("/hien-thi")
        public String hiethi(Model model,@RequestParam("num")Optional<Integer>num, @RequestParam(name = "size",defaultValue = "5",required = false)Integer size
     ){

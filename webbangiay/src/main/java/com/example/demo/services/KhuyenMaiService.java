@@ -8,17 +8,19 @@ import java.util.List;
 import java.util.UUID;
 
 public interface KhuyenMaiService {
-    public Page<KhuyenMai> getAll(Pageable pageable);
+    Page<KhuyenMai> getAll(Pageable pageable);
 
-    public List<KhuyenMai> findAll();
+    List<KhuyenMai> findAll();
 
-    public List<KhuyenMai> search(String search);
+    List<KhuyenMai> search(String search);
 
-    public KhuyenMai findById(UUID id);
+    KhuyenMai findById(UUID id);
 
-    public KhuyenMai add(KhuyenMai khuyenMai);
+    KhuyenMai add(KhuyenMai khuyenMai);
 
-    public KhuyenMai update(UUID id, KhuyenMai khuyenMai);
+    KhuyenMai update(UUID id, KhuyenMai khuyenMai);
 
-    public Boolean delete(UUID id);
+    Boolean delete(UUID id);
+
+    List<KhuyenMai> getComboboxKhuyenMai();
 }
