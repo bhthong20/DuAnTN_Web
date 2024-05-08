@@ -47,6 +47,8 @@ public class KichThuocController {
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("Size") KichThuoc size) {
         model.addAttribute("size", new KichThuoc());
+        List<KichThuoc>list = kichThuocService.findAll();
+        model.addAttribute("listKT", list);
         model.addAttribute("contentPage", "../size/add.jsp");
         return "home/layout";
     }
@@ -57,6 +59,7 @@ public class KichThuocController {
             model.addAttribute("contentPage", "../size/add.jsp");
             return "home/layout";
         }
+
         String makt = "KT" + (kichThuocService.findAll().size() + 1);
         size.setMa(makt);
         size.setNgayTao(Date.valueOf(LocalDate.now()));
@@ -72,6 +75,8 @@ public class KichThuocController {
 
     @GetMapping("/view-update")
     public String detail(Model model, @RequestParam("id") UUID id) {
+        List<KichThuoc>list = kichThuocService.findAll();
+        model.addAttribute("listKT", list);
         KichThuoc size = kichThuocService.findById(id);
         model.addAttribute("Size", size);
         model.addAttribute("contentPage", "../size/update.jsp");

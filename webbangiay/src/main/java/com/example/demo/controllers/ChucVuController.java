@@ -38,7 +38,8 @@ public class ChucVuController {
         Page<ChucVu> list = chucVuService.FindAll(pageable);
         model.addAttribute("chucVu", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        return "chuc-vu/hien-thi";
+        model.addAttribute("contentPage", "../chuc-vu/hien-thi.jsp");
+        return "home/layout";
     }
 
     @GetMapping("/delete/{id}")
@@ -47,12 +48,12 @@ public class ChucVuController {
         return "redirect:/chuc-vu/hien-thi";
     }
 
-    @GetMapping("/view-update/{id}")
-    public String viewUpdate(Model model, @PathVariable("id") UUID id) {
+    @GetMapping("/view-update")
+    public String viewUpdate(Model model, @RequestParam("id") UUID id) {
         ChucVu cv = chucVuService.findById(id);
         model.addAttribute("chucVu", cv);
-        model.addAttribute("contentPage", "/chuc-vu/update.jsp");
-        return "/chuc-vu/update";
+        model.addAttribute("contentPage", "../chuc-vu/update.jsp");
+        return "home/layout";
     }
 
     @PostMapping("/update/{id}")
@@ -69,8 +70,8 @@ public class ChucVuController {
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("chucVu") ChucVu chucVu) {
         model.addAttribute("chucVu", new ChucVu());
-        model.addAttribute("contentPage", "chuc-vu/add.jsp");
-        return "chuc-vu/add";
+        model.addAttribute("contentPage", "../chuc-vu/add.jsp");
+        return "home/layout";
     }
 
     @PostMapping("/add")

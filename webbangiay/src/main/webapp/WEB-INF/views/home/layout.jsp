@@ -186,6 +186,11 @@
                                 <div data-i18n="Basic">Nhân Viên</div>
                             </a>
                         </li>
+                        <li class="menu-item">
+                            <a href="/chuc-vu/hien-thi" class="menu-link">
+                                <div data-i18n="Basic">Chức vụ</div>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
