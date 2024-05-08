@@ -45,28 +45,13 @@
 </head>
 <body>
 <br>
-
-<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-           aria-controls="description" aria-selected="true">Thông tin Chi tiết sản phẩm</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chuc-vu/view-add" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới Chức Vụ</a>
-    </li>
-</ul>
 <div class="card mb-4">
-    <h5 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h5>
     <table class="table container">
         <tbody>
+        <h3 class="card-header" style="text-align: center">Thông tin chức vụ</h3>
         <tr>
-            <td colspan="2" style="text-align: center">
-                <form action="/chi-tiet-san-pham/search" method="post">
+            <td style="text-align: center">
+                <form action="/chuc-vu/search" method="post">
                     <div class="input-group" style="width:100%; text-align: center">
                         <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                aria-label="Bạn tìm gì..." name="search">
@@ -76,127 +61,16 @@
                     </div>
                 </form>
             </td>
-            <td>
-                <form action="/chi-tiet-san-pham/loc" method="post">
-                    <div class="card-body" style="text-align: center">
-                        <div class="demo-inline-spacing">
-                            <div class="btn-group">
-                                <select class="form-select">
-                                    <option selected disabled>Chất Liệu</option>
-                                    <c:forEach items="${listCL}" var="cl">
-                                        <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Secondary
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-success dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Success
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-danger dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Danger
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-warning dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Warning
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-info dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Info
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+        </tr>
+        <tr class="text-center">
+            <td class="text-center" colspan="2">
+                <%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
+                <a type="button" class="btn btn-primary" href="/chuc-vu/view-add" onclick="return myFunction6()">Thêm mới chức vụ</a>
             </td>
         </tr>
+
         </tbody>
     </table>
-
-
 </div>
 <div class="card">
     <div class="table-responsive text-nowrap">
@@ -218,24 +92,19 @@
                 <tr>
                     <td>${stt.index+1}</td>
                     <td>${cv.ma}</td>
-                        <%--                <td align="center">--%>
-                        <%--                    <img src="../../../uploads/${ctsp.sanPham.hinhAnh.anh1}" width="40" height="40"--%>
-                        <%--                         style="border-radius:50% 50% 50% 50%">--%>
-
-                        <%--                </td>--%>
                     <td>${cv.ten}</td>
                     <td>${cv.ngayTao}</td>
                     <td>${cv.ngayCapNhat}</td>
                     <td>${cv.moTa}</td>
                     <td>
-                        <c:if test="${cv.trangThai == 1}">Hoạt Động</c:if>
-                        <c:if test="${cv.trangThai == 0}">Không Hoạt Động</c:if>
+                        <c:if test="${cv.trangThai == 0}">Hoạt Động</c:if>
+                        <c:if test="${cv.trangThai == 1}">Không Hoạt Động</c:if>
                     </td>
-                    <td colspan="2">
-                        <a href="/chuc-vu/delete/${cv.id}" class="btn btn-success"
-                           onclick="return tbxd()">Delete</a>
-                        <a href="/chuc-vu/view-update/${cv.id}" class="btn btn-success"
-                           onclick="return tbxd()">Update</a>
+                    <td>
+                        <a href="/chuc-vu/delete/${cv.id}" class="btn btn-success" onclick="myFunction7()"
+                        >Delete</a>
+                        <a href="/chuc-vu/view-update?id=${cv.id}" class="btn btn-success" onclick="myFunction8()"
+                        >Update</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -243,19 +112,18 @@
         </table>
     </div>
 </div>
-
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center pagination-lg">
-        <li class="page-item"><a class="page-link" href="/hien-thi/chuc-vu?num=0">First</a></li>
-
+        <li class="page-item"><a class="page-link" href="/chuc-vu/hien-thi?num=0">First</a>
+        </li>
         <c:forEach begin="1" end="${total}" varStatus="status">
             <li class="page-item">
-                <a href="${pageContext.request.contextPath}/hien-thi/chuc-vu?num=${status.index -1}"
+                <a href="${pageContext.request.contextPath}/chuc-vu/hien-thi?num=${status.index -1}"
                    class="page-link">${status.index}</a>
             </li>
         </c:forEach>
-
-        <li class="page-item"><a class="page-link" href="/hien-thi/chuc-vu?num=${total-1}">Last</a></li>
+        <li class="page-item"><a class="page-link" href="/chuc-vu/hien-thi?num=${total-1}">Last</a>
+        </li>
     </ul>
 </nav>
 
@@ -342,7 +210,16 @@
     }
 
     function myFunction7() {
-        let text = "Bạn chắc chắn muốn sang trang thông tin đã thay đổi";
+        let text = "Bạn chắc chắn muốn xóa thông tin";
+        let kt = confirm(text);
+        if (kt == true) {
+            return true
+        } else {
+            return false;
+        }
+    }
+    function myFunction8() {
+        let text = "Bạn chắc chắn muốn trang update thông tin";
         let kt = confirm(text);
         if (kt == true) {
             return true
@@ -351,26 +228,8 @@
         }
     }
 
-
 </script>
-<script>
-    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {
-        dropdown.style.display = 'none';
-    });
 
-    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
-    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
-        dropdown.addEventListener('click', function () {
-            const dropdownMenu = dropdown.nextElementSibling;
-
-            if (dropdownMenu.style.display === 'block') {
-                dropdownMenu.style.display = 'none';
-            } else {
-                dropdownMenu.style.display = 'block';
-            }
-        });
-    });
-</script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>
