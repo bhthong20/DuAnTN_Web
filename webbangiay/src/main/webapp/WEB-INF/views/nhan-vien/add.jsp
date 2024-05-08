@@ -139,23 +139,6 @@
 </div>
 </body>
 <script>
-    const imageInput1 = document.getElementById('anhmoi');
-
-    const previewAnh12 = document.getElementById('preview-anh1-2');
-
-    imageInput1.addEventListener('change', function () {
-        const file = imageInput1.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewAnh12.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            previewAnh12.src = '';
-        }
-    });
-
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);

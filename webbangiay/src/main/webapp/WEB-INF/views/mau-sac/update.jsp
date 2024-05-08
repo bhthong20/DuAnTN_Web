@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="ten"/>
+                            <form:input class="form-control" id="ms" placeholder="" path="ten"/>
                             <form:label path="ten">Tên</form:label>
                             <form:errors path="ten" cssStyle="color: red"/>
                         </div>
@@ -95,6 +95,19 @@
 </div>
 </body>
 <script>
+    function validateForm() {
+        var newValue = document.getElementById("ms").value;
+        var existingValues = [
+            <c:forEach items="${listMS}" var="value" varStatus="status">
+            '${value.ten}'<c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+        ];
+        if(existingValues.includes(newValue)) {
+            alert("Giá trị đã tồn tại!");
+            return false;
+        }
+        return true;
+    }
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
         let kt = confirm(text);
@@ -108,7 +121,7 @@
     function myFunction2() {
         let text = "Bạn chắc chắn muốn sửa";
         let kt = confirm(text);
-        if (kt == true) {
+        if (kt == true && validateForm() == true) {
             return true
         } else {
             return false;

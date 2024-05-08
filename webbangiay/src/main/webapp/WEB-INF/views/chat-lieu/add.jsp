@@ -52,11 +52,11 @@
         <div class="card">
             <h3 class="card-header">Thêm mới chất liệu</h3>
             <div class="card-body">
-                <form:form action="/chat-lieu/add" method="post" modelAttribute="ChatLieu">
+                <form:form action="/chat-lieu/add" method="post" modelAttribute="ChatLieu" onsubmit="return validateForm()">
                 <div class="row">
                     <div class="col-6">
                         <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="tenChatLieu"/>
+                            <form:input class="form-control" id="cl" placeholder="" path="tenChatLieu"/>
                             <form:label path="tenChatLieu">Loại chất liệu:</form:label>
                             <form:errors path="tenChatLieu" cssStyle="color: red"/>
                         </div>
@@ -94,10 +94,25 @@
 </div>
 </body>
 <script>
+
+    function validateForm() {
+        var newValue = document.getElementById("cl").value;
+        var existingValues = [
+            <c:forEach items="${listCL}" var="value" varStatus="status">
+            '${value.tenChatLieu}'<c:if test="${!status.last}">,</c:if>
+            </c:forEach>
+        ];
+        if(existingValues.includes(newValue)) {
+            alert("Chất liệu đã tồn tại!");
+            return false;
+        }
+        return true;
+    }
+
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);
-        if (kt == true) {
+        if (kt == true &&validateForm()==true) {
             confirm("Thêm thành công");
             return true
         } else {

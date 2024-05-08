@@ -104,7 +104,7 @@
             </c:forEach>
         ];
         if(existingValues.includes(newValue)) {
-            alert("Giá trị đã tồn tại!");
+            alert("Size đã tồn tại!");
             return false;
         }
         return true;

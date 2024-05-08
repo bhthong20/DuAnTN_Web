@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.ChatLieu;
+import com.example.demo.models.MauSac;
 import com.example.demo.services.ChatLieuService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class ChatLieuController {
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("ChatLieu") ChatLieu chatLieu) {
+        List<ChatLieu>list = chatLieuService.findAll();
+        model.addAttribute("listCL", list);
         model.addAttribute("ChatLieu", new ChatLieu());
         model.addAttribute("contentPage", "../chat-lieu/add.jsp");
         return "home/layout";
@@ -69,6 +72,8 @@ public class ChatLieuController {
 
     @GetMapping("/view-update")
     public String detail(Model model, @RequestParam("id") UUID id) {
+        List<ChatLieu>list = chatLieuService.findAll();
+        model.addAttribute("listCL", list);
         ChatLieu cl = chatLieuService.findById(id);
         model.addAttribute("chatLieu", cl);
         model.addAttribute("contentPage", "../chat-lieu/update.jsp");

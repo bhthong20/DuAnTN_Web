@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.KichThuoc;
 import com.example.demo.models.ThuongHieu;
 import com.example.demo.services.ThuongHieuService;
 import jakarta.validation.Valid;
@@ -42,6 +43,8 @@ public class ThuongHieuController {
     }
     @GetMapping("view-add")
     public String viewAdd(Model model, @ModelAttribute("thuongHieu") ThuongHieu thuongHieu){
+        List<ThuongHieu>list = thuongHieuService.findAll();
+        model.addAttribute("listTH", list);
         model.addAttribute("thuongHieu",new ThuongHieu());
         model.addAttribute("contentPage", "../thuong-hieu/add.jsp");
         return "home/layout";
@@ -65,6 +68,8 @@ public class ThuongHieuController {
     }
     @GetMapping("view-update")
     public String detail(Model model, @RequestParam("id") UUID id){
+        List<ThuongHieu>list = thuongHieuService.findAll();
+        model.addAttribute("listTH", list);
         ThuongHieu thuongHieu = thuongHieuService.findById(id);
         model.addAttribute("thuongHieu",thuongHieu);
         model.addAttribute("contentPage", "../thuong-hieu/update.jsp");
