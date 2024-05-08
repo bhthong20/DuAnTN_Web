@@ -55,17 +55,18 @@ public class NhanVienController {
 
     @GetMapping("/view-update")
     public String viewUpdate(Model model, @RequestParam("id") UUID id, @ModelAttribute("chucVu") ChucVu chucVu) {
+        model.addAttribute("listCv", chucVuService.getAll());
         NhanVien nv = nhanVienService.findById(id);
         model.addAttribute("nhanVien", nv);
-        model.addAttribute("listCv", chucVuService.getAll());
         model.addAttribute("contentPage", "../nhan-vien/update.jsp");
         return "home/layout";
     }
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "nhanVien") NhanVien nhanVien,
-                         @PathVariable(name = "id") UUID id, @ModelAttribute("chucVu") ChucVu chucVu) {
+                         @PathVariable(name = "id") UUID id) {
         NhanVien nv = nhanVienService.findById(id);
+        nhanVien.setId(id);
         nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         System.out.println(nv.toString());
         nhanVienService.update(id, nhanVien);
@@ -83,7 +84,7 @@ public class NhanVienController {
 
     @PostMapping("/add")
     public String add(Model model, @ModelAttribute(name = "nhanVien") NhanVien nhanVien
-            , @ModelAttribute("chucVu") ChucVu chucVu, BindingResult result, @RequestParam("anh") MultipartFile anh1) {
+            , @ModelAttribute("chucVu") ChucVu chucVu, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("listChucVu", chucVuService.getAll());
             model.addAttribute("contentPage", "../nhan-vien/add.jsp");
@@ -91,7 +92,6 @@ public class NhanVienController {
         }
         String maNhanVien = "nhanVien" + (nhanVienService.getAll().size() + 1);
         nhanVien.setMa(maNhanVien);
-//        nhanVien.setHoTen(nhanVien.getHoTen());
         nhanVien.setNgayTao(Date.valueOf(LocalDate.now()));
         nhanVienService.add(nhanVien);
         System.out.println("listChucVu");

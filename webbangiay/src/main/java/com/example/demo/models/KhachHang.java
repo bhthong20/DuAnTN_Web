@@ -71,6 +71,4 @@ public class KhachHang {
     @Column(name = "trang_thai")
     private String trangThai;
 
-    @Column(name = "roles")
-    private String role;
 }

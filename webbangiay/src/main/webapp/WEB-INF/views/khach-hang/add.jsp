@@ -52,7 +52,7 @@
         <div class="card">
             <h3 class="card-header">Thêm mới khách hàng</h3>
             <div class="card-body">
-                <form:form action="/khach-hang/add" method="post" modelAttribute="khachHang">
+                <form>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
@@ -62,62 +62,64 @@
                             </div>
 
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="tenKH" class="form-control" placeholder="" path="hoTen"/>
-                                <form:label for="tenKH" path="hoTen">Tên khách hàng:</form:label>
-                                <form:errors path="hoTen" cssStyle="color: red"></form:errors>
+                                <input id="tenKH" class="form-control" placeholder="" path="hoTen"/>
+                                <label for="tenKH" path="hoTen">Tên khách hàng:</label>
+                                <span path="hoTen" cssStyle="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <form:select class="form-select" id="gioiTinh" path="gioiTinh">
+                                <select class="form-select" id="gioiTinh">
                                     <option selected disabled value="">Giới tính</option>
-                                    <form:option value="1">Nam</form:option>
-                                    <form:option value="0">Nữ</form:option>
-                                </form:select>
-                                <form:errors path="email" cssStyle="color: red"></form:errors>
-                                <form:label for="gioiTinh" path="gioiTinh">Giới tính:</form:label>
+                                    <option value="1">Nam</option>
+                                    <option value="0">Nữ</option>
+                                </select>
+                                <label for="gioiTinh" path="gioiTinh">Giới tính:</label>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="email" class="form-control" type="email" placeholder="" path="email"/>
-                                <form:label for="email" path="email">Email:</form:label>
-                                <form:errors path="email" cssStyle="color: red"></form:errors>
+                                <input id="email" class="form-control" type="email" placeholder="" path="email"/>
+                                <label for="email" path="email">Email:</label>
+                                <span path="email" cssStyle="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="sdt" class="form-control" type="number" placeholder="" path="sdt"/>
-                                <form:label for="sdt" path="sdt">SDT:</form:label>
-                                <form:errors path="sdt" cssStyle="color: red"></form:errors>
+                                <input id="sdt" class="form-control" type="number" placeholder="" path="sdt"/>
+                                <label for="sdt" path="sdt">SDT:</label>
+                                <span path="sdt" cssStyle="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="ngaySinh" class="form-control" type="date" placeholder="" path="ngaySinh"/>
-                                <form:label for="ngaySinh" path="ngaySinh">Ngày sinh:</form:label>
-                                <form:errors path="ngaySinh" cssStyle="color: red"></form:errors>
+                                <input id="ngaySinh" class="form-control" type="date" placeholder="" path="ngaySinh"/>
+                                <label for="ngaySinh" path="ngaySinh">Ngày sinh:</label>
+                                <span path="ngaySinh" cssStyle="color: red"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="taiKhoan" class="form-control" placeholder="" path="taiKhoan"/>
-                                <form:label for="taiKhoan" path="taiKhoan">Tài khoản:</form:label>
-                                <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
+                                <input id="taiKhoan" class="form-control" placeholder="" path="taiKhoan"/>
+                                <label for="taiKhoan" path="taiKhoan">Tài khoản:</label>
+                                <span path="taiKhoan" cssStyle="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="matKhau" class="form-control" placeholder="" path="matKhau"/>
-                                <form:label for="matKhau" path="matKhau">Mật khẩu:</form:label>
-                                <form:errors path="matKhau" cssStyle="color: red"></form:errors>
+                                <input id="matKhau" class="form-control" placeholder="" path="matKhau"/>
+                                <label for="matKhau" path="matKhau">Mật khẩu:</label>
+                                <span path="matKhau" cssStyle="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="trangThai" class="form-control" placeholder="" path="trangThai"/>
-                                <form:label for="trangThai" path="trangThai">Trạng thái:</form:label>
-                                <form:errors path="trangThai" cssStyle="color: red"></form:errors>
+                                <input id="ngayTao" class="form-control" type="date" placeholder="" path="ngayTao"/>
+                                <label for="ngayTao" path="ngayTao">Ngày tạo:</label>
+                                <span path="ngayTao" cssStyle="color: red"></span>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input id="ngayCapNhat" class="form-control" type="date" placeholder="" path="ngayCapNhat"/>
+                                <label for="ngayCapNhat" path="ngayCapNhat">Ngày cập nhât:</label>
+                                <span path="ngayCapNhat" cssStyle="color: red"></span>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input id="trangThai" class="form-control" placeholder="" path="trangThai"/>
+                                <label for="trangThai" path="trangThai">Trạng thái:</label>
+                                <span path="trangThai" cssStyle="color: red"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12" style="text-align: center">
-                            <button type="submit" class="btn btn-primary" onclick="myFunction1()"
-                            >Add
-                            </button>
-                        </div>
-                    </div>
-                </form:form>
-                <br>
+                </form>
+
                 <div class="row">
                     <div class="col-12" style="text-align: center">
                         <a class="btn btn-primary" href="/khach-hang/hien-thi">Quay lại</a>
@@ -129,16 +131,6 @@
 </div>
 </body>
 <script>
-    function myFunction1() {
-        let text = "Bạn chắc chắn muốn thêm thông tin";
-        let kt = confirm(text);
-        if (kt == true) {
-            confirm("Thêm thành công");
-            return true
-        } else {
-            return false;
-        }
-    }
 
     function myFunction3() {
         let text = "Bạn chắc chắn muốn thay đổi trạng thái";

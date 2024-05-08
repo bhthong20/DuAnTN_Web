@@ -45,35 +45,18 @@
     <script src="../assets/js/config.js"></script>
 </head>
 </head>
-
 <body>
-<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link" href="/chuc-vu/hien-thi" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin chi tiết
-            chức vụ</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-           aria-controls="description" aria-selected="true" role="tab">Thêm mới chi tiết sản phẩm</a>
-    </li>
-</ul>
 <div class="container">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h4>
-            <%--@elvariable id="chiTietSanPham" type=""--%>
+            <h3 class="card-header">Thêm mới chức vụ</h3>
             <div class="card-body">
                 <form:form action="/chuc-vu/add" method="post" modelAttribute="chucVu">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
                                 <form:input class="form-control" placeholder="" path="ma"/>
-                                <form:label class="form-label" path="ma">Mã Chức Vụ:</form:label>
+                                <form:label class="" path="ma">Mã Chức Vụ:</form:label>
                                 <form:errors path="ma" cssStyle="color: red"/>
                             </div>
                             <div class="form-floating mb-3 mt-3">
@@ -87,12 +70,12 @@
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
                                 <form:input class="form-control" placeholder="" path="moTa"/>
-                                <form:label class="form-label" path="moTa">Mô Tả:</form:label>
+                                <form:label class="" path="moTa">Mô Tả:</form:label>
                                 <form:errors path="moTa" cssStyle="color: #ff0000"/>
                             </div>
                             <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
-                            <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
-                            <form:radiobutton path="trangThai" value="1"/>Hoạt Độngz
+                            <form:radiobutton path="trangThai" value="0" checked="true"/>Hoạt Động
+                            <form:radiobutton path="trangThai" value="1"/>Không hoạt Động
                         </div>
                         <div class="row">
                             <div class="col-12" style="text-align: center">
@@ -103,29 +86,18 @@
                         </div>
                     </div>
                 </form:form>
-
-            </div>
         </div>
     </div>
 
-
-
+</div>
+</div>
 </body>
 <script>
     function myFunction1() {
-        let text = "Bạn chắc chắn muốn thêm";
+        let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);
         if (kt == true) {
-            return true
-        } else {
-            return false;
-        }
-    }
-
-    function myFunction2() {
-        let text = "Bạn chắc chắn muốn sửa";
-        let kt = confirm(text);
-        if (kt == true) {
+            confirm("Thêm thành công");
             return true
         } else {
             return false;
@@ -195,14 +167,7 @@
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#selectMauSac').select2();
-        $('#selectKichThuoc').select2();
-        $('#selectChatLieu').select2();
-    });
 
-</script>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="../assets/vendor/libs/jquery/jquery.js"></script>

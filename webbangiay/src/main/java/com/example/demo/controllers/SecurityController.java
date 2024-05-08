@@ -34,7 +34,7 @@ public class SecurityController {
 
     @GetMapping("/user-infor")
     @ResponseBody
-    public KhachHang getUserInfor() {
+    public Object getUserInfor() {
         return common.getUserLogin();
     }
 
