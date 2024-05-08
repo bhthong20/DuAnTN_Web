@@ -382,27 +382,8 @@
 
     window.onload = async function () {
         await loadChiTietSanPham();
-        if (hoaDonSelect.trangThai == 9) {
-            await loadUserLogin();
-        }
         fillTongTien();
     };
-
-    function loadUserLogin() {
-        $.ajax({
-            type: "GET",
-            url: "/user-infor",
-            success: function (response) {
-                if (response) {
-                    tenNguoiNhan.val(response.hoTen);
-                    soDienThoai.val(response.sdt);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
-    }
 
     function validateFields() {
         const tenNguoiNhanVal = tenNguoiNhan.val();

@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.models.MauSac;
-import com.example.demo.models.ThuongHieu;
 import com.example.demo.services.MauSacService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +44,6 @@ public class MauSacController {
     }
     @GetMapping("/view-add")
     public String viewAdd(Model model , @ModelAttribute("MauSac") MauSac mauSac){
-        List<MauSac>list = mauSacService.findAll();
-        model.addAttribute("listMS", list);
         model.addAttribute("MauSac", new MauSac());
         model.addAttribute("contentPage", "../mau-sac/add.jsp");
         return "home/layout";
@@ -69,8 +66,6 @@ public class MauSacController {
     }
     @GetMapping("/view-update")
     public String detail(Model model, @RequestParam("id") UUID id){
-        List<MauSac>list = mauSacService.findAll();
-        model.addAttribute("listMS", list);
         MauSac mauSac = mauSacService.findById(id);
         model.addAttribute("mauSac", mauSac);
         model.addAttribute("contentPage", "../mau-sac/update.jsp");

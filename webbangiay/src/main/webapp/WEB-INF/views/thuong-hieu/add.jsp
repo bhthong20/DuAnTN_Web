@@ -52,11 +52,11 @@
         <div class="card">
             <h3 class="card-header">Thêm mới thương hiệu</h3>
             <div class="card-body">
-                <form:form action="/thuong-hieu/add" method="post" modelAttribute="thuongHieu" onsubmit="return validateForm()">
+                <form:form action="/thuong-hieu/add" method="post" modelAttribute="thuongHieu">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-floating mb-3 mt-3">
-                                <form:input class="form-control" id="th" placeholder="" path="ten"/>
+                                <form:input class="form-control" placeholder="" path="ten"/>
                                 <form:label  path="ten">Tên</form:label>
                                 <form:errors path="ten" cssStyle="color: red"/>
                             </div>
@@ -91,23 +91,10 @@
 </div>
 </body>
 <script>
-    function validateForm() {
-        var newValue = document.getElementById("th").value;
-        var existingValues = [
-            <c:forEach items="${listTH}" var="value" varStatus="status">
-            '${value.ten}'<c:if test="${!status.last}">,</c:if>
-            </c:forEach>
-        ];
-        if(existingValues.includes(newValue)) {
-            alert("Thương hiệu đã tồn tại!");
-            return false;
-        }
-        return true;
-    }
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);
-        if (kt == true && validateForm()==true) {
+        if (kt == true) {
             confirm("Thêm thành công");
             return true
         } else {

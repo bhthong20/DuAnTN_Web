@@ -46,8 +46,6 @@ public class LoaiController {
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("PhanLoai") PhanLoai mauSac) {
-        List<PhanLoai>list = phanLoaiService.findAll();
-        model.addAttribute("listPL", list);
         model.addAttribute("PhanLoai", new PhanLoai());
         model.addAttribute("contentPage", "../loai/add.jsp");
         return "home/layout";

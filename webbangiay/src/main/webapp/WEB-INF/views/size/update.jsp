@@ -53,7 +53,7 @@
             <h4 class="card-header" style="text-align: center">Update kích thước</h4>
             <%--@elvariable id="chiTietSanPham" type=""--%>
             <div class="card-body">
-                <form:form action="/kich-thuoc/update/${Size.id}" method="post" modelAttribute="Size">
+                <form:form action="/kich-thuoc/update/${Size.id}" method="post" modelAttribute="Size" onsubmit="return validateForm()">
                 <div class="row">
 
                     <div class="col-6">

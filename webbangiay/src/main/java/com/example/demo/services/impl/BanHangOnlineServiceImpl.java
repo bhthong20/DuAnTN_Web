@@ -4,8 +4,6 @@ import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.GioHangChiTiet;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
-import com.example.demo.models.KhachHang;
-import com.example.demo.models.NhanVien;
 import com.example.demo.models.dto.BanHangRequest;
 import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.SanPhamAddHoaDon;
@@ -51,12 +49,12 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public Long countGioHang() {
-        return gioHangChiTietRepository.countByKhachHang((KhachHang) common.getUserLogin());
+        return gioHangChiTietRepository.countByKhachHang(common.getUserLogin());
     }
 
     @Override
     public List<GioHangChiTiet> getListGioHang() {
-        return gioHangChiTietRepository.findAllByKhachHang((KhachHang) common.getUserLogin());
+        return gioHangChiTietRepository.findAllByKhachHang(common.getUserLogin());
     }
 
     @Override
@@ -65,12 +63,12 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         try {
             ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(banHangRequest.getChiTietSanPham())).get();
             Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
-                    findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
+                    findByKhachHangAndChiTietSanPham(common.getUserLogin(), chiTietSanPham);
 
             if (gioHangChiTiet.isEmpty()) {
                 GioHangChiTiet gioHangChiTietNew = new GioHangChiTiet();
                 gioHangChiTietNew.setChiTietSanPham(chiTietSanPham);
-                gioHangChiTietNew.setKhachHang((KhachHang) common.getUserLogin());
+                gioHangChiTietNew.setKhachHang(common.getUserLogin());
                 gioHangChiTietNew.setSoLuong(banHangRequest.getSoLuong());
                 gioHangChiTietRepository.save(gioHangChiTietNew);
             } else {
@@ -93,7 +91,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             for (BanHangRequest el: list) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
                 Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
-                        findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
+                        findByKhachHangAndChiTietSanPham(common.getUserLogin(), chiTietSanPham);
 
                 if (el.getSoLuong() > chiTietSanPham.getSoLuongTon()) {
                     throw new BadRequestException("Sản phẩm " + chiTietSanPham.getSanPham().getTenSP() +
@@ -123,7 +121,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     public UUID taoHoaDon(List<BanHangRequest> list) throws BadRequestException {
         try {
             HoaDon hoaDon = new HoaDon();
-            hoaDon.setKhachHang((KhachHang) common.getUserLogin());
+            hoaDon.setKhachHang(common.getUserLogin());
             hoaDon.setLoai(1);
             hoaDon.setTrangThai(9);
             hoaDon.setMa("HĐ" + hoaDonRepository.findAll().size());
@@ -132,7 +130,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             for (BanHangRequest el: list) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
                 Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
-                        findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
+                        findByKhachHangAndChiTietSanPham(common.getUserLogin(), chiTietSanPham);
 
                 if (el.getSoLuong() > chiTietSanPham.getSoLuongTon()) {
                     throw new BadRequestException("Sản phẩm " + chiTietSanPham.getSanPham().getTenSP() +
@@ -174,9 +172,9 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Override
     public List<HoaDon> listHoaDon(int trangThai) {
         if (trangThai == -1) {
-            return hoaDonRepository.findAllByLoaiAndKhachHang(1, (KhachHang) common.getUserLogin());
+            return hoaDonRepository.findAllByLoaiAndKhachHang(1, common.getUserLogin());
         }
-        return hoaDonRepository.findAllByLoaiAndTrangThaiAndKhachHang(1, trangThai, (KhachHang) common.getUserLogin());
+        return hoaDonRepository.findAllByLoaiAndTrangThaiAndKhachHang(1, trangThai, common.getUserLogin());
     }
 
     @Override
@@ -271,10 +269,10 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Transactional
     public Boolean thayDoiTrangThaiHoaDon(UUID idHoaDon, int trangThai) {
         HoaDon hoaDon = hoaDonRepository.findById(idHoaDon).get();
-        if (common.getUserLoginType().equals("ADMIN")) {
-            hoaDon.setNhanVien((NhanVien) common.getUserLogin());
+        if (common.getUserLogin().getRole().equals("ADMIN")) {
+            hoaDon.setNhanVien(common.getUserLogin());
         } else {
-            hoaDon.setKhachHang((KhachHang) common.getUserLogin());
+            hoaDon.setKhachHang(common.getUserLogin());
         }
         hoaDon.setTrangThai(trangThai);
         return true;
