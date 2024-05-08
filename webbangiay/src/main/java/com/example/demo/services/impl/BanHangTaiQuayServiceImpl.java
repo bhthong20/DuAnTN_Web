@@ -233,7 +233,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                 khachHang.setMatKhau(maKhachHang);
                 khachHang.setId(khachHangService.add(khachHang).getId());
             }
-            khachHang.setRole(RolesConstant.ROLE_USER);
+
             if (request.getIdKhuyenMai() != null) {
                 hoaDon.setKhuyenMai(khuyenMaiRepository.findById(request.getIdKhuyenMai()).orElse(null));
             }
