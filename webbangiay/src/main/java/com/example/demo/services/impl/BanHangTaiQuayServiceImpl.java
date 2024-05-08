@@ -4,6 +4,7 @@ import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
 import com.example.demo.models.KhachHang;
+import com.example.demo.models.NhanVien;
 import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.SanPhamAddHoaDon;
 import com.example.demo.repositories.ChiTietSanPhamRepository;
@@ -232,12 +233,12 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
                 khachHang.setMatKhau(maKhachHang);
                 khachHang.setId(khachHangService.add(khachHang).getId());
             }
-            khachHang.setRole(RolesConstant.ROLE_USER);
+
             if (request.getIdKhuyenMai() != null) {
                 hoaDon.setKhuyenMai(khuyenMaiRepository.findById(request.getIdKhuyenMai()).orElse(null));
             }
             hoaDon.setKhachHang(khachHang);
-            hoaDon.setNhanVien(common.getUserLogin());
+            hoaDon.setNhanVien((NhanVien) common.getUserLogin());
             hoaDonService.update(hoaDon.getId(), hoaDon);
             return true;
         }

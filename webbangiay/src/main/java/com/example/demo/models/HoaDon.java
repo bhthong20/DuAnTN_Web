@@ -76,7 +76,7 @@ public class HoaDon {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nhan_vien_id")
-    private KhachHang nhanVien;
+    private NhanVien nhanVien;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "khuyen_mai_id")

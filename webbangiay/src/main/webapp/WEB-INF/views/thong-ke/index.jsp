@@ -50,7 +50,7 @@
                 <div class="card">
                     <h5 class="text-center card-header">Số lượng bán</h5>
                     <div class="card-body">
-                        <h2 class="text-center">5.000👟</h2>
+                        <h2 class="text-center"><span id="soLuongBan"></span>👟</h2>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <div class="card">
                     <h5 class="text-center card-header">Tổng doanh số</h5>
                     <div class="card-body">
-                        <h2 class="text-center">1.000.000🪙</h2>
+                        <h2 class="text-center"><span id="tongDoanhSo"></span>🪙</h2>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 <div class="card">
                     <h5 class="text-center card-header">Tổng tại quầy</h5>
                     <div class="card-body">
-                        <h2 class="text-center">1.000.000🪙</h2>
+                        <h2 class="text-center"><span id="tongTaiQuay"></span>🪙</h2>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="card">
                     <h5 class="text-center card-header">Tổng bán online</h5>
                     <div class="card-body">
-                        <h2 class="text-center">1.000.000🪙</h2>
+                        <h2 class="text-center"><span id="tongOnline"></span>🪙</h2>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
         <div class="row">
             <div style="min-height: 100%" class="col-8">
                 <div style="height: 100%" class="card">
-                    <h4 class="card-header">Danh sách sản phẩm</h4>
+                    <h4 class="card-header">Danh sách sản phẩm đã bán</h4>
                     <div class="card-body">
                         <div class="table-responsive text-nowrap">
                             <table class="table">
@@ -102,23 +102,10 @@
                                     <th>Tên Sp</th>
                                     <th>Số lượng tồn</th>
                                     <th>Số lượng bán</th>
-                                    <th>Đơn giá</th>
                                     <th>Doanh thu</th>
                                 </tr>
                                 </thead>
-                                <tbody class="table-border-bottom-2">
-                                    <tr>
-                                        <td>1</td>
-                                        <td align="center" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
-                                            <img src="../../../uploads/download.png" width="50" height="50"
-                                            style="border-radius:50% 50% 50% 50%">
-                                            <span class="text-primary cursor-pointer">Sản phẩm A</span>
-                                        </td>
-                                        <td>10</td>
-                                        <td>20</td>
-                                        <td>1.000.00 - 1.500.000</td>
-                                        <td>10.000.00</td>
-                                    </tr>
+                                <tbody class="table-border-bottom-2" id="listSanPham">
                                     <tr>
                                         <td>2</td>
                                         <td align="center" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
@@ -128,25 +115,10 @@
                                         </td>
                                         <td>10</td>
                                         <td>20</td>
-                                        <td>1.000.00 - 1.500.000</td>
                                         <td>10.000.00</td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center pagination-lg mt-3 mb-0">
-                                    <li class="page-item"><a class="page-link" href="/thuong-hieu/hien-thi?num=0">First</a>
-                                    </li>
-                                    <c:forEach begin="1" end="${total}" varStatus="status">
-                                        <li class="page-item">
-                                            <a href="${pageContext.request.contextPath}/thuong-hieu/hien-thi?num=${status.index -1}"
-                                               class="page-link">${status.index}</a>
-                                        </li>
-                                    </c:forEach>
-                                    <li class="page-item"><a class="page-link" href="/thuong-hieu/hien-thi?num=${total-1}">Last</a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -187,56 +159,9 @@
                                         <th>Chất liệu</th>
                                         <th>Số lượng tồn</th>
                                         <th>Số lượng bán</th>
-                                        <th>Đơn giá</th>
-                                        <th>Doanh thu</th>
                                     </tr>
                                     </thead>
-                                    <tbody class="table-border-bottom-2">
-                                    <tr>
-                                        <td>1</td>
-                                        <td align="center" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
-                                            <img src="../../../uploads/download.png" width="50" height="50"
-                                                 style="border-radius:50% 50% 50% 50%">
-                                            <span class="text-primary cursor-pointer">Sản phẩm A</span>
-                                        </td>
-                                        <td>10</td>
-                                        <td>20</td>
-                                        <td>10</td>
-                                        <td>20</td>
-                                        <td>10</td>
-                                        <td>1.000.00 - 1.500.000</td>
-                                        <td>10.000.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td align="center" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
-                                            <img src="../../../uploads/download.png" width="50" height="50"
-                                                 style="border-radius:50% 50% 50% 50%">
-                                            <span class="text-primary cursor-pointer">Sản phẩm A</span>
-                                        </td>
-                                        <td>10</td>
-                                        <td>20</td>
-                                        <td>10</td>
-                                        <td>20</td>
-                                        <td>10</td>
-                                        <td>1.000.00 - 1.500.000</td>
-                                        <td>10.000.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td align="center" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
-                                            <img src="../../../uploads/download.png" width="50" height="50"
-                                                 style="border-radius:50% 50% 50% 50%">
-                                            <span class="text-primary cursor-pointer">Sản phẩm A</span>
-                                        </td>
-                                        <td>10</td>
-                                        <td>20</td>
-                                        <td>10</td>
-                                        <td>20</td>
-                                        <td>10</td>
-                                        <td>1.000.00 - 1.500.000</td>
-                                        <td>10.000.00</td>
-                                    </tr>
+                                    <tbody class="table-border-bottom-2" id="listSanPhamDetail">
                                     </tbody>
                                 </table>
                             </div>
@@ -279,15 +204,9 @@
 <script src="../../js/todolist.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
-    function columnChart() {
+    function columnChart(series, xaxis, id) {
         var options = {
-            series: [{
-                name: 'Bán hàng online',
-                data: [44, 55, 41, 67, 22, 43]
-            }, {
-                name: 'Bán hàng tại quầy',
-                data: [13, 23, 20, 8, 13, 27]
-            }],
+            series: series,
             chart: {
                 type: 'bar',
                 height: 350,
@@ -326,11 +245,7 @@
                     }
                 },
             },
-            xaxis: {
-                categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT',
-                    '01/05/2011 GMT', '01/06/2011 GMT'
-                ],
-            },
+            xaxis: xaxis,
             legend: {
                 position: 'right',
                 offsetY: 40
@@ -340,7 +255,7 @@
             }
         };
 
-        var chart = new ApexCharts(document.querySelector("#columnChart"), options);
+        var chart = new ApexCharts(document.querySelector("#" + id), options);
         chart.render();
     }
 
@@ -400,39 +315,100 @@
         chart.render();
     }
 
-    columnChart();
-    lineChart([
-        {
-            name: "Sản phẩm 1",
-            data: [28, 29, 33, 36, 32, 32, 33, 33, 36, 32, 32, 33]
-        },
-        {
-            name: "Sản phẩm 2",
-            data: [12, 11, 14, 18, 17, 13, 13, 14, 18, 17, 13, 13]
-        },
-        {
-            name: "Sản phẩm 3",
-            data: [1, 2, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7]
-        }
-    ], {
-        categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
-    }, 'lineChart');
-    lineChart([
-        {
-            name: "Sản phẩm 1",
-            data: [28, 29, 33, 36, 32, 32, 33, 33, 36, 32, 32, 33]
-        },
-        {
-            name: "Sản phẩm 2",
-            data: [12, 11, 14, 18, 17, 13, 13, 14, 18, 17, 13, 13]
-        },
-        {
-            name: "Sản phẩm 3",
-            data: [1, 2, 3, 4, 5, 6, 7, 3, 4, 5, 6, 7]
-        }
-    ], {
-        categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
-    }, 'lineChartCtsp');
+    function genderSanPham(listData) {
+        const tableProduct = document.getElementById("listSanPham");
+        let html = '';
+        let index = 0;
+        listData.forEach(product => {
+            index++;
+            html += `
+                <tr>
+                    <td>` + index + `</td>
+                    <td align="center" onclick="detailSanPham('` + product.id + `')" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
+                        <img src="../../../uploads/` + product.url + `" width="50" height="50"
+                        style="border-radius:50% 50% 50% 50%">
+                        <span class="text-primary cursor-pointer">` + product.tenSanPham + `</span>
+                    </td>
+                    <td>` + product.soLuongTon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</td>
+                    <td>` + product.soLuongBan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</td>
+                    <td>` + product.doanhThu.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</td>
+                </tr>
+            `
+        });
+        tableProduct.innerHTML = html;
+    }
+
+    function genderSanPhamDetail(listData) {
+        console.log(listData)
+        const tableProduct = document.getElementById("listSanPhamDetail");
+        let html = '';
+        let index = 0;
+        listData.forEach(product => {
+            index++;
+            html += `
+                <tr>
+                    <td>` + index + `</td>
+                    <td align="center">
+                        <img src="../../../uploads/` + product.url + `" width="50" height="50"
+                             style="border-radius:50% 50% 50% 50%">
+                        <span class="text-primary cursor-pointer">` + product.tenSanPham + `</span>
+                    </td>
+                    <td>` + product.kichThuoc + `</td>
+                    <td>` + product.mauSac + `</td>
+                    <td>` + product.chatLieu + `</td>
+                    <td>` + product.soLuongTon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</td>
+                    <td>` + product.soLuongBan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</td>
+                </tr>
+            `
+        });
+        tableProduct.innerHTML = html;
+    }
+
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: "/thong-ke/api",
+            success: function (response) {
+                console.log(response)
+                $('#soLuongBan').text(response.thongKeTong.soLuongBan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                $('#tongDoanhSo').text(response.thongKeTong.tongDoanhSo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                $('#tongOnline').text(response.thongKeTong.tongOnline.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+                $('#tongTaiQuay').text(response.thongKeTong.tongTaiQuay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+
+                columnChart(response.getLineChartTong, {
+                    categories: response.categories,
+                }, 'columnChart');
+
+                lineChart(response.getLineChartSanPham, {
+                    categories: response.categories,
+                }, 'lineChart');
+
+                genderSanPham(response.getAllSanPham);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                alert("Lỗi hệ thống !!!")
+            }
+        });
+    }
+
+    function detailSanPham(id) {
+        $.ajax({
+            type: "GET",
+            url: "/thong-ke/detail/" + id,
+            success: function (response) {
+                console.log(response)
+                lineChart(response.getLineChartDetail, {
+                    categories: response.categories,
+                }, 'lineChartCtsp');
+                genderSanPhamDetail(response.getSanPhamDetail)
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+                alert("Lỗi hệ thống !!!")
+            }
+        });
+    }
 
 </script>
 </html>
