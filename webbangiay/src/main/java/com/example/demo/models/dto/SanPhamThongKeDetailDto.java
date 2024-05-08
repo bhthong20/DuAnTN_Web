@@ -11,11 +11,13 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SanPhamThongKeDto {
-
+public class SanPhamThongKeDetailDto {
     private UUID id;
     private String tenSanPham;
     private String url;
+    private String kichThuoc;
+    private String mauSac;
+    private String chatLieu;
     private int soLuongTon;
     private int soLuongBan;
     private Long doanhThu;

@@ -111,7 +111,7 @@
                     </span>
                     <ul class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="/ban-hang-online/hoa-don">Danh sách hóa đơn</a></li>
-                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="/khach-hang/thong-tin-ca-nhan">Thông tin tài khoản</a></li>
                         <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                     </ul>
                     <a href="/gio-hang" class="position-relative"><i style="font-size: 30px" class='bx bx-cart'></i>

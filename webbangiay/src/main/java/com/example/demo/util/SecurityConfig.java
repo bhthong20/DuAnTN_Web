@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .requestMatchers("/WEB-INF/**").permitAll()
                 .requestMatchers("/auth-register").permitAll()
                 .requestMatchers("/js").permitAll()
-                .requestMatchers("/**").permitAll()
+//                .requestMatchers("/**").permitAll()
                 .requestMatchers("/user-infor").permitAll()
                 .requestMatchers("/assets/**").permitAll()
                 .anyRequest().authenticated()

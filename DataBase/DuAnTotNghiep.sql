@@ -85,7 +85,6 @@ CREATE TABLE khach_hang (
 	trang_thai nvarchar(50) NULL,
 	tai_khoan nvarchar(50) NULL,
 	mat_khau nvarchar(32) NULL,
-	roles varchar(100) DEFAULT user_name() NULL,
 	CONSTRAINT PK__khach_ha__9B2CAEF3A03F8914 PRIMARY KEY (id_khach_hang)
 );
 
