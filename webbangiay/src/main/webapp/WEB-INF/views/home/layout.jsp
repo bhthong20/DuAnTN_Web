@@ -66,6 +66,8 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
     <script src="../js/menu.js"></script>
 </head>
@@ -137,7 +139,7 @@
                     <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
                 </a>
 
-                <a href="javascript:void(0);"  class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                     <i class="bx bx-chevron-left bx-sm align-middle"></i>
                 </a>
             </div>
@@ -389,52 +391,53 @@
                         <jsp:include page="${contentPage}"/>
                     </div>
 
-                <!-- Footer -->
-                <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                        <div class="mb-2 mb-md-0">
-                            ©
-                            <script>
-                    document.write(new Date().getFullYear());
+                    <!-- Footer -->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear());
 
-                            </script>
-                            , made with ❤️ by
-                            <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                                </script>
+                                , made with ❤️ by
+                                <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                            </div>
+                            <div>
+                                <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
+                                    Themes</a>
+
+                                <a
+                                        href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                                        target="_blank"
+                                        class="footer-link me-4"
+                                >Documentation</a
+                                >
+
+                                <a
+                                        href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                                        target="_blank"
+                                        class="footer-link me-4"
+                                >Support</a
+                                >
+                            </div>
                         </div>
-                        <div>
-                            <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                Themes</a>
+                    </footer>
+                    <!-- / Footer -->
 
-                            <a
-                                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Documentation</a
-                            >
-
-                            <a
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Support</a
-                            >
-                        </div>
-                    </div>
-                </footer>
-                <!-- / Footer -->
-
-                <div class="content-backdrop fade"></div>
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- / Layout page -->
             </div>
-            <!-- / Layout page -->
+
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
+        <!-- / Layout wrapper -->
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    <!-- / Layout wrapper -->
-
-
+</div>
 </body>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
@@ -458,33 +461,32 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script src="../../../js/select-2.js"></script>
-<script>
-        var url = window.location.href;
-        var domain = new URL(url).pathname;
-        var menuItem = $('.menu-item')
-        menuItem.each(function () {
-            var hrefMenu = $(this).find("a").attr("href");
-            var parts = hrefMenu.split('/');
-            if (parts.length > 0) {
-                if (domain.includes(parts[1])) {
-                    $(this).addClass("active open")
-                } else {
-                    $(this).removeClass("active open")
-                }
-            }
-        })
 
-        let show = 0
-        const showDropdow = () => {
-            show++;
-            if (show % 2 == 0) {
-                $('#dropdown-menu').hide();
+<%--<script src="../../../js/select-2.js"></script>--%>
+<script>
+    var url = window.location.href;
+    var domain = new URL(url).pathname;
+    var menuItem = $('.menu-item')
+    menuItem.each(function () {
+        var hrefMenu = $(this).find("a").attr("href");
+        var parts = hrefMenu.split('/');
+        if (parts.length > 0) {
+            if (domain.includes(parts[1])) {
+                $(this).addClass("active open")
             } else {
-                $('#dropdown-menu').show();
+                $(this).removeClass("active open")
             }
         }
+    })
+
+    let show = 0
+    const showDropdow = () => {
+        show++;
+        if (show % 2 == 0) {
+            $('#dropdown-menu').hide();
+        } else {
+            $('#dropdown-menu').show();
+        }
+    }
 </script>
 </html>

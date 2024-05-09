@@ -116,14 +116,11 @@
                             </div>
                             <div class="form-floating mb-3 mt-3 d-flex justify-content-between">
                                 <img id="preview-anh1" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                     width="30%" height="100%">
                                 <img id="preview-anh2" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                     width="30%" height="100%">
                                 <img id="preview-anh3" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                     width="30%" height="100%">
                             </div>
                         </div>
                     </div>

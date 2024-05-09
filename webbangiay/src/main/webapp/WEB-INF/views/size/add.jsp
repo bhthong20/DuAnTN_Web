@@ -80,7 +80,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12" style="text-align: center">
-                        <button type="submit" class="btn btn-success" onclick="myFunction1()"
+                        <button type="submit" class="btn btn-success" onclick="return myFunction1()"
                         >Add
                         </button>
                     </div>
@@ -110,7 +110,8 @@
         return true;
     }
 
-    function myFunction1() {
+    function myFunction1(size) {
+
         let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);
         if (kt == true && validateForm() == true) {

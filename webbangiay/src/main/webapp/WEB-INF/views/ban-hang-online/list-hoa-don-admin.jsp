@@ -46,7 +46,7 @@
 <div class="card mb-4">
     <table class="table container">
         <tbody>
-        <h3 class="card-header">Thông tin khuyến mại</h3>
+        <h3 class="card-header">Thông tin hóa đơn</h3>
         <tr>
             <td style="text-align: center">
                 <form action="/khuyen-mai/search" method="post">
