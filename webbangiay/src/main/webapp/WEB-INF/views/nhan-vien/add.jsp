@@ -116,12 +116,7 @@
                             <br>
                             <form:radiobutton path="tinhTrang" value="1"/>Ngưng hoạt động
                         </div>
-
-
-
                     </div>
-
-
                 </div>
                 <div class="row">
                     <div class="col-12" style="text-align: center">

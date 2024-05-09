@@ -57,25 +57,26 @@ public class KhachHangController {
     @GetMapping("/delete/{id}")
     public String deleteChucVu(@PathVariable(name = "id") UUID id) {
         khachHangService.deleteKhachHang(id);
-        return "redirect:/hien-thi/khach-hang";
+        return "redirect:/khach-hang/hien-thi";
     }
 
-    @GetMapping("/view-update/{id}")
-    public String viewUpdate(Model model, @PathVariable("id") UUID id) {
+    @GetMapping("/view-update")
+    public String viewUpdate(Model model, @RequestParam("id") UUID id) {
         KhachHang kh = khachHangService.findById(id);
         model.addAttribute("khachHang", kh);;
-        model.addAttribute("contentPage", "/khach-hang/update.jsp");
-        return "/khach-hang/update";
+        model.addAttribute("contentPage", "../khach-hang/update.jsp");
+        return "home/layout";
     }
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "khachHang") KhachHang khachHang,
                          @PathVariable(name = "id") UUID id ) {
         KhachHang kh = khachHangService.findById(id);
+        khachHang.setMa(kh.getMa());
+        khachHang.setNgayTao(kh.getNgayTao());
         khachHang.setNgayCapNhat(Date.valueOf(LocalDate.now()));
-        System.out.println(kh.toString());
         khachHangService.update(id , khachHang);
-        return "redirect:/hien-thi/khach-hang";
+        return "redirect:/khach-hang/hien-thi";
     }
 
 
@@ -90,14 +91,13 @@ public class KhachHangController {
     @PostMapping("/add")
     public String add(Model model , @ModelAttribute("khachHang") KhachHang khachHang, BindingResult result) {
         if (result.hasErrors()) {
-            model.addAttribute("contentPage", "chuc-vu/add.jsp");
             return "/khach-hang/add";
         }
-        String maKhachHang = "KH00" + (khachHangService.findAll().size() + 1);
+        String maKhachHang = "khachHang" + (khachHangService.findAll().size() + 1);
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
+        khachHang.setMa(maKhachHang);
         khachHangService.add(khachHang);
-        System.out.println("listKhachHang");
-        return "redirect:/hien-thi/khach-hang";
+        return "redirect:/khach-hang/hien-thi";
     }
 
 }
