@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.YearMonth;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,14 +40,14 @@ public class ThongKeServiceImpl implements ThongKeService {
 
         Set<HoaDon> set = new HashSet<>(list.stream().map(el -> el.getHoaDon()).collect(Collectors.toList()));
 
-        List<YearMonth> listNgayTao = listNgayTao(set);
+        List<LocalDate> listNgayTao = listNgayTao(set);
 
         List<Long> taiQuayTongTien = new ArrayList<>();
         List<Long> onlineTongTien = new ArrayList<>();
         List<LineChartDto> getLineChartTong = new ArrayList<>();
         listNgayTao.forEach(el -> {
-            taiQuayTongTien.add(countTongTienTheoThangByLoai(el, set, 1));
-            onlineTongTien.add(countTongTienTheoThangByLoai(el, set, 0));
+            taiQuayTongTien.add(countTongTienTheoThangByLoai(el, set, 0));
+            onlineTongTien.add(countTongTienTheoThangByLoai(el, set, 1));
         });
         getLineChartTong.add(new LineChartDto(null, "Bán tại quầy", taiQuayTongTien));
         getLineChartTong.add(new LineChartDto(null, "Bán online", onlineTongTien));
@@ -65,11 +65,11 @@ public class ThongKeServiceImpl implements ThongKeService {
 
         Set<HoaDon> set = new HashSet<>(list.stream().map(el -> el.getHoaDon()).collect(Collectors.toList()));
 
-        List<YearMonth> listNgayTao = listNgayTao(set);
+        List<LocalDate> listNgayTao = listNgayTao(set);
         return new ThongKeDetailDto(listNgayTao, getLineChartSanPhamDetail(list, listNgayTao), sanPhamThongKeDetailDtos(list, uuid));
     }
 
-    public List<YearMonth> listNgayTao(Set<HoaDon> hoaDons) {
+    public List<LocalDate> listNgayTao(Set<HoaDon> hoaDons) {
         // Tìm HoaDon có ngayTao nhỏ nhất
         Optional<HoaDon> hoaDonMinNgayTao = hoaDons.stream()
                 .min((hd1, hd2) -> hd1.getNgayTao().compareTo(hd2.getNgayTao()));
@@ -90,10 +90,10 @@ public class ThongKeServiceImpl implements ThongKeService {
         LocalDate ngayTaoLonNhat = hoaDonMax.getNgayTao().toLocalDate();
 
         // Tạo mảng chứa tất cả các tháng trong khoảng thời gian từ ngayTao nhỏ nhất đến ngayTao lớn nhất
-        List<YearMonth> thangTrongKhoang = new ArrayList<>();
-        YearMonth currentMonth = YearMonth.from(ngayTaoNhoNhat);
+        List<LocalDate> thangTrongKhoang = new ArrayList<>();
+        LocalDate currentMonth = LocalDate.from(ngayTaoNhoNhat);
 
-        while (!currentMonth.isAfter(YearMonth.from(ngayTaoLonNhat))) {
+        while (!currentMonth.isAfter(LocalDate.from(ngayTaoLonNhat))) {
             thangTrongKhoang.add(currentMonth);
             currentMonth = currentMonth.plusMonths(1);
         }
@@ -108,11 +108,11 @@ public class ThongKeServiceImpl implements ThongKeService {
         BigDecimal tongOnline = BigDecimal.ZERO;
 
         for (HoaDon el : set) {
-            tongDoanhSo = tongDoanhSo.add(el.getTongTien());
-            if (el.getLoai() == 1) {
-                tongTaiQuay = tongTaiQuay.add(el.getTongTien());
+            tongDoanhSo = tongDoanhSo.add(el.getTongTien().subtract(el.getTienShip()));
+            if (el.getLoai() == 0) {
+                tongTaiQuay = tongTaiQuay.add(el.getTongTien().subtract(el.getTienShip()));
             } else {
-                tongOnline = tongOnline.add(el.getTongTien());
+                tongOnline = tongOnline.add(el.getTongTien().subtract(el.getTienShip()));
             }
         }
 
@@ -122,24 +122,15 @@ public class ThongKeServiceImpl implements ThongKeService {
         return new ThongKeTongDto(tongSoLuongBan, tongDoanhSo.longValue(), tongTaiQuay.longValue(), tongOnline.longValue());
     }
 
-    public Long countTongTienTheoThangByLoai(YearMonth thangTrongKhoang, Set<HoaDon> set, int loai) {
+    public Long countTongTienTheoThangByLoai(LocalDate thangTrongKhoang, Set<HoaDon> set, int loai) {
         Long tongTien = 0l;
         for (HoaDon el : set) {
-            YearMonth hoaDonYearMonth = YearMonth.from(el.getNgayTao().toLocalDate());
-            if (thangTrongKhoang.equals(hoaDonYearMonth) && el.getLoai() == loai) {
-                tongTien += el.getTongTien().longValue();
+            LocalDate hoaDonLocalDate = LocalDate.from(el.getNgayTao().toLocalDate());
+            if (thangTrongKhoang.equals(hoaDonLocalDate) && el.getLoai() == loai) {
+                tongTien += el.getTongTien().longValue() - el.getTienShip().longValue();
             }
         }
         return tongTien;
-    }
-
-    // lấy danh sách chi tiết sản phẩm
-    public List<ChiTietSanPham> getAllChiTietSanPhamByListHoaDon(List<HoaDonChiTiet> list) {
-        return list.stream().map(el -> {
-            ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
-            chiTietSanPham.setNgayTao(el.getHoaDon().getNgayTao());
-            return chiTietSanPham;
-        }).collect(Collectors.toList());
     }
 
     public List<SanPhamThongKeDto> getAllSanPhamThongKe(List<HoaDonChiTiet> hoaDonChiTiets) {
@@ -176,7 +167,7 @@ public class ThongKeServiceImpl implements ThongKeService {
     }
 
     // Thống kê sản phẩm theo tháng
-    public List<LineChartDto> getLineChartSanPham(List<HoaDonChiTiet> hoaDonChiTiets, List<YearMonth> thangTrongKhoang) {
+    public List<LineChartDto> getLineChartSanPham(List<HoaDonChiTiet> hoaDonChiTiets, List<LocalDate> thangTrongKhoang) {
         List<LineChartDto> listReturn = new ArrayList<>();
 
         hoaDonChiTiets.forEach(el -> {
@@ -189,18 +180,18 @@ public class ThongKeServiceImpl implements ThongKeService {
         });
 
         // Tạo một Map để lưu trữ số lượng của từng sản phẩm dựa trên ID của sản phẩm
-        Map<UUID, Map<YearMonth, Long>> soLuongTheoThang = new HashMap<>();
+        Map<UUID, Map<LocalDate, Long>> soLuongTheoThang = new HashMap<>();
 
         // Lặp qua danh sách chi tiết hóa đơn để tính số lượng của từng sản phẩm theo tháng
         hoaDonChiTiets.forEach(el -> {
             UUID sanPhamId = el.getChiTietSanPham().getSanPham().getId();
             long soLuong = el.getSoLuong();
-            YearMonth thangHoaDon = YearMonth.from(el.getHoaDon().getNgayTao().toLocalDate());
+            LocalDate thangHoaDon = LocalDate.from(el.getHoaDon().getNgayTao().toLocalDate());
 
             // Kiểm tra xem sản phẩm đã tồn tại trong Map chưa
             if (soLuongTheoThang.containsKey(sanPhamId)) {
                 // Nếu sản phẩm đã tồn tại, kiểm tra xem số lượng theo tháng đã được cập nhật chưa
-                Map<YearMonth, Long> soLuongTheoThangCuaSanPham = soLuongTheoThang.get(sanPhamId);
+                Map<LocalDate, Long> soLuongTheoThangCuaSanPham = soLuongTheoThang.get(sanPhamId);
                 // Nếu số lượng theo tháng đã được cập nhật, cộng thêm số lượng mới vào
                 if (soLuongTheoThangCuaSanPham.containsKey(thangHoaDon)) {
                     long tongSoLuongHienTai = soLuongTheoThangCuaSanPham.get(thangHoaDon);
@@ -212,7 +203,7 @@ public class ThongKeServiceImpl implements ThongKeService {
                 }
             } else {
                 // Nếu sản phẩm chưa tồn tại trong Map, thêm sản phẩm vào Map và thêm số lượng theo tháng
-                Map<YearMonth, Long> soLuongTheoThangMoi = new HashMap<>();
+                Map<LocalDate, Long> soLuongTheoThangMoi = new HashMap<>();
                 soLuongTheoThangMoi.put(thangHoaDon, soLuong);
                 soLuongTheoThang.put(sanPhamId, soLuongTheoThangMoi);
             }
@@ -281,7 +272,7 @@ public class ThongKeServiceImpl implements ThongKeService {
     }
 
     // Thống kê chi tiết sản phẩm theo tháng
-    public List<LineChartDto> getLineChartSanPhamDetail(List<HoaDonChiTiet> hoaDonChiTiets, List<YearMonth> thangTrongKhoang) {
+    public List<LineChartDto> getLineChartSanPhamDetail(List<HoaDonChiTiet> hoaDonChiTiets, List<LocalDate> thangTrongKhoang) {
         List<LineChartDto> listReturn = new ArrayList<>();
 
         hoaDonChiTiets.forEach(el -> {
@@ -294,18 +285,18 @@ public class ThongKeServiceImpl implements ThongKeService {
         });
 
         // Tạo một Map để lưu trữ số lượng của từng sản phẩm dựa trên ID của sản phẩm
-        Map<UUID, Map<YearMonth, Long>> soLuongTheoThang = new HashMap<>();
+        Map<UUID, Map<LocalDate, Long>> soLuongTheoThang = new HashMap<>();
 
         // Lặp qua danh sách chi tiết hóa đơn để tính số lượng của từng sản phẩm theo tháng
         hoaDonChiTiets.forEach(el -> {
             UUID sanPhamId = el.getChiTietSanPham().getId();
             long soLuong = el.getSoLuong();
-            YearMonth thangHoaDon = YearMonth.from(el.getHoaDon().getNgayTao().toLocalDate());
+            LocalDate thangHoaDon = LocalDate.from(el.getHoaDon().getNgayTao().toLocalDate());
 
             // Kiểm tra xem sản phẩm đã tồn tại trong Map chưa
             if (soLuongTheoThang.containsKey(sanPhamId)) {
                 // Nếu sản phẩm đã tồn tại, kiểm tra xem số lượng theo tháng đã được cập nhật chưa
-                Map<YearMonth, Long> soLuongTheoThangCuaSanPham = soLuongTheoThang.get(sanPhamId);
+                Map<LocalDate, Long> soLuongTheoThangCuaSanPham = soLuongTheoThang.get(sanPhamId);
                 // Nếu số lượng theo tháng đã được cập nhật, cộng thêm số lượng mới vào
                 if (soLuongTheoThangCuaSanPham.containsKey(thangHoaDon)) {
                     long tongSoLuongHienTai = soLuongTheoThangCuaSanPham.get(thangHoaDon);
@@ -317,7 +308,7 @@ public class ThongKeServiceImpl implements ThongKeService {
                 }
             } else {
                 // Nếu sản phẩm chưa tồn tại trong Map, thêm sản phẩm vào Map và thêm số lượng theo tháng
-                Map<YearMonth, Long> soLuongTheoThangMoi = new HashMap<>();
+                Map<LocalDate, Long> soLuongTheoThangMoi = new HashMap<>();
                 soLuongTheoThangMoi.put(thangHoaDon, soLuong);
                 soLuongTheoThang.put(sanPhamId, soLuongTheoThangMoi);
             }

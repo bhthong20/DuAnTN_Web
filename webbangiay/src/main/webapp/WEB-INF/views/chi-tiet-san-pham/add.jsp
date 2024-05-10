@@ -363,7 +363,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="myFunction1()" >Add
+                                                    onclick="themNhanhMauSac()" >Add
                                             </button>
                                         </div>
                                     </div>
@@ -420,7 +420,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                   onclick="myFunction1()" >Add
+                                                   onclick="themNhanhKichThuoc()" >Add
                                             </button>
                                         </div>
                                     </div>
@@ -478,7 +478,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="myFunction1()" >Add
+                                                    onclick="themNhanhLoaiDe()" >Add
                                             </button>
                                         </div>
                                     </div>
@@ -496,6 +496,36 @@
 </body>
 <script>
 
+    function themNhanhMauSac() {
+        let text = "Bạn chắc chắn muốn thêm nhanh màu sắc không?";
+        let kt = confirm(text);
+        if (kt == true) {
+            alert("Thêm nhanh màu sắc thành công.")
+            return true
+        } else {
+            return false;
+        }
+    }
+    function themNhanhKichThuoc() {
+        let text = "Bạn chắc chắn muốn thêm nhanh kích thước không?";
+        let kt = confirm(text);
+        if (kt == true) {
+            alert("Thêm nhanh kích thước thành công.")
+            return true
+        } else {
+            return false;
+        }
+    }
+    function themNhanhLoaiDe() {
+        let text = "Bạn chắc chắn muốn thêm nhanh loại đế không";
+        let kt = confirm(text);
+        if (kt == true) {
+            alert("Thêm nhanh loại đế thành công.")
+            return true
+        } else {
+            return false;
+        }
+    }
     function myFunction3() {
         let text = "Bạn chắc chắn muốn thay đổi trạng thái";
         let kt = confirm(text);
@@ -768,6 +798,7 @@
     let listSize = [];
     let listCategory = [];
     let listProductDetail = [];
+    let listProductDetailUpdate = [];
 
     let dataProductDetailUpdate = [];
 
@@ -866,21 +897,29 @@
                 listSize.forEach(size => {
                     listCategory.forEach(category => {
                         index++;
-                        listProductDetail.push({
-                            index: index,
-                            colorId: color.id,
-                            colorName: color.name,
-                            sizeId: size.id,
-                            sizeName: size.name,
-                            categoryId: category.id,
-                            categoryName: category.name,
-                            quantity: 1,
-                            money: 1,
-                            name: tenSPValue,
-                            note: "",
-                            status: true,
-                            image: ""
-                        })
+                        if (listProductDetailUpdate.filter(el => el.colorId == color.id && el.sizeId == size.id && el.categoryId == category.id).length == 0) {
+                            listProductDetail.push({
+                                index: index,
+                                colorId: color.id,
+                                colorName: color.name,
+                                sizeId: size.id,
+                                sizeName: size.name,
+                                categoryId: category.id,
+                                categoryName: category.name,
+                                quantity: 1,
+                                money: 1,
+                                name: tenSPValue,
+                                note: "",
+                                status: true,
+                                image: ""
+                            })
+                        } else {
+                            let sanPham = listProductDetailUpdate.filter(el => el.colorId == color.id && el.sizeId == size.id && el.categoryId == category.id)[0]
+                            sanPham.index = index
+                            listProductDetail.push(
+                                sanPham
+                            )
+                        }
                     })
                 })
             })
@@ -1046,6 +1085,7 @@
                                 image: el.hinhAnh.id
                             })
                         });
+                        listProductDetailUpdate = listProductDetail;
                         updateColorTable();
                         var inputs = $('.productImg');
                         inputs.each(function () {

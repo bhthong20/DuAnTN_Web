@@ -18,4 +18,5 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
     List<HoaDon> findAllByLoaiAndTrangThaiAndKhachHang(int loai, int trangThai, KhachHang khachHang);
     List<HoaDon> findAllByLoaiAndKhachHang(int loai, KhachHang khachHang);
     Page<HoaDon> findAllByTrangThaiNotIn(int[] trangThais, Pageable pageable);
+    Page<HoaDon> findAllBy(Pageable pageable);
 }
