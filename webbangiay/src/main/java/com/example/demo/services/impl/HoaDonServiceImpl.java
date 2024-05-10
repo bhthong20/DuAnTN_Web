@@ -23,8 +23,8 @@ public class HoaDonServiceImpl implements HoaDonService {
 
     @Override
     public Page<HoaDon> getAllAdmin(Pageable pageable) {
-        int[] c = {3,9};
-        return hoaDonRepository.findAllByTrangThaiNotIn(c, pageable);
+//        int[] c = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        return hoaDonRepository.findAllBy(pageable);
     }
 
     @Override

@@ -91,7 +91,7 @@ public class BanHangOnlineRestController {
     }
 
     @PostMapping("/thay-doi-trang-thai")
-    public Boolean thayDoiTrangThai(@RequestBody TrangThaiHoaDonRequest request) {
+    public Boolean thayDoiTrangThai(@RequestBody TrangThaiHoaDonRequest request) throws BadRequestException {
         return service.thayDoiTrangThaiHoaDon(request.getIdHoaDon(), request.getTrangThai());
     }
 

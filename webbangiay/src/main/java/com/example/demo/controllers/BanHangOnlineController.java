@@ -5,6 +5,7 @@ import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.services.KhuyenMaiService;
 import com.example.demo.services.impl.VNPayService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,7 @@ public class BanHangOnlineController {
     }
 
     @GetMapping("/vnpay-payment")
-    public String GetMapping(Model model, HttpServletRequest request){
+    public String GetMapping(Model model, HttpServletRequest request) throws BadRequestException {
         int paymentStatus = service.orderReturn(request);
 
         String orderInfo = request.getParameter("vnp_OrderInfo");

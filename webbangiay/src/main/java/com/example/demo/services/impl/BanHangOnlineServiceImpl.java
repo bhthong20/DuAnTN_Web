@@ -21,6 +21,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -269,7 +270,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     @Transactional
-    public Boolean thayDoiTrangThaiHoaDon(UUID idHoaDon, int trangThai) {
+    public Boolean thayDoiTrangThaiHoaDon(UUID idHoaDon, int trangThai) throws BadRequestException {
         HoaDon hoaDon = hoaDonRepository.findById(idHoaDon).get();
         if (common.getUserLoginType().equals("ADMIN")) {
             hoaDon.setNhanVien((NhanVien) common.getUserLogin());
@@ -277,6 +278,28 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             hoaDon.setKhachHang((KhachHang) common.getUserLogin());
         }
         hoaDon.setTrangThai(trangThai);
+        if (trangThai == 1) {
+            List<HoaDonChiTiet> list = hoaDonChiTietRepository.findHoaDonChiTietByHoaDon(hoaDon);
+
+            List<ChiTietSanPham> listChiTiet = new ArrayList<>();
+
+            for (HoaDonChiTiet el:list) {
+                ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
+                if (chiTietSanPham != null) {
+                    if (el.getChiTietSanPham().getSoLuongTon() - el.getSoLuong() < 0) {
+                        throw new BadRequestException("Sản phẩm " + chiTietSanPham.getSanPham().getTenSP() +
+                                ". Có màu " + chiTietSanPham.getMauSac().getTen() +
+                                ". Có kích cớ: " + chiTietSanPham.getKichThuoc().getSize() +
+                                ". Có chất liệu: " + chiTietSanPham.getChatLieu().getTenChatLieu() +
+                                ". Không còn đủ số lượng");
+                    }
+                    el.getChiTietSanPham().setSoLuongTon(el.getChiTietSanPham().getSoLuongTon() - el.getSoLuong());
+                    listChiTiet.add(el.getChiTietSanPham());
+                }
+            }
+
+            chiTietSanPhamRepository.saveAll(listChiTiet);
+        }
         return true;
     }
 }

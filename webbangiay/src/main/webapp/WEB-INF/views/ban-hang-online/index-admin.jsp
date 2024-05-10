@@ -772,6 +772,7 @@
     }
 
     function switchBtn(trangThai) {
+        console.log(trangThai)
         switch (trangThai) {
             case 0: {
                 $('#btnGiaoHang').hide();

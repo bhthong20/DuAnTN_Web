@@ -57,6 +57,9 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Autowired
     private MauSacService mauSacService;
 
+    @Autowired
+    private ChiTietSanPhamRepository chiTietSanPhamRepository;
+
     @Override
     public Page<ChiTietSanPham> getAll(Pageable pageable) {
         return repository.findAll(pageable);
@@ -110,6 +113,10 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
             if (sanPhamUpdate != null) {
                 sanPhamUpdate.setTrangThai(0);
                 sanPhamRepository.save(sanPhamUpdate);
+                chiTietSanPhamRepository.saveAll(chiTietSanPhamRepository.findAllBySanPhamAndIsDelete(sanPhamUpdate, 1).stream().map(el -> {
+                    el.setIsDelete(0);
+                    return el;
+                }).collect(Collectors.toList()));
                 return true;
             }
         }

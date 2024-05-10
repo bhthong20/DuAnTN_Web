@@ -669,9 +669,9 @@
             tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
         });
 
-        tongTien += parseInt($('#tienShip').text());
-
         $('#donGia').text(tongTien)
+
+        tongTien += parseInt($('#tienShip').text());
 
         if (khuyenMaiSelect.id) {
             if (tongTien >= khuyenMaiSelect.dieuKienGia) {
