@@ -36,17 +36,23 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 1 and (ctsp.kichThuoc.size like %:search% or ctsp.sanPham.tenSP like %:search% or ctsp.mauSac.ten like %:search% or ctsp.chatLieu.tenChatLieu like %:search%)")
     List<ChiTietSanPham> search1(String search);
 
-    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 1 and ctsp.thuongHieu.ten like ?1")
-    List<SanPham> locTH(String locTH);
+    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = ?1 and ctsp.thuongHieu.ten like ?2")
+    List<SanPham> locTH(Integer tt,String locTH);
 
-    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 1 and ctsp.phanLoai.tenLoai like ?1")
-    List<SanPham> locPL(String locPL);
+    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = ?1 and ctsp.phanLoai.tenLoai like ?1")
+    List<SanPham> locPL(Integer tt,String locPL);
 
-    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 1 and (ctsp.thuongHieu.ten like ?1 or ctsp.phanLoai.tenLoai like ?2)")
-    List<SanPham> loc(String locTH, String locPL);
+    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = ?1 and (ctsp.thuongHieu.ten like ?2 or ctsp.phanLoai.tenLoai like ?3)")
+    List<SanPham> loc(Integer tt,String locTH, String locPL);
 
-    @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 1 and (ctsp.sanPham.tenSP like ?1 or ctsp.mauSac.ten like ?2 or ctsp.kichThuoc.size like ?3 or ctsp.chatLieu.tenChatLieu like ?4)")
-    List<ChiTietSanPham> loc1(String locSP, String locMS, String locSize, String locDe);
+    @Query("select ctsp from SanPham ctsp where  ctsp.thuongHieu.ten like ?1 or ctsp.phanLoai.tenLoai like ?2")
+    List<SanPham> loc1(String locTH, String locPL);
+
+
+    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = ?1 ")
+    List<SanPham> locTT(Integer locTT);
+
+
 
     //update lại toàn bộ các trường có trạng thái 0, vì là câu native query nên tên bảng sẽ lấy theo tên trong sql
     @Transactional

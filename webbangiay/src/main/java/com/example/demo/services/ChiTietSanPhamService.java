@@ -43,11 +43,15 @@ public interface ChiTietSanPhamService {
     public List<ChiTietSanPham> search1(String search);
 
     //lọc bên trang trạng thái
-    public List<SanPham> loc(String locTH, String locPL);
+    public List<SanPham> loc(Integer tt,String locTH, String locPL);
 
-    public List<SanPham> locTH(String locTH);
+    public List<SanPham> locTHPL(String locTH, String locPL);
 
-    public List<SanPham> locPL(String locPL);
+    public List<SanPham> locTH(Integer tt,String locTH);
+
+    public List<SanPham> locPL(Integer tt,String locPL);
+
+    public List<SanPham> locTT(Integer tt);
 
     public Boolean delete(UUID id);
 

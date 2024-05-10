@@ -74,6 +74,7 @@
 
 <body>
 <!-- Layout wrapper -->
+
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
@@ -383,7 +384,6 @@
             </nav>
 
             <!-- / Navbar -->
-            <div class="content-wrapper">
 
                 <div class="content-body">
                     <!-- row -->

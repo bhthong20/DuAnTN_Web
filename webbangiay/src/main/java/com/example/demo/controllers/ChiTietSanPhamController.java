@@ -174,26 +174,39 @@ public class ChiTietSanPhamController {
     @PostMapping("/loc")
     public String loc(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham,
                       @RequestParam(value = "locTH", required = false) String locTH,
-                      @RequestParam(value = "locPL", required = false) String locPL) {
+                      @RequestParam(value = "locPL", required = false) String locPL,
+                      @RequestParam(value = "locTT", required = false) Integer locTT) {
         model.addAttribute("listTH", thuongHieuService.findAll());
         model.addAttribute("listPL", phanLoaiService.findAll());
         List<SanPham> list;
-        if (locTH != null && locPL == null) {
+        if (locTH != null && locPL == null&& locTT != null) {
             // Xử lý tìm kiếm dựa trên option1
-            list = chiTietSanPhamService.locTH(locTH);
+            list = chiTietSanPhamService.locTH(locTT,locTH);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
             model.addAttribute("listCTSP", list);
             return "home/layout";
-        } else if (locPL != null && locTH == null) {
+        } else if (locPL != null && locTH == null&& locTT != null) {
             // Xử lý tìm kiếm dựa trên option2
-            list = chiTietSanPhamService.locPL(locPL);
+            list = chiTietSanPhamService.locPL(locTT,locPL);
+            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
+            model.addAttribute("listCTSP", list);
+            return "home/layout";
+        } else if (locPL != null && locTH != null && locTT == null) {
+            // Xử lý tìm kiếm dựa trên option2
+            list = chiTietSanPhamService.locTHPL(locTH,locPL);
+            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
+            model.addAttribute("listCTSP", list);
+            return "home/layout";
+        }else if (locPL == null && locTH == null && locTT != null) {
+            // Xử lý tìm kiếm dựa trên option2
+            list = chiTietSanPhamService.locTT(locTT);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
             model.addAttribute("listCTSP", list);
             return "home/layout";
         } else {
             // Nếu không có lựa chọn nào được chọn, trả về tất cả các kết quả
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-            model.addAttribute("listCTSP", list = chiTietSanPhamService.loc(locTH,locPL));
+            model.addAttribute("listCTSP", list = chiTietSanPhamService.loc(locTT,locTH,locPL));
             return "home/layout";
         }
     }

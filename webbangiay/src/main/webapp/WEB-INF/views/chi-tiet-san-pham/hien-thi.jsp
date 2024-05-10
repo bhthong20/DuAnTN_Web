@@ -81,6 +81,14 @@
                             </div>
 
                             <div class="btn-group">
+                                <select class="form-select" name="locTT">
+                                    <option selected disabled>Trạng thái</option>
+                                    <option value="0">Ngừng bán</option>
+                                    <option value="1">Còn bán</option>
+                                </select>
+                            </div>
+
+                            <div class="btn-group">
                                 <button type="submit" class="btn btn-primary mr-2"
                                         onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
                                     Lọc
@@ -94,7 +102,8 @@
         <tr class="text-center">
             <td class="text-center" colspan="2">
                 <%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
-                <a type="button" class="btn btn-primary" onclick="return myFunction1()" href="/chi-tiet-san-pham/view-add">Thêm
+                <a type="button" class="btn btn-primary" onclick="return myFunction1()"
+                   href="/chi-tiet-san-pham/view-add">Thêm
                     mới sản phẩm</a>
             </td>
         </tr>
@@ -108,6 +117,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th></th>
                 <th>STT</th>
                 <th>Mã</th>
                 <th>Ảnh</th>
@@ -229,15 +239,6 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                            <%--                            <div class="mb-3">--%>
-                            <%--                                <label class="form-label" for="hinhAnhSearch">Hình ảnh</label>--%>
-                            <%--                                <select class="form-select" id="hinhAnhSearch">--%>
-                            <%--                                    <option selected value="">Lựa chọn</option>--%>
-                            <%--                                    <c:forEach items="${listHA}" var="item">--%>
-                            <%--                                        <option value="${item.id}">${item.ten}</option>--%>
-                            <%--                                    </c:forEach>--%>
-                            <%--                                </select>--%>
-                            <%--                            </div>--%>
                         </div>
                     </div>
                     <div class="row">
@@ -304,11 +305,25 @@
             }
         });
 
-        // Nếu không còn giá trị nào trong mảng selectedIds, không gửi request AJAX
+        // Kiểm tra xem có sản phẩm nào được chọn không
         if (selectedIds.length === 0) {
+
             console.error("No valid UUIDs to send in the request.");
-            return;
+            window.alert("Chưa chọn một sản phẩm để xem chi tiết.");
+            $('#modalDanhSachSanPham').hide();// Ẩn modal
+            return false; // Dừng thực hiện hàm
         }
+
+        // Kiểm tra nếu người dùng chọn nhiều hơn một idCTSP
+        if (selectedIds.length > 1) {
+            $('#modalDanhSachSanPham').modal('hide'); // Ẩn modal
+            console.error("Chỉ được chọn một sản phẩm để xem chi tiết.");
+            // Hiển thị thông báo lỗi cho người dùng
+            // Ví dụ: Thông báo lỗi sử dụng window.alert
+            window.alert("Chỉ được chọn một sản phẩm để xem chi tiết.");
+            return false; // Dừng việc gửi request AJAX
+        }
+
         // Gửi request AJAX với các idCTSP đã được chọn
 
         $.ajax({
@@ -319,24 +334,24 @@
                 response.forEach(el => {
                     index++;
                     html += `<tr item='` + JSON.stringify(el) + `'>
-                                <td><input class="form-check-input" type="checkbox" name="chiTietSanPham" value="` + el.id + `" /></td>
-                                <td>` + (el ? el.ma : "") + `</td>
-                                <td align="center">
-                                    <img src="../../../uploads/` + (el.hinhAnh ? el.hinhAnh.anh1 : "") + `" width="100" height="100"
-                                         style="border-radius:50% 50% 50% 50%">
+                            <td><input class="form-check-input" type="checkbox" name="chiTietSanPham" value="` + el.id + `" /></td>
+                            <td>` + (el ? el.ma : "") + `</td>
+                            <td align="center">
+                                <img src="../../../uploads/` + (el.hinhAnh ? el.hinhAnh.anh1 : "") + `" width="100" height="100"
+                                     style="border-radius:50% 50% 50% 50%">
 
-                                </td>
-                                <td>` + (el.sanPham ? el.sanPham.tenSP : "") + `</td>
-                                <td>` + (el.mauSac ? el.mauSac.ten : "") + `</td>
-                                <td>` + (el.kichThuoc ? el.kichThuoc.size : "") + `</td>
-                                <td>` + (el.chatLieu ? el.chatLieu.tenChatLieu : "") + `</td>
-                                <td>` + (el.sanPham.phanLoai ? el.sanPham.phanLoai.tenLoai : "") + `</td>
-                                <td>` + (el.sanPham.thuongHieu ? el.sanPham.thuongHieu.ten : "") + `</td>
-                                <td>` + el.soLuongTon + `</td>
-                                <td><strong>  `+ VND.format(el.donGia) + `</strong></td>
+                            </td>
+                            <td>` + (el.sanPham ? el.sanPham.tenSP : "") + `</td>
+                            <td>` + (el.mauSac ? el.mauSac.ten : "") + `</td>
+                            <td>` + (el.kichThuoc ? el.kichThuoc.size : "") + `</td>
+                            <td>` + (el.chatLieu ? el.chatLieu.tenChatLieu : "") + `</td>
+                            <td>` + (el.sanPham.phanLoai ? el.sanPham.phanLoai.tenLoai : "") + `</td>
+                            <td>` + (el.sanPham.thuongHieu ? el.sanPham.thuongHieu.ten : "") + `</td>
+                            <td>` + el.soLuongTon + `</td>
+                            <td><strong>  ` + VND.format(el.donGia) + `</strong></td>
 
-                            </tr>
-                            `
+                        </tr>
+                        `
                 })
                 tableProduct.innerHTML = html;
             },
@@ -344,6 +359,69 @@
                 console.log(xhr.responseText);
             }
         });
+    }
+
+    const searchSanPham = () => {
+        let maSanPhamSearch = $("#maSanPhamSearch").val();
+        let tenSanPhamSearch = $('#tenSanPhamSearch').val();
+        let mauSacSearch = $('#mauSacSearch').val();
+        let kichCoSearch = $('#sizeSearch').val();
+        let chatLieuSearch = $('#chatLieuSearch').val();
+        let hinhAnhSearch = $('#hinhAnhSearch').val();
+        $('#listProduct').find('tr').each(function () {
+            let product = JSON.parse($(this).attr('item'));
+            let check = true;
+
+            // Kiểm tra mã sản phẩm
+            if (maSanPhamSearch) {
+                if (!product.ma.includes(maSanPhamSearch)) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra tên sản phẩm
+            if (tenSanPhamSearch) {
+                if (!product.ten.toLowerCase().includes(tenSanPhamSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra màu sắc
+            if (mauSacSearch) {
+                if (!product.mauSac.id.toLowerCase().includes(mauSacSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra kích cỡ
+            if (kichCoSearch) {
+                if (!product.kichThuoc.id.includes(kichCoSearch)) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra chất liệu
+            if (chatLieuSearch) {
+                if (!product.chatLieu.id.toLowerCase().includes(chatLieuSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Kiểm tra hình ảnh
+            if (hinhAnhSearch) {
+                if (!product.hinhAnh.id.toLowerCase().includes(hinhAnhSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
+            // Nếu sản phẩm không thỏa mãn các điều kiện tìm kiếm, ẩn nó đi
+            if (!check) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+
     }
 
     function myFunction1() {
