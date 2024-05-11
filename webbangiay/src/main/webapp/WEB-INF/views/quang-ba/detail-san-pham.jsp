@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             <div class=" text-sub-title-detail">
-                                Đã bán <span id="daBan"></span>
+                                Đã bán <span id="daBan">0</span> 👟
                             </div>
                         </div>
 
@@ -486,8 +486,10 @@
             url: "/home/rest/" + id,
             success: function (response) {
                 if (response.sanPham) {
+                    console.log(response)
                     sanPham.tenSp = response.sanPham.tenSP
                     sanPham.daBan = response.soLuongDaBan
+                    $('#daBan').text(sanPham.daBan);
                 }
                 if (response.chiTietSanPham && response.chiTietSanPham.length !== 0) {
                     chiTietSanPham = response.chiTietSanPham
@@ -645,6 +647,28 @@
         $('#anh1').attr('src', mauSacSelect.anh1);
         $('#anh2').attr('src', mauSacSelect.anh2);
         $('#anh3').attr('src', mauSacSelect.anh3);
+        $('#soLuong').text(mauSacSelect.soLuongTon);
+        $('#moTa').text(mauSacSelect.mota);
+
+        const saleSelect = $('.voucher-ticket.checked');
+
+        if (saleSelect.length != 0) {
+            $('#tenMaGiamGia').text(saleSelect[0].getAttribute('ten'));
+            $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect[0].getAttribute('ngayKetThuc'))).toLocaleString());
+            $('#donGiaTruocSale').text("₫" + mauSacSelect.donGia);
+            if (saleSelect[0].getAttribute('hinhThucGiam') == 1) {
+                $('#donGia').text(mauSacSelect.donGia * (100 - saleSelect[0].getAttribute('giaTriGiam')) / 100);
+                $('#giamGia').text('' + saleSelect[0].getAttribute('giaTriGiam') + ' % giảm');
+            } else {
+                $('#donGia').text(mauSacSelect.donGia - saleSelect[0].getAttribute('giaTriGiam'));
+                $('#giamGia').text('' + saleSelect[0].getAttribute('giaTriGiam') + ' VNĐ giảm');
+                if (mauSacSelect.donGia - saleSelect[0].getAttribute('giaTriGiam') < 0) {
+                    $('#donGia').text(0);
+                }
+            }
+        } else {
+            $('#donGia').text(mauSacSelect.donGia);
+        }
     }
 
     function changeSize(button) {
@@ -654,6 +678,8 @@
         $('#anh1').attr('src', sizeSelect.anh1);
         $('#anh2').attr('src', sizeSelect.anh2);
         $('#anh3').attr('src', sizeSelect.anh3);
+        $('#soLuong').text(sizeSelect.soLuongTon);
+        console.log(sizeSelect)
     }
 
     function changeChatLieu(button) {
@@ -663,6 +689,7 @@
         $('#anh1').attr('src', chatLieuSelect.anh1);
         $('#anh2').attr('src', chatLieuSelect.anh2);
         $('#anh3').attr('src', chatLieuSelect.anh3);
+        $('#soLuong').text(chatLieuSelect.soLuongTon);
     }
 </script>
 </html>

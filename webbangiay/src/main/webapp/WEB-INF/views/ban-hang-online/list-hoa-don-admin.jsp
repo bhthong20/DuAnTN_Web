@@ -76,6 +76,7 @@
                 <th>Mã</th>
                 <th>Mã người đặt</th>
                 <th>Tên người nhận</th>
+                <th>Nhân viên</th>
                 <th>Ngày tạo</th>
                 <th>Trạng thái</th>
                 <th>Phương thức thanh toán</th>
@@ -99,6 +100,15 @@
                         <c:choose>
                             <c:when test="${not empty item.tenNguoiNhan}">
                                 ${item.tenNguoiNhan}
+                            </c:when>
+                            <c:otherwise>
+                                -
+                            </c:otherwise>
+                        </c:choose></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty item.nhanVien}">
+                                ${item.nhanVien.hoTen}
                             </c:when>
                             <c:otherwise>
                                 -
