@@ -134,16 +134,16 @@
         </table>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=0">First</a></li>
+                <li class="page-item"><a class="page-link" href="/hoa-don?num=0">First</a></li>
 
                 <c:forEach begin="1" end="${total}" varStatus="status">
                     <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/khuyen-mai/hien-thi?num=${status.index -1}"
+                        <a href="${pageContext.request.contextPath}/hoa-don?num=${status.index -1}"
                            class="page-link">${status.index}</a>
                     </li>
                 </c:forEach>
 
-                <li class="page-item"><a class="page-link" href="/khuyen-mai/hien-thi?num=${total-1}">Last</a></li>
+                <li class="page-item"><a class="page-link" href="/hoa-don?num=${total-1}">Last</a></li>
             </ul>
         </nav>
     </div>

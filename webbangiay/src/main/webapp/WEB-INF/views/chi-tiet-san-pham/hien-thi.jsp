@@ -239,6 +239,15 @@
                                     </c:forEach>
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="loaiSearch">Loại</label>
+                                <select class="form-select" id="loaiSearch">
+                                    <option selected value="">Lựa chọn</option>
+                                    <c:forEach items="${listPL}" var="item">
+                                        <option value="${item.id}">${item.tenLoai}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -261,6 +270,7 @@
                             <th>Thương hiệu</th>
                             <th>Số lượng</th>
                             <th>Đơn giá</th>
+                            <th>Trạng thái</th>
                         </tr>
                         </thead>
                         <tbody class="table-border-bottom-2" id="listProduct">
@@ -271,12 +281,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <a id="updateBtnt" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</a>
             </div>
         </div>
     </div>
 </div>
 </body>
 <script>
+
 
     // mở modal lấy danh sách sản phẩm
     const getDanhSachSanPham = () => {
@@ -349,9 +361,8 @@
                             <td>` + (el.sanPham.thuongHieu ? el.sanPham.thuongHieu.ten : "") + `</td>
                             <td>` + el.soLuongTon + `</td>
                             <td><strong>  ` + VND.format(el.donGia) + `</strong></td>
-
-                        </tr>
-                        `
+                            <td>` + (el.trangThai==1?'Còn bán': 'Ngừng bán') + `</td>
+                        </tr>`
                 })
                 tableProduct.innerHTML = html;
             },
@@ -359,6 +370,24 @@
                 console.log(xhr.responseText);
             }
         });
+        $(document).ready(function () {
+            // Bắt sự kiện click trên button "Update"
+            $('#updateBtnt').click(function () {
+                // Lấy id của sản phẩm đang được chọn để cập nhật
+                let selectedProductId = $('input[name="idCTSP"]:checked').val();
+
+                // Kiểm tra xem có sản phẩm nào được chọn không
+                if (!selectedProductId) {
+                    // Hiển thị thông báo lỗi nếu không có sản phẩm nào được chọn
+                    alert("Chưa chọn sản phẩm để cập nhật.");
+                    return;
+                }
+
+                // Chuyển hướng sang trang cập nhật sản phẩm với id của sản phẩm được chọn
+                window.location.href = `/chi-tiet-san-pham/view-update?idctsp=` + selectedIds.join(",");
+            });
+        });
+
     }
 
     const searchSanPham = () => {
@@ -368,6 +397,7 @@
         let kichCoSearch = $('#sizeSearch').val();
         let chatLieuSearch = $('#chatLieuSearch').val();
         let hinhAnhSearch = $('#hinhAnhSearch').val();
+        let loaiSearch = $('#loaiSearch').val();
         $('#listProduct').find('tr').each(function () {
             let product = JSON.parse($(this).attr('item'));
             let check = true;
@@ -414,6 +444,12 @@
                 }
             }
 
+            if (loaiSearch) {
+                if (!product.loai.id.toLowerCase().includes(loaiSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+
             // Nếu sản phẩm không thỏa mãn các điều kiện tìm kiếm, ẩn nó đi
             if (!check) {
                 $(this).hide();
@@ -444,8 +480,9 @@
         }
     }
 
+
     function myFunction3() {
-        let text = "Bạn chắc chắn muốn thay đổi trạng thái";
+        let text = "Bạn chắc chắn muốn xóa sản phẩm";
         let kt = confirm(text);
         if (kt == true) {
             confirm("Thay đổi trạng thái thành công");
