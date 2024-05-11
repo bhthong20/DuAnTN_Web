@@ -6,6 +6,7 @@ import com.example.demo.models.dto.ThongKeDetailDto;
 import java.util.UUID;
 
 public interface ThongKeService {
-    ThongKeAllDto getTongThongKe();
-    ThongKeDetailDto getTongThongKeDetail(UUID uuid);
+    ThongKeAllDto getTongThongKe(int type);
+
+    ThongKeDetailDto getTongThongKeDetail(UUID uuid, int type);
 }

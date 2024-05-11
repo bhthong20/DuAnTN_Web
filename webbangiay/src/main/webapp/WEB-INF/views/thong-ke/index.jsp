@@ -82,7 +82,15 @@
     </section>
     <section class="mb-4">
         <div class="card">
-            <h4 class="card-header">Thống kê doanh thu</h4>
+            <h4 class="card-header d-flex justify-content-between align-items-center"><span>Thống kê doanh thu</span>
+                <span>
+                    <select class="form-select" id="phanLoai">
+                        <option selected value="1">Theo ngày</option>
+                        <option value="2">Theo tháng</option>
+                        <option value="3">Theo năm</option>
+                    </select>
+                </span>
+            </h4>
             <div class="card-body">
                 <div id="columnChart"></div>
             </div>
@@ -125,7 +133,9 @@
             </div>
             <div style="min-height: 100%" class="col-4">
                 <div style="height: 100%" class="card">
-                    <h4 class="card-header">Thống kê sản phẩm</h4>
+                    <h4 class="card-header">
+                        Thống kê sản phẩm
+                    </h4>
                     <div class="card-body">
                         <div id="lineChart"></div>
                     </div>
@@ -255,6 +265,7 @@
             }
         };
 
+        document.querySelector("#" + id).innerHTML = ''
         var chart = new ApexCharts(document.querySelector("#" + id), options);
         chart.render();
     }
@@ -310,7 +321,7 @@
                 offsetX: -5
             }
         };
-
+        document.querySelector("#" + lineChart).innerHTML = '';
         var chart = new ApexCharts(document.querySelector("#" + lineChart), options);
         chart.render();
     }
@@ -339,7 +350,6 @@
     }
 
     function genderSanPhamDetail(listData) {
-        console.log(listData)
         const tableProduct = document.getElementById("listSanPhamDetail");
         let html = '';
         let index = 0;
@@ -364,10 +374,22 @@
         tableProduct.innerHTML = html;
     }
 
+    let type = 1;
+
     window.onload = function () {
+        getAllThongKe(1);
+    }
+
+    document.getElementById('phanLoai').addEventListener('change', function() {
+        var selectedOption = this.value;
+        type = selectedOption;
+        getAllThongKe(selectedOption)
+    });
+
+    function getAllThongKe(type) {
         $.ajax({
             type: "GET",
-            url: "/thong-ke/api",
+            url: "/thong-ke/api/" + type,
             success: function (response) {
                 console.log(response)
                 $('#soLuongBan').text(response.thongKeTong.soLuongBan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
@@ -393,15 +415,16 @@
     }
 
     function detailSanPham(id) {
-        $.ajax({
+       $.ajax({
             type: "GET",
-            url: "/thong-ke/detail/" + id,
+            url: "/thong-ke/detail/" + id + "/" + type,
             success: function (response) {
-                console.log(response)
-                lineChart(response.getLineChartDetail, {
-                    categories: response.categories,
-                }, 'lineChartCtsp');
                 genderSanPhamDetail(response.getSanPhamDetail)
+                setTimeout(function() {
+                    lineChart(response.getLineChartDetail, {
+                        categories: response.categories,
+                    }, 'lineChartCtsp');
+                }, 500);
             },
             error: function (xhr, status, error) {
                 console.error(error);

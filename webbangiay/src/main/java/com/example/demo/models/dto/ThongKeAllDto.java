@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,5 +16,5 @@ public class ThongKeAllDto {
     private List<SanPhamThongKeDto> getAllSanPham;
     private List<LineChartDto> getLineChartSanPham;
     private List<LineChartDto> getLineChartTong;
-    private List<LocalDate> categories;
+    private List<Object> categories;
 }

@@ -111,7 +111,6 @@
                             <tr>
                                 <th><input class="form-check-input checkStatus" type="checkbox" id="checkAll"
                                            onchange="checkAll(this)" type="checkbox"/></th>
-                                <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Màu sắc</th>
                                 <th>Kích cỡ</th>
@@ -587,11 +586,6 @@
                         index++;
                         html += `<tr item='` + JSON.stringify(el) + `'>
                                 <td><input class="form-check-input checkStatus" onchange="fillTongTien()" type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
-                                <td align="center">
-                                    <img src="../../../uploads/` + (el.chiTietSanPham.hinhAnh ? el.chiTietSanPham.hinhAnh.anh1 : "") + `" width="100" height="100"
-                                         style="border-radius:50% 50% 50% 50%">
-
-                                </td>
                                 <td>` + (el.chiTietSanPham.sanPham ? el.chiTietSanPham.sanPham.tenSP : "") + `</td>
                                 <td>` + (el.chiTietSanPham.mauSac ? el.chiTietSanPham.mauSac.ten : "") + `</td>
                                 <td>` + (el.chiTietSanPham.kichThuoc ? el.chiTietSanPham.kichThuoc.size : "") + `</td>

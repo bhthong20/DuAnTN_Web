@@ -90,9 +90,8 @@
             <span id="title"></span>
         </h4>
         <div class="row">
-            <div class="col-lg-8 mb-3">
-
-                <div class="card">
+            <div class="col-lg-8 mb-3" style="min-height: 100%">
+                <div class="card" style="height: 100%">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Thông tin hóa đơn</h5>
                     </div>
@@ -270,7 +269,6 @@
                             <thead>
                             <tr>
                                 <th><input class="form-check-input" type="checkbox" disabled id="checkAll" onchange="checkAll(this)" type="checkbox"/></th>
-                                <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Màu sắc</th>
                                 <th>Kích cỡ</th>
@@ -652,11 +650,6 @@
                         index++;
                         html += `<tr item='` + JSON.stringify(el) + `'>
                                 <td><input class="form-check-input checkStatus" disabled type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
-                                <td align="center">
-                                    <img src="../../../uploads/` + (el.chiTietSanPham.hinhAnh ? el.chiTietSanPham.hinhAnh.anh1 : "") + `" width="100" height="100"
-                                         style="border-radius:50% 50% 50% 50%">
-
-                                </td>
                                 <td>` + (el.chiTietSanPham.sanPham ? el.chiTietSanPham.sanPham.tenSP : "") + `</td>
                                 <td>` + (el.chiTietSanPham.mauSac ? el.chiTietSanPham.mauSac.ten : "") + `</td>
                                 <td>` + (el.chiTietSanPham.kichThuoc ? el.chiTietSanPham.kichThuoc.size : "") + `</td>
@@ -706,7 +699,7 @@
 
         $('#tienGiam').text(hoaDon.tienGiam ? hoaDon.tienGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
         $('#tongTien').text(hoaDon.tongTien ? hoaDon.tongTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
-        $('#donGia').text((hoaDon.tienGiam + hoaDon.tongTien + hoaDon.tienShip).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#donGia').text((hoaDon.tienGiam + hoaDon.tongTien - hoaDon.tienShip).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 
         if (hoaDon.trangThai && hoaDon.trangThai == 10) {
             $(".btnExport").show();
@@ -772,7 +765,6 @@
     }
 
     function switchBtn(trangThai) {
-        console.log(trangThai)
         switch (trangThai) {
             case 0: {
                 $('#btnGiaoHang').hide();

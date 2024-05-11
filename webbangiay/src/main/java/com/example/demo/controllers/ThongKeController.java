@@ -26,15 +26,15 @@ public class ThongKeController {
         return "home/layout";
     }
 
-    @GetMapping("/api")
+    @GetMapping("/api/{type}")
     @ResponseBody
-    public ThongKeAllDto getAllTongApi() {
-        return thongKeService.getTongThongKe();
+    public ThongKeAllDto getAllTongApi(@PathVariable(name = "type") int type) {
+        return thongKeService.getTongThongKe(type);
     }
 
-    @GetMapping("/detail/{id}")
+    @GetMapping("/detail/{id}/{type}")
     @ResponseBody
-    public ThongKeDetailDto getThongKeDetail(@PathVariable(name = "id") UUID id) {
-        return thongKeService.getTongThongKeDetail(id);
+    public ThongKeDetailDto getThongKeDetail(@PathVariable(name = "id") UUID id, @PathVariable(name = "type") int type) {
+        return thongKeService.getTongThongKeDetail(id, type);
     }
 }
