@@ -1,6 +1,5 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
 import com.example.demo.models.dto.LineChartDto;
@@ -16,8 +15,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDate;
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,74 +32,127 @@ import java.util.stream.Collectors;
 @Service
 public class ThongKeServiceImpl implements ThongKeService {
 
+    public enum ReturnType {
+        LOCAL_DATE,
+        YEAR_MONTH,
+        YEAR
+    }
+
     @Autowired
     private ThongKeRepository repository;
 
     @Override
-    public ThongKeAllDto getTongThongKe() {
+    public ThongKeAllDto getTongThongKe(int type) {
         List<HoaDonChiTiet> list = repository.getAllHoaDonChiTiet();
 
         Set<HoaDon> set = new HashSet<>(list.stream().map(el -> el.getHoaDon()).collect(Collectors.toList()));
+        ReturnType returnType = ReturnType.LOCAL_DATE;
 
-        List<LocalDate> listNgayTao = listNgayTao(set);
+        switch (type) {
+            case 1:
+                returnType = ReturnType.LOCAL_DATE;
+                break;
+            case 2:
+                returnType = ReturnType.YEAR_MONTH;
+                break;
+            case 3:
+                returnType = ReturnType.YEAR;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid return type");
+        }
+
+        List<Object> listNgayTao = (List<Object>) listNgayTao(set, returnType);
 
         List<Long> taiQuayTongTien = new ArrayList<>();
         List<Long> onlineTongTien = new ArrayList<>();
         List<LineChartDto> getLineChartTong = new ArrayList<>();
+
+        ReturnType finalReturnType = returnType;
+
         listNgayTao.forEach(el -> {
-            taiQuayTongTien.add(countTongTienTheoThangByLoai(el, set, 0));
-            onlineTongTien.add(countTongTienTheoThangByLoai(el, set, 1));
+            taiQuayTongTien.add(countTongTienTheoThangByLoai(el, set, 0, finalReturnType));
+            onlineTongTien.add(countTongTienTheoThangByLoai(el, set, 1, finalReturnType));
         });
+
         getLineChartTong.add(new LineChartDto(null, "Bán tại quầy", taiQuayTongTien));
         getLineChartTong.add(new LineChartDto(null, "Bán online", onlineTongTien));
 
         ThongKeTongDto thongKeTongDto = getTongQuatThongKe(set, list);
         List<SanPhamThongKeDto> getAllSanPham = getAllSanPhamThongKe(list);
-        List<LineChartDto> getLineChartSanPham = getLineChartSanPham(list, listNgayTao);
+        List<LineChartDto> getLineChartSanPham = getLineChartSanPham(list, listNgayTao, finalReturnType);
 
         return new ThongKeAllDto(thongKeTongDto, getAllSanPham, getLineChartSanPham, getLineChartTong, listNgayTao);
     }
 
     @Override
-    public ThongKeDetailDto getTongThongKeDetail(UUID uuid) {
+    public ThongKeDetailDto getTongThongKeDetail(UUID uuid, int type) {
         List<HoaDonChiTiet> list = repository.getAllHoaDonChiTiet();
 
         Set<HoaDon> set = new HashSet<>(list.stream().map(el -> el.getHoaDon()).collect(Collectors.toList()));
 
-        List<LocalDate> listNgayTao = listNgayTao(set);
+        ReturnType returnType = ReturnType.LOCAL_DATE;
+
+        switch (type) {
+            case 1:
+                returnType = ReturnType.LOCAL_DATE;
+                break;
+            case 2:
+                returnType = ReturnType.YEAR_MONTH;
+                break;
+            case 3:
+                returnType = ReturnType.YEAR;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid return type");
+        }
+
+        List<Object> listNgayTao = (List<Object>) listNgayTao(set, returnType);
+
         return new ThongKeDetailDto(listNgayTao, getLineChartSanPhamDetail(list, listNgayTao), sanPhamThongKeDetailDtos(list, uuid));
     }
 
-    public List<LocalDate> listNgayTao(Set<HoaDon> hoaDons) {
-        // Tìm HoaDon có ngayTao nhỏ nhất
-        Optional<HoaDon> hoaDonMinNgayTao = hoaDons.stream()
-                .min((hd1, hd2) -> hd1.getNgayTao().compareTo(hd2.getNgayTao()));
 
-        // Tìm HoaDon có ngayTao lớn nhất
-        Optional<HoaDon> hoaDonMaxNgayTao = hoaDons.stream()
-                .max((hd1, hd2) -> hd1.getNgayTao().compareTo(hd2.getNgayTao()));
+    public static List<?> listNgayTao(Set<HoaDon> hoaDons, ReturnType returnType) {
+        Optional<HoaDon> minHoaDon = hoaDons.stream().min(Comparator.comparing(HoaDon::getNgayTao));
+        Optional<HoaDon> maxHoaDon = hoaDons.stream().max(Comparator.comparing(HoaDon::getNgayTao));
 
-        // Nếu không có hóa đơn thì bỏ qua
-        if (hoaDonMaxNgayTao.isEmpty() || hoaDonMinNgayTao.isEmpty()) {
+        if (minHoaDon.isEmpty() || maxHoaDon.isEmpty()) {
             return new ArrayList<>();
         }
 
-        HoaDon hoaDonMin = hoaDonMinNgayTao.get();
-        HoaDon hoaDonMax = hoaDonMaxNgayTao.get();
+        LocalDate minDate = minHoaDon.get().getNgayTao().toLocalDate();
+        LocalDate maxDate = maxHoaDon.get().getNgayTao().toLocalDate();
 
-        LocalDate ngayTaoNhoNhat = hoaDonMin.getNgayTao().toLocalDate();
-        LocalDate ngayTaoLonNhat = hoaDonMax.getNgayTao().toLocalDate();
+        List<Object> dateList = new ArrayList<>();
+        LocalDate currentDate = minDate;
 
-        // Tạo mảng chứa tất cả các tháng trong khoảng thời gian từ ngayTao nhỏ nhất đến ngayTao lớn nhất
-        List<LocalDate> thangTrongKhoang = new ArrayList<>();
-        LocalDate currentMonth = LocalDate.from(ngayTaoNhoNhat);
-
-        while (!currentMonth.isAfter(LocalDate.from(ngayTaoLonNhat))) {
-            thangTrongKhoang.add(currentMonth);
-            currentMonth = currentMonth.plusMonths(1);
+        switch (returnType) {
+            case LOCAL_DATE:
+                while (!currentDate.isAfter(maxDate)) {
+                    dateList.add(currentDate);
+                    currentDate = currentDate.plusDays(1);
+                }
+                break;
+            case YEAR_MONTH:
+                YearMonth currentYearMonth = YearMonth.from(minDate);
+                while (!currentYearMonth.isAfter(YearMonth.from(maxDate))) {
+                    dateList.add(currentYearMonth);
+                    currentYearMonth = currentYearMonth.plusMonths(1);
+                }
+                break;
+            case YEAR:
+                Year currentYear = Year.from(minDate);
+                while (!currentYear.isAfter(Year.from(maxDate))) {
+                    dateList.add(currentYear);
+                    currentYear = currentYear.plusYears(1);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid return type");
         }
 
-        return thangTrongKhoang;
+        return dateList;
     }
 
     public ThongKeTongDto getTongQuatThongKe(Set<HoaDon> set, List<HoaDonChiTiet> list) {
@@ -122,10 +176,11 @@ public class ThongKeServiceImpl implements ThongKeService {
         return new ThongKeTongDto(tongSoLuongBan, tongDoanhSo.longValue(), tongTaiQuay.longValue(), tongOnline.longValue());
     }
 
-    public Long countTongTienTheoThangByLoai(LocalDate thangTrongKhoang, Set<HoaDon> set, int loai) {
+    public Long countTongTienTheoThangByLoai(Object thangTrongKhoang, Set<HoaDon> set, int loai, ReturnType returnType) {
         Long tongTien = 0l;
         for (HoaDon el : set) {
-            LocalDate hoaDonLocalDate = LocalDate.from(el.getNgayTao().toLocalDate());
+            Object hoaDonLocalDate = switchTypeDate(LocalDate.from(el.getNgayTao().toLocalDate()), returnType);
+
             if (thangTrongKhoang.equals(hoaDonLocalDate) && el.getLoai() == loai) {
                 tongTien += el.getTongTien().longValue() - el.getTienShip().longValue();
             }
@@ -167,7 +222,7 @@ public class ThongKeServiceImpl implements ThongKeService {
     }
 
     // Thống kê sản phẩm theo tháng
-    public List<LineChartDto> getLineChartSanPham(List<HoaDonChiTiet> hoaDonChiTiets, List<LocalDate> thangTrongKhoang) {
+    public List<LineChartDto> getLineChartSanPham(List<HoaDonChiTiet> hoaDonChiTiets, List<Object> thangTrongKhoang, ReturnType returnType) {
         List<LineChartDto> listReturn = new ArrayList<>();
 
         hoaDonChiTiets.forEach(el -> {
@@ -180,18 +235,18 @@ public class ThongKeServiceImpl implements ThongKeService {
         });
 
         // Tạo một Map để lưu trữ số lượng của từng sản phẩm dựa trên ID của sản phẩm
-        Map<UUID, Map<LocalDate, Long>> soLuongTheoThang = new HashMap<>();
+        Map<UUID, Map<Object, Long>> soLuongTheoThang = new HashMap<>();
 
         // Lặp qua danh sách chi tiết hóa đơn để tính số lượng của từng sản phẩm theo tháng
         hoaDonChiTiets.forEach(el -> {
             UUID sanPhamId = el.getChiTietSanPham().getSanPham().getId();
             long soLuong = el.getSoLuong();
-            LocalDate thangHoaDon = LocalDate.from(el.getHoaDon().getNgayTao().toLocalDate());
+            Object thangHoaDon = switchTypeDate(LocalDate.from(el.getHoaDon().getNgayTao().toLocalDate()), returnType);
 
             // Kiểm tra xem sản phẩm đã tồn tại trong Map chưa
             if (soLuongTheoThang.containsKey(sanPhamId)) {
                 // Nếu sản phẩm đã tồn tại, kiểm tra xem số lượng theo tháng đã được cập nhật chưa
-                Map<LocalDate, Long> soLuongTheoThangCuaSanPham = soLuongTheoThang.get(sanPhamId);
+                Map<Object, Long> soLuongTheoThangCuaSanPham = soLuongTheoThang.get(sanPhamId);
                 // Nếu số lượng theo tháng đã được cập nhật, cộng thêm số lượng mới vào
                 if (soLuongTheoThangCuaSanPham.containsKey(thangHoaDon)) {
                     long tongSoLuongHienTai = soLuongTheoThangCuaSanPham.get(thangHoaDon);
@@ -203,7 +258,7 @@ public class ThongKeServiceImpl implements ThongKeService {
                 }
             } else {
                 // Nếu sản phẩm chưa tồn tại trong Map, thêm sản phẩm vào Map và thêm số lượng theo tháng
-                Map<LocalDate, Long> soLuongTheoThangMoi = new HashMap<>();
+                Map<Object, Long> soLuongTheoThangMoi = new HashMap<>();
                 soLuongTheoThangMoi.put(thangHoaDon, soLuong);
                 soLuongTheoThang.put(sanPhamId, soLuongTheoThangMoi);
             }
@@ -272,7 +327,7 @@ public class ThongKeServiceImpl implements ThongKeService {
     }
 
     // Thống kê chi tiết sản phẩm theo tháng
-    public List<LineChartDto> getLineChartSanPhamDetail(List<HoaDonChiTiet> hoaDonChiTiets, List<LocalDate> thangTrongKhoang) {
+    public List<LineChartDto> getLineChartSanPhamDetail(List<HoaDonChiTiet> hoaDonChiTiets, List<Object> thangTrongKhoang) {
         List<LineChartDto> listReturn = new ArrayList<>();
 
         hoaDonChiTiets.forEach(el -> {
@@ -335,5 +390,18 @@ public class ThongKeServiceImpl implements ThongKeService {
         });
 
         return listReturn;
+    }
+
+    public Object switchTypeDate(LocalDate thangTrongKhoang, ReturnType returnType) {
+        switch (returnType) {
+            case LOCAL_DATE:
+                return thangTrongKhoang;
+            case YEAR_MONTH:
+                return YearMonth.from(thangTrongKhoang);
+            case YEAR:
+                return Year.from(thangTrongKhoang);
+            default:
+                throw new IllegalArgumentException("Invalid return type");
+        }
     }
 }

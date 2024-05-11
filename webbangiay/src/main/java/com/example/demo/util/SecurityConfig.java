@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
@@ -29,11 +30,28 @@ public class SecurityConfig {
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/WEB-INF/**").permitAll()
                 .requestMatchers("/auth-register").permitAll()
+                .requestMatchers("/403").permitAll()
                 .requestMatchers("/js").permitAll()
 //                .requestMatchers("/**").permitAll()
                 .requestMatchers("/user-infor").permitAll()
+                .requestMatchers("/ban-hang-tai-quay/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/thong-ke/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/khuyen-mai/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/thuong-hieu/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/chat-lieu/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/kich-thuoc/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/mau-sac/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/loai/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/loai/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/chi-tiet-san-pham/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/chuc-vu/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
+                .requestMatchers("/vnpay-payment/**").hasAnyRole(RolesConstant.ROLE_USER)
+                .requestMatchers("/payment/**").hasAnyRole(RolesConstant.ROLE_USER)
                 .requestMatchers("/assets/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler())
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -48,6 +66,12 @@ public class SecurityConfig {
         return http.build();
     }
 
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            response.sendRedirect(request.getContextPath() + "/403");
+        };
+    }
+
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new SimpleUrlAuthenticationSuccessHandler() {
@@ -55,7 +79,7 @@ public class SecurityConfig {
             protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
                 // Kiểm tra vai trò của người dùng và chuyển hướng đến đường dẫn tương ứng
                 if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                    return "/hoa-don"; // Chuyển hướng đến trang "/admin/home" nếu người dùng có vai trò ADMIN
+                    return "/thong-ke"; // Chuyển hướng đến trang "/admin/home" nếu người dùng có vai trò ADMIN
                 } else {
                     return "/home"; // Chuyển hướng đến trang "/home" mặc định
                 }

@@ -38,12 +38,12 @@ public class HomeController {
     private KhuyenMaiService khuyenMaiService;
 
     @GetMapping("/home")
-    private String showHome() {
+    public String showHome() {
         return "quang-ba/home";
     }
 
     @GetMapping("/san-pham")
-    private String showSanPham(Model model) {
+    public String showSanPham(Model model) {
         model.addAttribute("listTH", thuongHieuService.findAll());
         model.addAttribute("listPL", phanLoaiService.findAll());
         model.addAttribute("listMS", mauSacService.findAll());
@@ -51,8 +51,13 @@ public class HomeController {
     }
 
     @GetMapping("/san-pham/{id}")
-    private String showSanPhamDetail(Model model) {
+    public String showSanPhamDetail(Model model) {
         model.addAttribute("listKM", khuyenMaiService.getComboboxKhuyenMai());
         return "quang-ba/detail-san-pham";
+    }
+
+    @GetMapping("/403")
+    public String show403() {
+        return "quang-ba/403";
     }
 }
