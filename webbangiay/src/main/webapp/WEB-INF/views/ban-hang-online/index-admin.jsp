@@ -706,7 +706,7 @@
 
         $('#tienGiam').text(hoaDon.tienGiam ? hoaDon.tienGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
         $('#tongTien').text(hoaDon.tongTien ? hoaDon.tongTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
-        $('#donGia').text((hoaDon.tienGiam + hoaDon.tongTien + hoaDon.tienShip).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+        $('#donGia').text((hoaDon.tienGiam + hoaDon.tongTien - hoaDon.tienShip).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 
         if (hoaDon.trangThai && hoaDon.trangThai == 10) {
             $(".btnExport").show();
@@ -772,7 +772,6 @@
     }
 
     function switchBtn(trangThai) {
-        console.log(trangThai)
         switch (trangThai) {
             case 0: {
                 $('#btnGiaoHang').hide();
