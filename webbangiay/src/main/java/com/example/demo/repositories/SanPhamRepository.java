@@ -30,7 +30,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
                 FROM hoa_don_chi_tiet hdct
                 JOIN chi_tiet_san_pham ctsp ON hdct.chi_tiet_san_pham_id = ctsp.id_chi_tiet_san_pham
                 JOIN hoa_don hd on hdct.hoa_don_id = hd.id_hoa_don
-                where hd.trang_thai = 2
+                where hd.trang_thai = 10
                 GROUP BY
                     ctsp.san_pham_id
             )
@@ -85,7 +85,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
                 FROM hoa_don_chi_tiet hdct
                 JOIN chi_tiet_san_pham ctsp ON hdct.chi_tiet_san_pham_id = ctsp.id_chi_tiet_san_pham
                 JOIN hoa_don hd on hdct.hoa_don_id = hd.id_hoa_don
-                where hd.trang_thai = 2
+                where hd.trang_thai = 10
                 GROUP BY
                     ctsp.san_pham_id
             )
@@ -141,7 +141,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
             FROM hoa_don_chi_tiet hdct
             JOIN chi_tiet_san_pham ctsp ON hdct.chi_tiet_san_pham_id = ctsp.id_chi_tiet_san_pham
             JOIN hoa_don hd on hdct.hoa_don_id = hd.id_hoa_don
-            where hd.trang_thai = 2 and ctsp.san_pham_id = :idSp
+            where hd.trang_thai = 10 and ctsp.san_pham_id = :idSp
 """, nativeQuery = true)
     Long getSoLuongDaBa(@Param("idSp") UUID idSp);
 }
