@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class HoaDonServiceImpl implements HoaDonService {
     @Autowired
     HoaDonRepository hoaDonRepository;
+
     @Override
     public Page<HoaDon> getAll(Pageable pageable) {
         return hoaDonRepository.findAll(pageable);
@@ -65,5 +67,20 @@ public class HoaDonServiceImpl implements HoaDonService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<HoaDon> loc(Integer locTT, Integer locPTTT, Integer locLoai, Date ngayTao) {
+        return hoaDonRepository.loc(locTT, locPTTT, locLoai, ngayTao);
+    }
+
+    @Override
+    public List<HoaDon> searchMa(String ma) {
+        return hoaDonRepository.searchMa(ma);
+    }
+
+    @Override
+    public List<HoaDon> loc1(Integer locTT, Integer locPTTT, Integer locLoai) {
+        return hoaDonRepository.loc1(locTT,locPTTT,locLoai);
     }
 }

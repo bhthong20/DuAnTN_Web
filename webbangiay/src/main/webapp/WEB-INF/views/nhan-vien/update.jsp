@@ -92,7 +92,7 @@
                             <form:errors path="ngaySinh" cssStyle="color: red"></form:errors>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <form:select class="form-select" path="chucVu"  id="selectChucVu">
+                            <form:select class="form-select" path="chucVu" id="selectChucVu">
                                 <option selected disabled>Sản phẩm</option>
                                 <form:options items="${listCv}" itemValue="id" itemLabel="ten"/>
                             </form:select>
@@ -129,7 +129,6 @@
         </div>
     </div>
 
-</div>
 </div>
 </body>
 <script>

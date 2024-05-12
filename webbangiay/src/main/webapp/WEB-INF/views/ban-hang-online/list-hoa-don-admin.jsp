@@ -49,20 +49,63 @@
         <h3 class="card-header">Thông tin hóa đơn</h3>
         <tr>
             <td style="text-align: center">
-                <form action="/khuyen-mai/search" method="post">
+                <form action="/hoa-don/search" method="post">
                     <div class="input-group" style="width:100%; text-align: center">
                         <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                               aria-label="Bạn tìm gì..." name="search">
+                               aria-label="Bạn tìm gì..." name="ma">
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
                         </div>
                     </div>
                 </form>
             </td>
-        </tr>
-        <tr class="text-center">
-            <td class="text-center" colspan="2">
-                <a type="button" class="btn btn-primary" href="/khuyen-mai/view-add">Thêm mới</a>
+            <td>
+                <form action="/hoa-don/loc" method="post">
+                    <div class="card-body" style="text-align: center">
+
+                            <div class="btn-group">
+                                <select class="form-select" name="locTT">
+                                    <option selected disabled>Trạng thái</option>
+                                    <option value=0>Chờ xác nhận</option>
+                                    <option value=1>Đã xác nhận</option>
+                                    <option value=2>Đã thanh toán</option>
+                                    <option value="3">Chờ thanh toán</option>
+                                    <option value="4">Chờ vẫn chuyển</option>
+                                    <option value="5">Đang vận chuyển</option>
+                                    <option value="6">Vận chuyển hoàn tất</option>
+                                    <option value="7">Giao trễ</option>
+                                    <option value="8">Đã hủy</option>
+                                    <option value="9">Mới tạo</option>
+                                    <option value="10">Hoàn tất</option>
+                                </select>
+                            </div>
+
+                            <div class="btn-group">
+                                <select class="form-select" name="locLoai">
+                                    <option selected disabled>Loại</option>
+                                    <option value="0">Tại quầy</option>
+                                    <option value="1">online</option>
+                                </select>
+                            </div>
+
+                            <div class="btn-group">
+                                <select class="form-select" name="locPTTT">
+                                    <option selected disabled>PT Thanh toán</option>
+                                    <option value="0">Nhận hàng</option>
+                                    <option value="1">online</option>
+                                </select>
+                            </div>
+                            <div class="btn-group">
+                                <input type="date" class="form-control" name="ngayTao" >
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary mr-2">
+                                    Lọc
+                                </button>
+                            </div>
+                        </div>
+
+                </form>
             </td>
         </tr>
         </tbody>
@@ -135,8 +178,10 @@
                         <c:if test="${item.loai==1}">online</c:if>
                     </td>
                     <td>
-                        <c:if test="${item.loai==0}"><a href="/ban-hang-tai-quay?id=${item.id}" class="btn btn-success">Chi tiết</a></c:if>
-                        <c:if test="${item.loai==1}"><a href="/hoa-don/detail?id=${item.id}" class="btn btn-success">Chi tiết</a></c:if>
+                        <c:if test="${item.loai==0}"><a href="/ban-hang-tai-quay?id=${item.id}" class="btn btn-success">Chi
+                            tiết</a></c:if>
+                        <c:if test="${item.loai==1}"><a href="/hoa-don/detail?id=${item.id}" class="btn btn-success">Chi
+                            tiết</a></c:if>
 
                     </td>
                 </tr>
