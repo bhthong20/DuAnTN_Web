@@ -56,15 +56,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
-                                <input id="ma" disabled class="form-control" placeholder=""/>
-                                <label for="ma" path="sanPham">Mã khách hàng:</label>
-                                <span path="sanPham" cssStyle="color: red"></span>
-                            </div>
-
-                            <div class="form-floating mb-3 mt-3">
                                 <form:input id="tenKH" class="form-control" placeholder="" path="hoTen"/>
                                 <form:label for="tenKH" path="hoTen">Tên khách hàng:</form:label>
-                                <form:errors path="hoTen" cssStyle="color: red"></form:errors>
+                                <form:errors path="hoTen" cssStyle="color: red"/>
                             </div>
                             <div class="form-floating mb-3 mt-3">
                                 <form:select class="form-select" id="gioiTinh" path="gioiTinh">
@@ -77,29 +71,29 @@
                             <div class="form-floating mb-3 mt-3">
                                 <form:input id="email" class="form-control" type="email" placeholder="" path="email"/>
                                 <form:label for="email" path="email">Email:</form:label>
-                                <form:errors path="email" cssStyle="color: red"></form:errors>
+                                <form:errors path="email" cssStyle="color: red"/>
                             </div>
                             <div class="form-floating mb-3 mt-3">
                                 <form:input id="sdt" class="form-control" type="number" placeholder="" path="sdt"/>
                                 <form:label for="sdt" path="sdt">SDT:</form:label>
-                                <form:errors path="sdt" cssStyle="color: red"></form:errors>
+                                <form:errors path="sdt" cssStyle="color: red"/>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <form:input id="ngaySinh" class="form-control" type="date" placeholder="" path="ngaySinh"/>
+                                <form:input id="ngaySinh" class="form-control" type="date" path="ngaySinh"/>
                                 <form:label for="ngaySinh" path="ngaySinh">Ngày sinh:</form:label>
-                                <form:errors path="ngaySinh" cssStyle="color: red"></form:errors>
+                                <form:errors path="ngaySinh" cssStyle="color: red"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
                                 <form:input id="taiKhoan" class="form-control" placeholder="" path="taiKhoan"/>
                                 <form:label for="taiKhoan" path="taiKhoan">Tài khoản:</form:label>
-                                <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
+                                <form:errors path="taiKhoan" cssStyle="color: red"/>
                             </div>
                             <div class="form-floating mb-3 mt-3">
                                 <form:input id="matKhau" class="form-control" placeholder="" path="matKhau"/>
                                 <form:label for="matKhau" path="matKhau">Mật khẩu:</form:label>
-                                <form:errors path="matKhau" cssStyle="color: red"></form:errors>
+                                <form:errors path="matKhau" cssStyle="color: red"/>
                             </div>
                             <div class="form-check mb-3 mt-3">
                                 <form:label class="" path="trangThai">Trạng thái:</form:label>
