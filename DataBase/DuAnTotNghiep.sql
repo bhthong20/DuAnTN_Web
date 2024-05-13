@@ -261,9 +261,8 @@ CREATE TABLE hoa_don (
 	CONSTRAINT PK__hoa_don__342B812A66836C5A PRIMARY KEY (id_hoa_don),
 	CONSTRAINT FK__hoa_don__khach_h__7F2BE32F FOREIGN KEY (khach_hang_id) REFERENCES khach_hang(id_khach_hang),
 	CONSTRAINT FK__hoa_don__khuyen___00200768 FOREIGN KEY (khuyen_mai_id) REFERENCES khuyen_mai(id_khuyen_mai),
-	CONSTRAINT hoa_don_khach_hang_FK FOREIGN KEY (nhan_vien_id) REFERENCES khach_hang(id_khach_hang)
+	CONSTRAINT hoa_don_nhan_vien_FK FOREIGN KEY (nhan_vien_id) REFERENCES nhan_vien(id_nhan_vien)
 );
-
 
 GO
 -- WEB_BAN_GIAY.dbo.nhan_vien definition
@@ -410,5 +409,4 @@ CREATE TABLE hoa_don_chi_tiet (
 GO
 INSERT INTO WEB_BAN_GIAY.dbo.khach_hang (id_khach_hang,ma,ten_khach_hang,email,sdt,ngay_sinh,gioi_tinh,ngay_tao,ngay_cap_nhat,trang_thai,tai_khoan,mat_khau,roles) VALUES
 	 (N'7C52B2DF-5953-4FC1-8D2E-8D7E8316D002',N'ADMIN',N'admin',N'admin@gmail.com',N'0328843156',NULL,NULL,'2024-04-25',NULL,NULL,N'admin',N'a',N'ADMIN');
-
 GO

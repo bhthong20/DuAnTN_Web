@@ -126,7 +126,7 @@
                 <th>Loại</th>
                 <th>Ngày tạo</th>
                 <th>Trạng thái</th>
-                <th>Mô tả</th>
+<%--                <th>Mô tả</th>--%>
                 <th colspan="2">Chức năng</th>
             </tr>
             </thead>
@@ -149,7 +149,7 @@
                         <c:if test="${ctsp.trangThai==0}">Ngừng bán</c:if>
                         <c:if test="${ctsp.trangThai==1}">Còn bán</c:if>
                     </td>
-                    <td>${ctsp.moTa}</td>
+<%--                    <td>${ctsp.moTa}</td>--%>
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

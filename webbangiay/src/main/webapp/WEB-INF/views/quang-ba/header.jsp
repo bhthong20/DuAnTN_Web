@@ -78,8 +78,7 @@
         <div class="container justify-content-between p-0">
             <div class="d-flex">
                 <div class="site-brand">
-                    <a href="https://ivymoda.com/"><img src="https://pubcdn.ivymoda.com/ivy2/images/logo.png"
-                                                        alt="Trang chủ | IVY moda"></a>
+                    <a href=""><img src="/uploads/Diamond_Sneaker-removebg.png"></a>
                 </div>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                     <ul class="navbar-nav text-center mb-2 mb-lg-0">
