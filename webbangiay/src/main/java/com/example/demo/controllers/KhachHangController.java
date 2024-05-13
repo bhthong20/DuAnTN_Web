@@ -4,6 +4,7 @@ package com.example.demo.controllers;
 import com.example.demo.models.KhachHang;
 import com.example.demo.services.KhachHangService;
 import com.example.demo.util.UserLoginCommon;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -89,9 +90,10 @@ public class KhachHangController {
 
 
     @PostMapping("/add")
-    public String add(Model model , @ModelAttribute("khachHang") KhachHang khachHang, BindingResult result) {
+    public String add(Model model , @Valid @ModelAttribute("khachHang") KhachHang khachHang, BindingResult result) {
         if (result.hasErrors()) {
-            return "/khach-hang/add";
+            model.addAttribute("contentPage", "../khach-hang/add.jsp");
+            return "home/layout";
         }
         String maKhachHang = "khachHang" + (khachHangService.findAll().size() + 1);
         khachHang.setNgayTao(Date.valueOf(LocalDate.now()));
