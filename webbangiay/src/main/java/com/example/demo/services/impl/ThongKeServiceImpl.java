@@ -2,6 +2,7 @@ package com.example.demo.services.impl;
 
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
+import com.example.demo.models.KhuyenMai;
 import com.example.demo.models.dto.LineChartDto;
 import com.example.demo.models.dto.SanPhamThongKeDetailDto;
 import com.example.demo.models.dto.SanPhamThongKeDto;
@@ -162,11 +163,11 @@ public class ThongKeServiceImpl implements ThongKeService {
         BigDecimal tongOnline = BigDecimal.ZERO;
 
         for (HoaDon el : set) {
-            tongDoanhSo = tongDoanhSo.add(el.getTongTien().subtract(el.getTienShip()));
+            tongDoanhSo = tongDoanhSo.add(el.getTongTien().subtract((el.getTienShip() != null ? el.getTienShip() : BigDecimal.ZERO)));
             if (el.getLoai() == 0) {
-                tongTaiQuay = tongTaiQuay.add(el.getTongTien().subtract(el.getTienShip()));
+                tongTaiQuay = tongTaiQuay.add(el.getTongTien().subtract((el.getTienShip() != null ? el.getTienShip() : BigDecimal.ZERO)));
             } else {
-                tongOnline = tongOnline.add(el.getTongTien().subtract(el.getTienShip()));
+                tongOnline = tongOnline.add(el.getTongTien().subtract((el.getTienShip() != null ? el.getTienShip() : BigDecimal.ZERO)));
             }
         }
 
@@ -182,7 +183,7 @@ public class ThongKeServiceImpl implements ThongKeService {
             Object hoaDonLocalDate = switchTypeDate(LocalDate.from(el.getNgayTao().toLocalDate()), returnType);
 
             if (thangTrongKhoang.equals(hoaDonLocalDate) && el.getLoai() == loai) {
-                tongTien += el.getTongTien().longValue() - el.getTienShip().longValue();
+                tongTien += el.getTongTien().longValue() - (el.getTienShip() != null ? el.getTienShip().longValue() : 0L);
             }
         }
         return tongTien;
@@ -199,7 +200,17 @@ public class ThongKeServiceImpl implements ThongKeService {
             sanPhamThongKeDto.setUrl(el.getChiTietSanPham().getSanPham().getHinhAnh().getAnh1());
             sanPhamThongKeDto.setSoLuongTon(el.getChiTietSanPham().getSoLuongTon());
             sanPhamThongKeDto.setSoLuongBan(el.getSoLuong());
-            BigDecimal doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia());
+            BigDecimal doanhThu = BigDecimal.ZERO;
+            if (el.getHoaDon().getKhuyenMai() == null) {
+                doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia());
+            } else {
+                KhuyenMai khuyenMai = el.getHoaDon().getKhuyenMai();
+                if (khuyenMai.getHinhThucGiamGia() == 1) {
+                    doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia()).multiply(BigDecimal.valueOf(100 - khuyenMai.getGiaTriGiam().intValue())).divide(BigDecimal.valueOf(100));
+                } else {
+                    doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia()).subtract(BigDecimal.valueOf(khuyenMai.getGiaTriGiam().intValue()));
+                }
+            }
             sanPhamThongKeDto.setDoanhThu(doanhThu.longValue());
 
             Optional<SanPhamThongKeDto> existingItem = sanPhamThongKeDtos.stream()
@@ -303,7 +314,20 @@ public class ThongKeServiceImpl implements ThongKeService {
                 sanPhamThongKeDto.setMauSac(el.getChiTietSanPham().getMauSac().getTen());
                 sanPhamThongKeDto.setSoLuongTon(el.getChiTietSanPham().getSoLuongTon());
                 sanPhamThongKeDto.setSoLuongBan(el.getSoLuong());
-                BigDecimal doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia());
+
+                BigDecimal doanhThu = BigDecimal.ZERO;
+
+                if (el.getHoaDon().getKhuyenMai() == null) {
+                    doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia());
+                } else {
+                    KhuyenMai khuyenMai = el.getHoaDon().getKhuyenMai();
+                    if (khuyenMai.getHinhThucGiamGia() == 1) {
+                        doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia()).multiply(BigDecimal.valueOf(100 - khuyenMai.getGiaTriGiam().intValue())).divide(BigDecimal.valueOf(100));
+                    } else {
+                        doanhThu = BigDecimal.valueOf(el.getSoLuong()).multiply(el.getDonGia()).subtract(BigDecimal.valueOf(khuyenMai.getGiaTriGiam().intValue()));
+                    }
+                }
+
                 sanPhamThongKeDto.setDoanhThu(doanhThu.longValue());
 
                 Optional<SanPhamThongKeDetailDto> existingItem = sanPhamThongKeDtos.stream()

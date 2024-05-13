@@ -319,7 +319,6 @@
 
         // Kiểm tra xem có sản phẩm nào được chọn không
         if (selectedIds.length === 0) {
-
             console.error("No valid UUIDs to send in the request.");
             window.alert("Chưa chọn một sản phẩm để xem chi tiết.");
             $('#modalDanhSachSanPham').hide();// Ẩn modal

@@ -41,7 +41,7 @@ public class HoaDonController {
 
     @GetMapping()
     public String quanLyBanHang(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        Sort sort = Sort.by("ngayTao").descending();
+        Sort sort = Sort.by("ma").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HoaDon> list = hoaDonService.getAllAdmin(pageable);
         model.addAttribute("listhoaDon", list.getContent());
