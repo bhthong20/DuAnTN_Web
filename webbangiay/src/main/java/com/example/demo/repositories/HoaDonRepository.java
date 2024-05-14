@@ -22,8 +22,4 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     List<HoaDon> findAllByLoaiAndKhachHang(int loai, KhachHang khachHang);
 
-    @Query(value = """
-                SELECT hd FROM HoaDon hd where 1 = 1 and hd.trangThai <> 9
-            """)
-    Page<HoaDon> findAllBy(Pageable pageable);
 }
