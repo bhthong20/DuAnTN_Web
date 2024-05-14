@@ -91,28 +91,13 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public List<SanPham> loc( Integer tt,String locPL, String locTH) {
-        return repository.loc(tt,locPL,locTH);
+    public List<SanPham> loc(String locTH, String locPL) {
+        return repository.loc(locTH, locPL);
     }
 
     @Override
-    public List<SanPham> locTHPL(String locTH, String locPL) {
-        return repository.loc1(locTH,locPL);
-    }
-
-    @Override
-    public List<SanPham> locTH(Integer tt,String locTH) {
-        return repository.locTH(tt,locTH);
-    }
-
-    @Override
-    public List<SanPham> locPL(Integer tt,String locPL) {
-        return repository.locPL(tt,locPL);
-    }
-
-    @Override
-    public List<SanPham> locTT(Integer tt) {
-        return repository.locTT(tt);
+    public List<SanPham> loc1(String locTH, String locPL, Integer locTT) {
+        return repository.loc1(locTH, locPL, locTT);
     }
 
 
@@ -151,7 +136,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
             List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
 
-            for (ChiTietSanPhamDto dto: sanPhamDto.getChiTietSanPhamDtos()) {
+            for (ChiTietSanPhamDto dto : sanPhamDto.getChiTietSanPhamDtos()) {
                 ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
                 String maCTSP = "CTSP" + (findAll().size() + 1);
                 chiTietSanPham.setMa(maCTSP);
@@ -194,7 +179,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
                 List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
                 List<UUID> listIdSave = new ArrayList<>();
 
-                for (ChiTietSanPhamDto dto: sanPhamDto.getChiTietSanPhamDtos()) {
+                for (ChiTietSanPhamDto dto : sanPhamDto.getChiTietSanPhamDtos()) {
                     ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
                     if (dto.getId() == null) {
                         String maCTSP = "CTSP" + (findAll().size() + 1);
@@ -249,9 +234,9 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
     @Override
     public ChiTietSanPham update(UUID id, ChiTietSanPham chiTietSanPham) {
-        if(id != null){
+        if (id != null) {
             ChiTietSanPham ctsp = repository.findById(id).orElse(null);
-            if(ctsp != null){
+            if (ctsp != null) {
                 BeanUtils.copyProperties(chiTietSanPham, ctsp);
                 repository.save(ctsp);
             }

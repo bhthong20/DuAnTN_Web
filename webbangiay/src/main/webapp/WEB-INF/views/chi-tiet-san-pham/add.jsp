@@ -35,15 +35,6 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
-</head>
 </head>
 
 <body>
@@ -66,17 +57,6 @@
                                 <label for="tenSP" path="sanPham">Tên sản phẩm:</label>
                                 <span path="sanPham" cssStyle="color: red"></span>
                             </div>
-
-                            <%--                            <div class="form-floating mb-3 mt-3">--%>
-                            <%--                                <input id="soLuongTon" type="number" class="form-control" placeholder="" path="soLuongTon"/>--%>
-                            <%--                                <label for="soLuongTon" path="soLuongTon">Số lượng tồn:</label>--%>
-                            <%--                                <span path="soLuongTon" cssStyle="color: red"></span>--%>
-                            <%--                            </div>--%>
-                            <%--                            <div class="form-floating mb-3 mt-3">--%>
-                            <%--                                <input id="donGia" class="form-control" type="number" placeholder="" path="donGia"/>--%>
-                            <%--                                <label for="donGia" path="donGia">Đơn giá:</label>--%>
-                            <%--                                <span path="donGia" cssStyle="color: red"></span>--%>
-                            <%--                            </div>--%>
                             <div class="form-floating mb-3 mt-3">
                                 <select class="form-select" id="phanLoai">
                                     <option selected disabled value="">Phân loại</option>
@@ -197,7 +177,7 @@
                             <th>Tên sản phẩm</th>
                             <th>Giá tiền</th>
                             <th>Số lượng</th>
-                            <th>CHẤT LIỆU</th>
+                            <th>Chất liệu</th>
                             <th>Size</th>
                             <th>Màu sắc</th>
                             <th>Hình ảnh</th>
@@ -628,10 +608,6 @@
         }
         if (!sanPham.idThuongHieu) {
             alert("Thương hiệu không được để trống")
-            return false;
-        }
-        if (!sanPham.moTa) {
-            alert("Mô tả quảng bá không được để trống");
             return false;
         }
         if (!sanPham.chiTietSanPhamDtos) {
@@ -1114,23 +1090,4 @@
         // }
     };
 </script>
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-<script src="../assets/vendor/js/menu.js"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-
-<!-- Main JS -->
-<script src="../assets/js/main.js"></script>
-
-<!-- Page JS -->
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 </html>

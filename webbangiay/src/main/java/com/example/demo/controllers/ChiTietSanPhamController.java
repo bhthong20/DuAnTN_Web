@@ -175,44 +175,38 @@ public class ChiTietSanPhamController {
     public String loc(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham,
                       @RequestParam(value = "locTH", required = false) String locTH,
                       @RequestParam(value = "locPL", required = false) String locPL,
-                      @RequestParam(value = "locTT", required = false) Integer locTT) {
+                      @RequestParam(value = "locTT", required = false) Integer locTT, @RequestParam("num") Optional<Integer> num,
+                      @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         model.addAttribute("listTH", thuongHieuService.findAll());
         model.addAttribute("listPL", phanLoaiService.findAll());
         List<SanPham> list;
-        if (locTH != null && locPL == null&& locTT != null) {
+        if (locTT != null) {
             // Xử lý tìm kiếm dựa trên option1
-            list = chiTietSanPhamService.locTH(locTT,locTH);
+            list = chiTietSanPhamService.loc1(locTH, locPL, locTT);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
             model.addAttribute("listCTSP", list);
             return "home/layout";
-        } else if (locPL != null && locTH == null&& locTT != null) {
+        } else if (locTT == null) {
             // Xử lý tìm kiếm dựa trên option2
-            list = chiTietSanPhamService.locPL(locTT,locPL);
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-            model.addAttribute("listCTSP", list);
-            return "home/layout";
-        } else if (locPL != null && locTH != null && locTT == null) {
-            // Xử lý tìm kiếm dựa trên option2
-            list = chiTietSanPhamService.locTHPL(locTH,locPL);
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-            model.addAttribute("listCTSP", list);
-            return "home/layout";
-        }else if (locPL == null && locTH == null && locTT != null) {
-            // Xử lý tìm kiếm dựa trên option2
-            list = chiTietSanPhamService.locTT(locTT);
+            list = chiTietSanPhamService.loc(locTH, locPL);
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
             model.addAttribute("listCTSP", list);
             return "home/layout";
         } else {
             // Nếu không có lựa chọn nào được chọn, trả về tất cả các kết quả
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<SanPham> lists = sanPhamService.getAll(pageable);
+            model.addAttribute("listCTSP", lists.getContent());
+            model.addAttribute("total", lists.getTotalPages());
             model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-            model.addAttribute("listCTSP", list = chiTietSanPhamService.loc(locTT,locTH,locPL));
             return "home/layout";
         }
     }
 
     @PostMapping("/modal-add-mau-sac")
-    public ModelAndView addMauSac(@ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @ModelAttribute("mauSac") @Valid MauSac mauSac, BindingResult result,
+    public ModelAndView addMauSac(@ModelAttribute("chiTietSanPham") ChiTietSanPham
+                                          chiTietSanPham, @ModelAttribute("mauSac") @Valid MauSac mauSac, BindingResult result,
                                   @ModelAttribute("kichThuoc") KichThuoc kichThuoc,
                                   @ModelAttribute("chatLieu") ChatLieu chatLieu, ModelMap model) {
         if (result.hasErrors()) {
@@ -232,7 +226,8 @@ public class ChiTietSanPhamController {
     }
 
     @PostMapping("/modal-add-kich-thuoc")
-    public String addSize(@ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @ModelAttribute("kichThuoc") @Valid KichThuoc kichThuoc, BindingResult result,
+    public String addSize(@ModelAttribute("chiTietSanPham") ChiTietSanPham
+                                  chiTietSanPham, @ModelAttribute("kichThuoc") @Valid KichThuoc kichThuoc, BindingResult result,
                           @ModelAttribute("mauSac") MauSac mauSac,
                           @ModelAttribute("chatLieu") ChatLieu chatLieu, Model model) {
         if (result.hasErrors()) {
@@ -251,7 +246,8 @@ public class ChiTietSanPhamController {
     }
 
     @PostMapping("/modal-add-chat-lieu")
-    public String addDe(@ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @ModelAttribute("chatLieu") @Valid ChatLieu chatLieu, BindingResult result,
+    public String addDe(@ModelAttribute("chiTietSanPham") ChiTietSanPham
+                                chiTietSanPham, @ModelAttribute("chatLieu") @Valid ChatLieu chatLieu, BindingResult result,
                         @ModelAttribute("mauSac") MauSac mauSac,
                         @ModelAttribute("kichThuoc") KichThuoc kichThuoc, Model model) {
         if (result.hasErrors()) {

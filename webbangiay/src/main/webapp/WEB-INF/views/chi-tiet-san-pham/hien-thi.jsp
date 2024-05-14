@@ -197,18 +197,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-xl">
-                            <div class="mb-3">
-                                <label class="form-label" for="maSanPhamSearch">Mã sản phẩm</label>
-                                <input type="text" id="maSanPhamSearch" class="form-control phone-mask"
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="tenSanPhamSearch">Tên sản phẩm</label>
-                                <input type="text" id="tenSanPhamSearch" class="form-control phone-mask"
-                                />
-                            </div>
-                        </div>
+
                         <div class="col-xl">
                             <div class="mb-3">
                                 <label class="form-label" for="mauSacSearch">Màu sắc</label>
