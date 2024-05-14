@@ -90,8 +90,6 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
         return repository.search1(search);
     }
 
-
-
     @Override
     public List<SanPham> loc1(String locTH, String locPL, Integer locTT) {
         return repository.loc1(locTH, locPL, locTT);
@@ -133,7 +131,23 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
             List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
 
-
+            for (ChiTietSanPhamDto dto : sanPhamDto.getChiTietSanPhamDtos()) {
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+                String maCTSP = "CTSP" + (findAll().size() + 1);
+                chiTietSanPham.setMa(maCTSP);
+                chiTietSanPham.setNgayTao(Date.valueOf(LocalDate.now()));
+                chiTietSanPham.setChatLieu(chatLieuService.findById(dto.getIdChatLieu()));
+                chiTietSanPham.setDonGia(dto.getDonGia());
+                chiTietSanPham.setKichThuoc(kichThuocService.findById(dto.getIdKichThuoc()));
+                chiTietSanPham.setMauSac(mauSacService.findById(dto.getIdMauSac()));
+                chiTietSanPham.setSoLuongTon(dto.getSoLuongTon());
+                chiTietSanPham.setTrangThai(dto.getTrangThai());
+                chiTietSanPham.setMoTa(dto.getMoTa());
+                chiTietSanPham.setSanPham(sanPham);
+                chiTietSanPham.setIsDelete(1);
+                chiTietSanPham.setHinhAnh(hinhAnhService.findById(dto.getIdHinhAnh()));
+                chiTietSanPhams.add(chiTietSanPham);
+            }
 
             repository.saveAll(chiTietSanPhams);
         } catch (Exception e) {
