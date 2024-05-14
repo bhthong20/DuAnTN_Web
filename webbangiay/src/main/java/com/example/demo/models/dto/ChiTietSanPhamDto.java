@@ -13,13 +13,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChiTietSanPhamDto {
-    private UUID id;
-    private UUID idKichThuoc;
-    private UUID idMauSac;
-    private UUID idChatLieu;
+    private String id;
+    private String idKichThuoc;
+    private String idMauSac;
+    private String idChatLieu;
     private int soLuongTon;
     private BigDecimal donGia;
     private String moTa;
     private int trangThai;
-    private UUID idHinhAnh;
+    private String idHinhAnh;
+    private String anh1;
+    private String anh2;
+    private String anh3;
 }

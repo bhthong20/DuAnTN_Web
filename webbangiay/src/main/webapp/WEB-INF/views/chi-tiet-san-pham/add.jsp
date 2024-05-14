@@ -102,7 +102,7 @@
                                 <label for="moTa" path="moTa">Mô tả quảng bá:</label>
                                 <span path="moTa" cssStyle="color: red"></span>
                             </div>
-                            <div class="form-floating mb-3 mt-3">
+                            <div class="form-floating mb-3 mt-3" style="display:none;">
                                 <select class="form-select" id="hinhAnh">
                                     <option selected disabled value="">Hình ảnh</option>
                                     <c:forEach items="${listHA}" var="hinhAnh">
@@ -114,17 +114,44 @@
                                 </select>
                                 <label for="hinhAnh" path="hinhAnh">Hình ảnh quảng bá:</label>
                             </div>
-                            <div class="form-floating mb-3 mt-3 d-flex justify-content-between">
-                                <img id="preview-anh1" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                <img id="preview-anh2" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                <img id="preview-anh3" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                            </div>
+                            <div align="center" class="row">
+                                    <div class="col-4">
+                                        <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                               for="hinhAnh1">
+                                            <img id="preview-anh-hinhAnh1" class="preview-image" src="" alt=""
+                                                 width="100%" height="100%"
+                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                        </label>
+                                        <div style="display: none">
+                                            <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                                                   id="hinhAnh1">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                               for="hinhAnh2">
+                                            <img id="preview-anh-hinhAnh2" class="preview-image" src="" alt=""
+                                                 width="100%" height="100%"
+                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                        </label>
+                                        <div style="display: none">
+                                            <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                                                   id="hinhAnh2">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                               for="hinhAnh3">
+                                            <img id="preview-anh-hinhAnh3" class="preview-image" src="" alt=""
+                                                 width="100%" height="100%"
+                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                        </label>
+                                        <div style="display: none">
+                                            <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                                                   id="hinhAnh3">
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </form>
@@ -199,10 +226,10 @@
                             <th>#</th>
                             <th>Tên sản phẩm</th>
                             <th>Giá tiền</th>
-                            <th>Số lượng</th>
-                            <th>CHẤT LIỆU</th>
-                            <th>Size</th>
+                            <th>Chất liệu</th>
+                            <th>Kích thước</th>
                             <th>Màu sắc</th>
+                            <th>Số lượng</th>
                             <th>Hình ảnh</th>
                             <th>Mô tả</th>
                             <th>Tình trạng</th>
@@ -218,7 +245,7 @@
                                 id="bttCreate" onclick="return myFunction1()">Thêm mới
                         </button>
                         <button type="button" class="btn btn-success"
-                                id="bttUpdate" onclick="return myFunction2()">Update
+                                id="bttUpdate" onclick="return myFunction2()">Chỉnh sửa
                         </button>
                     </div>
                 </div>
@@ -237,7 +264,8 @@
                 </div>
                 <div class="modal-body">
                     <div id="qr-code" class="m-auto d-flex justify-content-center"></div>
-                    <a href="#"><h3 onclick="downloadQrCode()" class="mt-3 text-primary">DOWNLOAD QR CODE HERE !!!</h3></a>
+                    <a href="#"><h3 onclick="downloadQrCode()" class="mt-3 text-primary">DOWNLOAD QR CODE HERE !!!</h3>
+                    </a>
                 </div>
             </div>
         </div>
@@ -363,7 +391,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="themNhanhMauSac()" >Add
+                                                    onclick="themNhanhMauSac()">Add
                                             </button>
                                         </div>
                                     </div>
@@ -420,7 +448,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                   onclick="themNhanhKichThuoc()" >Add
+                                                    onclick="themNhanhKichThuoc()">Add
                                             </button>
                                         </div>
                                     </div>
@@ -478,7 +506,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="themNhanhLoaiDe()" >Add
+                                                    onclick="themNhanhLoaiDe()">Add
                                             </button>
                                         </div>
                                     </div>
@@ -495,6 +523,20 @@
     </div>
 </body>
 <script>
+    function previewAnh(input) {
+        const previewAnh22 = document.getElementById('preview-anh-' + input.getAttribute('id'));
+
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewAnh22.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewAnh22.src = '';
+        }
+    }
 
     function themNhanhMauSac() {
         let text = "Bạn chắc chắn muốn thêm nhanh màu sắc không?";
@@ -506,6 +548,7 @@
             return false;
         }
     }
+
     function themNhanhKichThuoc() {
         let text = "Bạn chắc chắn muốn thêm nhanh kích thước không?";
         let kt = confirm(text);
@@ -516,6 +559,7 @@
             return false;
         }
     }
+
     function themNhanhLoaiDe() {
         let text = "Bạn chắc chắn muốn thêm nhanh loại đế không";
         let kt = confirm(text);
@@ -526,6 +570,7 @@
             return false;
         }
     }
+
     function myFunction3() {
         let text = "Bạn chắc chắn muốn thay đổi trạng thái";
         let kt = confirm(text);
@@ -625,10 +670,6 @@
             alert("Loại sản phẩm không được để trống");
             return false;
         }
-        if (!sanPham.idHinhAnh) {
-            alert("Hình ảnh quảng bá không được để trống")
-            return false;
-        }
         if (!sanPham.idThuongHieu) {
             alert("Thương hiệu không được để trống")
             return false;
@@ -652,9 +693,6 @@
             if (!el.moTa) {
                 check = false;
             }
-            if (!el.idHinhAnh) {
-                check = false;
-            }
         })
         if (!check) {
             alert("Chi tiết sản phẩm phải nhập đủ thông tin");
@@ -663,23 +701,53 @@
         return true;
     }
 
-    function myFunction1() {
+    async function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
         var tenSPValue = document.getElementById('tenSP').value;
         var moTaValue = document.getElementById('moTa').value;
         var thuongHieu = document.getElementById('thuongHieu').value;
-        var hinhAnh = document.getElementById('hinhAnh').value;
+        var hinhAnh = {
+            anh1: null,
+            anh2: null,
+            anh3: null,
+        };
         var phanLoai = document.getElementById('phanLoai').value;
+
+        var anh1 = document.getElementById('hinhAnh1');
+        var anh2 = document.getElementById('hinhAnh2');
+        var anh3 = document.getElementById('hinhAnh3');
+
+        if ((anh1.files && anh1.files[0])) {
+            await convertInputToBase64(anh1).then(response => {
+                hinhAnh.anh1 = response;
+            });
+        }
+
+        if (anh2.files && anh2.files[0]) {
+            await convertInputToBase64(anh2).then(response => {
+                hinhAnh.anh2 = response;
+            });
+        }
+
+        if (anh3.files && anh3.files[0]) {
+            await convertInputToBase64(anh3).then(response => {
+                hinhAnh.anh3 = response;
+            });
+        }
+
         getMoney();
         getQuantity();
         getNote();
         getStatus();
-        getImages();
+        await getImages();
         let sanPham = {
             id: null,
             tenSanPham: tenSPValue,
             idLoaiSanPham: phanLoai,
-            idHinhAnh: hinhAnh,
+            idHinhAnh: null,
+            anh1: hinhAnh.anh1,
+            anh2: hinhAnh.anh2,
+            anh3: hinhAnh.anh3,
             idThuongHieu: thuongHieu,
             moTa: moTaValue,
             chiTietSanPhamDtos: listProductDetail.map(el => {
@@ -692,7 +760,10 @@
                     donGia: el.money,
                     moTa: el.note,
                     trangThai: el.status,
-                    idHinhAnh: el.image
+                    idHinhAnh: null,
+                    anh1: el.anh1,
+                    anh2: el.anh2,
+                    anh3: el.anh3
                 }
             })
         };
@@ -721,23 +792,53 @@
         }
     }
 
-    function myFunction2() {
+    async function myFunction2() {
         let text = "Bạn chắc chắn muốn sửa";
         var tenSPValue = document.getElementById('tenSP').value;
         var moTaValue = document.getElementById('moTa').value;
         var thuongHieu = document.getElementById('thuongHieu').value;
-        var hinhAnh = document.getElementById('hinhAnh').value;
+        var hinhAnh = {
+            anh1: null,
+            anh2: null,
+            anh3: null,
+        };
         var phanLoai = document.getElementById('phanLoai').value;
+
+        var anh1 = document.getElementById('hinhAnh1');
+        var anh2 = document.getElementById('hinhAnh2');
+        var anh3 = document.getElementById('hinhAnh3');
+
+        if ((anh1.files && anh1.files[0])) {
+            await convertInputToBase64(anh1).then(response => {
+                hinhAnh.anh1 = response;
+            });
+        }
+
+        if (anh2.files && anh2.files[0]) {
+            await convertInputToBase64(anh2).then(response => {
+                hinhAnh.anh2 = response;
+            });
+        }
+
+        if (anh3.files && anh3.files[0]) {
+            await convertInputToBase64(anh3).then(response => {
+                hinhAnh.anh3 = response;
+            });
+        }
+
         getMoney();
         getQuantity();
         getNote();
         getStatus();
-        getImages();
+        await getImages();
         let sanPham = {
             id: id,
             tenSanPham: tenSPValue,
             idLoaiSanPham: phanLoai,
-            idHinhAnh: hinhAnh,
+            idHinhAnh: null,
+            anh1: hinhAnh.anh1,
+            anh2: hinhAnh.anh2,
+            anh3: hinhAnh.anh3,
             idThuongHieu: thuongHieu,
             moTa: moTaValue,
             chiTietSanPhamDtos: listProductDetail.map(el => {
@@ -751,11 +852,14 @@
                     donGia: el.money,
                     moTa: el.note,
                     trangThai: el.status,
-                    idHinhAnh: el.image
+                    idHinhAnh: null,
+                    anh1: el.anh1,
+                    anh2: el.anh2,
+                    anh3: el.anh3
                 }
             })
         };
-
+        console.log(sanPham)
         if (!validateSanPham(sanPham)) {
             return
         }
@@ -781,18 +885,6 @@
             return false;
         }
     }
-
-    document.getElementById("hinhAnh").addEventListener("change", function () {
-        var selectedOption = this.options[this.selectedIndex];
-
-        var anh1Value = selectedOption.getAttribute("anh1");
-        var anh2Value = selectedOption.getAttribute("anh2");
-        var anh3Value = selectedOption.getAttribute("anh3");
-
-        document.getElementById("preview-anh1").src = '../../../uploads/' + anh1Value;
-        document.getElementById("preview-anh2").src = '../../../uploads/' + anh2Value;
-        document.getElementById("preview-anh3").src = '../../../uploads/' + anh3Value;
-    });
 
     let listMauSac = [];
     let listSize = [];
@@ -843,16 +935,43 @@
         updateColorTable();
     }
 
-    function genComboboxImage(index) {
-        var htmlSelect = '<select class="form-select productImg" index="' + index + '" >';
-        var selectElement = document.getElementById("hinhAnh");
-
-        var options = selectElement.options;
-        for (var i = 0; i < options.length; i++) {
-            htmlSelect += '<option value="' + options[i].value + '" anh1="' + options[i].getAttribute('anh1') +
-                '" anh2="' + options[i].getAttribute('anh2') + '" anh3="' + options[i].getAttribute('anh3') + '">' + options[i].text + '</option>';
-        }
-        htmlSelect += '</select>'
+    function genComboboxImage(index, anh1, anh2, anh3) {
+        var htmlSelect = `
+                <div align="center" style="
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: row;">
+                    <label style="border: 5px solid white;width: 50px;height: 50px;border-radius:50% 50% 50% 50%;"
+                           for="anhmoi1` + index + `">
+                        <img id="preview-anh-anhmoi1` + index + `" class="preview-image" src="../../../uploads/` + anh1 + `" alt=""
+                             width="100%" height="100%"
+                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                    </label>
+                    <div style="display: none">
+                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                               id="anhmoi1` + index + `">
+                    </div>
+                    <label style="border: 5px solid white;width: 50px;height: 50px;border-radius:50% 50% 50% 50%;"
+                           for="anhmoi2` + index + `">
+                        <img id="preview-anh-anhmoi2` + index + `" class="preview-image" src="../../../uploads/` + anh2 + `" alt=""
+                             width="100%" height="100%"
+                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                    </label>
+                    <div style="display: none">
+                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                               id="anhmoi2` + index + `">
+                    </div>
+                    <label style="border: 5px solid white;width: 50px;height: 50px;border-radius:50% 50% 50% 50%;"
+                           for="anhmoi3` + index + `">
+                        <img id="preview-anh-anhmoi3` + index + `" class="preview-image" src="../../../uploads/` + anh3 + `" alt=""
+                             width="100%" height="100%"
+                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                    </label>
+                    <div style="display: none">
+                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                               id="anhmoi3` + index + `">
+                    </div>
+                </div>`;
 
         return htmlSelect;
     }
@@ -868,14 +987,17 @@
                 '<td>' + product.name +
                 '<a style="display: ' + (product.id ? 'inline-block' : 'none') + '" onclick="generateQrCode(`' + product.id + '`)" data-bs-toggle="modal" data-bs-target="#modalOpenQrCode"><img src="/uploads/plus.png"></a>' +
                 '</td>' +
-                '<td> <input class="form-control productMoney" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.money + '" /></td>' +
-                '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
                 '<td>' + product.categoryName + '</td>' +
                 '<td>' + product.sizeName + '</td>' +
                 '<td>' + product.colorName + '</td>' +
-                '<td>' + genComboboxImage(product.index) + '</td>' +
+                '<td> <input class="form-control productMoney" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.money + '" /></td>' +
+                '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
+                '<td>' + genComboboxImage(product.index,
+                product.image ? product.image.anh1 : "",
+                product.image ? product.image.anh2 : "",
+                product.image ? product.image.anh3 : "") + '</td>' +
                 '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
-                '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" ' + (product.status ? `checked`: ``) + ' /></div></td>' +
+                '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" ' + (product.status ? `checked` : ``) + ' /></div></td>' +
                 '</tr>';
         });
 
@@ -909,9 +1031,9 @@
                                 quantity: 1,
                                 money: 1,
                                 name: tenSPValue,
-                                note: "",
+                                note: "Sản phẩm đẹp",
                                 status: true,
-                                image: ""
+                                image: {}
                             })
                         } else {
                             let sanPham = listProductDetailUpdate.filter(el => el.colorId == color.id && el.sizeId == size.id && el.categoryId == category.id)[0]
@@ -982,17 +1104,42 @@
         });
     }
 
-    function getImages() {
-        var inputs = document.querySelectorAll('.productImg');
-        inputs.forEach(function (input) {
-            var index = input.getAttribute('index');
+    async function getImages() {
+        await Promise.all(listProductDetail.map(async (el) => {
 
-            listProductDetail = listProductDetail.map(el => {
-                if (parseInt(el.index) == parseInt(index)) {
-                    el.image = input.value
+            var anh1 = document.getElementById('anhmoi1' + el.index);
+            var anh2 = document.getElementById('anhmoi2' + el.index);
+            var anh3 = document.getElementById('anhmoi3' + el.index);
+
+            try {
+                if ((anh1.files && anh1.files[0])) {
+                    el.anh1 = await convertInputToBase64(anh1);
                 }
-                return el;
-            })
+                if (anh2.files && anh2.files[0]) {
+                    el.anh2 = await convertInputToBase64(anh2);
+                }
+                if (anh3.files && anh3.files[0]) {
+                    el.anh3 = await convertInputToBase64(anh3);
+                }
+            } catch (error) {
+                console.error("Error converting input to base64:", error);
+            }
+        }));
+        return listProductDetail;
+    }
+
+    function convertInputToBase64(input) {
+        return new Promise((resolve, reject) => {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    resolve(e.target.result.split(',')[1]);
+                };
+                reader.onerror = function (error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         });
     }
 
@@ -1015,9 +1162,9 @@
                         $('#thuongHieu').val(response.sanPham.thuongHieu ? response.sanPham.thuongHieu.id : "");
                         $('#phanLoai').val(response.sanPham.phanLoai ? response.sanPham.phanLoai.id : "");
                         if (response.sanPham.hinhAnh) {
-                            document.getElementById("preview-anh1").src = '../../../uploads/' + response.sanPham.hinhAnh.anh1;
-                            document.getElementById("preview-anh2").src = '../../../uploads/' + response.sanPham.hinhAnh.anh2;
-                            document.getElementById("preview-anh3").src = '../../../uploads/' + response.sanPham.hinhAnh.anh3;
+                            document.getElementById("preview-anh-hinhAnh1").src = '../../../uploads/' + response.sanPham.hinhAnh.anh1;
+                            document.getElementById("preview-anh-hinhAnh2").src = '../../../uploads/' + response.sanPham.hinhAnh.anh2;
+                            document.getElementById("preview-anh-hinhAnh3").src = '../../../uploads/' + response.sanPham.hinhAnh.anh3;
                         }
                     }
                     if (response.chiTietSanPham) {
@@ -1075,14 +1222,14 @@
                                 name: el.sanPham.tenSP,
                                 note: el.moTa,
                                 status: el.trangThai === 1,
-                                image: el.hinhAnh.id
+                                image: el.hinhAnh
                             });
                             dataProductDetailUpdate.push({
                                 id: el.id,
                                 colorId: el.mauSac.id,
                                 sizeId: el.kichThuoc.id,
                                 categoryId: el.chatLieu.id,
-                                image: el.hinhAnh.id
+                                image: el.hinhAnh
                             })
                         });
                         listProductDetailUpdate = listProductDetail;
@@ -1091,12 +1238,12 @@
                         inputs.each(function () {
                             var currentIndex = $(this).attr('index');
 
-                            var matchedProductDetail = listProductDetail.find(function(el) {
+                            var matchedProductDetail = listProductDetail.find(function (el) {
                                 return parseInt(el.index) === parseInt(currentIndex);
                             });
 
                             if (matchedProductDetail) {
-                                 $(this).val(matchedProductDetail.image);
+                                $(this).val(matchedProductDetail.image);
                             }
                         });
                     }

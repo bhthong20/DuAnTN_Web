@@ -17,6 +17,7 @@ import com.example.demo.services.KhachHangService;
 import com.example.demo.util.RolesConstant;
 import com.example.demo.util.UserLoginCommon;
 import jakarta.transaction.Transactional;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +60,11 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     }
 
     @Override
-    public List<HoaDon> createHoaDon() {
+    public List<HoaDon> createHoaDon() throws BadRequestException {
+        List<HoaDon> hoaDons = hoaDonRepository.findAllByLoaiAndTrangThai(0, 9);
+        if (hoaDons.size() >= 10) {
+            throw new BadRequestException("Bạn chỉ được tạo tối thiểu 10 hóa đơn chờ");
+        }
         HoaDon hoaDon = new HoaDon();
         String maHD = "HĐ" + (hoaDonService.findAll().size() + 1);
         hoaDon.setMa(maHD);

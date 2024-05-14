@@ -1,6 +1,7 @@
 package com.example.demo.services.impl;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.HinhAnh;
 import com.example.demo.models.SanPham;
 import com.example.demo.models.dto.ChiTietSanPhamDto;
 import com.example.demo.models.dto.SanPhamDto;
@@ -14,6 +15,7 @@ import com.example.demo.services.MauSacService;
 import com.example.demo.services.PhanLoaiService;
 import com.example.demo.services.SanPhamService;
 import com.example.demo.services.ThuongHieuService;
+import com.example.demo.util.ConvertImage;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,9 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Autowired
     private ChiTietSanPhamRepository chiTietSanPhamRepository;
 
+    @Autowired
+    private ConvertImage convertImage;
+
     @Override
     public Page<ChiTietSanPham> getAll(Pageable pageable) {
         return repository.findAll(pageable);
@@ -91,8 +96,8 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public List<SanPham> loc( String locPL, String locTH) {
-        return repository.loc( locPL,locTH);
+    public List<SanPham> loc(String locPL, String locTH) {
+        return repository.loc(locPL, locTH);
     }
 
     @Override
@@ -122,34 +127,66 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Transactional
     public Boolean addAllChiTietSanPham(SanPhamDto sanPhamDto) {
         try {
+
             SanPham sanPham = new SanPham();
             sanPham.setMa("SP" + (sanPhamService.findAll().size() + 1));
             sanPham.setTenSP(sanPhamDto.getTenSanPham());
             sanPham.setNgayTao(Date.valueOf(LocalDate.now()));
             sanPham.setMoTa(sanPhamDto.getMoTa());
-            sanPham.setHinhAnh(hinhAnhService.findById(sanPhamDto.getIdHinhAnh()));
-            sanPham.setPhanLoai(phanLoaiService.findById(sanPhamDto.getIdLoaiSanPham()));
-            sanPham.setThuongHieu(thuongHieuService.findById(sanPhamDto.getIdThuongHieu()));
+            sanPham.setPhanLoai(phanLoaiService.findById(UUID.fromString(sanPhamDto.getIdLoaiSanPham())));
+            sanPham.setThuongHieu(thuongHieuService.findById(UUID.fromString(sanPhamDto.getIdThuongHieu())));
             sanPham.setTrangThai(1);
+
+            HinhAnh hinhAnh = new HinhAnh();
+            if (sanPhamDto.getAnh1() != null) {
+                hinhAnh.setAnh1(convertImage.convertImageFromBase64(sanPhamDto.getAnh1()));
+            }
+            if (sanPhamDto.getAnh2() != null) {
+                hinhAnh.setAnh2(convertImage.convertImageFromBase64(sanPhamDto.getAnh2()));
+            }
+            if (sanPhamDto.getAnh3() != null) {
+                hinhAnh.setAnh3(convertImage.convertImageFromBase64(sanPhamDto.getAnh3()));
+            }
+
+            hinhAnh.setTen("Ảnh sản phẩm " + sanPhamDto.getTenSanPham());
+            hinhAnh.setId(hinhAnhService.add(hinhAnh).getId());
+            sanPham.setHinhAnh(hinhAnh);
+
             sanPham.setId(sanPhamService.add(sanPham).getId());
 
             List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
 
-            for (ChiTietSanPhamDto dto: sanPhamDto.getChiTietSanPhamDtos()) {
-                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
+            for (ChiTietSanPhamDto dto : sanPhamDto.getChiTietSanPhamDtos()) {
                 String maCTSP = "CTSP" + (findAll().size() + 1);
+
+                ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
                 chiTietSanPham.setMa(maCTSP);
                 chiTietSanPham.setNgayTao(Date.valueOf(LocalDate.now()));
-                chiTietSanPham.setChatLieu(chatLieuService.findById(dto.getIdChatLieu()));
+                chiTietSanPham.setChatLieu(chatLieuService.findById(UUID.fromString(dto.getIdChatLieu())));
                 chiTietSanPham.setDonGia(dto.getDonGia());
-                chiTietSanPham.setKichThuoc(kichThuocService.findById(dto.getIdKichThuoc()));
-                chiTietSanPham.setMauSac(mauSacService.findById(dto.getIdMauSac()));
+                chiTietSanPham.setKichThuoc(kichThuocService.findById(UUID.fromString(dto.getIdKichThuoc())));
+                chiTietSanPham.setMauSac(mauSacService.findById(UUID.fromString(dto.getIdMauSac())));
                 chiTietSanPham.setSoLuongTon(dto.getSoLuongTon());
                 chiTietSanPham.setTrangThai(dto.getTrangThai());
                 chiTietSanPham.setMoTa(dto.getMoTa());
                 chiTietSanPham.setSanPham(sanPham);
                 chiTietSanPham.setIsDelete(1);
-                chiTietSanPham.setHinhAnh(hinhAnhService.findById(dto.getIdHinhAnh()));
+
+                if (dto.getAnh1() != null && dto.getAnh2() != null && dto.getAnh3() != null) {
+                    HinhAnh hinhAnhCtsp = new HinhAnh();
+                    if (dto.getAnh1() != null) {
+                        hinhAnhCtsp.setAnh1(convertImage.convertImageFromBase64(dto.getAnh1()));
+                    }
+                    if (dto.getAnh2() != null) {
+                        hinhAnhCtsp.setAnh2(convertImage.convertImageFromBase64(dto.getAnh2()));
+                    }
+                    if (dto.getAnh3() != null) {
+                        hinhAnhCtsp.setAnh3(convertImage.convertImageFromBase64(dto.getAnh3()));
+                    }
+                    hinhAnhCtsp.setTen("Ảnh sản phẩm " + sanPhamDto.getTenSanPham() + ". Mã " + maCTSP);
+                    hinhAnhCtsp.setId(hinhAnhService.add(hinhAnhCtsp).getId());
+                    chiTietSanPham.setHinhAnh(hinhAnhCtsp);
+                }
                 chiTietSanPhams.add(chiTietSanPham);
             }
 
@@ -164,40 +201,89 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     @Transactional
     public Boolean updateAllChiTietSanPham(SanPhamDto sanPhamDto) {
         try {
-            SanPham sanPham = sanPhamRepository.findById(sanPhamDto.getId()).orElse(null);
+            SanPham sanPham = sanPhamRepository.findById(UUID.fromString(sanPhamDto.getId())).orElse(null);
             if (sanPham != null) {
+                HinhAnh hinhAnh = sanPham.getHinhAnh();
+
+                if (sanPhamDto.getAnh1() != null) {
+                    hinhAnh.setAnh1(convertImage.convertImageFromBase64(sanPhamDto.getAnh1()));
+                }
+                if (sanPhamDto.getAnh2() != null) {
+                    hinhAnh.setAnh2(convertImage.convertImageFromBase64(sanPhamDto.getAnh2()));
+                }
+                if (sanPhamDto.getAnh3() != null) {
+                    hinhAnh.setAnh3(convertImage.convertImageFromBase64(sanPhamDto.getAnh3()));
+                }
+
+                hinhAnhService.update(hinhAnh.getId(), hinhAnh);
+
                 sanPham.setTenSP(sanPhamDto.getTenSanPham());
                 sanPham.setNgayTao(Date.valueOf(LocalDate.now()));
                 sanPham.setMoTa(sanPhamDto.getMoTa());
-                sanPham.setHinhAnh(hinhAnhService.findById(sanPhamDto.getIdHinhAnh()));
-                sanPham.setPhanLoai(phanLoaiService.findById(sanPhamDto.getIdLoaiSanPham()));
-                sanPham.setThuongHieu(thuongHieuService.findById(sanPhamDto.getIdThuongHieu()));
+                sanPham.setHinhAnh(sanPham.getHinhAnh());
+                sanPham.setPhanLoai(phanLoaiService.findById(UUID.fromString(sanPhamDto.getIdLoaiSanPham())));
+                sanPham.setThuongHieu(thuongHieuService.findById(UUID.fromString(sanPhamDto.getIdThuongHieu())));
                 sanPham.setTrangThai(1);
                 sanPhamRepository.save(sanPham);
 
                 List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
                 List<UUID> listIdSave = new ArrayList<>();
 
-                for (ChiTietSanPhamDto dto: sanPhamDto.getChiTietSanPhamDtos()) {
+                for (ChiTietSanPhamDto dto : sanPhamDto.getChiTietSanPhamDtos()) {
                     ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
                     if (dto.getId() == null) {
                         String maCTSP = "CTSP" + (findAll().size() + 1);
                         chiTietSanPham.setMa(maCTSP);
                         chiTietSanPham.setSanPham(sanPham);
                     } else {
-                        chiTietSanPham = repository.findById(dto.getId()).orElse(null);
+                        chiTietSanPham = repository.findById(UUID.fromString(dto.getId())).orElse(null);
                         listIdSave.add(chiTietSanPham.getId());
                     }
+
+                    HinhAnh hinhAnhCtsp;
+
+                    if (chiTietSanPham.getHinhAnh() == null) {
+                        hinhAnhCtsp = new HinhAnh();
+
+                        if (dto.getAnh1() != null) {
+                            hinhAnhCtsp.setAnh1(convertImage.convertImageFromBase64(dto.getAnh1()));
+                        }
+                        if (dto.getAnh2() != null) {
+                            hinhAnhCtsp.setAnh2(convertImage.convertImageFromBase64(dto.getAnh2()));
+                        }
+                        if (dto.getAnh3() != null) {
+                            hinhAnhCtsp.setAnh3(convertImage.convertImageFromBase64(dto.getAnh3()));
+                        }
+
+                        hinhAnhCtsp.setTen("Ảnh sản phẩm " + sanPhamDto.getTenSanPham() + ". Mã " + chiTietSanPham.getMa());
+
+                        hinhAnhCtsp.setId(hinhAnhService.add(hinhAnhCtsp).getId());
+                        chiTietSanPham.setHinhAnh(hinhAnhCtsp);
+                    } else {
+                        hinhAnhCtsp = chiTietSanPham.getHinhAnh();
+                        if (dto.getAnh1() != null) {
+                            hinhAnhCtsp.setAnh1(convertImage.convertImageFromBase64(dto.getAnh1()));
+                        }
+                        if (dto.getAnh2() != null) {
+                            hinhAnhCtsp.setAnh2(convertImage.convertImageFromBase64(dto.getAnh2()));
+                        }
+                        if (dto.getAnh3() != null) {
+                            hinhAnhCtsp.setAnh3(convertImage.convertImageFromBase64(dto.getAnh3()));
+                        }
+
+                        hinhAnhService.update(hinhAnhCtsp.getId(), hinhAnhCtsp);
+                        chiTietSanPham.setHinhAnh(chiTietSanPham.getHinhAnh());
+                    }
+
                     chiTietSanPham.setNgayTao(Date.valueOf(LocalDate.now()));
-                    chiTietSanPham.setChatLieu(chatLieuService.findById(dto.getIdChatLieu()));
+                    chiTietSanPham.setChatLieu(chatLieuService.findById(UUID.fromString(dto.getIdChatLieu())));
                     chiTietSanPham.setDonGia(dto.getDonGia());
-                    chiTietSanPham.setKichThuoc(kichThuocService.findById(dto.getIdKichThuoc()));
-                    chiTietSanPham.setMauSac(mauSacService.findById(dto.getIdMauSac()));
+                    chiTietSanPham.setKichThuoc(kichThuocService.findById(UUID.fromString(dto.getIdKichThuoc())));
+                    chiTietSanPham.setMauSac(mauSacService.findById(UUID.fromString(dto.getIdMauSac())));
                     chiTietSanPham.setSoLuongTon(dto.getSoLuongTon());
                     chiTietSanPham.setTrangThai(dto.getTrangThai());
                     chiTietSanPham.setIsDelete(1);
                     chiTietSanPham.setMoTa(dto.getMoTa());
-                    chiTietSanPham.setHinhAnh(hinhAnhService.findById(dto.getIdHinhAnh()));
                     chiTietSanPhams.add(chiTietSanPham);
                 }
 
@@ -233,9 +319,9 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
 
     @Override
     public ChiTietSanPham update(UUID id, ChiTietSanPham chiTietSanPham) {
-        if(id != null){
+        if (id != null) {
             ChiTietSanPham ctsp = repository.findById(id).orElse(null);
-            if(ctsp != null){
+            if (ctsp != null) {
                 BeanUtils.copyProperties(chiTietSanPham, ctsp);
                 repository.save(ctsp);
             }
