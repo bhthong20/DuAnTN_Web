@@ -91,6 +91,11 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
+    public List<SanPham> loc(String locTH, String locPL) {
+        return repository.loc(locTH, locPL);
+    }
+
+    @Override
     public List<SanPham> loc1(String locTH, String locPL, Integer locTT) {
         return repository.loc1(locTH, locPL, locTT);
     }
