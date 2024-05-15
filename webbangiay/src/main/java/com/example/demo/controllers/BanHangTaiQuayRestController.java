@@ -42,9 +42,9 @@ public class BanHangTaiQuayRestController {
         return banHangTaiQuayService.getDetailSanPham(id);
     }
 
-    @GetMapping("/get-all-san-pham")
-    public List<ChiTietSanPham> getChiTietSanPham() {
-        return banHangTaiQuayService.getChiTietSanPham();
+    @PostMapping("/get-all-san-pham")
+    public List<ChiTietSanPham> getChiTietSanPham(@RequestBody List<UUID> listId) {
+        return banHangTaiQuayService.getChiTietSanPham(listId);
     }
 
     @PostMapping("/mua-san-pham")

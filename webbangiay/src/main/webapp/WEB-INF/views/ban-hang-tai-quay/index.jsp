@@ -1349,9 +1349,16 @@
     const getDanhSachSanPham = () => {
         const tableProduct = document.getElementById("listProduct");
         let html = '';
+        let listId = [];
+        $('#listHoaDonSanPham').find('tr').each(function () {
+            let product = JSON.parse($(this).attr('item'));
+            listId.push(product.chiTietSanPham.id)
+        });
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/ban-hang-tai-quay/rest/get-all-san-pham",
+            contentType: "application/json",
+            data: JSON.stringify(listId),
             success: function (response) {
                 let index = 0;
                 response.forEach(el => {
