@@ -204,24 +204,45 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
         try {
             SanPham sanPham = sanPhamRepository.findById(UUID.fromString(sanPhamDto.getId())).orElse(null);
             if (sanPham != null) {
-                HinhAnh hinhAnh = sanPham.getHinhAnh();
+                HinhAnh hinhAnh = null;
+                if (sanPham.getHinhAnh() == null) {
+                    hinhAnh = new HinhAnh();
 
-                if (sanPhamDto.getAnh1() != null) {
-                    hinhAnh.setAnh1(convertImage.convertImageFromBase64(sanPhamDto.getAnh1()));
-                }
-                if (sanPhamDto.getAnh2() != null) {
-                    hinhAnh.setAnh2(convertImage.convertImageFromBase64(sanPhamDto.getAnh2()));
-                }
-                if (sanPhamDto.getAnh3() != null) {
-                    hinhAnh.setAnh3(convertImage.convertImageFromBase64(sanPhamDto.getAnh3()));
+                    if (sanPhamDto.getAnh1() != null) {
+                        hinhAnh.setAnh1(convertImage.convertImageFromBase64(sanPhamDto.getAnh1()));
+                    }
+                    if (sanPhamDto.getAnh2() != null) {
+                        hinhAnh.setAnh2(convertImage.convertImageFromBase64(sanPhamDto.getAnh2()));
+                    }
+                    if (sanPhamDto.getAnh3() != null) {
+                        hinhAnh.setAnh3(convertImage.convertImageFromBase64(sanPhamDto.getAnh3()));
+                    }
+
+                    hinhAnh.setTen("Ảnh sản phẩm " + sanPhamDto.getTenSanPham());
+
+                    hinhAnh.setId(hinhAnhService.add(hinhAnh).getId());
+                    sanPham.setHinhAnh(hinhAnh);
+
+                } else {
+                    hinhAnh = sanPham.getHinhAnh();
+                    if (sanPhamDto.getAnh1() != null) {
+                        hinhAnh.setAnh1(convertImage.convertImageFromBase64(sanPhamDto.getAnh1()));
+                    }
+                    if (sanPhamDto.getAnh2() != null) {
+                        hinhAnh.setAnh2(convertImage.convertImageFromBase64(sanPhamDto.getAnh2()));
+                    }
+                    if (sanPhamDto.getAnh3() != null) {
+                        hinhAnh.setAnh3(convertImage.convertImageFromBase64(sanPhamDto.getAnh3()));
+                    }
+
+                    hinhAnhService.update(hinhAnh.getId(), hinhAnh);
+                    sanPham.setHinhAnh(sanPham.getHinhAnh());
                 }
 
-                hinhAnhService.update(hinhAnh.getId(), hinhAnh);
 
                 sanPham.setTenSP(sanPhamDto.getTenSanPham());
                 sanPham.setNgayTao(Date.valueOf(LocalDate.now()));
                 sanPham.setMoTa(sanPhamDto.getMoTa());
-                sanPham.setHinhAnh(sanPham.getHinhAnh());
                 sanPham.setPhanLoai(phanLoaiService.findById(UUID.fromString(sanPhamDto.getIdLoaiSanPham())));
                 sanPham.setThuongHieu(thuongHieuService.findById(UUID.fromString(sanPhamDto.getIdThuongHieu())));
                 sanPham.setTrangThai(1);
