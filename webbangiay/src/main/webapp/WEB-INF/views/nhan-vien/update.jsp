@@ -92,7 +92,7 @@
                             <form:errors path="ngaySinh" cssStyle="color: red"></form:errors>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <form:select class="form-select" path="chucVu">
+                            <form:select class="form-select" path="chucVu" id="selectChucVu">
                                 <option selected disabled>Sản phẩm</option>
                                 <form:options items="${listCv}" itemValue="id" itemLabel="ten"/>
                             </form:select>
@@ -103,7 +103,6 @@
                             <form:label class="" path="taiKhoan">Tài Khoản:</form:label>
                             <form:errors path="taiKhoan" cssStyle="color: #ff0000"/>
                         </div>
-
                         <div class="form-floating mb-3 mt-3">
                             <form:input class="form-control" placeholder="" path="matKhau"/>
                             <form:label class="" path="matKhau">Mật Khẩu:</form:label>
@@ -116,11 +115,7 @@
                             <br>
                             <form:radiobutton path="tinhTrang" value="1"/>Ngưng hoạt động
                         </div>
-
                     </div>
-
-
-
                 </div>
                 <div class="row">
                     <div class="col-12" style="text-align: center">
@@ -135,27 +130,8 @@
     </div>
 
 </div>
-</div>
 </body>
 <script>
-    const imageInput1 = document.getElementById('anhmoi');
-
-    const previewAnh12 = document.getElementById('preview-anh1-2');
-
-    imageInput1.addEventListener('change', function () {
-        const file = imageInput1.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewAnh12.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        } else {
-            previewAnh12.src = '';
-        }
-        document.getElementById('cucheck1').value = 'moi1';
-    });
-
     function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm thông tin";
         let kt = confirm(text);
@@ -218,6 +194,9 @@
         }
     }
 
+    $(document).ready(function () {
+        $('#selectChucVu').select2();
+    });
 </script>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>

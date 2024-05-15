@@ -96,14 +96,15 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
     }
 
     @Override
-    public List<SanPham> loc(String locPL, String locTH) {
-        return repository.loc(locPL, locTH);
+    public List<SanPham> loc(String locTH, String locPL) {
+        return repository.loc(locTH, locPL);
     }
 
     @Override
-    public List<ChiTietSanPham> loc1(String locSP, String locMS, String locKT, String locCL) {
-        return repository.loc1(locSP, locMS, locKT, locCL);
+    public List<SanPham> loc1(String locTH, String locPL, Integer locTT) {
+        return repository.loc1(locTH, locPL, locTT);
     }
+
 
     @Override
     public Boolean delete(UUID id) {
@@ -229,7 +230,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
                 List<ChiTietSanPham> chiTietSanPhams = new ArrayList<>();
                 List<UUID> listIdSave = new ArrayList<>();
 
-                for (ChiTietSanPhamDto dto : sanPhamDto.getChiTietSanPhamDtos()) {
+                for (ChiTietSanPhamDto dto: sanPhamDto.getChiTietSanPhamDtos()) {
                     ChiTietSanPham chiTietSanPham = new ChiTietSanPham();
                     if (dto.getId() == null) {
                         String maCTSP = "CTSP" + (findAll().size() + 1);

@@ -55,17 +55,18 @@ public class NhanVienController {
 
     @GetMapping("/view-update")
     public String viewUpdate(Model model, @RequestParam("id") UUID id, @ModelAttribute("chucVu") ChucVu chucVu) {
+        model.addAttribute("listCv", chucVuService.getAll());
         NhanVien nv = nhanVienService.findById(id);
         model.addAttribute("nhanVien", nv);
-        model.addAttribute("listCv", chucVuService.getAll());
         model.addAttribute("contentPage", "../nhan-vien/update.jsp");
         return "home/layout";
     }
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "nhanVien") NhanVien nhanVien,
-                         @PathVariable(name = "id") UUID id, @ModelAttribute("chucVu") ChucVu chucVu) {
+                         @PathVariable(name = "id") UUID id) {
         NhanVien nv = nhanVienService.findById(id);
+        nhanVien.setId(id);
         nhanVien.setNgayCapNhat(Date.valueOf(LocalDate.now()));
         System.out.println(nv.toString());
         nhanVienService.update(id, nhanVien);

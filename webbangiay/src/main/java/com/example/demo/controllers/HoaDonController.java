@@ -40,9 +40,9 @@ public class HoaDonController {
     private KhachHangService khachHangService;
 
     @GetMapping()
-    public String quanLyBanHang(Model model,@RequestParam("num")Optional<Integer>num, @RequestParam(name = "size",defaultValue = "5",required = false)Integer size) {
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0),size,sort);
+    public String quanLyBanHang(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        Sort sort = Sort.by("ma").descending();
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HoaDon> list = hoaDonService.getAllAdmin(pageable);
         model.addAttribute("listhoaDon", list.getContent());
         model.addAttribute("total", list.getTotalPages());
@@ -58,10 +58,10 @@ public class HoaDonController {
     }
 
     @GetMapping("/hien-thi")
-       public String hiethi(Model model,@RequestParam("num")Optional<Integer>num, @RequestParam(name = "size",defaultValue = "5",required = false)Integer size
-    ){
+    public String hiethi(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size
+    ) {
         Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0),size,sort);
+        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HoaDon> list = hoaDonService.getAll(pageable);
         System.out.println(list.getContent());
         model.addAttribute("listhoaDon", list.getContent());
@@ -71,7 +71,7 @@ public class HoaDonController {
     }
 
     @GetMapping("/view-add")
-    public String viewAdd(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon,@ModelAttribute(name="nhanVien") NhanVien nhanVien,@ModelAttribute(name="khachHang") KhachHang khachHang,@ModelAttribute(name = "khuyenMai") KhuyenMai khuyenMai) {
+    public String viewAdd(Model model, @ModelAttribute("hoaDon") HoaDon hoaDon, @ModelAttribute(name = "nhanVien") NhanVien nhanVien, @ModelAttribute(name = "khachHang") KhachHang khachHang, @ModelAttribute(name = "khuyenMai") KhuyenMai khuyenMai) {
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll();
         List<KhuyenMai> listKhuyenMai = khuyenMaiService.findAll();
@@ -81,6 +81,7 @@ public class HoaDonController {
         model.addAttribute("listKhuyenMai", listKhuyenMai);
         return "hoa-don/add";
     }
+
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute(name = "hoaDon") HoaDon hoaDon, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -92,8 +93,9 @@ public class HoaDonController {
         hoaDonService.add(hoaDon);
         return "redirect:/hoa-don/hien-thi";
     }
+
     @GetMapping("/view-update/{id}")
-    public String viewUPdate(Model model, @PathVariable("id") UUID id, @ModelAttribute("hoaDon") HoaDon hoaDon, @ModelAttribute(name="nhanVien") NhanVien nhanVien, @ModelAttribute(name="khachHang") KhachHang khachHang, @ModelAttribute(name = "khuyenMai") KhuyenMai khuyenMai) {
+    public String viewUPdate(Model model, @PathVariable("id") UUID id, @ModelAttribute("hoaDon") HoaDon hoaDon, @ModelAttribute(name = "nhanVien") NhanVien nhanVien, @ModelAttribute(name = "khachHang") KhachHang khachHang, @ModelAttribute(name = "khuyenMai") KhuyenMai khuyenMai) {
         List<NhanVien> listNhanVien = nhanVienService.findAll();
         List<KhachHang> listKhachHang = khachHangService.findAll();
         List<KhuyenMai> listKhuyenMai = khuyenMaiService.findAll();
@@ -102,21 +104,61 @@ public class HoaDonController {
         model.addAttribute("listKhachHang", listKhachHang);
         model.addAttribute("listKhuyenMai", listKhuyenMai);
         HoaDon hoadon = hoaDonService.findById(id);
-        model.addAttribute("hoaDon",hoadon);
+        model.addAttribute("hoaDon", hoadon);
         return "hoa-don/update";
     }
-        @PostMapping("/update/{id}")
+
+    @PostMapping("/update/{id}")
     public String update(@ModelAttribute(name = "hoaDon") HoaDon hoaDon,
                          @PathVariable(name = "id") UUID id) {
         HoaDon hd = hoaDonService.findById(id);
         hoaDon.setId(id);
         hoaDon.setMa(hoaDon.getMa());
-            hoaDonService.update(id, hoaDon);
+        hoaDonService.update(id, hoaDon);
         return "redirect:/hoa-don/hien-thi";
     }
-        @GetMapping("/delete/{id}")
+
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") UUID id) {
         hoaDonService.delete(id);
         return "redirect:/hoa-don/hien-thi";
+    }
+
+    @PostMapping("/loc")
+    public String loc(Model model, @RequestParam(value = "locTT", required = false) Integer locTT,
+                      @RequestParam(value = "locPTTT", required = false) Integer locPTTT,
+                      @RequestParam(value = "locLoai", required = false) Integer locLoai,
+                      @RequestParam(value = "ngayTao", required = false) String ngayTao) {
+        if (ngayTao == null || ngayTao.isEmpty()) {
+            List<HoaDon> list = hoaDonService.loc(locTT, locPTTT, locLoai, null);
+            model.addAttribute("listhoaDon", list);
+            model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
+            return "home/layout";
+
+        } else {
+            List<HoaDon> list = hoaDonService.loc(locTT, locPTTT, locLoai, Date.valueOf(ngayTao));
+            model.addAttribute("listhoaDon", list);
+            model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
+            return "home/layout";
+        }
+
+    }
+
+    @PostMapping("/search")
+    public String search(Model model, @RequestParam("ma") String ma, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        if (!ma.isEmpty()) {
+            List<HoaDon> list = hoaDonService.searchMa(ma);
+            model.addAttribute("listhoaDon", list);
+            model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
+            return "home/layout";
+        } else {
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<HoaDon> list = hoaDonService.getAllAdmin(pageable);
+            model.addAttribute("listhoaDon", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
+            return "home/layout";
+        }
     }
 }

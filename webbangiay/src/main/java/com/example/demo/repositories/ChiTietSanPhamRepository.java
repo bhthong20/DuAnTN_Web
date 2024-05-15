@@ -1,6 +1,7 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.HoaDon;
 import com.example.demo.models.SanPham;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -8,8 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,17 +34,24 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query("select c from ChiTietSanPham c  where  c.trangThai = 0 ")
     List<ChiTietSanPham> findAll0();
 
-    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 1 and (ctsp.ma like %:search% or ctsp.tenSP like %:search%)")
+    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 1 and (ctsp.ma like %:search% or UPPER(ctsp.tenSP) like UPPER(concat('%', :search, '%')))")
     List<SanPham> search(String search);
 
     @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 1 and (ctsp.kichThuoc.size like %:search% or ctsp.sanPham.tenSP like %:search% or ctsp.mauSac.ten like %:search% or ctsp.chatLieu.tenChatLieu like %:search%)")
     List<ChiTietSanPham> search1(String search);
 
-    @Query("select ctsp from SanPham ctsp where ctsp.trangThai = 0 and (ctsp.thuongHieu.ten like ?1 or ctsp.phanLoai.tenLoai like ?2)")
+    @Query("select sp from SanPham sp where sp.trangThai =1 and" +
+            "(:locTH is null or sp.thuongHieu.ten=:locTH) " +
+            "and (:locPL is null or sp.phanLoai.tenLoai=:locPL) "
+    )
     List<SanPham> loc(String locTH, String locPL);
 
-    @Query("select ctsp from ChiTietSanPham ctsp where ctsp.trangThai = 1 and (ctsp.sanPham.tenSP like ?1 or ctsp.mauSac.ten like ?2 or ctsp.kichThuoc.size like ?3 or ctsp.chatLieu.tenChatLieu like ?4)")
-    List<ChiTietSanPham> loc1(String locSP, String locMS, String locSize, String locDe);
+    @Query("select sp from SanPham sp where " +
+            "(:locTH is null or sp.thuongHieu.ten=:locTH) " +
+            "and (:locPL is null or sp.phanLoai.tenLoai=:locPL) " +
+            "and (:locTT is null or sp.trangThai=:locTT) "
+    )
+    List<SanPham> loc1(String locTH, String locPL, Integer locTT);
 
     //update lại toàn bộ các trường có trạng thái 0, vì là câu native query nên tên bảng sẽ lấy theo tên trong sql
     @Transactional

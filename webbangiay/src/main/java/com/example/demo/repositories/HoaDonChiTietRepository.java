@@ -14,8 +14,12 @@ import java.util.UUID;
 public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, UUID> {
 
     List<HoaDonChiTiet> findHoaDonChiTietByHoaDonAndTrangThai(HoaDon hoaDon, int trangThai);
+
     List<HoaDonChiTiet> findHoaDonChiTietByIdIn(List<UUID> uuids);
+
     Optional<HoaDonChiTiet> findHoaDonChiTietByHoaDonAndChiTietSanPham(HoaDon hoaDon, ChiTietSanPham chiTietSanPham);
+
     Long countByHoaDon(HoaDon hoaDon);
+
     List<HoaDonChiTiet> findHoaDonChiTietByHoaDon(HoaDon hoaDon);
 }

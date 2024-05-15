@@ -44,30 +44,45 @@
 </head>
 <body>
 <div class="card mb-4">
-    <table class="table container">
-        <tbody>
+    <div class="container">
         <h3 class="card-header">Thông tin khuyến mại</h3>
-        <tr>
-            <td style="text-align: center">
-                <form action="/khuyen-mai/search" method="post">
-                    <div class="input-group" style="width:100%; text-align: center">
-                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                               aria-label="Bạn tìm gì..." name="search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
-                        </div>
-                    </div>
-                </form>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <td class="text-center" colspan="2">
-                <a type="button" class="btn btn-primary" href="/khuyen-mai/view-add">Thêm mới</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <form action="/khuyen-mai/search" method="post" class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="search" class="visually-hidden">Tìm kiếm</label>
+                <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm...">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+            </div>
+        </form>
+
+        <form action="/khuyen-mai/loc" method="post" class="row g-3 align-items-center mt-3">
+            <div class="col-auto">
+                <select class="form-select" name="locHTG">
+                    <option selected disabled>Loại</option>
+                    <option value=0>Tiền</option>
+                    <option value=1>%</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <select class="form-select" name="locTT">
+                    <option selected disabled>Trạng thái</option>
+                    <option value=0>Ngừng hoạt động</option>
+                    <option value=1>Hoạt động</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit">Lọc</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="text-center mt-3">
+        <a type="button" class="btn btn-primary" href="/khuyen-mai/view-add">Thêm mới</a>
+    </div>
+    <br>
 </div>
+
 <div class="card">
     <div class="table-responsive text-nowrap">
         <table class="table container">
@@ -88,8 +103,12 @@
                     <td>${hangSanPham.ma}</td>
                     <td>${hangSanPham.ten}</td>
                     <td>${hangSanPham.ngayTao}</td>
-                    <td><script>document.write(new Date(${hangSanPham.ngayBatDau}).toLocaleString())</script></td>
-                    <td><script>document.write(new Date(${hangSanPham.ngayKetThuc}).toLocaleString())</script></td>
+                    <td>
+                        <script>document.write(new Date(${hangSanPham.ngayBatDau}).toLocaleString())</script>
+                    </td>
+                    <td>
+                        <script>document.write(new Date(${hangSanPham.ngayKetThuc}).toLocaleString())</script>
+                    </td>
                     <td>${hangSanPham.giaTriGiam} <c:if test="${hangSanPham.hinhThucGiamGia==0}"> VNĐ</c:if>
                         <c:if test="${hangSanPham.hinhThucGiamGia==1}"> %</c:if></td>
                     <td>

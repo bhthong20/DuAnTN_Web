@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -86,6 +88,22 @@ public class KhuyenMaiController {
     public String search(Model model, @ModelAttribute("khuyenMai") KhuyenMai khuyenMai, @RequestParam("search") String search) {
         List<KhuyenMai> list = khuyenMaiService.search(search);
         model.addAttribute("listKhuyenMai", list);
-        return "khuyen-mai/hien-thi";
+        model.addAttribute("contentPage", "../khuyen-mai/hien-thi.jsp");
+        return "home/layout";
     }
+
+
+    @PostMapping("/loc")
+    public String loc(Model model,
+                      @RequestParam(value = "locTT", required = false) Integer locTT,
+                      @RequestParam(value = "locHTG", required = false) Integer locHTG,
+                      @ModelAttribute("khuyenMai") KhuyenMai khuyenMai) {
+
+
+        List<KhuyenMai> list = khuyenMaiService.loc(locTT, locHTG);
+        model.addAttribute("listKhuyenMai", list);
+        model.addAttribute("contentPage", "../khuyen-mai/hien-thi.jsp");
+        return "home/layout";
+    }
+
 }

@@ -43,10 +43,9 @@ public interface ChiTietSanPhamService {
     public List<ChiTietSanPham> search1(String search);
 
     //lọc bên trang trạng thái
-    public List<SanPham> loc(String locTH, String locPL);
+    List<SanPham> loc(String locTH, String locPL);
 
-    //lọc bên trang view trạng thái
-    public List<ChiTietSanPham> loc1(String locSP, String locMS, String locKT, String locCL);
+    List<SanPham> loc1(String locTH, String locPL, Integer locTT);
 
     public Boolean delete(UUID id);
 

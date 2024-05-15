@@ -116,13 +116,9 @@
                             <br>
                             <form:radiobutton path="tinhTrang" value="1"/>Ngưng hoạt động
                         </div>
-
-
-
                     </div>
-
-
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-12" style="text-align: center">
                         <button type="submit" class="btn btn-success"
@@ -132,11 +128,10 @@
                 </div>
             </div>
             </form:form>
-            </div>
         </div>
-
     </div>
 </div>
+
 </body>
 <script>
     function myFunction1() {

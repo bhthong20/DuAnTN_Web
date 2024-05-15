@@ -49,7 +49,7 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     public KhuyenMai update(UUID id, KhuyenMai hangSanPham) {
         if (id != null) {
             KhuyenMai hangSanPhamUpadte = khuyenMaiRepository.findById(id).orElse(null);
-            if (hangSanPham != null){
+            if (hangSanPham != null) {
                 hangSanPham.setId(hangSanPhamUpadte.getId());
                 hangSanPham.setNgayTao(hangSanPhamUpadte.getNgayTao());
                 hangSanPham.setNgayCapNhat(Date.valueOf(LocalDate.now()));
@@ -76,6 +76,11 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
     @Override
     public List<KhuyenMai> getComboboxKhuyenMai() {
         Long ngayHienTai = System.currentTimeMillis();
-        return khuyenMaiRepository.findByNgayBatDauLessThanEqualAndNgayKetThucGreaterThanEqualAndTrangThaiAndNgayBatDauIsNotNullAndNgayKetThucIsNotNullOrderByNgayTaoDesc(ngayHienTai ,ngayHienTai ,1);
+        return khuyenMaiRepository.findByNgayBatDauLessThanEqualAndNgayKetThucGreaterThanEqualAndTrangThaiAndNgayBatDauIsNotNullAndNgayKetThucIsNotNullOrderByNgayTaoDesc(ngayHienTai, ngayHienTai, 1);
+    }
+
+    @Override
+    public List<KhuyenMai> loc(Integer locTT, Integer locHTG) {
+        return khuyenMaiRepository.loc(locTT, locHTG);
     }
 }

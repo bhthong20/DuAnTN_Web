@@ -394,15 +394,15 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="hinhAnhSearch">Hình ảnh</label>
-                                <select class="form-select" id="hinhAnhSearch">
-                                    <option selected value="">Lựa chọn</option>
-                                    <c:forEach items="${listHA}" var="item">
-                                        <option value="${item.id}">${item.ten}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
+<%--                            <div class="mb-3">--%>
+<%--                                <label class="form-label" for="hinhAnhSearch">Hình ảnh</label>--%>
+<%--                                <select class="form-select" id="hinhAnhSearch">--%>
+<%--                                    <option selected value="">Lựa chọn</option>--%>
+<%--                                    <c:forEach items="${listHA}" var="item">--%>
+<%--                                        <option value="${item.id}">${item.ten}</option>--%>
+<%--                                    </c:forEach>--%>
+<%--                                </select>--%>
+<%--                            </div>--%>
                         </div>
                     </div>
                     <div class="row">
@@ -720,8 +720,6 @@
             alert("Bạn chưa chọn sản phẩm nào.")
             return;
         }
-
-
         let kt = confirm("Bạn có chắc chắn muốn mua hàng không?");
         if (kt == true) {
             let check = true;

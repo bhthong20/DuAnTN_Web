@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.dto.SanPhamDetail;
 import com.example.demo.models.dto.SanPhamDto;
 import com.example.demo.services.ChiTietSanPhamService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -35,6 +37,14 @@ public class ChiTietSanPhamRestController {
         sanPhamDetail.setSanPham(sanPhamService.findById(id));
         sanPhamDetail.setChiTietSanPham(chiTietSanPhamService.findChiTietSanPhamBySanPham(sanPhamDetail.getSanPham()));
         return sanPhamDetail;
+    }
+
+    @GetMapping("/detail-san-phams")
+    public List<ChiTietSanPham> chiTietSanPham(@RequestParam("idctsp") UUID id) {
+        SanPhamDetail sanPhamDetail = new SanPhamDetail();
+        sanPhamDetail.setSanPham(sanPhamService.findById(id));
+        List<ChiTietSanPham> chiTietSanPham = chiTietSanPhamService.findChiTietSanPhamBySanPham(sanPhamDetail.getSanPham());
+        return chiTietSanPham;
     }
 
     @PostMapping("/update-san-pham")

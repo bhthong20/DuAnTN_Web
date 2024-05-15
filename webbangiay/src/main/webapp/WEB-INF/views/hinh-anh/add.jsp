@@ -125,13 +125,13 @@
                         <div class="col-2"></div>
                         <div class="col-8">
                             <div class="form-group">
-                                <form:label path="ten"><b>Tên:</b></form:label>
-                                <form:input placeholder="" path="ten"/>
+                                <form:label path="ten" ><b>Tên:</b></form:label>
+                                <form:input placeholder="" class="form-control" path="ten"/>
                                 <form:errors path="ten" cssClass="text-danger"/>
                             </div>
                             <div class="form-group">
                                 <form:label path="moTa"><b>Mô tả:</b></form:label>
-                                <form:input placeholder="" path="moTa"/>
+                                <form:input placeholder="" class="form-control" path="moTa"/>
                                 <form:errors path="moTa" cssClass="text-danger"/>
                             </div>
                         </div>

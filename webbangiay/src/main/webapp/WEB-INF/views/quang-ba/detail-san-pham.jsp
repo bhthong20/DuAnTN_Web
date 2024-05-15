@@ -87,17 +87,17 @@
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img id="anh1" class="d-block w-100" src="../assets/img/elements/13.jpg" alt="First slide"/>
+                            <img id="anh1" class="d-block w-100" src="" alt="First slide"/>
                             <div class="carousel-caption d-none d-md-block">
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img id="anh2" class="d-block w-100" src="../assets/img/elements/2.jpg" alt="Second slide"/>
+                            <img id="anh2" class="d-block w-100" src="" alt="Second slide"/>
                             <div class="carousel-caption d-none d-md-block">
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img id="anh3" class="d-block w-100" src="../assets/img/elements/18.jpg" alt="Third slide"/>
+                            <img id="anh3" class="d-block w-100" src="" alt="Third slide"/>
                             <div class="carousel-caption d-none d-md-block">
                             </div>
                         </div>

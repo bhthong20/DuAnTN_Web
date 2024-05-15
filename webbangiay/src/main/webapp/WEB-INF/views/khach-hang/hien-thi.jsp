@@ -130,7 +130,10 @@
                     <td>${stt.index+1}</td>
                     <td>${kh.ma}</td>
                     <td>${kh.hoTen}</td>
-                    <td>${kh.gioiTinh}</td>
+                    <td>
+                        <c:if test="${kh.gioiTinh == false}">Nam</c:if>
+                        <c:if test="${kh.gioiTinh == true}">Nữ</c:if>
+                    </td>
                     <td>${kh.email}</td>
                     <td>${kh.sdt}</td>
                     <td>${kh.ngaySinh}</td>
@@ -142,7 +145,7 @@
                     <td colspan="2">
                         <a href="/khach-hang/delete/${kh.id}" class="btn btn-success"
                            onclick="return myFunction2()">Delete</a>
-                        <a href="/khach-hang/view-update?idctsp=${kh.id}" class="btn btn-success"
+                        <a href="/khach-hang/view-update?id=${kh.id}" class="btn btn-success"
                            onclick="return myFunction2()">Update</a>
                     </td>
                 </tr>

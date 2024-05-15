@@ -50,70 +50,75 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Update Khách Hàng</h4>
+            <h4 class="card-header" style="text-align: center">Sửa Khách Hàng</h4>
             <%--@elvariable id="chiTietSanPham" type=""--%>
             <div class="card-body">
                 <form:form action="/khach-hang/update/${khachHang.id}" method="post" modelAttribute="khachHang">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="ma"/>
-                            <form:label class="form-label" path="ma">Mã Khách Hàng:</form:label>
-                            <form:errors path="ma" cssStyle="color: red"/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mt-3">
+                                <input id="ma" disabled class="form-control" placeholder=""/>
+                                <label for="ma" path="sanPham">Mã khách hàng:</label>
+                                <span path="sanPham" cssStyle="color: red"></span>
+                            </div>
+
+                            <div class="form-floating mb-3 mt-3">
+                                <form:input id="tenKH" class="form-control" placeholder="" path="hoTen"/>
+                                <form:label for="tenKH" path="hoTen">Tên khách hàng:</form:label>
+                                <form:errors path="hoTen" cssStyle="color: red"></form:errors>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <form:select class="form-select" id="gioiTinh" path="gioiTinh">
+                                    <option selected disabled value="">Giới tính</option>
+                                    <form:option value="0">Nam</form:option>
+                                    <form:option value="1">Nữ</form:option>
+                                </form:select>
+                                <form:label for="gioiTinh" path="gioiTinh">Giới tính:</form:label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <form:input id="email" class="form-control" type="email" placeholder="" path="email"/>
+                                <form:label for="email" path="email">Email:</form:label>
+                                <form:errors path="email" cssStyle="color: red"></form:errors>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <form:input id="sdt" class="form-control" type="number" placeholder="" path="sdt"/>
+                                <form:label for="sdt" path="sdt">SDT:</form:label>
+                                <form:errors path="sdt" cssStyle="color: red"></form:errors>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <form:input id="ngaySinh" class="form-control" type="date" placeholder="" path="ngaySinh"/>
+                                <form:label for="ngaySinh" path="ngaySinh">Ngày sinh:</form:label>
+                                <form:errors path="ngaySinh" cssStyle="color: red"></form:errors>
+                            </div>
                         </div>
-                        <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="hoTen"/>
-                            <form:label class="form-label" path="hoTen">Tên Khách Hàng:</form:label>
-                            <form:errors path="hoTen" cssStyle="color: red"/>
-                        </div>
-                        <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="email"/>
-                            <form:label class="form-label" path="email">Email:</form:label>
-                            <form:errors path="email" cssStyle="color: red"/>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                    </div>
-                    <div class="col-md-6">
-                        <form:label class="form-label" path="gioiTinh">Giới Tính:</form:label>
-                        <form:radiobutton path="gioiTinh" value="0" checked="true"/>Nam
-                        <form:radiobutton path="gioiTinh" value="1"/>Nữ
-                        <div class="form-floating mb-3 mt-3">
-                            <form:input class="form-control" placeholder="" path="sdt"/>
-                            <form:label class="form-label" path="sdt">Số Điện Thoại:</form:label>
-                            <form:errors path="sdt" cssStyle="color: #ff0000"/>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mt-3">
+                                <form:input id="taiKhoan" class="form-control" placeholder="" path="taiKhoan"/>
+                                <form:label for="taiKhoan" path="taiKhoan">Tài khoản:</form:label>
+                                <form:errors path="taiKhoan" cssStyle="color: red"></form:errors>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <form:input id="matKhau" class="form-control" placeholder="" path="matKhau"/>
+                                <form:label for="matKhau" path="matKhau">Mật khẩu:</form:label>
+                                <form:errors path="matKhau" cssStyle="color: red"></form:errors>
+                            </div>
+                            <div class="form-check mb-3 mt-3">
+                                <form:label class="" path="trangThai">Trạng thái:</form:label>
+                                <br>
+                                <form:radiobutton path="trangThai" value="0" checked="true"/>Hoạt động
+                                <br>
+                                <form:radiobutton path="trangThai" value="1"/>Ngưng hoạt động
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="ngaySinh"/>
-                        <form:label class="form-label" path="ngaySinh">Ngày Sinh:</form:label>
-                        <form:errors path="ngaySinh" cssStyle="color: #ff0000"/>
+                    <div class="row">
+                        <div class="col-12" style="text-align: center">
+                            <button type="submit" class="btn btn-primary"
+                                    id="btt" onclick="return myFunction1()">Sửa
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="taiKhoan"/>
-                        <form:label class="form-label" path="taiKhoan">Tài Khoản:</form:label>
-                        <form:errors path="taiKhoan" cssStyle="color: #ff0000"/>
-                    </div>
-                    <div class="form-floating mb-3 mt-3">
-                        <form:input class="form-control" placeholder="" path="matKhau"/>
-                        <form:label class="form-label" path="matKhau">Mật Khẩu:</form:label>
-                        <form:errors path="matKhau" cssStyle="color: #ff0000"/>
-                    </div>
-                    <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
-                    <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
-                    <form:radiobutton path="trangThai" value="1"/>Hoạt Động
-                </div>
-                <div class="row">
-                    <div class="col-12" style="text-align: center">
-                        <button type="submit" class="btn btn-success"
-                                id="btt" onclick="return myFunction1()">Add
-                        </button>
-                    </div>
-                </div>
-            </div>
-            </form:form>
+                </form:form>
             </table>
         </div>
     </div>

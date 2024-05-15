@@ -26,12 +26,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("thuong-hieu")
+@RequestMapping("/thuong-hieu")
 public class ThuongHieuController {
     @Autowired
     private ThuongHieuService thuongHieuService;
 
-    @GetMapping("hien-thi")
+    @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
         Sort sort = Sort.by("ngayTao").ascending();
@@ -41,7 +41,7 @@ public class ThuongHieuController {
         model.addAttribute("contentPage", "../thuong-hieu/hien-thi.jsp");
         return "home/layout";
     }
-    @GetMapping("view-add")
+    @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("thuongHieu") ThuongHieu thuongHieu){
         List<ThuongHieu>list = thuongHieuService.findAll();
         model.addAttribute("listTH", list);
@@ -49,7 +49,7 @@ public class ThuongHieuController {
         model.addAttribute("contentPage", "../thuong-hieu/add.jsp");
         return "home/layout";
     }
-    @PostMapping("add")
+    @PostMapping("/add")
     public String add(@Valid @ModelAttribute(name = "thuongHieu") ThuongHieu thuongHieu, BindingResult bindingResult,Model model){
         if(bindingResult.hasErrors()){
             model.addAttribute("contentPage", "../thuong-hieu/add.jsp");
@@ -61,12 +61,12 @@ public class ThuongHieuController {
         thuongHieuService.add(thuongHieu);
         return "redirect:/thuong-hieu/hien-thi";
     }
-    @GetMapping("delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") UUID id){
         thuongHieuService.delete(id);
         return "redirect:/thuong-hieu/hien-thi";
     }
-    @GetMapping("view-update")
+    @GetMapping("/view-update")
     public String detail(Model model, @RequestParam("id") UUID id){
         List<ThuongHieu>list = thuongHieuService.findAll();
         model.addAttribute("listTH", list);
@@ -75,7 +75,7 @@ public class ThuongHieuController {
         model.addAttribute("contentPage", "../thuong-hieu/update.jsp");
         return "home/layout";
     }
-    @PostMapping("update/{id}")
+    @PostMapping("/update/{id}")
     public String update(@Valid @ModelAttribute(name = "thuongHieu") ThuongHieu thuongHieu,Model model,
                          @PathVariable(name = "id") UUID id,
                          BindingResult result){
@@ -92,7 +92,7 @@ public class ThuongHieuController {
         thuongHieuService.update(id, thuongHieu);
         return "redirect:/thuong-hieu/hien-thi";
     }
-    @PostMapping("search")
+    @PostMapping("/search")
     public String search (Model model, @ModelAttribute("thuongHieu") ThuongHieu thuongHieu, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
                           @RequestParam(name = "size", defaultValue = "5", required = false) Integer size){
         if (search.isEmpty()) {
