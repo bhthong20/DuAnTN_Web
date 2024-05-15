@@ -7,6 +7,7 @@ import com.example.demo.models.KhachHang;
 import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.SanPhamAddHoaDon;
 import com.example.demo.services.BanHangTaiQuayService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class BanHangTaiQuayRestController {
     }
 
     @GetMapping("/tao-moi-hoa-don")
-    public List<HoaDon> createHoaDon() {
+    public List<HoaDon> createHoaDon() throws BadRequestException {
         return banHangTaiQuayService.createHoaDon();
     }
 
@@ -41,9 +42,9 @@ public class BanHangTaiQuayRestController {
         return banHangTaiQuayService.getDetailSanPham(id);
     }
 
-    @GetMapping("/get-all-san-pham")
-    public List<ChiTietSanPham> getChiTietSanPham() {
-        return banHangTaiQuayService.getChiTietSanPham();
+    @PostMapping("/get-all-san-pham")
+    public List<ChiTietSanPham> getChiTietSanPham(@RequestBody List<UUID> listId) {
+        return banHangTaiQuayService.getChiTietSanPham(listId);
     }
 
     @PostMapping("/mua-san-pham")

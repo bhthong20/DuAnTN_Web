@@ -117,8 +117,8 @@
             <tr>
                 <th>STT</th>
                 <th>Mã</th>
-                <th>Mã người đặt</th>
-                <th>Tên người nhận</th>
+                <th>Mã khách hàng</th>
+                <th>Tên khách hàng</th>
                 <th>Nhân viên</th>
                 <th>Ngày tạo</th>
                 <th>Trạng thái</th>
@@ -141,8 +141,8 @@
                         </c:choose></td>
                     <td>
                         <c:choose>
-                            <c:when test="${not empty item.tenNguoiNhan}">
-                                ${item.tenNguoiNhan}
+                            <c:when test="${not empty item.khachHang}">
+                                ${item.khachHang.hoTen}
                             </c:when>
                             <c:otherwise>
                                 -

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,9 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     Page<HoaDon> findAllByTrangThaiNotIn(int[] trangThais, Pageable pageable);
 
+    @Query(value = """
+        SELECT hd FROM HoaDon hd where 1 = 1 and hd.trangThai <> 9
+    """)
     Page<HoaDon> findAllBy(Pageable pageable);
 
     @Query("select hd from HoaDon hd where hd.ma like  %:ma% ")

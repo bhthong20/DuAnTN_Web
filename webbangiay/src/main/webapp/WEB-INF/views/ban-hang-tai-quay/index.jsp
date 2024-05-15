@@ -96,11 +96,11 @@
                                 <label class="form-label" for="statusHoaDon">Trạng thái</label>
                                 <input type="text" class="form-control" disabled id="statusHoaDon"/>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="display: none;">
                                 <label class="form-label" for="tenNguoiNhan">Tên người nhận</label>
                                 <input type="text" class="form-control checkStatus" id="tenNguoiNhan"/>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="display: none;">
                                 <label class="form-label" for="soDienThoai">Số điện thoại</label>
                                 <div class="input-group input-group-merge">
                                     <input type="text" id="soDienThoai" class="form-control checkStatus"/>
@@ -181,7 +181,7 @@
                                 />
                             </div>
                             <button onclick="clearFormKhachHang()" class="btn btn-primary checkStatus">KH mới</button>
-                            <button class="btn btn-primary checkStatus" onclick="khachHangLaNguoiNhan()">KH là người
+                            <button class="btn btn-primary checkStatus" style="display: none;" onclick="khachHangLaNguoiNhan()">KH là người
                                 nhận
                             </button>
                             <button class="btn btn-primary checkStatus" onclick="openModalKhachHang()"
@@ -1347,9 +1347,16 @@
     const getDanhSachSanPham = () => {
         const tableProduct = document.getElementById("listProduct");
         let html = '';
+        let listId = [];
+        $('#listHoaDonSanPham').find('tr').each(function () {
+            let product = JSON.parse($(this).attr('item'));
+            listId.push(product.chiTietSanPham.id)
+        });
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/ban-hang-tai-quay/rest/get-all-san-pham",
+            contentType: "application/json",
+            data: JSON.stringify(listId),
             success: function (response) {
                 let index = 0;
                 response.forEach(el => {
@@ -1479,7 +1486,7 @@
                     getAllHoaDon();
                 },
                 error: function (xhr, status, error) {
-                    console.log(xhr.responseText);
+                    alert(xhr.responseJSON.message)
                 }
             });
             return true

@@ -1,8 +1,9 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.dto.FileUploadDTO;
 import com.example.demo.models.dto.PaymentRequest;
 import com.example.demo.services.impl.VNPayService;
-import com.example.demo.util.ConfigVnpay;
+import com.example.demo.util.ConvertImage;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,9 @@ public class AjaxController {
 
     @Autowired
     private VNPayService service;
+
+    @Autowired
+    private ConvertImage convertImage;
 
     @PostMapping("/payment")
     public String payment(@RequestBody PaymentRequest request) throws UnsupportedEncodingException {
@@ -33,5 +37,10 @@ public class AjaxController {
         String totalPrice = request.getParameter("vnp_Amount");
 //        return paymentStatus == 1 ? "ordersuccess" : "orderfail";
         return new PaymentRequest(Integer.parseInt(totalPrice), orderInfo, paymentStatus);
+    }
+
+    @PostMapping("/test/upload")
+    public String test(@RequestBody FileUploadDTO fileUploadDTO) {
+        return convertImage.convertImageFromBase64(fileUploadDTO.getFile());
     }
 }
