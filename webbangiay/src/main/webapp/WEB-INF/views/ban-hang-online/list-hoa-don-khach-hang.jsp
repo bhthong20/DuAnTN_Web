@@ -124,6 +124,10 @@
                                 class="shopee-sort-by-options__option">
                             <span aria-hidden="true">Đã hủy</span></button>
                         <button aria-label=""
+                                onclick="orderBy(this, 6)" aria-pressed="false"
+                                class="shopee-sort-by-options__option">
+                            <span aria-hidden="true">Vận chuyển hoàn tất</span></button>
+                        <button aria-label=""
                                 onclick="orderBy(this, 10)" aria-pressed="false"
                                 class="shopee-sort-by-options__option">
                             <span aria-hidden="true">Đã hoàn tất</span></button>
@@ -234,7 +238,7 @@
                 <div class="w-100 text-center"><h4>Không có hóa đơn 🤷‍♂️🤷‍♀️</h4></div>
             `
         }
-        console.log(html)
+
         $('#listHoaDon').html(html)
     }
 
