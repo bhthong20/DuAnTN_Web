@@ -175,8 +175,8 @@
                                 <input type="text" id="sdtKhachHang" disabled class="form-control phone-mask"
                                 />
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="ngaySinh">Ngày sinh</label>
+                            <div class="mb-3"Ư>
+                                <label class="form-label" for="ngaySinh" >Ngày sinh</label>
                                 <input type="date" id="ngaySinh" disabled class="form-control phone-mask"
                                 />
                             </div>
@@ -190,9 +190,6 @@
                         </div>
                     </div>
                     <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Thông tin Khuyến mại</h5>
-                        </div>
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="form-label" for="khuyenMai">Khuyến mại</label>
@@ -629,26 +626,6 @@
 </div>
 </div>
 </body>
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-<script src="../assets/vendor/js/menu.js"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-
-<!-- Main JS -->
-<script src="../assets/js/main.js"></script>
-
-<!-- Page JS -->
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<%--Qr Code--%>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 <script
         src="https://unpkg.com/html5-qrcode">
 </script>
@@ -935,13 +912,13 @@
     const validateForm = () => {
         let check = true;
         // Kiểm tra trường tenNguoiNhan
-        if (!tenNguoiNhan.val()) {
-            check = false;
-        }
-        // Kiểm tra trường soDienThoai
-        if (!soDienThoai.val()) {
-            check = false;
-        }
+        // if (!tenNguoiNhan.val()) {
+        //     check = false;
+        // }
+        // // Kiểm tra trường soDienThoai
+        // if (!soDienThoai.val()) {
+        //     check = false;
+        // }
         // Kiểm tra trường ghiChu
         if (!ghiChu.val()) {
             check = false;

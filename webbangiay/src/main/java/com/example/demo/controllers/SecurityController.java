@@ -60,4 +60,34 @@ public class SecurityController {
         }
         return "redirect:/login";
     }
+    @GetMapping("/forgot-password")
+    public String forgotPasswordForm(Model model) {
+        model.addAttribute("userLogin", new UserLogin());
+        return "security/forgot-password";
+    }
+
+    @PostMapping("/forgot-password")
+    public String forgotPasswordSubmit(@ModelAttribute("email") String email, BindingResult bindingResult, Model model) {
+        // Thực hiện xác thực thông tin người dùng, ví dụ: email hoặc tên người dùng
+        // Nếu thông tin không hợp lệ, chuyển hướng trở lại form quên mật khẩu
+        if (bindingResult.hasErrors()) {
+            return "security/forgot-password";
+        }
+
+        // Gửi email reset mật khẩu đến người dùng
+        boolean emailSent = service.sendResetPasswordEmail(email);
+
+        if (!emailSent) {
+            // Xử lý nếu gửi email thất bại, ví dụ: hiển thị thông báo lỗi cho người dùng
+            model.addAttribute("error", "Failed to send reset password email. Please try again later.");
+            return "security/forgot-password";
+        }
+
+        // Hiển thị thông báo cho người dùng rằng email đã được gửi thành công
+        model.addAttribute("success", "Reset password email has been sent. Please check your email inbox.");
+
+        // Chuyển hướng người dùng đến trang chủ hoặc trang thông báo thành công khác
+        return "redirect:/login";
+    }
+
 }

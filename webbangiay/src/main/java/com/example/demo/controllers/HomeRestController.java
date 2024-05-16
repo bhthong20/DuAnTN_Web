@@ -8,6 +8,7 @@ import com.example.demo.services.HomeService;
 import com.example.demo.services.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +40,12 @@ public class HomeRestController {
         sanPhamDetail.setChiTietSanPham(chiTietSanPhamService.findChiTietSanPhamBySanPham(sanPhamDetail.getSanPham()));
         sanPhamDetail.setSoLuongDaBan(service.getSoLuongDaBan(UUID.fromString(id)));
         return sanPhamDetail;
+    }
+
+    @GetMapping("/all")
+    public Page<HomeQuangBaRespose> getAllSanPhamQuangBa(Pageable pageable) {
+        // Assuming you want to fetch all products without any filtering
+        // You can modify this method if needed
+        return service.getAllSanPhamQuangBan(pageable);
     }
 }

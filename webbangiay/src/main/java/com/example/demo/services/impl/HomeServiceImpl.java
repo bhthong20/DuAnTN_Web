@@ -45,4 +45,11 @@ public class HomeServiceImpl implements HomeService {
             return null;
         }
     }
+
+    @Override
+    public Page<HomeQuangBaRespose> getAllSanPhamQuangBan(Pageable pageable) {
+        // Assuming you want to fetch all products without any filtering
+        // You can modify this method if needed
+        return sanPhamRepository.getAllSanPhamQuangBa(pageable); // Modify this according to your repository method
+    }
 }

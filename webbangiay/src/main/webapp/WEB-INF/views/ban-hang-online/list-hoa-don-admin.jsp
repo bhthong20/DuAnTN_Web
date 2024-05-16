@@ -68,14 +68,13 @@
                                     <option selected disabled>Trạng thái</option>
                                     <option value=0>Chờ xác nhận</option>
                                     <option value=1>Đã xác nhận</option>
-                                    <option value=2>Đã thanh toán</option>
+<%--                                    <option value=2>Đã thanh toán</option>--%>
                                     <option value="3">Chờ thanh toán</option>
-                                    <option value="4">Chờ vẫn chuyển</option>
+<%--                                    <option value="4">Chờ vẫn chuyển</option>--%>
                                     <option value="5">Đang vận chuyển</option>
                                     <option value="6">Vận chuyển hoàn tất</option>
-                                    <option value="7">Giao trễ</option>
                                     <option value="8">Đã hủy</option>
-                                    <option value="9">Mới tạo</option>
+<%--                                    <option value="9">Mới tạo</option>--%>
                                     <option value="10">Hoàn tất</option>
                                 </select>
                             </div>

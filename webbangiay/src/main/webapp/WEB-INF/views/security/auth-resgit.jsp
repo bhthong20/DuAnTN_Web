@@ -127,8 +127,8 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Adventure starts here 🚀</h4>
-                    <p class="mb-4">Make your app management easy and fun!</p>
+                    <h4 class="mb-2">Cuộc phiêu lưu bắt đầu từ đây 🚀</h4>
+                    <p class="mb-4">Làm cho việc mua sắm của bạn trở nên dễ dàng và thú vị!</p>
 
                     <form:form id="formAuthentication" class="mb-3" modelAttribute="khachHang" action="/auth-register" method="POST">
                         <div class="mb-3">

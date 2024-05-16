@@ -270,7 +270,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a id="updateBtnt" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Update</a>
+                <a id="updateBtnt" type="button" style="color:white" class="btn btn-secondary" data-bs-dismiss="modal">Update</a>
             </div>
         </div>
     </div>

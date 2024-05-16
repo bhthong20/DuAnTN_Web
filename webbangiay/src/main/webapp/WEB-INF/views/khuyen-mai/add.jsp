@@ -66,14 +66,16 @@
                                 <span id="tenError" style="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <input id="ngayBatDau" type="datetime-local" class="form-control" placeholder="" path="sanPham"/>
+                                <input id="ngayBatDau" type="datetime-local" class="form-control" placeholder=""
+                                       path="sanPham"/>
                                 <label for="ngayBatDau">Ngày bắt đầu:</label>
-                                <span  id="ngayBatDauError" style="color: red"></span>
+                                <span id="ngayBatDauError" style="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <input id="ngayKetThuc" type="datetime-local" class="form-control" placeholder="" path="sanPham"/>
+                                <input id="ngayKetThuc" type="datetime-local" class="form-control" placeholder=""
+                                       path="sanPham"/>
                                 <label for="ngayKetThuc">Ngày kết thúc:</label>
-                                <span  id="ngayKetThucError" style="color: red"></span>
+                                <span id="ngayKetThucError" style="color: red"></span>
                             </div>
                         </div>
 
@@ -102,19 +104,21 @@
                                 </div>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <input id="giaTriGiam" type="number" class="form-control" placeholder="" path="sanPham"/>
+                                <input id="giaTriGiam" type="number" class="form-control" placeholder=""
+                                       path="sanPham"/>
                                 <label for="giaTriGiam">Giá trị giảm:</label>
-                                <span  id="giaTriGiamError" style="color: red"></span>
+                                <span id="giaTriGiamError" style="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <input id="dieuKienGia" type="number" class="form-control" placeholder="" path="sanPham"/>
+                                <input id="dieuKienGia" type="number" class="form-control" placeholder=""
+                                       path="sanPham"/>
                                 <label for="giaTriGiam">Điều kiện giảm:</label>
-                                <span  id="dieuKienGiaError" style="color: red"></span>
+                                <span id="dieuKienGiaError" style="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
                                 <textarea id="moTa" class="form-control" path="moTa"></textarea>
                                 <label for="moTa" path="moTa">Mô tả:</label>
-                                <span  id="moTaError" style="color: red"></span>
+                                <span id="moTaError" style="color: red"></span>
                             </div>
                         </div>
                     </div>
@@ -134,7 +138,7 @@
             </div>
         </div>
     </div>
-
+</div>
 </body>
 
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
@@ -303,7 +307,7 @@
             if (kt) {
                 $.ajax({
                     type: "POST",
-                    url: "/khuyen-mai/update/"+id,
+                    url: "/khuyen-mai/update/" + id,
                     contentType: "application/json",
                     data: JSON.stringify(getValue()),
                     success: function (response) {

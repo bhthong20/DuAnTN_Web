@@ -68,7 +68,6 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
-    <script src="../js/menu.js"></script>
 </head>
 
 <body>
@@ -147,9 +146,7 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script src="../../../js/select-2.js"></script>
+
 <script>
     var url = window.location.href;
     var domain = new URL(url).pathname;

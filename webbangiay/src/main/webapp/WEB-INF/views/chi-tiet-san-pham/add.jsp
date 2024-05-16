@@ -104,43 +104,46 @@
                                 <label for="hinhAnh" path="hinhAnh">Hình ảnh quảng bá:</label>
                             </div>
                             <div align="center" class="row">
-                                    <div class="col-4">
-                                        <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
-                                               for="hinhAnh1">
-                                            <img id="preview-anh-hinhAnh1" class="preview-image" src="" alt=""
-                                                 width="100%" height="100%"
-                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                        </label>
-                                        <div style="display: none">
-                                            <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
-                                                   id="hinhAnh1">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
-                                               for="hinhAnh2">
-                                            <img id="preview-anh-hinhAnh2" class="preview-image" src="" alt=""
-                                                 width="100%" height="100%"
-                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                        </label>
-                                        <div style="display: none">
-                                            <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
-                                                   id="hinhAnh2">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
-                                               for="hinhAnh3">
-                                            <img id="preview-anh-hinhAnh3" class="preview-image" src="" alt=""
-                                                 width="100%" height="100%"
-                                                 style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                        </label>
-                                        <div style="display: none">
-                                            <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
-                                                   id="hinhAnh3">
-                                        </div>
+                                <div class="col-4">
+                                    <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                           for="hinhAnh1">
+                                        <img id="preview-anh-hinhAnh1" class="preview-image" src="" alt=""
+                                             width="100%" height="100%"
+                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                    </label>
+                                    <div style="display: none">
+                                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s"
+                                               accept="image/jpeg, image/png"
+                                               id="hinhAnh1">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                           for="hinhAnh2">
+                                        <img id="preview-anh-hinhAnh2" class="preview-image" src="" alt=""
+                                             width="100%" height="100%"
+                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                    </label>
+                                    <div style="display: none">
+                                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s"
+                                               accept="image/jpeg, image/png"
+                                               id="hinhAnh2">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                           for="hinhAnh3">
+                                        <img id="preview-anh-hinhAnh3" class="preview-image" src="" alt=""
+                                             width="100%" height="100%"
+                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                    </label>
+                                    <div style="display: none">
+                                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s"
+                                               accept="image/jpeg, image/png"
+                                               id="hinhAnh3">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -213,11 +216,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá tiền</th>
+                            <th>Sản phẩm</th>
                             <th>Chất liệu</th>
-                            <th>Kích thước</th>
+                            <th>Size</th>
                             <th>Màu sắc</th>
+                            <th>Giá tiền</th>
                             <th>Số lượng</th>
                             <th>Hình ảnh</th>
                             <th>Mô tả</th>
@@ -537,6 +540,7 @@
             return false;
         }
     }
+
     function themNhanhKichThuoc() {
         let text = "Bạn chắc chắn muốn thêm nhanh kích thước không?";
         let kt = confirm(text);
@@ -648,6 +652,13 @@
 
         downloadLink.click();
     }
+    function validateImage(input) {
+        if (input.files.length === 0) {
+            alert(`không được để trống`);
+            return false;
+        }
+        return true;
+    }
 
     function validateSanPham(sanPham) {
         if (!sanPham.tenSanPham) {
@@ -670,6 +681,8 @@
             alert("Chi tiết sản phẩm không được để trống")
             return false;
         }
+
+
         let check = true;
         sanPham.chiTietSanPhamDtos.forEach(el => {
             if (!el.soLuongTon) {
@@ -704,6 +717,10 @@
         var anh1 = document.getElementById('hinhAnh1');
         var anh2 = document.getElementById('hinhAnh2');
         var anh3 = document.getElementById('hinhAnh3');
+
+        if (!validateImage(anh1)) return false;
+        if (!validateImage(anh2)) return false;
+        if (!validateImage(anh3)) return false;
 
         if ((anh1.files && anh1.files[0])) {
             await convertInputToBase64(anh1).then(response => {
@@ -755,6 +772,7 @@
                 }
             })
         };
+
         if (!validateSanPham(sanPham)) {
             return
         }
@@ -923,6 +941,7 @@
         updateColorTable();
     }
 
+    //hiển thị hình ảnh lên ctsp
     function genComboboxImage(index, anh1, anh2, anh3) {
         var htmlSelect = `
                 <div align="center" style="
@@ -985,7 +1004,7 @@
                 product.image ? product.image.anh2 : "",
                 product.image ? product.image.anh3 : "") + '</td>' +
                 '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
-                '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" ' + (product.status ? `checked`: ``) + ' /></div></td>' +
+                '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" ' + (product.status ? `checked` : ``) + ' /></div></td>' +
                 '</tr>';
         });
 
@@ -1036,6 +1055,7 @@
         }
     }
 
+    //lấy giá trị input
     function getMoney() {
         var inputs = document.querySelectorAll('.productMoney');
         inputs.forEach(function (input) {
