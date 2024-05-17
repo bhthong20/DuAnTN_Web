@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .requestMatchers("/forgot-password").permitAll()
                 .requestMatchers("/403").permitAll()
                 .requestMatchers("/js").permitAll()
-//                .requestMatchers("/**").permitAll()
+                .requestMatchers("/**").permitAll()
                 .requestMatchers("/user-infor").permitAll()
                 .requestMatchers("/ban-hang-tai-quay/**").hasAnyRole(RolesConstant.ROLE_ADMIN)
                 .requestMatchers("/thong-ke/**").hasAnyRole(RolesConstant.ROLE_ADMIN)

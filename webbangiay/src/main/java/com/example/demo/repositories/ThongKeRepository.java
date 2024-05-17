@@ -11,7 +11,7 @@ public interface ThongKeRepository extends HoaDonRepository {
 
     @Query("SELECT hdct FROM HoaDonChiTiet hdct " +
             "JOIN hdct.hoaDon hd " +
-            "WHERE (hd.trangThai = 10 AND hd.trangThai = 6) AND hdct.trangThai = 0")
+            "WHERE (hd.trangThai = 10 OR hd.trangThai = 6) AND hdct.trangThai = 0")
     List<HoaDonChiTiet> getAllHoaDonChiTiet();
 
 }
