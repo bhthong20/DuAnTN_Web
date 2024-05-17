@@ -141,7 +141,10 @@
                     <td>${kh.matKhau}</td>
                     <td>${kh.ngayTao}</td>
                     <td>${kh.ngayCapNhat}</td>
-                    <td>${kh.trangThai}</td>
+                    <td>
+                        <c:if test="${kh.trangThai == 0}">Hoạt động</c:if>
+                        <c:if test="${kh.trangThai == 1}">Không hoạt động</c:if>
+                    </td>
                     <td colspan="2">
                         <a href="/khach-hang/delete/${kh.id}" class="btn btn-success"
                            onclick="return myFunction2()">Delete</a>
