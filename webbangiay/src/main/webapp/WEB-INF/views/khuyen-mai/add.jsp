@@ -12,37 +12,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="../../images/favicon.png"/>
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet"
     />
-
-    <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
-
-    <!-- Core CSS -->
     <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css"/>
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css"/>
     <link rel="stylesheet" href="../assets/css/demo.css"/>
-
-    <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
-
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
 </head>
 </head>
 
@@ -104,13 +87,13 @@
                                 </div>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <input id="giaTriGiam" type="number" class="form-control" placeholder=""
+                                <input id="giaTriGiam" type="text" class="form-control" placeholder=""
                                        path="sanPham"/>
                                 <label for="giaTriGiam">Giá trị giảm:</label>
                                 <span id="giaTriGiamError" style="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
-                                <input id="dieuKienGia" type="number" class="form-control" placeholder=""
+                                <input id="dieuKienGia" type="text" class="form-control" placeholder=""
                                        path="sanPham"/>
                                 <label for="giaTriGiam">Điều kiện giảm:</label>
                                 <span id="dieuKienGiaError" style="color: red"></span>
@@ -169,14 +152,14 @@
                 type: "GET",
                 url: "/khuyen-mai/detail?id=" + id,
                 success: function (response) {
-                    ma.val(response.ma)
-                    ten.val(response.ten)
+                    ma.val(response.ma);
+                    ten.val(response.ten);
                     ngayBatDau.val(new Date(response.ngayBatDau).toISOString().slice(0, 16));
                     ngayKetThuc.val(new Date(response.ngayKetThuc).toISOString().slice(0, 16));
                     response.hinhThucGiamGia === 1 ? giamTheoPhamTram.attr("checked", true) : giamTheoTien.attr("checked", true);
-                    giaTriGiam.val(response.giaTriGiam);
+                    giaTriGiam.val(formatNumber(response.giaTriGiam));
                     moTa.val(response.moTa);
-                    dieuKienGia.val(response.dieuKienGia);
+                    dieuKienGia.val(formatNumber(response.dieuKienGia));
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
@@ -187,6 +170,12 @@
             $('#bttUpdate').hide();
         }
     };
+
+    // Hàm formatNumber để định dạng số với dấu phẩy
+    function formatNumber(value) {
+        return parseFloat(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
 
     const ma = $('#ma');
     const ten = $('#ten');
@@ -205,7 +194,6 @@
     const giaTriGiamError = $('#giaTriGiamError');
     const moTaError = $('#moTaError');
     const dieuKienGiaError = $('#dieuKienGiaError');
-
     const validate = () => {
         let isValid = true;
 
@@ -216,27 +204,27 @@
         moTaError.text('');
         dieuKienGiaError.text('');
 
-        if (ten.val() === '') {
+        if (ten.val().trim() === '') {
             isValid = false;
             tenError.text('Trường Tên không được bỏ trống');
         }
-        if (ngayBatDau.val() === '') {
+        if (ngayBatDau.val().trim() === '') {
             isValid = false;
             ngayBatDauError.text('Trường Ngày bắt đầu không được bỏ trống');
         }
-        if (ngayKetThuc.val() === '') {
+        if (ngayKetThuc.val().trim() === '') {
             isValid = false;
             ngayKetThucError.text('Trường Ngày kết thúc không được bỏ trống');
         }
-        if (giaTriGiam.val() === '') {
+        if (removeFormat(giaTriGiam.val()).trim() === '') {
             isValid = false;
             giaTriGiamError.text('Trường Giá trị giảm không được bỏ trống');
         }
-        if (dieuKienGia.val() === '') {
+        if (removeFormat(dieuKienGia.val()).trim() === '') {
             isValid = false;
             dieuKienGiaError.text('Điều kiện giá không được bỏ trống');
         }
-        if (moTa.val() === '') {
+        if (moTa.val().trim() === '') {
             isValid = false;
             moTaError.text('Trường Mô tả không được bỏ trống');
         }
@@ -250,7 +238,7 @@
 
         // Kiểm tra giá trị giảm khi giamTheoPhanTram được chọn
         if (giamTheoPhamTram.is(':checked')) {
-            const giaTriGiamValue = parseFloat(giaTriGiam.val());
+            const giaTriGiamValue = parseFloat(removeFormat(giaTriGiam.val()));
             if (giaTriGiamValue < 0 || giaTriGiamValue > 100 || isNaN(giaTriGiamValue)) {
                 isValid = false;
                 giaTriGiamError.text('Giá trị giảm phải nằm trong khoảng từ 0 đến 100');
@@ -269,11 +257,36 @@
             ngayKetThuc: new Date(ngayKetThuc.val()).getTime(),
             trangThai: 1,
             hinhThucGiamGia: giamTheoPhamTram.is(':checked') ? 1 : 0,
-            giaTriGiam: giaTriGiam.val(),
-            dieuKienGia: dieuKienGia.val(),
+            giaTriGiam: removeFormat(giaTriGiam.val()),
+            dieuKienGia: removeFormat(dieuKienGia.val()),
             moTa: moTa.val(),
         }
     }
+
+    // Hàm removeFormat để loại bỏ dấu phẩy khỏi giá trị
+    function removeFormat(value) {
+        return value.replace(/,/g, '');
+    }
+
+    $(document).ready(function () {
+        $('#giaTriGiam').on('input', function () {
+            let value = removeFormat($(this).val());
+            if (!isNaN(value) && value !== '') {
+                $(this).val(formatNumber(value));
+            } else {
+                $(this).val('');
+            }
+        });
+
+        $('#dieuKienGia').on('input', function () {
+            let value = removeFormat($(this).val());
+            if (!isNaN(value) && value !== '') {
+                $(this).val(formatNumber(value));
+            } else {
+                $(this).val('');
+            }
+        });
+    });
 
     const createKhuyenMai = () => {
         if (validate()) {
@@ -326,24 +339,5 @@
             }
         }
     }
-
 </script>
-<!-- build:js assets/vendor/js/core.js -->
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-<script src="../assets/vendor/js/menu.js"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-
-<!-- Main JS -->
-<script src="../assets/js/main.js"></script>
-
-<!-- Page JS -->
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 </html>

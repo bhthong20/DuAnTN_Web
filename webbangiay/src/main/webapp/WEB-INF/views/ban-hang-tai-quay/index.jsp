@@ -114,18 +114,40 @@
                                 ></textarea>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Hình thức thanh toán</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioTienMat" value="tienMat">
+                                    <label class="form-check-label" for="radioTienMat">
+                                        Tiền mặt
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioChuyenKhoan" value="chuyenKhoan">
+                                    <label class="form-check-label" for="radioChuyenKhoan">
+                                        Chuyển khoản
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioCaHai" value="chuyenKhoan">
+                                    <label class="form-check-label" for="radioChuyenKhoan">
+                                       Cả hai
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
                                 <label class="form-label" for="tienMat">Tiền mặt</label>
-                                <input type="number" id="tienMat" class="form-control checkStatus phone-mask"
+                                <input type="text" id="tienMat" class="form-control number-input checkStatus phone-mask"
                                 />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="chuyenKhoan">Chuyển khoản</label>
-                                <input type="number" id="chuyenKhoan" class="form-control checkStatus phone-mask"
+                                <input type="text" id="chuyenKhoan" class="form-control number-input checkStatus phone-mask"
                                 />
                             </div>
                             <div class="mb-4">
                                 <label class="form-label" for="tongTien">Tổng tiền</label>
-                                <input type="number" disabled id="tongTien" class="form-control phone-mask"
+                                <input type="text" disabled id="tongTien" class="form-control phone-mask"
                                 />
                             </div>
                             <button onclick="clearFormHoaDon()" class="btn btn-primary checkStatus">Clear</button>
@@ -135,7 +157,9 @@
                             </button>
                             <button onclick="tuChoiHoaDon()" class="btn btn-primary checkStatus">Từ chối
                             </button>
-                            <button type="button" onclick="exportHTMLtoPDF()" class="btn btn-primary btnExport">In hóa đơn</button>
+                            <button type="button" onclick="exportHTMLtoPDF()" class="btn btn-primary btnExport">In hóa
+                                đơn
+                            </button>
 
                         </div>
                     </div>
@@ -175,13 +199,14 @@
                                 <input type="text" id="sdtKhachHang" disabled class="form-control phone-mask"
                                 />
                             </div>
-                            <div class="mb-3"Ư>
-                                <label class="form-label" for="ngaySinh" >Ngày sinh</label>
+                            <div class="mb-3" Ư>
+                                <label class="form-label" for="ngaySinh">Ngày sinh</label>
                                 <input type="date" id="ngaySinh" disabled class="form-control phone-mask"
                                 />
                             </div>
                             <button onclick="clearFormKhachHang()" class="btn btn-primary checkStatus">KH mới</button>
-                            <button class="btn btn-primary checkStatus" style="display: none;" onclick="khachHangLaNguoiNhan()">KH là người
+                            <button class="btn btn-primary checkStatus" style="display: none;"
+                                    onclick="khachHangLaNguoiNhan()">KH là người
                                 nhận
                             </button>
                             <button class="btn btn-primary checkStatus" onclick="openModalKhachHang()"
@@ -209,7 +234,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="tienGiam">Tiền được giảm</label>
-                                <input type="number" disabled id="tienGiam" class="form-control phone-mask"
+                                <input type="text" disabled id="tienGiam" class="form-control phone-mask"
                                 />
                             </div>
                         </div>
@@ -391,15 +416,15 @@
                                     </c:forEach>
                                 </select>
                             </div>
-<%--                            <div class="mb-3">--%>
-<%--                                <label class="form-label" for="hinhAnhSearch">Hình ảnh</label>--%>
-<%--                                <select class="form-select" id="hinhAnhSearch">--%>
-<%--                                    <option selected value="">Lựa chọn</option>--%>
-<%--                                    <c:forEach items="${listHA}" var="item">--%>
-<%--                                        <option value="${item.id}">${item.ten}</option>--%>
-<%--                                    </c:forEach>--%>
-<%--                                </select>--%>
-<%--                            </div>--%>
+                            <%--                            <div class="mb-3">--%>
+                            <%--                                <label class="form-label" for="hinhAnhSearch">Hình ảnh</label>--%>
+                            <%--                                <select class="form-select" id="hinhAnhSearch">--%>
+                            <%--                                    <option selected value="">Lựa chọn</option>--%>
+                            <%--                                    <c:forEach items="${listHA}" var="item">--%>
+                            <%--                                        <option value="${item.id}">${item.ten}</option>--%>
+                            <%--                                    </c:forEach>--%>
+                            <%--                                </select>--%>
+                            <%--                            </div>--%>
                         </div>
                     </div>
                     <div class="row">
@@ -634,6 +659,60 @@
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const radioTienMat = document.getElementById('radioTienMat');
+        const radioCahai = document.getElementById('radioCaHai');
+        const radioChuyenKhoan = document.getElementById('radioChuyenKhoan');
+        const inputTienMat = document.getElementById('tienMat');
+        const inputChuyenKhoan = document.getElementById('chuyenKhoan');
+
+        // Add event listeners to the radio buttons
+        radioTienMat.addEventListener('change', function () {
+            if (radioTienMat.checked) {
+                inputTienMat.disabled = false;
+                inputChuyenKhoan.disabled = true;
+                inputChuyenKhoan.value = 0;
+            }
+        });
+
+        radioChuyenKhoan.addEventListener('change', function () {
+            if (radioChuyenKhoan.checked) {
+                inputChuyenKhoan.disabled = false;
+                inputTienMat.disabled = true;
+                inputTienMat.value = 0;
+            }
+        });
+
+        radioCahai.addEventListener('change', function () {
+            if (radioCahai.checked) {
+                inputChuyenKhoan.disabled = false;
+                inputTienMat.disabled = false;
+            }
+        });
+
+        // Ensure the inputs are disabled and values are 0 by default
+        inputTienMat.value = 0;
+        inputChuyenKhoan.value = 0;
+    });
+
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function removeCommas(number) {
+        return number.replace(/,/g, '');
+    }
+    document.querySelectorAll('.number-input').forEach(input => {
+        input.addEventListener('input', (event) => {
+            let value = event.target.value;
+            // Remove all non-digit characters
+            value = value.replace(/\D/g, '');
+            // Format the value with commas
+            value = formatNumberWithCommas(value);
+            event.target.value = value;
+        });
+    });
+
     function exportHTMLtoPDF() {
         window.scrollTo(0, 0);
         fillExportHoaDon();
@@ -799,14 +878,14 @@
     }
 
     const getFormHoaDon = () => {
-        tongTien.val(fillTongTien());
+        tongTien.val(formatNumberWithCommas(fillTongTien()));
         hoaDon.tenNguoiNhan = tenNguoiNhan.val();
         hoaDon.sdt = soDienThoai.val();
-        hoaDon.tienMat = tienMat.val();
-        hoaDon.chuyenKhoan = chuyenKhoan.val();
-        hoaDon.tongTien = tongTien.val();
+        hoaDon.tienMat = removeCommas(tienMat.val());
+        hoaDon.chuyenKhoan = removeCommas(chuyenKhoan.val());
+        hoaDon.tongTien = removeCommas(tongTien.val());
         hoaDon.ghiChu = ghiChu.val();
-        hoaDon.tienGiam = tienGiam.val();
+        hoaDon.tienGiam = removeCommas(tienGiam.val());
     }
 
     const getFormKhachHang = () => {
@@ -872,7 +951,7 @@
                     <td>` + product.chiTietSanPham.mauSac.ten + `</td>
                     <td>` + product.chiTietSanPham.kichThuoc.size + `</td>
                     <td>` + product.chiTietSanPham.chatLieu.tenChatLieu + `</td>
-                    <td><strong>` +  product.chiTietSanPham.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
+                    <td><strong>` + product.chiTietSanPham.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
                     <td><strong>` + lastInputValue + `</strong></td>
                 </tr>
             `
@@ -932,7 +1011,7 @@
             check = false;
         }
         // Kiểm tra trường tongTien
-        if (!tongTien.val()) {
+        if (!removeCommas(tongTien.val())) {
             check = false;
         }
         if (!khachHang.id) {
@@ -963,11 +1042,11 @@
             return false;
         }
 
-        if (parseInt(tienMat.val()) + parseInt(chuyenKhoan.val()) < parseInt(tongTien.val())) {
+        if (parseInt(removeCommas(tienMat.val())) + parseInt(removeCommas(chuyenKhoan.val())) < parseInt(removeCommas(tongTien.val()))) {
             alert("Thiếu tiền");
             return false;
         }
-        if (parseInt(tienMat.val()) + parseInt(chuyenKhoan.val()) > parseInt(tongTien.val())) {
+        if (parseInt(removeCommas(tienMat.val())) + parseInt(removeCommas(chuyenKhoan.val())) > parseInt(removeCommas(tongTien.val()))) {
             alert("Thừa tiền");
             return false;
         }
@@ -1156,7 +1235,7 @@
         khuyenMaiSelect.hinhThucGiamGia = parseInt(hinhThucGiam);
         khuyenMaiSelect.dieuKienGia = parseInt(dieuKienGia);
 
-        tongTien.val(fillTongTien());
+        tongTien.val(formatNumberWithCommas(fillTongTien()));
     });
 
     const fillTongTien = () => {
@@ -1171,10 +1250,10 @@
         if (khuyenMaiSelect.id) {
             if (tongTien >= khuyenMaiSelect.dieuKienGia) {
                 if (khuyenMaiSelect.hinhThucGiamGia == 1) {
-                    tienGiam.val(tongTien * (khuyenMaiSelect.giaTriGiam) / 100);
+                    tienGiam.val(formatNumberWithCommas(tongTien * (khuyenMaiSelect.giaTriGiam) / 100));
                     tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
                 } else {
-                    tienGiam.val(khuyenMaiSelect.giaTriGiam);
+                    tienGiam.val(formatNumberWithCommas(khuyenMaiSelect.giaTriGiam));
                     tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
                     if (tongTien < 0) {
                         tongTien = 0;
@@ -1202,7 +1281,7 @@
         tienMat.val(hoaDon.tienMat);
         chuyenKhoan.val(hoaDon.chuyenKhoan);
         khuyenMai.val(hoaDon.khuyenMai ? hoaDon.khuyenMai.id : "")
-        tongTien.val(fillTongTien());
+        tongTien.val(formatNumberWithCommas(fillTongTien()));
     }
 
     const khachHangLaNguoiNhan = () => {
@@ -1295,7 +1374,7 @@
                                 <td>` + (el.chiTietSanPham.kichThuoc ? el.chiTietSanPham.kichThuoc.size : "") + `</td>
                                 <td>` + (el.chiTietSanPham.chatLieu ? el.chiTietSanPham.chatLieu.tenChatLieu : "") + `</td>
                                 <td>` + el.chiTietSanPham.soLuongTon + `</td>
-                                <td><strong>` + el.chiTietSanPham.donGia + `</strong></td>
+                                <td><strong>` + el.chiTietSanPham.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
                                 <td colspan="2">
                                     <input class="form-control" disabled="true" type="number" onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" value="` + el.soLuong + `" />
                                 </td>
@@ -1304,7 +1383,7 @@
                     })
                     tableProduct.innerHTML = html;
 
-                    tongTien.val(fillTongTien());
+                    tongTien.val(formatNumberWithCommas(fillTongTien()));
 
                     if (hoaDon.trangThai && (hoaDon.trangThai == 2 || hoaDon.trangThai == 8)) {
                         $(".checkStatus").attr('disabled', 'disabled')
@@ -1351,7 +1430,7 @@
                                 <td>` + (el.kichThuoc ? el.kichThuoc.size : "") + `</td>
                                 <td>` + (el.chatLieu ? el.chatLieu.tenChatLieu : "") + `</td>
                                 <td>` + el.soLuongTon + `</td>
-                                <td><strong>` + el.donGia + `</strong></td>
+                                <td><strong>` + el.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
                                 <td colspan="2">
                                     <input class="form-control" type="number" onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" value="1" />
                                 </td>
@@ -1436,10 +1515,10 @@
         await findHoaDonById();
         if (id) {
             if (hoaDon.tienGiam) {
-                tienGiam.val(hoaDon.tienGiam);
+                tienGiam.val(formatNumberWithCommas(hoaDon.tienGiam));
             }
             if (hoaDon.tongTien != undefined) {
-                tongTien.val(hoaDon.tongTien);
+                tongTien.val(formatNumberWithCommas(hoaDon.tongTien));
             }
         }
 
