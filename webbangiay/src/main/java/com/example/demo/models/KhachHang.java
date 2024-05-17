@@ -54,7 +54,6 @@ public class KhachHang {
     @Column(name = "sdt")
     private String sdt;
 
-    @NotNull(message = "Không để trống thông tin")
     @Column(name = "ngay_sinh")
     private Date ngaySinh;
 
@@ -75,5 +74,8 @@ public class KhachHang {
 
     @Column(name = "trang_thai")
     private String trangThai;
+
+    @Column(name = "reset_code")
+    private String resetCode;
 
 }

@@ -170,11 +170,11 @@
                                 <div data-i18n="Under Maintenance">Phân loại</div>
                             </a>
                         </li>
-                        <li class="menu-item">
-                            <a href="/hinh-anh/hien-thi" class="menu-link">
-                                <div data-i18n="Under Maintenance">Hình ảnh</div>
-                            </a>
-                        </li>
+<%--                        <li class="menu-item">--%>
+<%--                            <a href="/hinh-anh/hien-thi" class="menu-link">--%>
+<%--                                <div data-i18n="Under Maintenance">Hình ảnh</div>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
                         <li class="menu-item">
                             <a href="/thuong-hieu/hien-thi" class="menu-link">
                                 <div data-i18n="Under Maintenance">Thương hiệu</div>
@@ -190,12 +190,11 @@
                         <div data-i18n="Basic">Quản lý khuyến mại</div>
                     </a>
                 </li>
-
                 <!-- Misc -->
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
                 <li class="menu-item">
                     <a
-                            href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                            href=""
                             target="_blank"
                             class="menu-link"
                     >
@@ -205,7 +204,7 @@
                 </li>
                 <li class="menu-item">
                     <a
-                            href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                            href=""
                             target="_blank"
                             class="menu-link"
                     >
@@ -335,34 +334,6 @@
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                        <div class="mb-2 mb-md-0">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear());
-
-                            </script>
-                            , made with ❤️ by
-                            <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                        </div>
-                        <div>
-                            <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                Themes</a>
-
-                            <a
-                                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Documentation</a
-                            >
-
-                            <a
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Support</a
-                            >
-                        </div>
                     </div>
                 </footer>
                 <!-- / Footer -->

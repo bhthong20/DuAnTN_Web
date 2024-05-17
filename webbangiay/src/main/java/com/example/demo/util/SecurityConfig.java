@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .requestMatchers("/WEB-INF/**").permitAll()
                 .requestMatchers("/auth-register").permitAll()
                 .requestMatchers("/forgot-password").permitAll()
+                .requestMatchers("/reset-password").permitAll()
                 .requestMatchers("/403").permitAll()
                 .requestMatchers("/js").permitAll()
 //                .requestMatchers("/**").permitAll()
