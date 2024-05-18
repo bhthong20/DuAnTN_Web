@@ -17,6 +17,8 @@ public interface HoaDonService {
 
     public HoaDon findById(UUID id);
 
+    public HoaDon findByMa(String ma);
+
     public HoaDon add(HoaDon hoaDon);
 
     public HoaDon update(UUID id, HoaDon hoaDon);

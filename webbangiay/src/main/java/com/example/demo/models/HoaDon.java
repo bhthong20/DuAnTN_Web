@@ -18,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -56,7 +57,10 @@ public class HoaDon {
 
     @CreationTimestamp
     @Column(name = "ngay_tao")
-    private Date ngayTao;
+    private LocalDateTime ngayTao;
+
+    @Column(name = "ngay_cap_nhat")
+    private LocalDateTime ngayCapNhat;
 
     @Column(name = "phuong_thuc_thanh_toan")
     private int phuongThucThanhToan;

@@ -42,6 +42,11 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
+    public HoaDon findByMa(String ma) {
+        return hoaDonRepository.findByMa(ma);
+    }
+
+    @Override
     public HoaDon add(HoaDon hoaDon) {
         return hoaDonRepository.save(hoaDon);
     }

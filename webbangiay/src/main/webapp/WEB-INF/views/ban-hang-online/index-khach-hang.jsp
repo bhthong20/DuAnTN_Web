@@ -846,7 +846,7 @@
             }
             case 1: {
                 $('#btnThanhToan').hide();
-                $('#btnHuyDonHang').show();
+                $('#btnHuyDonHang').hide();
                 $('#hoanThanhDonHang').hide();
                 break;
             }

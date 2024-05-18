@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -96,6 +96,46 @@ public class NhanVienController {
         nhanVienService.add(nhanVien);
         System.out.println("listChucVu");
         return "redirect:/nhan-vien/hien-thi";
+    }
+
+
+    @PostMapping("/loc")
+    public String loc(Model model, @RequestParam("num") Optional<Integer> num,
+                      @RequestParam(name = "size", defaultValue = "5", required = false) Integer size, @RequestParam(value = "locTT", required = false) Integer locTT,
+                      @RequestParam(value = "locGT", required = false) Boolean locGT) {
+        if (locTT == null && locGT == null) {
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<NhanVien> list = nhanVienService.FindAll(pageable);
+            model.addAttribute("nhanVien", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "../nhan-vien/hien-thi.jsp");
+            return "home/layout";
+
+        } else {
+            List<NhanVien> list = nhanVienService.loc(locTT, locGT);
+            model.addAttribute("nhanVien", list);
+            model.addAttribute("contentPage", "../nhan-vien/hien-thi.jsp");
+            return "home/layout";
+        }
+    }
+
+    @PostMapping("/search")
+    public String search(Model model, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+        if (search.isEmpty()) {
+            Sort sort = Sort.by("ngayTao").descending();
+            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Page<NhanVien> list = nhanVienService.FindAll(pageable);
+            model.addAttribute("nhanVien", list.getContent());
+            model.addAttribute("total", list.getTotalPages());
+            model.addAttribute("contentPage", "../nhan-vien/hien-thi.jsp");
+            return "home/layout";
+        } else {
+            List<NhanVien> list = nhanVienService.search(search);
+            model.addAttribute("nhanVien", list);
+            model.addAttribute("contentPage", "../nhan-vien/hien-thi.jsp");
+            return "home/layout";
+        }
     }
 }
 

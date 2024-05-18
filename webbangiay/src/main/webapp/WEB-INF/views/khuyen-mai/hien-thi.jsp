@@ -105,7 +105,7 @@
                 <th>Ngày kết thúc</th>
                 <th>Giá trị giảm</th>
                 <th>Điều kiện giảm</th>
-                <th>Tình trạng</th>
+<%--                <th>Tình trạng</th>--%>
                 <th>Chức năng</th>
             </tr>
             <c:forEach items="${listKhuyenMai}" var="hangSanPham" varStatus="stt">
@@ -142,10 +142,10 @@
 
                         document.write(formatCurrency(${hangSanPham.dieuKienGia}) + " VNĐ");</script>
                     </td>
-                    <td>
-                        <c:if test="${hangSanPham.trangThai==0}">Ngừng hoạt động</c:if>
-                        <c:if test="${hangSanPham.trangThai==1}">Hoạt động</c:if>
-                    </td>
+<%--                    <td>--%>
+<%--                        <c:if test="${hangSanPham.trangThai==0}">Ngừng hoạt động</c:if>--%>
+<%--                        <c:if test="${hangSanPham.trangThai==1}">Hoạt động</c:if>--%>
+<%--                    </td>--%>
                     <td>
                         <a href="/khuyen-mai/delete/${hangSanPham.id}" class="btn btn-success"
                            onclick="return tbxd()">Delete</a>

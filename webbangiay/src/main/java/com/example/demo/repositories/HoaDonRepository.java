@@ -29,6 +29,8 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     Page<HoaDon> findAllByTrangThaiNotIn(int[] trangThais, Pageable pageable);
 
+    HoaDon findByMa(String ma);
+
     @Query(value = """
         SELECT hd FROM HoaDon hd where 1 = 1 and hd.trangThai <> 9
     """)

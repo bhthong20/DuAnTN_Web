@@ -1,4 +1,4 @@
-﻿  USE
+﻿USE
 [master]
 CREATE 
 DATABASE [WEB_BAN_GIAY]
@@ -85,10 +85,12 @@ CREATE TABLE khach_hang (
 	trang_thai nvarchar(50) NULL,
 	tai_khoan nvarchar(50) NULL,
 	mat_khau nvarchar(32) NULL,
+	reset_code VARCHAR(50)
 	CONSTRAINT PK__khach_ha__9B2CAEF3A03F8914 PRIMARY KEY (id_khach_hang)
 );
 
 GO
+
 
 -- WEB_BAN_GIAY.dbo.khuyen_mai definition
 
@@ -213,24 +215,6 @@ CREATE TABLE dia_chi (
 
 GO
 
--- WEB_BAN_GIAY.dbo.gio_hang definition
-
--- Drop table
-
--- DROP TABLE WEB_BAN_GIAY.dbo.gio_hang;
-
-CREATE TABLE gio_hang (
-	id_gio_hang uniqueidentifier DEFAULT newid() NOT NULL,
-	id_khach_hang uniqueidentifier NULL,
-	ma varchar(50) NULL,
-	ngay_tao date DEFAULT getdate() NULL,
-	ghi_chu nvarchar(50) NULL,
-	trang_thai int NULL,
-	CONSTRAINT PK__gio_hang__0EE4A21914A0CC96 PRIMARY KEY (id_gio_hang),
-	CONSTRAINT FK__gio_hang__id_kha__412EB0B6 FOREIGN KEY (id_khach_hang) REFERENCES khach_hang(id_khach_hang)
-);
-
-GO
 
 -- WEB_BAN_GIAY.dbo.hoa_don definition
 
@@ -241,8 +225,8 @@ GO
 CREATE TABLE hoa_don (
 	id_hoa_don uniqueidentifier DEFAULT newid() NOT NULL,
 	ma_hoa_don varchar(50) NULL,
-	ngay_tao date DEFAULT getdate() NULL,
-	ngay_cap_nhat date NULL,
+	ngay_tao datetime DEFAULT getdate(),
+	ngay_cap_nhat datetime NULL,
 	nhan_vien_id uniqueidentifier NULL,
 	khach_hang_id uniqueidentifier NULL,
 	khuyen_mai_id uniqueidentifier NULL,
@@ -406,7 +390,4 @@ CREATE TABLE hoa_don_chi_tiet (
 	CONSTRAINT FK__hoa_don_c__hoa_d__03F0984C FOREIGN KEY (hoa_don_id) REFERENCES hoa_don(id_hoa_don)
 );
 
-GO
-INSERT INTO WEB_BAN_GIAY.dbo.khach_hang (id_khach_hang,ma,ten_khach_hang,email,sdt,ngay_sinh,gioi_tinh,ngay_tao,ngay_cap_nhat,trang_thai,tai_khoan,mat_khau,roles) VALUES
-	 (N'7C52B2DF-5953-4FC1-8D2E-8D7E8316D002',N'ADMIN',N'admin',N'admin@gmail.com',N'0328843156',NULL,NULL,'2024-04-25',NULL,NULL,N'admin',N'a',N'ADMIN');
 GO

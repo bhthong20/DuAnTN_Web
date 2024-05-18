@@ -2,6 +2,7 @@ package com.example.demo.services.impl;
 
 import com.example.demo.models.ChatLieu;
 import com.example.demo.models.NhanVien;
+import com.example.demo.models.SanPham;
 import com.example.demo.repositories.NhanVienRepository;
 import com.example.demo.services.NhanVienService;
 import org.springframework.beans.BeanUtils;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class NhanVienServiceImpl implements  NhanVienService {
+public class NhanVienServiceImpl implements NhanVienService {
     @Autowired
     NhanVienRepository nhanVienRepository;
 
@@ -35,7 +36,7 @@ public class NhanVienServiceImpl implements  NhanVienService {
 
     @Override
     public List<NhanVien> search(String search) {
-        return null;
+        return nhanVienRepository.search(search);
     }
 
     @Override
@@ -63,6 +64,11 @@ public class NhanVienServiceImpl implements  NhanVienService {
     @Override
     public void deleteNhanVien(UUID id) {
         nhanVienRepository.deleteById(id);
+    }
+
+    @Override
+    public List<NhanVien> loc(Integer locTT, Boolean locGT) {
+        return nhanVienRepository.loc(locTT, locGT);
     }
 }
 
