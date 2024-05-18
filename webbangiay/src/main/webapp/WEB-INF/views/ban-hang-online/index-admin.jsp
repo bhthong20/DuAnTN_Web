@@ -332,6 +332,9 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1400px;">
         <div class="modal-content">
             <div id="content">
+                <div style="width: 100%; text-align: center; padding: 30px 0; background: #6d70ff">
+
+                </div>
                 <div style="width: 100%; text-align: center; padding: 30px 0">
                     <h1>THÔNG TIN HÓA ĐƠN</h1>
                 </div>
@@ -456,7 +459,6 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Ảnh</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Màu sắc</th>
                                     <th>Kích cỡ</th>
@@ -540,10 +542,6 @@
             const lastInputValue = lastInput.val();
             html += `
                 <tr>
-                    <td align="center">
-                        <img src="../uploads/` + product.chiTietSanPham.hinhAnh.anh1 + `" width="50" height="50"
-                             style="border-radius:50% 50% 50% 50%">
-                    </td>
                     <td>` + product.chiTietSanPham.sanPham.tenSP + `</td>
                     <td>` + product.chiTietSanPham.mauSac.ten + `</td>
                     <td>` + product.chiTietSanPham.kichThuoc.size + `</td>
@@ -675,7 +673,6 @@
     }
 
     const fillDataFiled = (hoaDon) => {
-        $(".btnExport").hide();
         tenNguoiNhan.val(hoaDon.tenNguoiNhan);
         soDienThoai.val(hoaDon.sdt);
         diaChi.val(hoaDon.diaChi);
@@ -701,9 +698,6 @@
         $('#tongTien').text(hoaDon.tongTien ? hoaDon.tongTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
         $('#donGia').text((hoaDon.tienGiam + hoaDon.tongTien - hoaDon.tienShip).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 
-        if (hoaDon.trangThai && hoaDon.trangThai == 10) {
-            $(".btnExport").show();
-        }
     }
 
     function thayDoiTrangThai(trangThai) {
@@ -771,6 +765,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').show();
                 $('#btnHuyDon').show();
+                $(".btnExport").hide();
                 break;
             }
             case 1: {
@@ -778,6 +773,7 @@
                 $('#btnXacNhanGiao').show();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").show();
                 break;
             }
             case 2: {
@@ -785,6 +781,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").show();
                 break;
             }
             case 3: {
@@ -792,6 +789,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").hide();
                 break;
             }
             case 4: {
@@ -799,6 +797,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").show();
                 break;
             }
             case 5: {
@@ -806,6 +805,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").show();
                 break;
             }
             case 6: {
@@ -813,6 +813,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").show();
                 break;
             }
             case 7: {
@@ -820,6 +821,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").show();
                 break;
             }
             case 8: {
@@ -827,6 +829,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").hide();
                 break;
             }
             case 9: {
@@ -834,6 +837,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").hide();
                 break;
             }
             case 10: {
@@ -841,6 +845,7 @@
                 $('#btnXacNhanGiao').hide();
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
+                $(".btnExport").show();
                 break;
             }
             default: return "";
