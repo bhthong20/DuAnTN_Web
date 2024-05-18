@@ -33,13 +33,8 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
 </head>
 <body>
@@ -67,24 +62,21 @@
                             <div class="btn-group">
                                 <select class="form-select" name="locTT">
                                     <option selected disabled>Trạng thái</option>
-                                    <c:forEach items="${listTT}" var="tt">
-                                        <option value="${tt.trangThai}">${tt.trangThai}</option>
-                                    </c:forEach>
+                                    <option value="0">Hoạt động</option>
+                                    <option value="1">Không hoạt động</option>
                                 </select>
                             </div>
 
                             <div class="btn-group">
-                                <select class="form-select" name="locPL">
+                                <select class="form-select" name="locGT">
                                     <option selected disabled>Giới tính</option>
-                                    <c:forEach items="${listGT}" var="gt">
-                                        <option value="${pl.gioiTinh}">${pl.gioiTinh}</option>
-                                    </c:forEach>
+                                    <option value="false">Nam</option>
+                                    <option value="true">Nữ</option>
                                 </select>
                             </div>
 
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-primary mr-2"
-                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                <button type="submit" class="btn btn-primary mr-2">
                                     Lọc
                                 </button>
                             </div>
@@ -118,9 +110,6 @@
                 <th>Ngày sinh</th>
                 <th>Tài khoản</th>
                 <th>Mật khẩu</th>
-                <th>Ngày tạo</th>
-                <th>Ngày cập nhập</th>
-                <th>Trạng thái</th>
                 <th colspan="2">Chức năng</th>
             </tr>
             </thead>
@@ -139,12 +128,6 @@
                     <td>${kh.ngaySinh}</td>
                     <td>${kh.taiKhoan}</td>
                     <td>${kh.matKhau}</td>
-                    <td>${kh.ngayTao}</td>
-                    <td>${kh.ngayCapNhat}</td>
-                    <td>
-                        <c:if test="${kh.trangThai == 0}">Hoạt động</c:if>
-                        <c:if test="${kh.trangThai == 1}">Không hoạt động</c:if>
-                    </td>
                     <td colspan="2">
                         <a href="/khach-hang/delete/${kh.id}" class="btn btn-success"
                            onclick="return myFunction2()">Delete</a>

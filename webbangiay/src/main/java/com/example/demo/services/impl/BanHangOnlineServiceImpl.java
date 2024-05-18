@@ -21,6 +21,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -278,6 +279,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             hoaDon.setKhachHang((KhachHang) common.getUserLogin());
         }
         hoaDon.setTrangThai(trangThai);
+        hoaDon.setNgayCapNhat(LocalDateTime.now());
         if (trangThai == 1) {
             List<HoaDonChiTiet> list = hoaDonChiTietRepository.findHoaDonChiTietByHoaDon(hoaDon);
 

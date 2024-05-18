@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +68,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
         String maHD = "HĐ" + (hoaDonService.findAll().size() + 1);
         hoaDon.setMa(maHD);
         hoaDon.setLoai(0);
-        hoaDon.setNgayTao(Date.valueOf(LocalDate.now()));
+        hoaDon.setNgayTao(LocalDateTime.now());
         hoaDon.setTrangThai(9);
         hoaDonService.add(hoaDon);
         return hoaDonService.findAll();
@@ -246,6 +246,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
             }
             hoaDon.setKhachHang(khachHang);
             hoaDon.setNhanVien((NhanVien) common.getUserLogin());
+            hoaDon.setNgayCapNhat(LocalDateTime.now());
             hoaDonService.update(hoaDon.getId(), hoaDon);
             return true;
         }
@@ -275,6 +276,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
 
             HoaDon hoaDon = hoaDonService.findById(idHoaDon);
             hoaDon.setTrangThai(8);
+            hoaDon.setNgayCapNhat(LocalDateTime.now());
             hoaDonService.update(idHoaDon, hoaDon);
         } catch (Exception e) {
             e.printStackTrace();

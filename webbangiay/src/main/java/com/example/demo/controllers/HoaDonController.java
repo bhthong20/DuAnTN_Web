@@ -18,7 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -40,8 +40,8 @@ public class HoaDonController {
     private KhachHangService khachHangService;
 
     @GetMapping()
-    public String quanLyBanHang(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        Sort sort = Sort.by("ma").descending();
+    public String quanLyBanHang(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
+        Sort sort = Sort.by("ngayTao").descending();
         Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
         Page<HoaDon> list = hoaDonService.getAllAdmin(pageable);
         model.addAttribute("listhoaDon", list.getContent());
@@ -89,7 +89,7 @@ public class HoaDonController {
         }
         String maHD = "HD" + (hoaDonService.findAll().size() + 1);
         hoaDon.setMa(maHD);
-        hoaDon.setNgayTao(Date.valueOf(LocalDate.now()));
+        hoaDon.setNgayTao(LocalDateTime.now());
         hoaDonService.add(hoaDon);
         return "redirect:/hoa-don/hien-thi";
     }

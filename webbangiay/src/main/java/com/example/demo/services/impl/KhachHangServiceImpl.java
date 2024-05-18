@@ -31,7 +31,12 @@ public class KhachHangServiceImpl implements KhachHangService {
 
     @Override
     public List<KhachHang> search(String search) {
-        return null;
+        return khachHangRepository.search(search);
+    }
+
+    @Override
+    public List<KhachHang> loc(Integer locTT, Boolean locGT) {
+        return khachHangRepository.loc(locTT, locGT);
     }
 
     @Override

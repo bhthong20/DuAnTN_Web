@@ -111,26 +111,30 @@
                                 <textarea
                                         id="ghiChu"
                                         class="form-control checkStatus"
+                                        valu
                                 ></textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Hình thức thanh toán</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioTienMat" value="tienMat">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioTienMat"
+                                           value="tienMat">
                                     <label class="form-check-label" for="radioTienMat">
                                         Tiền mặt
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioChuyenKhoan" value="chuyenKhoan">
+                                    <input class="form-check-input" type="radio" name="paymentMethod"
+                                           id="radioChuyenKhoan" value="chuyenKhoan">
                                     <label class="form-check-label" for="radioChuyenKhoan">
                                         Chuyển khoản
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioCaHai" value="chuyenKhoan">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="radioCaHai"
+                                           value="chuyenKhoan">
                                     <label class="form-check-label" for="radioChuyenKhoan">
-                                       Cả hai
+                                        Cả hai
                                     </label>
                                 </div>
                             </div>
@@ -142,7 +146,8 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="chuyenKhoan">Chuyển khoản</label>
-                                <input type="text" id="chuyenKhoan" class="form-control number-input checkStatus phone-mask"
+                                <input type="text" id="chuyenKhoan"
+                                       class="form-control number-input checkStatus phone-mask"
                                 />
                             </div>
                             <div class="mb-4">
@@ -702,6 +707,7 @@
     function removeCommas(number) {
         return number.replace(/,/g, '');
     }
+
     document.querySelectorAll('.number-input').forEach(input => {
         input.addEventListener('input', (event) => {
             let value = event.target.value;
@@ -920,7 +926,7 @@
         fillTongTien();
 
         $("#maHoaDonPdf").text(hoaDon.ma);
-        $("#ngayTaoPdf").text(hoaDon.ngayTao);
+        $("#ngayTaoPdf").text(formatDateTime(hoaDon.ngayTao));
         $("#maKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.ma : "Không có dữ liệu");
         $("#tenKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.hoTen : "Không có dữ liệu");
         $("#tenNguoiNhanPdf").text(hoaDon.tenNguoiNhan ? hoaDon.tenNguoiNhan : "Không có dữ liệu");
@@ -1271,9 +1277,30 @@
         return tongTien;
     }
 
+    const formatDateTime = (dateTimeString) => {
+        return new Date(dateTimeString).toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        }).replace(',', '');
+    }
+
     const fillHoaDon = () => {
         maHoaDon.val(hoaDon.ma);
-        ngayTao.val(hoaDon.ngayTao);
+        const formattedDateTime = new Date(hoaDon.ngayTao).toLocaleString('en-GB', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        }).replace(',', '');
+        ngayTao.val(formattedDateTime);
         trangThai.val(fillTrangThaiHoaDon(hoaDon.trangThai));
         tenNguoiNhan.val(hoaDon.tenNguoiNhan);
         soDienThoai.val(hoaDon.sdt);

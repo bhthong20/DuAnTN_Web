@@ -508,6 +508,17 @@
 <script src="../assets/vendor/api-province/api.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    const formatDateTime = (dateTimeString) => {
+        return new Date(dateTimeString).toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        }).replace(',', '');
+    }
     function exportHTMLtoPDF() {
         window.scrollTo(0, 0);
         fillExportHoaDon(hoaDonSelect);
@@ -518,13 +529,17 @@
         }, 500);
     }
 
+    function formatAddress(address) {
+        return address.replace(/{|}/g, '').replace(/,/g, ' -');
+    }
+
     const fillExportHoaDon = (hoaDon) => {
         $("#maHoaDonPdf").text(hoaDon.ma);
-        $("#ngayTaoPdf").text(hoaDon.ngayTao);
+        $("#ngayTaoPdf").text(formatDateTime(hoaDon.ngayTao));
         $("#maKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.ma : "Không có dữ liệu");
         $("#tenKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.hoTen : "Không có dữ liệu");
         $("#tenNguoiNhanPdf").text(hoaDon.tenNguoiNhan ? hoaDon.tenNguoiNhan : "Không có dữ liệu");
-        $("#diaChiNhanPdf").text("Không có dữ liệu");
+        $("#diaChiNhanPdf").text(formatAddress(hoaDon.diaChi));
         $("#soDienThoaiNguoiDatPdf").text(hoaDon.khachHang ? hoaDon.khachHang.sdt : "Không có dữ liệu");
         $("#soDienThoaiNguoiNhanPdf").text(hoaDon.sdt ? hoaDon.sdt : "Không có dữ liệu");
         $("#donGiaPdf").text((hoaDon.tongTien + hoaDon.tienGiam).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ");

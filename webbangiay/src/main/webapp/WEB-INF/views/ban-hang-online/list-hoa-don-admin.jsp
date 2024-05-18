@@ -79,7 +79,7 @@
                                 </select>
                             </div>
 
-                            <div class="btn-group">
+                            <div STYLE="display: none" class="btn-group">
                                 <select class="form-select" name="locLoai">
                                     <option selected disabled>Loại</option>
                                     <option value="0">Tại quầy</option>
@@ -116,12 +116,11 @@
             <tr>
                 <th>STT</th>
                 <th>Mã</th>
-                <th>Mã khách hàng</th>
                 <th>Tên khách hàng</th>
                 <th>Nhân viên</th>
                 <th>Ngày tạo</th>
+                <th>Ngày Cập nhật</th>
                 <th>Trạng thái</th>
-                <th>Phương thức thanh toán</th>
                 <th>Loại</th>
                 <th>Chức năng</th>
             </tr>
@@ -129,15 +128,6 @@
                 <tr>
                     <td>${stt.index+1}</td>
                     <td>${item.ma}</td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${not empty item.khachHang}">
-                                ${item.khachHang.ma}
-                            </c:when>
-                            <c:otherwise>
-                                -
-                            </c:otherwise>
-                        </c:choose></td>
                     <td>
                         <c:choose>
                             <c:when test="${not empty item.khachHang}">
@@ -156,7 +146,8 @@
                                 -
                             </c:otherwise>
                         </c:choose></td>
-                    <td>${item.ngayTao}</td>
+                    <td class="ngay-tao">${item.ngayTao}</td>
+                    <td class="ngay-tao">${item.ngayCapNhat}</td>
                     <td>
                         <c:if test="${item.trangThai==0}">Chờ xác nhận</c:if>
                         <c:if test="${item.trangThai==1}">Đã xác nhận</c:if>
@@ -170,8 +161,6 @@
                         <c:if test="${item.trangThai==9}">Mới tạo</c:if>
                         <c:if test="${item.trangThai==10}">Hoàn tất</c:if>
                     </td>
-                    <td><c:if test="${item.phuongThucThanhToan==0}">Nhận hàng</c:if>
-                        <c:if test="${item.phuongThucThanhToan==1}">Online</c:if></td>
                     <td>
                         <c:if test="${item.loai==0}">tại quầy</c:if>
                         <c:if test="${item.loai==1}">online</c:if>
@@ -206,4 +195,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+<script>
+    function formatDateTime(dateTimeStr) {
+        let date = new Date(dateTimeStr);
+        let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
+        return date.toLocaleDateString('en-GB', options).replace(',', '');
+    }
+    function formatAllDates() {
+        document.querySelectorAll('.ngay-tao').forEach(function (element) {
+            element.textContent = formatDateTime(element.textContent);
+        });
+    }
+    window.onload = formatAllDates;
+</script>
 </html>
