@@ -332,131 +332,78 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" style="min-width: 1400px;">
         <div class="modal-content">
             <div id="content">
-                <div style="width: 100%; text-align: center; padding: 30px 0; background: #6d70ff">
-
-                </div>
                 <div style="width: 100%; text-align: center; padding: 30px 0">
-                    <h1>THÔNG TIN HÓA ĐƠN</h1>
+                    <h1>HÓA ĐƠN BÁN HÀNG</h1>
+                    <span>Mã hóa đơn: <span style="font-weight: 900;">HD0222</span></span>
+                    <div class="pb-2" style=""><img style="background: #FFFFFF; padding: 10px" src="../uploads/Remove-bg.ai_1716017234917.png" width="200px" height="70px" /></div>
+                    <span>Ngày tạo: <span style="font-weight: 900;">18/05/2024</span></span>
                 </div>
                 <div class="container">
-
-                    <div class="divider">
-                        <div class="divider-text">Thông tin hóa đơn</div>
-                    </div>
                     <!--        row 1-->
                     <div class="row">
                         <div class="col-2">
-                            <h5 class="text-end">Mã hóa đơn</h5>
+                            <span class="text-end">Mã hóa đơn</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="maHoaDonPdf"></h5>
+                            <span id="maHoaDonPdf"></span>
                         </div>
                         <div class="col-2">
-                            <h5 class="text-end">Ngày tạo</h5>
+                            <span class="text-end">Ngày tạo</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="ngayTaoPdf"></h5>
+                            <span id="ngayTaoPdf"></span>
                         </div>
                     </div>
                     <!--        row 2-->
                     <div class="row">
                         <div class="col-2">
-                            <h5 class="text-end">Mã người đặt hàng</h5>
+                            <span class="text-end">Mã người đặt hàng</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="maKhachHangPdf"></h5>
+                            <span id="maKhachHangPdf"></span>
                         </div>
                         <div class="col-2">
-                            <h5 class="text-end">Tên người nhận</h5>
+                            <span class="text-end">Tên người nhận</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="tenNguoiNhanPdf"></h5>
+                            <span id="tenNguoiNhanPdf"></span>
                         </div>
                     </div>
                     <!--        row 3-->
                     <div class="row">
                         <div class="col-2">
-                            <h5 class="text-end">Tên người đặt hàng</h5>
+                            <span class="text-end">Tên người đặt hàng</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="tenKhachHangPdf"></h5>
+                            <span id="tenKhachHangPdf"></span>
                         </div>
                         <div class="col-2">
-                            <h5 class="text-end">Địa chỉ người nhận</h5>
+                            <span class="text-end">Địa chỉ người nhận</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="diaChiNhanPdf"></h5>
+                            <span id="diaChiNhanPdf"></span>
                         </div>
                     </div>
                     <!--        row 4-->
-                    <div class="row">
+                    <div class="row mb-5">
                         <div class="col-2">
-                            <h5 class="text-end">Số điện thoại người đặt</h5>
+                            <span class="text-end">Số điện thoại người đặt</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="soDienThoaiNguoiDatPdf"></h5>
+                            <span id="soDienThoaiNguoiDatPdf"></span>
                         </div>
                         <div class="col-2">
-                            <h5 class="text-end">Số điện thoại người nhận</h5>
+                            <span class="text-end">Số điện thoại người nhận</span>
                         </div>
                         <div class="col-4">
-                            <h5 id="soDienThoaiNguoiNhanPdf"></h5>
+                            <span id="soDienThoaiNguoiNhanPdf"></span>
                         </div>
                     </div>
                     <!--        row 5-->
 
-                    <div class="divider">
-                        <div class="divider-text">Thông tin giá</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Đơn giá</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="donGiaPdf"></h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Phí ship</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="phiShipPdf"></h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Mã giảm giá</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="tenMaGiamGiaPdf"></h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Tiền được giảm</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="tienDuocGiamPdf"></h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Tổng tiền thanh toán</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="tongTienPdf"></h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Trạng thái</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="trangThaiPdf"></h5>
-                        </div>
-                    </div>
-
                     <div class="row mb-5">
-                        <div class="divider">
-                            <div class="divider-text">Danh sách sản phẩm</div>
-                        </div>
                         <div class="text-nowrap">
-                            <table class="table table-striped">
+                            <table border="1" class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>Tên sản phẩm</th>
@@ -473,6 +420,51 @@
                             </table>
                         </div>
                     </div>
+
+
+                    <div class="row">
+                        <div class="col-2">
+                            <span class="text-end">Đơn giá</span>
+                        </div>
+                        <div class="col-4">
+                            <span id="donGiaPdf"></span>
+                        </div>
+                        <div class="col-2">
+                            <span class="text-end">Phí ship</span>
+                        </div>
+                        <div class="col-4">
+                            <span id="phiShipPdf"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <span class="text-end">Mã giảm giá</span>
+                        </div>
+                        <div class="col-4">
+                            <span id="tenMaGiamGiaPdf"></span>
+                        </div>
+                        <div class="col-2">
+                            <span class="text-end">Tiền được giảm</span>
+                        </div>
+                        <div class="col-4">
+                            <span id="tienDuocGiamPdf"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <span class="text-end">Tổng tiền thanh toán</span>
+                        </div>
+                        <div class="col-4">
+                            <span id="tongTienPdf"></span>
+                        </div>
+                        <div class="col-2">
+                            <span class="text-end">Trạng thái</span>
+                        </div>
+                        <div class="col-4">
+                            <span id="trangThaiPdf"></span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
