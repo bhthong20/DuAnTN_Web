@@ -410,7 +410,10 @@
 
     function muaNgay() {
         let sanPham = getChiTietSanPhamSelect();
-
+        if (sanPham.soLuongTon <= 0) {
+            alert("Sản phẩm đã hết hàng");
+            return;
+        }
         let productShopping = []
         let kt = confirm("Bạn có chắc chắn muốn tạo hóa đơn không?");
         if (kt) {

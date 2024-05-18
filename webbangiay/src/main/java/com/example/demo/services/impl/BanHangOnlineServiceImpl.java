@@ -1,19 +1,10 @@
 package com.example.demo.services.impl;
 
-import com.example.demo.models.ChiTietSanPham;
-import com.example.demo.models.GioHangChiTiet;
-import com.example.demo.models.HoaDon;
-import com.example.demo.models.HoaDonChiTiet;
-import com.example.demo.models.KhachHang;
-import com.example.demo.models.NhanVien;
+import com.example.demo.models.*;
 import com.example.demo.models.dto.BanHangRequest;
 import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.SanPhamAddHoaDon;
-import com.example.demo.repositories.ChiTietSanPhamRepository;
-import com.example.demo.repositories.GioHangChiTietRepository;
-import com.example.demo.repositories.HoaDonChiTietRepository;
-import com.example.demo.repositories.HoaDonRepository;
-import com.example.demo.repositories.KhuyenMaiRepository;
+import com.example.demo.repositories.*;
 import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.util.UserLoginCommon;
 import jakarta.transaction.Transactional;
@@ -49,6 +40,9 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Autowired
     private UserLoginCommon common;
+
+    @Autowired
+    private LichSuTrangThaiRepository lichSuTrangThaiRepository;
 
     @Override
     public Long countGioHang() {
@@ -129,6 +123,12 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             hoaDon.setTrangThai(9);
             hoaDon.setMa("HĐ" + hoaDonRepository.findAll().size());
             hoaDon.setId(hoaDonRepository.save(hoaDon).getId());
+
+            LichSuTrangThai lichSuTrangThai = new LichSuTrangThai();
+            lichSuTrangThai.setTrangThai(hoaDon.getTrangThai());
+            lichSuTrangThai.setHoaDon(hoaDon);
+            lichSuTrangThai.setIsDelete(1);
+            lichSuTrangThaiRepository.save(lichSuTrangThai);
 
             for (BanHangRequest el: list) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
@@ -262,6 +262,11 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
             hoaDonRepository.save(hoaDonRequest.getHoaDon());
 
+            LichSuTrangThai lichSuTrangThai = new LichSuTrangThai();
+            lichSuTrangThai.setTrangThai(hoaDonRequest.getHoaDon().getTrangThai());
+            lichSuTrangThai.setHoaDon(hoaDonRequest.getHoaDon());
+            lichSuTrangThai.setIsDelete(1);
+            lichSuTrangThaiRepository.save(lichSuTrangThai);
             return returnUrl;
         } catch (Exception e) {
             throw e;
@@ -276,6 +281,21 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             hoaDon.setNhanVien((NhanVien) common.getUserLogin());
         } else {
             hoaDon.setKhachHang((KhachHang) common.getUserLogin());
+        }
+        if (trangThai == 8 && hoaDon.getTrangThai() == 1) {
+            List<HoaDonChiTiet> list = hoaDonChiTietRepository.findHoaDonChiTietByHoaDon(hoaDon);
+
+            List<ChiTietSanPham> listChiTiet = new ArrayList<>();
+
+            for (HoaDonChiTiet el:list) {
+                ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
+                if (chiTietSanPham != null) {
+                    el.getChiTietSanPham().setSoLuongTon(el.getChiTietSanPham().getSoLuongTon() + el.getSoLuong());
+                    listChiTiet.add(el.getChiTietSanPham());
+                }
+            }
+
+            chiTietSanPhamRepository.saveAll(listChiTiet);
         }
         hoaDon.setTrangThai(trangThai);
         if (trangThai == 1) {
@@ -300,6 +320,80 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
             chiTietSanPhamRepository.saveAll(listChiTiet);
         }
+
+        // lưu lại lịch sử trạng thái
+        LichSuTrangThai lichSuTrangThai = new LichSuTrangThai();
+        lichSuTrangThai.setTrangThai(trangThai);
+        lichSuTrangThai.setHoaDon(hoaDon);
+        lichSuTrangThai.setIsDelete(1);
+        lichSuTrangThaiRepository.save(lichSuTrangThai);
+
         return true;
     }
+
+    @Override
+    public Boolean quayLaiTrangThai(UUID idHoaDon) throws BadRequestException {
+        HoaDon hoaDon = hoaDonRepository.findById(idHoaDon).get();
+        List<LichSuTrangThai> list = lichSuTrangThaiRepository.getAllByHoaDon(hoaDon);
+
+        int trangThai = 0;
+
+        if (list.size() <= 1) {
+            trangThai = 9;
+        } else {
+            trangThai = list.get(1).getTrangThai();
+        }
+
+        if (trangThai == 1 && hoaDon.getTrangThai() == 8) {
+            List<HoaDonChiTiet> hoaDonChiTietList = hoaDonChiTietRepository.findHoaDonChiTietByHoaDon(hoaDon);
+
+            List<ChiTietSanPham> listChiTiet = new ArrayList<>();
+
+            for (HoaDonChiTiet el:hoaDonChiTietList) {
+                ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
+                if (chiTietSanPham != null) {
+                    el.getChiTietSanPham().setSoLuongTon(el.getChiTietSanPham().getSoLuongTon() - el.getSoLuong());
+                    listChiTiet.add(el.getChiTietSanPham());
+                }
+            }
+
+            chiTietSanPhamRepository.saveAll(listChiTiet);
+        }
+
+        if (hoaDon.getTrangThai() == 1) {
+            List<HoaDonChiTiet> hoaDonChiTietList = hoaDonChiTietRepository.findHoaDonChiTietByHoaDon(hoaDon);
+
+            List<ChiTietSanPham> listChiTiet = new ArrayList<>();
+
+            for (HoaDonChiTiet el:hoaDonChiTietList) {
+                ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
+                if (chiTietSanPham != null) {
+                    el.getChiTietSanPham().setSoLuongTon(el.getChiTietSanPham().getSoLuongTon() + el.getSoLuong());
+                    listChiTiet.add(el.getChiTietSanPham());
+                }
+            }
+
+            chiTietSanPhamRepository.saveAll(listChiTiet);
+        }
+
+        if (list.size() != 0) {
+            LichSuTrangThai lichSuTrangThaiDelete0 = list.get(0);
+            lichSuTrangThaiDelete0.setIsDelete(0);
+            LichSuTrangThai lichSuTrangThaiDelete1 = list.get(1);
+            lichSuTrangThaiDelete1.setIsDelete(1);
+            lichSuTrangThaiRepository.save(lichSuTrangThaiDelete0);
+            lichSuTrangThaiRepository.save(lichSuTrangThaiDelete1);
+        }
+
+        LichSuTrangThai lichSuTrangThai = new LichSuTrangThai();
+        lichSuTrangThai.setTrangThai(trangThai);
+        lichSuTrangThai.setHoaDon(hoaDon);
+        lichSuTrangThai.setIsDelete(1);
+        lichSuTrangThaiRepository.save(lichSuTrangThai);
+
+        hoaDon.setTrangThai(trangThai);
+        hoaDonRepository.save(hoaDon);
+        return null;
+    }
+
 }
