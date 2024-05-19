@@ -50,7 +50,47 @@
 
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
+    <style>
+        .text-center {
+            text-align: center;
+            margin-top: 0px;
+        }
 
+        .link-button {
+            display: inline-block;
+            text-decoration: none;
+            background: linear-gradient(45deg, #6a6a6a 0%, #a8a8a8 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .link-button h4 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .link-button:hover {
+            background: linear-gradient(45deg, #a8a8a8 0%, #6a6a6a 100%);
+            transform: translateY(-5px);
+        }
+
+        .link-button:active {
+            transform: translateY(0);
+        }
+        .card__product .position-relative {
+            width: 100%; /* Đảm bảo phần tử cha chiếm toàn bộ chiều rộng */
+            height: 300px; /* Đặt chiều cao cố định cho phần tử cha */
+            overflow: hidden; /* Ẩn các phần tử con vượt ra ngoài phần tử cha */
+        }
+
+        .card__product .position-relative img {
+            width: 100%; /* Ảnh chiếm toàn bộ chiều rộng của phần tử cha */
+            height: auto; /* Chiều cao của ảnh được điều chỉnh tự động để giữ tỷ lệ khung hình */
+            object-fit: cover; /* Cắt ảnh sao cho nó vừa với kích thước của phần tử cha */
+        }
+    </style>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 </head>
@@ -61,31 +101,69 @@
 
 <section id="content" class="mt-4">
     <section id="banner__page" style="height: 100%">
-        <img class="w-100"
-             data-src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png"
-             src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png"
-             alt="">
-        <div style="    right: 200px;
-    bottom: 200px;" class="item-content-wrap position-absolute item-content-center">
-            <div class="item-content-title main-subheader" style="color: #ffffff;text-align: right;font-size: 70px;
-    line-height: 70px; font-weight: bolder;font-family: 'LibreItalic', 'Libre Bodoni', serif !important; font-style: italic;">
-                Introducing<br>ZERØGRAND<br>REMASTERED
+<%--        <img class="w-100"--%>
+<%--             data-src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png"--%>
+<%--             src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png"--%>
+<%--             alt="">--%>
+<%--        <div style="    right: 200px;--%>
+<%--    bottom: 200px;" class="item-content-wrap position-absolute item-content-center">--%>
+<%--            <div class="item-content-title main-subheader" style="color: #ffffff;text-align: right;font-size: 70px;--%>
+<%--    line-height: 70px; font-weight: bolder;font-family: 'LibreItalic', 'Libre Bodoni', serif !important; font-style: italic;">--%>
+<%--                Introducing<br>ZERØGRAND<br>REMASTERED--%>
+<%--            </div>--%>
+<%--            <div class="item-content-des" style="color: #ffffff;text-align: right;font-size: 30px;">Our Best Just Got--%>
+<%--                Better--%>
+<%--            </div>--%>
+<%--            <div class="item-content-btn" style="color: #ffffff;text-align: right">--%>
+<%--                        <span>--%>
+<%--                            <a href="#" class="btn btn-dark">MUA NGAY</a>--%>
+<%--                        </span>--%>
+<%--                <span style="font-size: 22px; margin: 0 10px;line-height: 60px;"> | </span>--%>
+<%--                <span>--%>
+<%--                            <a href="#" class="btn btn-dark">TÌM HIỂU THÊM</a>--%>
+<%--                        </span>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
             </div>
-            <div class="item-content-des" style="color: #ffffff;text-align: right;font-size: 30px;">Our Best Just Got
-                Better
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="3000">
+                    <img style="width: 100%; height: 500px; object-fit: cover;"
+                         src="https://thietke6d.com/wp-content/uploads/2021/05/banner-quang-cao-giay-2.webp"
+                         class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <img style="width: 100%; height: 500px; object-fit: cover;"
+                         src="https://intphcm.com/data/upload/poster-giay.jpg"
+                         class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="3000">
+                    <img style="width: 100%; height: 500px; object-fit: cover;"
+                         src="https://thietke6d.com/wp-content/uploads/2021/05/banner-quang-cao-giay-6.webp"
+                         class="d-block w-100" alt="...">
+                </div>
             </div>
-            <div class="item-content-btn" style="color: #ffffff;text-align: right">
-                        <span>
-                            <a href="#" class="btn btn-dark">MUA NGAY</a>
-                        </span>
-                <span style="font-size: 22px; margin: 0 10px;line-height: 60px;"> | </span>
-                <span>
-                            <a href="#" class="btn btn-dark">TÌM HIỂU THÊM</a>
-                        </span>
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </section>
-
+    <hr>
+    <h4 class="text-center">Danh Sách Sản Phẩm Bán Chạy</h4>
     <section>
         <div class="row" id="listSanPham">
             <!-- Product cards will be rendered here -->
@@ -98,13 +176,21 @@
         </nav>
     </section>
 
+    <div class="text-center">
+        <a href="/san-pham" class="link-button">
+            <h4 style="color: white">Xem Thêm</h4>
+        </a>
+    </div>
+    <hr>
 </section>
 
 <jsp:include page="footer.jsp"></jsp:include>
 
 </body>
 <script>
-
+    function formatCurrency(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
     function getListData() {
         const pageing = document.getElementById("pagination");
         let renderPage = '';
@@ -114,7 +200,7 @@
             url: "/home/rest/all",
             success: function (response) {
                 console.log(response)
-                renderCard(response.content);
+                renderCard(response.content.slice(0, 4));
                 if (response.totalPages > 1) {
                     for (let i = 0; i < response.totalPages; i++) {
                         renderPage += `
@@ -162,7 +248,7 @@
                                         <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
                                             <span aria-label="promotion price"></span>
                                             <div class="truncate flex items-baseline"><span
-                                                    class="text-base/5 truncate">` + (el.donGia) + ` VNĐ</span><span
+                                                    class="text-base/5 truncate">` +formatCurrency (el.donGia) + `</span><span
                                                     class="text-xs/sp14"></span></div>
                                         </div>
                                     </div>
@@ -195,4 +281,5 @@
         listSanPham.innerHTML = html;
     }
 </script>
+
 </html>

@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -41,9 +42,21 @@ public class HoaDonController {
 
     @GetMapping()
     public String quanLyBanHang(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
+        int currentPage = num.orElse(0);
+        if (currentPage < 0) {
+            model.addAttribute("errorMessage", "Trang không hợp lệ.");
+            return "home/layout"; // or a specific error page
+        }
+
         Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+        Pageable pageable = PageRequest.of(currentPage, size, sort);
         Page<HoaDon> list = hoaDonService.getAllAdmin(pageable);
+
+        if (currentPage >= list.getTotalPages()) {
+            model.addAttribute("errorMessage", "Trang không hợp lệ.");
+            return "home/layout"; // or a specific error page
+        }
+
         model.addAttribute("listhoaDon", list.getContent());
         model.addAttribute("total", list.getTotalPages());
         model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
@@ -124,37 +137,50 @@ public class HoaDonController {
         return "redirect:/hoa-don/hien-thi";
     }
 
-    @PostMapping("/loc")
-    public String loc(Model model, @RequestParam(value = "locTT", required = false) Integer locTT,
+    @GetMapping("/loc")
+    public String loc(Model model,
+                      @RequestParam(value = "locTT", required = false) Integer locTT,
                       @RequestParam(value = "locPTTT", required = false) Integer locPTTT,
                       @RequestParam(value = "locLoai", required = false) Integer locLoai,
                       @RequestParam(value = "ngayTao", required = false) String ngayTao) {
-        if (ngayTao == null || ngayTao.isEmpty()) {
-            List<HoaDon> list = hoaDonService.loc(locTT, locPTTT, locLoai, null);
-            model.addAttribute("listhoaDon", list);
-            model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
-            return "home/layout";
+        LocalDateTime startOfDay = null;
+        LocalDateTime endOfDay = null;
 
-        } else {
-            List<HoaDon> list = hoaDonService.loc(locTT, locPTTT, locLoai, Date.valueOf(ngayTao));
-            model.addAttribute("listhoaDon", list);
-            model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
-            return "home/layout";
+        if (ngayTao != null && !ngayTao.isEmpty()) {
+            LocalDate date = LocalDate.parse(ngayTao);
+            startOfDay = date.atStartOfDay();
+            endOfDay = date.plusDays(1).atStartOfDay();
         }
 
+        List<HoaDon> list = hoaDonService.loc(locTT, locPTTT, locLoai, startOfDay, endOfDay);
+        model.addAttribute("listhoaDon", list);
+        model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
+        return "home/layout";
     }
 
-    @PostMapping("/search")
-    public String search(Model model, @RequestParam("ma") String ma, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+    @GetMapping("/search")
+    public String search(Model model, @RequestParam("ma") String ma, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
         if (!ma.isEmpty()) {
             List<HoaDon> list = hoaDonService.searchMa(ma);
             model.addAttribute("listhoaDon", list);
             model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");
             return "home/layout";
         } else {
+            int currentPage = num.orElse(0);
+            if (currentPage < 0) {
+                model.addAttribute("errorMessage", "Trang không hợp lệ.");
+                return "home/layout"; // or a specific error page
+            }
+
             Sort sort = Sort.by("ngayTao").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
+            Pageable pageable = PageRequest.of(currentPage, size, sort);
             Page<HoaDon> list = hoaDonService.getAllAdmin(pageable);
+
+            if (currentPage >= list.getTotalPages()) {
+                model.addAttribute("errorMessage", "Trang không hợp lệ.");
+                return "home/layout"; // or a specific error page
+            }
+
             model.addAttribute("listhoaDon", list.getContent());
             model.addAttribute("total", list.getTotalPages());
             model.addAttribute("contentPage", "../ban-hang-online/list-hoa-don-admin.jsp");

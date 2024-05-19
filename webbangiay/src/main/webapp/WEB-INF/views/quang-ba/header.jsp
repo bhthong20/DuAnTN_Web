@@ -35,9 +35,10 @@
 
     <meta name="description" content=""/>
 
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico"/>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -82,23 +83,23 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                     <ul class="navbar-nav text-center mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/home">Trang chủ</a>
+                            <a class="nav-link active" href="/home"><i class="bi bi-house"></i>Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Sản phẩm</a>
+                            <a class="nav-link" href="/san-pham"><i class="bi bi-bag"></i>Sản phẩm</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Giới thiệu</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Tin tức</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Liên hệ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/san-pham">Tra cứu</a>
-                        </li>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="/san-pham">Giới thiệu</a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="/tin-tuc">Tin tức</a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="/san-pham">Liên hệ</a>--%>
+<%--                        </li>--%>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" href="/san-pham">Tra cứu</a>--%>
+<%--                        </li>--%>
                     </ul>
                 </div>
             </div>
@@ -112,7 +113,7 @@
                         <li><a class="dropdown-item" href="/khach-hang/thong-tin-ca-nhan">Thông tin tài khoản</a></li>
                         <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                     </ul>
-                    <a href="/gio-hang" class="position-relative"><i style="font-size: 30px" class='bx bx-cart'></i>
+                    <a href="/gio-hang" class="position-relative"><i style="font-size: 30px; background-color: #8c8c8cư" class='bx bx-cart'></i>
                         <span class="position-absolute top-0 translate-middle badge rounded-pill bg-danger">
                         <span id="soLuongGioHang"></span>
                       </span>

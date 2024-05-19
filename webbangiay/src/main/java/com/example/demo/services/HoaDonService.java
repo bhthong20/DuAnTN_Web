@@ -4,6 +4,7 @@ import com.example.demo.models.HoaDon;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +26,8 @@ public interface HoaDonService {
 
     public Boolean delete(UUID id);
 
-    List<HoaDon> loc(Integer locTT, Integer locPTTT, Integer locLoai, Date ngayTao);
+    public List<HoaDon> loc(Integer locTT, Integer locPTTT, Integer locLoai, LocalDateTime startOfDay, LocalDateTime endOfDay);
+
 
     List<HoaDon> searchMa(String ma);
 

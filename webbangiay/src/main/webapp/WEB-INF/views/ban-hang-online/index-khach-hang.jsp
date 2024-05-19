@@ -183,7 +183,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label">Đơn giá</label>
                                 <div class="col-sm-7">
-                                    <span id="donGia">0</span><span>VNĐ</span>
+                                    <span id="donGia">0</span><span></span>
                                 </div>
                             </div>
                             <c:if test="${not empty listKM}">
@@ -212,7 +212,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label">Tiền giảm</label>
                                 <div class="col-sm-7">
-                                    <span id="tienGiam">0</span><span>VNĐ</span>
+                                    <span id="tienGiam">0</span><span></span>
                                 </div>
                             </div>
 
@@ -220,14 +220,14 @@
                                 <label class="col-sm-5 col-form-label" title="(Không được áp dụng mã giảm giá)">Tiền
                                     Ship</label>
                                 <div class="col-sm-7">
-                                    <span id="tienShip">0</span><span>VNĐ</span>
+                                    <span id="tienShip">0</span><span></span>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label">Thành tiền</label>
                                 <div class="col-sm-7">
-                                    <span id="tongTien">0</span><span>VNĐ</span>
+                                    <span id="tongTien">0</span><span></span>
                                 </div>
                             </div>
 
@@ -262,12 +262,12 @@
 
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <a href="/ban-hang-online/hoa-don" type="button" class="btn btn-danger">Quay lại</a>
+                                    <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>
                                     <button type="button" id="btnHuyDonHang" onclick="huyDonHang()"
                                             class="btn btn-danger">Hủy hóa đơn
                                     </button>
                                     <button type="button" id="btnThanhToan" onclick="thanhToan()"
-                                            class="btn btn-danger">Thanh toán
+                                            class="btn btn-danger">Đặt Hàng
                                     </button>
                                     <button type="button" id="hoanThanhDonHang" onclick="hoanThanhDonHangKhachHang()"
                                             class="btn btn-danger">Đã nhận đơn hàng
@@ -359,6 +359,9 @@
 <script src="../assets/vendor/api-province/data.json"></script>
 <script src="../assets/vendor/api-province/api.js"></script>
 <script>
+    function formatCurrency(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
     let urlBanHangTaiQuay = window.location.href;
 
     let urlParams = new URLSearchParams(new URL(urlBanHangTaiQuay).search);
@@ -433,10 +436,18 @@
 
         return true;
     }
+    function removeCurrencyFormat(value) {
+        // Loại bỏ các ký tự không phải là số hoặc dấu phẩy
+        return value.replace(/[^\d.,]/g, '')
+            // Loại bỏ dấu phẩy nếu nó ở giữa các số
+            .replace(/,(?=\d{3})/g, '')
+            // Loại bỏ dấu chấm nếu nó ở cuối số
+            .replace(/\.(?=\d*$)/g, '');
+    }
 
     function thanhToan() {
         if (validateFields()) {
-            let kt = confirm("Bạn có chắc chắn muốn thanh toán không?");
+            let kt = confirm("Bạn có chắc chắn muốn đặt hàng không?");
             if (kt) {
                 let sanPhamAddHoaDons = []
                 $('#listChiTietSanPham').find('tr').each(function () {
@@ -460,9 +471,9 @@
                 hoaDonSelect.sdt = soDienThoai.val();
                 hoaDonSelect.diaChi = diaChi.val() + "{,} " + selectedDistrictText + "{,} " + selectedProvinceText;
                 hoaDonSelect.ghiChu = moTa.val();
-                hoaDonSelect.tienGiam = tienGiam.text();
-                hoaDonSelect.tongTien = $('#tongTien').text();
-                hoaDonSelect.tienShip = $('#tienShip').text();
+                hoaDonSelect.tienGiam = removeCurrencyFormat(tienGiam.text());
+                hoaDonSelect.tongTien = removeCurrencyFormat($('#tongTien').text());
+                hoaDonSelect.tienShip = removeCurrencyFormat($('#tienShip').text());
 
                 let data = {
                     sanPhamAddHoaDons: sanPhamAddHoaDons,
@@ -475,8 +486,12 @@
                     contentType: "application/json",
                     data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
                     success: function (response) {
-                        console.log(response)
-                        window.location.href = response;
+                        // console.log(response)
+                        // window.location.href = response;
+                        alert("Đặt hàng thành công!"); // Hiển thị thông báo thành công
+                        setTimeout(function() {
+                            window.location.href = response;
+                        }, 2000); // Chuyển hướng sau 2 giây
                     },
                     error: function (xhr, status, error) {
                         if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
@@ -578,7 +593,7 @@
                 let index = 0;
                 let html = '';
                 if (response && response.length != 0) {
-                    $('#title').text("Hóa đơn " + response.hoaDon.ma)
+                    $('#title').text("Thông Tin Thanh Toán " + response.hoaDon.ma)
                     $('#gioHangShow').show();
 
                     $('#trangThai').text(switchTrangThai(response.hoaDon.trangThai));
@@ -592,7 +607,7 @@
                                 <td>` + (el.chiTietSanPham.mauSac ? el.chiTietSanPham.mauSac.ten : "") + `</td>
                                 <td>` + (el.chiTietSanPham.kichThuoc ? el.chiTietSanPham.kichThuoc.size : "") + `</td>
                                 <td>` + (el.chiTietSanPham.chatLieu ? el.chiTietSanPham.chatLieu.tenChatLieu : "") + `</td>
-                                <td><strong>` + el.donGia + `</strong></td>
+                                <td><strong>` + formatCurrency(el.donGia) + `</strong></td>
                                 <td colspan="2">
                                     <input class="form-control checkStatus" type="number" onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" value="` + el.soLuong + `" />
                                 </td>
@@ -667,17 +682,17 @@
             tongTien += parseInt(lastInputValue) * product.chiTietSanPham.donGia;
         });
 
-        $('#donGia').text(tongTien)
+        $('#donGia').text(formatCurrency(tongTien))
 
-        tongTien += parseInt($('#tienShip').text());
+        tongTien +=  parseInt(removeCurrencyFormat($('#tienShip').text()));
 
         if (khuyenMaiSelect.id) {
             if (tongTien >= khuyenMaiSelect.dieuKienGia) {
                 if (khuyenMaiSelect.hinhThucGiamGia == 1) {
-                    tienGiam.text(tongTien * (khuyenMaiSelect.giaTriGiam) / 100);
+                    tienGiam.text(formatCurrency(tongTien * (khuyenMaiSelect.giaTriGiam) / 100));
                     tongTien = tongTien * (100 - khuyenMaiSelect.giaTriGiam) / 100
                 } else {
-                    tienGiam.text(khuyenMaiSelect.giaTriGiam);
+                    tienGiam.text(formatCurrency(khuyenMaiSelect.giaTriGiam));
                     tongTien = tongTien - khuyenMaiSelect.giaTriGiam;
                     if (tongTien < 0) {
                         tongTien = 0;
@@ -692,7 +707,7 @@
         } else {
             tienGiam.val(0);
         }
-        $('#tongTien').text(tongTien);
+        $('#tongTien').text(formatCurrency(tongTien));
     }
 
     const deleteProduct = () => {
@@ -780,9 +795,9 @@
                         location.reload();
                     },
                     error: function (xhr, status, error) {
-                        if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
-                            alert(xhr.responseJSON.message)
-                        }
+                        console.log(xhr.responseText);
+                        alert("Bạn Đã Thêm Quá Số Lượng Hiện Có!!!")
+                        location.reload();
                     }
                 });
             }
@@ -926,7 +941,7 @@
             type: "GET",
             data: params,
             success: function(response) {
-                $('#tienShip').text(response.fee.fee);
+               $('#tienShip').text(formatCurrency(response.fee.fee));
                 fillTongTien();
             },
             error: function(xhr, status, error) {

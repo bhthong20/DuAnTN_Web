@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -58,19 +59,50 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
         return hoaDonRepository.findAllByLoai(0);
     }
 
-    @Override
-    public List<HoaDon> createHoaDon() throws BadRequestException {
-        List<HoaDon> hoaDons = hoaDonRepository.findAllByLoaiAndTrangThai(0, 9);
-        if (hoaDons.size() >= 10) {
-            throw new BadRequestException("Bạn chỉ được tạo tối thiểu 10 hóa đơn chờ");
+    private static final int MAX_RETRY_ATTEMPTS = 1000; // Số lần thử tạo mã mới tối đa
+
+    // Hàm tạo mã hóa đơn ngẫu nhiên độ dài 4 chữ số
+    private String generateRandomCode() {
+        Random random = new Random();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            stringBuilder.append(random.nextInt(10)); // Random số từ 0 đến 9
         }
+        return stringBuilder.toString();
+    }
+
+    // Hàm kiểm tra xem mã đã tồn tại trong danh sách hóa đơn hay chưa
+    private boolean isCodeExists(String code, List<HoaDon> hoaDons) {
+        for (HoaDon hoaDon : hoaDons) {
+            if (hoaDon.getMa().equals(code)) {
+                return true; // Mã đã tồn tại
+            }
+        }
+        return false; // Mã chưa tồn tại
+    }
+
+    // Hàm tạo hóa đơn mới với mã hóa đơn không trùng lặp
+    public List<HoaDon> createHoaDon() throws BadRequestException {
+        List<HoaDon> hoaDons = hoaDonRepository.findAll(); // Lấy danh sách hóa đơn từ cơ sở dữ liệu
+
+        int attempts = 0;
+        String newCode;
+        do {
+            newCode = "HĐ0" + generateRandomCode(); // Tạo mã mới
+            attempts++;
+            if (attempts > MAX_RETRY_ATTEMPTS) {
+                throw new BadRequestException("Không thể tạo mã hóa đơn mới sau " + MAX_RETRY_ATTEMPTS + " lần thử.");
+            }
+        } while (isCodeExists(newCode, hoaDons)); // Kiểm tra mã mới có tồn tại không
+
+        // Tạo hóa đơn mới với mã hóa đơn không trùng lặp
         HoaDon hoaDon = new HoaDon();
-        String maHD = "HĐ" + (hoaDonService.findAll().size() + 1);
-        hoaDon.setMa(maHD);
+        hoaDon.setMa(newCode);
         hoaDon.setLoai(0);
         hoaDon.setNgayTao(LocalDateTime.now());
         hoaDon.setTrangThai(9);
         hoaDonService.add(hoaDon);
+
         return hoaDonService.findAll();
     }
 

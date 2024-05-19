@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,9 +77,11 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public List<HoaDon> loc(Integer locTT, Integer locPTTT, Integer locLoai, Date ngayTao) {
-        return hoaDonRepository.loc(locTT, locPTTT, locLoai, ngayTao);
+    public List<HoaDon> loc(Integer locTT, Integer locPTTT, Integer locLoai, LocalDateTime startOfDay, LocalDateTime endOfDay) {
+        // Adjust your repository call accordingly
+        return hoaDonRepository.loc(locTT, locPTTT, locLoai, startOfDay, endOfDay);
     }
+
 
     @Override
     public List<HoaDon> searchMa(String ma) {
@@ -87,6 +90,6 @@ public class HoaDonServiceImpl implements HoaDonService {
 
     @Override
     public List<HoaDon> loc1(Integer locTT, Integer locPTTT, Integer locLoai) {
-        return hoaDonRepository.loc1(locTT,locPTTT,locLoai);
+        return hoaDonRepository.loc1(locTT, locPTTT, locLoai);
     }
 }

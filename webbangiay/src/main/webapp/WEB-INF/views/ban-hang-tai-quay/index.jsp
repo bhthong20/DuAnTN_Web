@@ -108,11 +108,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="ghiChu">Ghi chú</label>
-                                <textarea
-                                        id="ghiChu"
-                                        class="form-control checkStatus"
-                                        valu
-                                ></textarea>
+                                <textarea id="ghiChu" class="form-control checkStatus">N/A</textarea>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Hình thức thanh toán</label>
@@ -204,7 +200,7 @@
                                 <input type="text" id="sdtKhachHang" disabled class="form-control phone-mask"
                                 />
                             </div>
-                            <div class="mb-3" Ư>
+                            <div class="mb-3">
                                 <label class="form-label" for="ngaySinh">Ngày sinh</label>
                                 <input type="date" id="ngaySinh" disabled class="form-control phone-mask"
                                 />
@@ -1063,6 +1059,28 @@
             }
             // Kiểm tra trường ngaySinh
             if (!ngaySinh.val()) {
+                check = false;
+            }
+
+            // Kiểm tra định dạng email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(emailKhachHang.val())) {
+                alert("Email không đúng định dạng");
+                check = false;
+            }
+
+            // Kiểm tra định dạng số điện thoại (chỉ chứa chữ số và có độ dài từ 10 đến 11)
+            const phonePattern = /^\d{10,11}$/;
+            if (!phonePattern.test(sdtKhachHang.val())) {
+                alert("Số điện thoại không đúng định dạng");
+                check = false;
+            }
+
+            // Kiểm tra ngày sinh phải trước ngày hiện tại
+            const today = new Date();
+            const birthDate = new Date(ngaySinh.val());
+            if (birthDate >= today) {
+                alert("Ngày sinh phải trước ngày hiện tại");
                 check = false;
             }
         }
