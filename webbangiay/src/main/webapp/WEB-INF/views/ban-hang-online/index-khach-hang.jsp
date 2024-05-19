@@ -128,7 +128,7 @@
             <div class="col-lg-4 mb-3">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Hóa đơn</h5>
+                        <h5 class="mb-0">Đơn hàng</h5>
                     </div>
                     <div class="card-body">
                         <form>
@@ -172,7 +172,7 @@
                             </div>
 
                             <div class="divider">
-                                <div class="divider-text">Thông tin hóa đơn</div>
+                                <div class="divider-text">Thông tin đơn hàng</div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-5 col-form-label">Trạng thái</label>
@@ -264,7 +264,7 @@
                                 <div class="col-12 text-center">
                                     <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>
                                     <button type="button" id="btnHuyDonHang" onclick="huyDonHang()"
-                                            class="btn btn-danger">Hủy hóa đơn
+                                            class="btn btn-danger">Hủy đơn hàng
                                     </button>
                                     <button type="button" id="btnThanhToan" onclick="thanhToan()"
                                             class="btn btn-danger">Đặt Hàng

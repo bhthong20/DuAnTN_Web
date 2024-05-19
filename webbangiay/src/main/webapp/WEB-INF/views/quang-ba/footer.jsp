@@ -109,18 +109,13 @@
                     <div class="footer-col">
                         <div class="footer-social">
                             <h4>
-                                KẾT NỐI VỚI ECCO
+                                KẾT NỐI VỚI DIAMOND SNEAKER
                             </h4>
                             <ul class="list-social">
 
 
                             </ul>
                         </div>
-
-
-                        <a class="hidden-xs" href="http://online.gov.vn/Home/WebDetails/32098" target="_blank"><img
-                                src="//theme.hstatic.net/1000143422/1001234326/14/logo-bct.png?v=90"
-                                style="width:150px;"></a>
 
                     </div>
 

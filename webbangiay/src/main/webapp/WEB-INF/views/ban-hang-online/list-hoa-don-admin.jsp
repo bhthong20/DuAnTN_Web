@@ -60,7 +60,7 @@
                 </form>
             </td>
             <td>
-                <form action="/hoa-don/loc" method="get">
+                <form action="/hoa-don/loc" method="get"  onsubmit="return validateDate();">
                     <div class="card-body" style="text-align: center">
                         <div class="btn-group">
                             <select class="form-select" name="locTT">
@@ -75,7 +75,7 @@
                             </select>
                         </div>
 
-                        <div class="btn-group">
+                        <div class="btn-group" style="display: none">
                             <select class="form-select" name="locLoai">
                                 <option selected disabled>Loại</option>
                                 <option value="0" ${param.locLoai == '0' ? 'selected' : ''}>Tại quầy</option>
@@ -83,16 +83,28 @@
                             </select>
                         </div>
 
-                        <div class="btn-group" style="display: none">
-                            <select class="form-select" name="locPTTT">
+                        <div class="btn-group">
+                            <select class="form-select" name="locPTTT" style="display: none">
                                 <option selected disabled>PT Thanh toán</option>
                                 <option value="0" ${param.locPTTT == '0' ? 'selected' : ''}>Nhận hàng</option>
                                 <option value="1" ${param.locPTTT == '1' ? 'selected' : ''}>Online</option>
                             </select>
                         </div>
+                        <!-- Chọn ngày bắt đầu -->
                         <div class="btn-group">
-                            <input type="date" class="form-control" name="ngayTao" value="${param.ngayTao}">
+                            <label for="ngayBatDau"
+                                   style="display: inline-block; width: 70px; text-align: right; margin-right: 10px;margin-top:10px ">Từ:</label>
+                            <input type="date" class="form-control" id="ngayBatDau" name="ngayBatDau"
+                                   value="${param.ngayBatDau}">
                         </div>
+                        <!-- Chọn ngày kết thúc -->
+                        <div class="btn-group">
+                            <label for="ngayBatDau"
+                                   style="display: inline-block; width: 70px; text-align: right; margin-right: 10px;margin-top:10px ">Đến:</label>
+                            <input type="date" class="form-control" id="ngayKetThuc" name="ngayKetThuc"
+                                   value="${param.ngayKetThuc}">
+                        </div>
+
                         <div class="btn-group">
                             <button type="submit" class="btn btn-primary mr-2">
                                 Lọc
@@ -105,90 +117,272 @@
         </tbody>
     </table>
 </div>
+
 <div class="card">
-    <div class="table-responsive text-nowrap">
-        <table class="table container">
-            <tr>
-                <th>STT</th>
-                <th>Mã</th>
-                <th>Tên khách hàng</th>
-                <th>Nhân viên</th>
-                <th>Ngày tạo</th>
-                <th>Ngày Cập nhật</th>
-                <th>Trạng thái</th>
-                <th>Loại</th>
-                <th>Chức năng</th>
-            </tr>
-            <c:forEach items="${listhoaDon}" var="item" varStatus="stt">
-                <tr>
-                    <td>${stt.index+1}</td>
-                    <td>${item.ma}</td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${not empty item.khachHang}">
-                                ${item.khachHang.hoTen}
-                            </c:when>
-                            <c:otherwise>
-                                -
-                            </c:otherwise>
-                        </c:choose></td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${not empty item.nhanVien}">
-                                ${item.nhanVien.hoTen}
-                            </c:when>
-                            <c:otherwise>
-                                -
-                            </c:otherwise>
-                        </c:choose></td>
-                    <td class="ngay-tao">${item.ngayTao}</td>
-                    <td class="ngay-tao">${item.ngayCapNhat}</td>
-                    <td>
-                        <c:if test="${item.trangThai==0}">Chờ xác nhận</c:if>
-                        <c:if test="${item.trangThai==1}">Đã xác nhận</c:if>
-                        <c:if test="${item.trangThai==2}">Đã thanh toán</c:if>
-                        <c:if test="${item.trangThai==3}">Chờ thanh toán</c:if>
-                        <c:if test="${item.trangThai==4}">Chờ vẫn chuyển</c:if>
-                        <c:if test="${item.trangThai==5}">Đang vận chuyển</c:if>
-                        <c:if test="${item.trangThai==6}">Vận chuyển hoàn tất</c:if>
-                        <c:if test="${item.trangThai==7}">Giao trễ</c:if>
-                        <c:if test="${item.trangThai==8}">Đã hủy</c:if>
-                        <c:if test="${item.trangThai==9}">Mới tạo</c:if>
-                        <c:if test="${item.trangThai==10}">Hoàn tất</c:if>
-                    </td>
-                    <td>
-                        <c:if test="${item.loai==0}">tại quầy</c:if>
-                        <c:if test="${item.loai==1}">online</c:if>
-                    </td>
-                    <td>
-                        <c:if test="${item.loai==0}"><a href="/ban-hang-tai-quay?id=${item.id}" class="btn btn-success">Chi
-                            tiết</a></c:if>
-                        <c:if test="${item.loai==1}"><a href="/hoa-don/detail?id=${item.id}" class="btn btn-success">Chi
-                            tiết</a></c:if>
+    <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button"
+                    role="tab" aria-controls="all" aria-selected="true">Tất cả hóa đơn
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="counter-tab" data-bs-toggle="tab" data-bs-target="#counter" type="button"
+                    role="tab" aria-controls="counter" aria-selected="false">Tại quầy
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="online-tab" data-bs-toggle="tab" data-bs-target="#online" type="button"
+                    role="tab" aria-controls="online" aria-selected="false">Online
+            </button>
+        </li>
+    </ul>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                <div class="table-responsive text-nowrap">
+                    <table class="table container">
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã</th>
+                            <th>Khách hàng</th>
+                            <th>Nhân viên</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày Cập nhật</th>
+                            <th>Trạng thái</th>
+                            <th>Loại</th>
+                            <th>Tổng tiền</th>
+                            <th>Chức năng</th>
+                        </tr>
+                        <c:forEach items="${listhoaDon}" var="item" varStatus="stt">
+                            <tr>
+                                <td>${stt.index+1}</td>
+                                <td>${item.ma}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not empty item.khachHang}">
+                                            ${item.khachHang.hoTen}
+                                        </c:when>
+                                        <c:otherwise>
+                                            -
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not empty item.nhanVien}">
+                                            ${item.nhanVien.hoTen}
+                                        </c:when>
+                                        <c:otherwise>
+                                            -
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="ngay-tao">${item.ngayTao}</td>
+                                <td class="ngay-tao">${item.ngayCapNhat}</td>
+                                <td>
+                                    <c:if test="${item.trangThai==0}">Chờ xác nhận</c:if>
+                                    <c:if test="${item.trangThai==1}">Đã xác nhận</c:if>
+                                    <c:if test="${item.trangThai==2}">Đã thanh toán</c:if>
+                                    <c:if test="${item.trangThai==3}">Chờ thanh toán</c:if>
+                                    <c:if test="${item.trangThai==4}">Chờ vẫn chuyển</c:if>
+                                    <c:if test="${item.trangThai==5}">Đang vận chuyển</c:if>
+                                    <c:if test="${item.trangThai==6}">Vận chuyển hoàn tất</c:if>
+                                    <c:if test="${item.trangThai==7}">Giao trễ</c:if>
+                                    <c:if test="${item.trangThai==8}">Đã hủy</c:if>
+                                    <c:if test="${item.trangThai==9}">Mới tạo</c:if>
+                                    <c:if test="${item.trangThai==10}">Hoàn tất</c:if>
+                                </td>
+                                <td>
+                                    <c:if test="${item.loai==0}">tại quầy</c:if>
+                                    <c:if test="${item.loai==1}">Online</c:if>
+                                </td>
+                                <td class="tong-tien">
+                                    <c:choose>
+                                        <c:when test="${not empty item.tongTien}">
+                                            ${item.tongTien}
+                                        </c:when>
+                                        <c:otherwise>
+                                            -
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>
+                                    <c:if test="${item.loai==0}"><a href="/ban-hang-tai-quay?id=${item.id}"
+                                                                    class="btn btn-success">Chi
+                                        tiết</a></c:if>
+                                    <c:if test="${item.loai==1}"><a href="/hoa-don/detail?id=${item.id}"
+                                                                    class="btn btn-success">Chi
+                                        tiết</a></c:if>
 
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-        <c:if test="${not empty errorMessage}">
-            <div class="alert alert-danger" role="alert">
-                    ${errorMessage}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
-        </c:if>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center pagination-lg">
-                <li class="page-item"><a class="page-link" href="/hoa-don?num=0">First</a></li>
-
-                <c:forEach begin="1" end="${total}" varStatus="status">
-                    <li class="page-item">
-                        <a href="${pageContext.request.contextPath}/hoa-don?num=${status.index -1}"
-                           class="page-link">${status.index}</a>
-                    </li>
-                </c:forEach>
-
-                <li class="page-item"><a class="page-link" href="/hoa-don?num=${total-1}">Last</a></li>
-            </ul>
-        </nav>
+            <div class="tab-pane fade" id="counter" role="tabpanel" aria-labelledby="counter-tab">
+                <div class="table-responsive text-nowrap">
+                    <table class="table container">
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã</th>
+                            <th>Khách hàng</th>
+                            <th>Nhân viên</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày Cập nhật</th>
+                            <th>Trạng thái</th>
+                            <th>Loại</th>
+                            <th>Tổng tiền</th>
+                            <th>Chức năng</th>
+                        </tr>
+                        <% int sttAll = 1; %>
+                        <c:forEach items="${listhoaDon}" var="item" varStatus="stt">
+                            <c:if test="${item.loai == 0}">
+                                <tr>
+                                    <td><%= sttAll++ %>
+                                    </td>
+                                    <td>${item.ma}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${not empty item.khachHang}">
+                                                ${item.khachHang.hoTen}
+                                            </c:when>
+                                            <c:otherwise>
+                                                -
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${not empty item.nhanVien}">
+                                                ${item.nhanVien.hoTen}
+                                            </c:when>
+                                            <c:otherwise>
+                                                -
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td class="ngay-tao">${item.ngayTao}</td>
+                                    <td class="ngay-tao">${item.ngayCapNhat}</td>
+                                    <td>
+                                        <c:if test="${item.trangThai==0}">Chờ xác nhận</c:if>
+                                        <c:if test="${item.trangThai==1}">Đã xác nhận</c:if>
+                                        <c:if test="${item.trangThai==2}">Đã thanh toán</c:if>
+                                        <c:if test="${item.trangThai==3}">Chờ thanh toán</c:if>
+                                        <c:if test="${item.trangThai==4}">Chờ vẫn chuyển</c:if>
+                                        <c:if test="${item.trangThai==5}">Đang vận chuyển</c:if>
+                                        <c:if test="${item.trangThai==6}">Vận chuyển hoàn tất</c:if>
+                                        <c:if test="${item.trangThai==7}">Giao trễ</c:if>
+                                        <c:if test="${item.trangThai==8}">Đã hủy</c:if>
+                                        <c:if test="${item.trangThai==9}">Mới tạo</c:if>
+                                        <c:if test="${item.trangThai==10}">Hoàn tất</c:if>
+                                    </td>
+                                    <td>
+                                        tại quầy
+                                    </td>
+                                    <td class="tong-tien">
+                                        <c:choose>
+                                            <c:when test="${not empty item.tongTien}">
+                                                ${item.tongTien}
+                                            </c:when>
+                                            <c:otherwise>
+                                                -
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <a href="/ban-hang-tai-quay?id=${item.id}" class="btn btn-success">Chi
+                                            tiết</a>
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="online" role="tabpanel" aria-labelledby="online-tab">
+                <div class="table-responsive text-nowrap">
+                    <table class="table container">
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã</th>
+                            <th>Khách hàng</th>
+                            <th>Nhân viên</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày Cập nhật</th>
+                            <th>Trạng thái</th>
+                            <th>Loại</th>
+                            <th>Tổng tiền</th>
+                            <th>Chức năng</th>
+                        </tr>
+                        <% int sttAlll = 1; %>
+                        <c:forEach items="${listhoaDon}" var="item" varStatus="stt">
+                            <c:if test="${item.loai == 1}">
+                                <tr>
+                                    <td><%= sttAlll++ %>
+                                    </td>
+                                    <td>${item.ma}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${not empty item.khachHang}">
+                                                ${item.khachHang.hoTen}
+                                            </c:when>
+                                            <c:otherwise>
+                                                -
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${not empty item.nhanVien}">
+                                                ${item.nhanVien.hoTen}
+                                            </c:when>
+                                            <c:otherwise>
+                                                -
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td class="ngay-tao">${item.ngayTao}</td>
+                                    <td class="ngay-tao">${item.ngayCapNhat}</td>
+                                    <td>
+                                        <c:if test="${item.trangThai==0}">Chờ xác nhận</c:if>
+                                        <c:if test="${item.trangThai==1}">Đã xác nhận</c:if>
+                                        <c:if test="${item.trangThai==2}">Đã thanh toán</c:if>
+                                        <c:if test="${item.trangThai==3}">Chờ thanh toán</c:if>
+                                        <c:if test="${item.trangThai==4}">Chờ vẫn chuyển</c:if>
+                                        <c:if test="${item.trangThai==5}">Đang vận chuyển</c:if>
+                                        <c:if test="${item.trangThai==6}">Vận chuyển hoàn tất</c:if>
+                                        <c:if test="${item.trangThai==7}">Giao trễ</c:if>
+                                        <c:if test="${item.trangThai==8}">Đã hủy</c:if>
+                                        <c:if test="${item.trangThai==9}">Mới tạo</c:if>
+                                        <c:if test="${item.trangThai==10}">Hoàn tất</c:if>
+                                    </td>
+                                    <td>
+                                        Online
+                                    </td>
+                                    <td class="tong-tien">
+                                        <c:choose>
+                                            <c:when test="${not empty item.tongTien}">
+                                                ${item.tongTien}
+                                            </c:when>
+                                            <c:otherwise>
+                                                -
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <a href="/hoa-don/detail?id=${item.id}" class="btn btn-success">Chi
+                                            tiết</a>
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
@@ -196,6 +390,55 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 <script>
+    function validateDate() {
+        var ngayBatDau = document.getElementById("ngayBatDau").value;
+        var ngayKetThuc = document.getElementById("ngayKetThuc").value;
+
+        // Chuyển đổi ngày từ chuỗi thành đối tượng Date để so sánh
+        var startDate = new Date(ngayBatDau);
+        var endDate = new Date(ngayKetThuc);
+
+        // Kiểm tra nếu ngày kết thúc nhỏ hơn ngày bắt đầu
+        if (endDate < startDate) {
+            alert("Ngày kết thúc không được nhỏ hơn ngày bắt đầu");
+            return false; // Ngăn chặn việc gửi biểu mẫu nếu ngày kết thúc nhỏ hơn ngày bắt đầu
+        }
+        return true; // Cho phép gửi biểu mẫu nếu không có lỗi
+    }
+
+    window.onload = function () {
+        formatAllDates();
+        formatAllCurrencies();
+
+        // Thêm sự kiện cho các tab
+        document.querySelectorAll('.nav-link').forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                // Xác định tab hiện tại bằng cách lấy ID của tab đang được nhấp
+                let currentTabId = this.getAttribute('id');
+
+                // Dựa vào tab hiện tại, thực hiện tìm kiếm và lọc phù hợp
+                if (currentTabId === 'all-tab') {
+                    // Thực hiện tìm kiếm và lọc trong tab "Tất cả"
+                    searchAndFilterInTab('all');
+                } else if (currentTabId === 'counter-tab') {
+                    // Thực hiện tìm kiếm và lọc trong tab "Tại quầy"
+                    searchAndFilterInTab('counter');
+                } else if (currentTabId === 'online-tab') {
+                    // Thực hiện tìm kiếm và lọc trong tab "Online"
+                    searchAndFilterInTab('online');
+                }
+            });
+        });
+    };
+
+    function searchAndFilterInTab(tabId) {
+        // Tìm kiếm và lọc trong tab được chỉ định
+        let tabContent = document.getElementById(tabId);
+
+        // Thực hiện tìm kiếm và lọc trong tabContent
+        // Ví dụ: bạn có thể lọc các phần tử trong tabContent và hiển thị chỉ các phần tử thỏa mãn điều kiện tìm kiếm và lọc
+    }
+
     function formatDateTime(dateTimeStr) {
         let date = new Date(dateTimeStr);
         let options = {
@@ -209,12 +452,32 @@
         return date.toLocaleDateString('en-GB', options).replace(',', '');
     }
 
+    function formatCurrency(value) {
+        let number = parseFloat(value);
+        if (isNaN(number)) {
+            return value; // If value is not a valid number, return it as is
+        }
+        return number.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2}) + " VNĐ";
+    }
+
     function formatAllDates() {
         document.querySelectorAll('.ngay-tao').forEach(function (element) {
             element.textContent = formatDateTime(element.textContent);
         });
     }
 
-    window.onload = formatAllDates;
+    function formatAllCurrencies() {
+        document.querySelectorAll('.tong-tien').forEach(function (element) {
+            let value = element.textContent.trim();
+            if (value && value !== '-') {
+                element.textContent = formatCurrency(value);
+            }
+        });
+    }
+
+    window.onload = function () {
+        formatAllDates();
+        formatAllCurrencies();
+    };
 </script>
 </html>

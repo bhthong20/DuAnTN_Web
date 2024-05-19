@@ -142,14 +142,17 @@ public class HoaDonController {
                       @RequestParam(value = "locTT", required = false) Integer locTT,
                       @RequestParam(value = "locPTTT", required = false) Integer locPTTT,
                       @RequestParam(value = "locLoai", required = false) Integer locLoai,
-                      @RequestParam(value = "ngayTao", required = false) String ngayTao) {
+                      @RequestParam(value = "ngayBatDau", required = false) String ngayBatDau,
+                      @RequestParam(value = "ngayKetThuc", required = false) String ngayKetThuc) {
         LocalDateTime startOfDay = null;
         LocalDateTime endOfDay = null;
 
-        if (ngayTao != null && !ngayTao.isEmpty()) {
-            LocalDate date = LocalDate.parse(ngayTao);
-            startOfDay = date.atStartOfDay();
-            endOfDay = date.plusDays(1).atStartOfDay();
+        // Chuyển đổi ngày bắt đầu và kết thúc từ chuỗi sang LocalDateTime
+        if (ngayBatDau != null && !ngayBatDau.isEmpty() && ngayKetThuc != null && !ngayKetThuc.isEmpty()) {
+            LocalDate startDate = LocalDate.parse(ngayBatDau);
+            LocalDate endDate = LocalDate.parse(ngayKetThuc);
+            startOfDay = startDate.atStartOfDay();
+            endOfDay = endDate.plusDays(1).atStartOfDay();
         }
 
         List<HoaDon> list = hoaDonService.loc(locTT, locPTTT, locLoai, startOfDay, endOfDay);

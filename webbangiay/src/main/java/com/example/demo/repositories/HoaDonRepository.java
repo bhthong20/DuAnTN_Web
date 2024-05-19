@@ -45,7 +45,6 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
             "OR nv.hoTen LIKE %:ma%")
     List<HoaDon> searchMa(String ma);
 
-
     @Query("select hd from HoaDon hd left join NhanVien nv on nv.id=hd.nhanVien.id " +
             "left join KhachHang kh on kh.id=hd.khachHang.id " +
             "where " +

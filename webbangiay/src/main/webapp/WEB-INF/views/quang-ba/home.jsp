@@ -114,17 +114,17 @@
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="3000">
                     <img style="width: 100%; height: 500px; object-fit: cover;"
-                         src="/uploads/banner1.png"
+                         src="/uploads/banner8.jpg"
                          class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
                     <img style="width: 100%; height: 500px; object-fit: cover;"
-                         src="/uploads/banner2.png"
+                         src="/uploads/banner6.jpg"
                          class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
                     <img style="width: 100%; height: 500px; object-fit: cover;"
-                         src="/uploads/banner3.png"
+                         src="/uploads/banner5.jpg"
                          class="d-block w-100" alt="...">
                 </div>
             </div>
