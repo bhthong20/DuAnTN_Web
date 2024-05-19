@@ -543,10 +543,21 @@
             html2pdf().from(htmlElement).save('exported_file.pdf');
         }, 500);
     }
-
+    function formatDateTime(dateTimeStr) {
+        let date = new Date(dateTimeStr);
+        let options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        };
+        return date.toLocaleDateString('en-GB', options).replace(',', '');
+    }
     const fillExportHoaDon = (hoaDon) => {
         $("#maHoaDonPdf").text(hoaDon.ma);
-        $("#ngayTaoPdf").text(hoaDon.ngayTao);
+        $("#ngayTaoPdf").text(formatDateTime(hoaDon.ngayTao));
         $("#nhanVien").text(hoaDon.nhanVien ? hoaDon.nhanVien.hoTen : "Không có dữ liệu");
         $("#maKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.ma : "Không có dữ liệu");
         $("#tenKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.hoTen : "Không có dữ liệu");
@@ -897,6 +908,7 @@
                 $('#btnXacNhan').hide();
                 $('#btnHuyDon').hide();
                 $(".btnExport").show();
+                $("#btnQuayLai").hide();
                 break;
             }
             default: return "";

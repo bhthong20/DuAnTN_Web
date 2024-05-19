@@ -49,10 +49,10 @@
         <h3 class="card-header">Thông tin hóa đơn</h3>
         <tr>
             <td style="text-align: center">
-                <form action="/hoa-don/search" method="post">
+                <form action="/hoa-don/search" method="get">
                     <div class="input-group" style="width:100%; text-align: center">
                         <input type="text" class="form-control" placeholder="Bạn tìm gì..."
-                               aria-label="Bạn tìm gì..." name="ma">
+                               aria-label="Bạn tìm gì..." name="ma" value="${param.ma}">
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
                         </div>
@@ -60,50 +60,45 @@
                 </form>
             </td>
             <td>
-                <form action="/hoa-don/loc" method="post">
+                <form action="/hoa-don/loc" method="get">
                     <div class="card-body" style="text-align: center">
-
-                            <div class="btn-group">
-                                <select class="form-select" name="locTT">
-                                    <option selected disabled>Trạng thái</option>
-                                    <option value=0>Chờ xác nhận</option>
-                                    <option value=1>Đã xác nhận</option>
-<%--                                    <option value=2>Đã thanh toán</option>--%>
-                                    <option value="3">Chờ thanh toán</option>
-<%--                                    <option value="4">Chờ vẫn chuyển</option>--%>
-                                    <option value="5">Đang vận chuyển</option>
-                                    <option value="6">Vận chuyển hoàn tất</option>
-                                    <option value="8">Đã hủy</option>
-<%--                                    <option value="9">Mới tạo</option>--%>
-                                    <option value="10">Hoàn tất</option>
-                                </select>
-                            </div>
-
-                            <div STYLE="display: none" class="btn-group">
-                                <select class="form-select" name="locLoai">
-                                    <option selected disabled>Loại</option>
-                                    <option value="0">Tại quầy</option>
-                                    <option value="1">online</option>
-                                </select>
-                            </div>
-
-                            <div class="btn-group">
-                                <select class="form-select" name="locPTTT">
-                                    <option selected disabled>PT Thanh toán</option>
-                                    <option value="0">Nhận hàng</option>
-                                    <option value="1">online</option>
-                                </select>
-                            </div>
-                            <div class="btn-group">
-                                <input type="date" class="form-control" name="ngayTao" >
-                            </div>
-                            <div class="btn-group">
-                                <button type="submit" class="btn btn-primary mr-2">
-                                    Lọc
-                                </button>
-                            </div>
+                        <div class="btn-group">
+                            <select class="form-select" name="locTT">
+                                <option selected disabled>Trạng thái</option>
+                                <option value="0" ${param.locTT == '0' ? 'selected' : ''}>Chờ xác nhận</option>
+                                <option value="1" ${param.locTT == '1' ? 'selected' : ''}>Đã xác nhận</option>
+                                <option value="3" ${param.locTT == '3' ? 'selected' : ''}>Chờ thanh toán</option>
+                                <option value="5" ${param.locTT == '5' ? 'selected' : ''}>Đang vận chuyển</option>
+                                <option value="6" ${param.locTT == '6' ? 'selected' : ''}>Vận chuyển hoàn tất</option>
+                                <option value="8" ${param.locTT == '8' ? 'selected' : ''}>Đã hủy</option>
+                                <option value="10" ${param.locTT == '10' ? 'selected' : ''}>Hoàn tất</option>
+                            </select>
                         </div>
 
+                        <div class="btn-group">
+                            <select class="form-select" name="locLoai">
+                                <option selected disabled>Loại</option>
+                                <option value="0" ${param.locLoai == '0' ? 'selected' : ''}>Tại quầy</option>
+                                <option value="1" ${param.locLoai == '1' ? 'selected' : ''}>Online</option>
+                            </select>
+                        </div>
+
+                        <div class="btn-group" style="display: none">
+                            <select class="form-select" name="locPTTT">
+                                <option selected disabled>PT Thanh toán</option>
+                                <option value="0" ${param.locPTTT == '0' ? 'selected' : ''}>Nhận hàng</option>
+                                <option value="1" ${param.locPTTT == '1' ? 'selected' : ''}>Online</option>
+                            </select>
+                        </div>
+                        <div class="btn-group">
+                            <input type="date" class="form-control" name="ngayTao" value="${param.ngayTao}">
+                        </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary mr-2">
+                                Lọc
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </td>
         </tr>
@@ -175,6 +170,11 @@
                 </tr>
             </c:forEach>
         </table>
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">
+                    ${errorMessage}
+            </div>
+        </c:if>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center pagination-lg">
                 <li class="page-item"><a class="page-link" href="/hoa-don?num=0">First</a></li>
@@ -198,14 +198,23 @@
 <script>
     function formatDateTime(dateTimeStr) {
         let date = new Date(dateTimeStr);
-        let options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
+        let options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        };
         return date.toLocaleDateString('en-GB', options).replace(',', '');
     }
+
     function formatAllDates() {
         document.querySelectorAll('.ngay-tao').forEach(function (element) {
             element.textContent = formatDateTime(element.textContent);
         });
     }
+
     window.onload = formatAllDates;
 </script>
 </html>

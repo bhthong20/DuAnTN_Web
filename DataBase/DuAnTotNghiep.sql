@@ -391,3 +391,25 @@ CREATE TABLE hoa_don_chi_tiet (
 );
 
 GO
+
+ --WEB_BAN_GIAY.dbo.lich_su_trang_thai definition
+
+-- Drop table
+
+-- DROP TABLE WEB_BAN_GIAY.dbo.lich_su_trang_thai;
+
+CREATE TABLE WEB_BAN_GIAY.dbo.lich_su_trang_thai (
+	id uniqueidentifier NOT NULL,
+	ngay_tao datetime NULL,
+	ngay_cap_nhat datetime NULL,
+	trang_thai int NULL,
+	hoa_don_id uniqueidentifier NULL,
+	is_delete int NULL,
+	CONSTRAINT lich_su_trang_thai_pk PRIMARY KEY (id)
+);
+
+
+-- WEB_BAN_GIAY.dbo.lich_su_trang_thai foreign keys
+
+ALTER TABLE WEB_BAN_GIAY.dbo.lich_su_trang_thai ADD CONSTRAINT lich_su_trang_thai_hoa_don_FK FOREIGN KEY (hoa_don_id) REFERENCES WEB_BAN_GIAY.dbo.hoa_don(id_hoa_don);
+

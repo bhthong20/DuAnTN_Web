@@ -130,7 +130,7 @@
                                 <div data-i18n="Basic">Nhân Viên</div>
                             </a>
                         </li>
-                        <li class="menu-item">
+                        <li class="menu-item" STYLE="display:none;">
                             <a href="/chuc-vu/hien-thi" class="menu-link">
                                 <div data-i18n="Basic">Chức vụ</div>
                             </a>
@@ -190,28 +190,6 @@
                         <div data-i18n="Basic">Quản lý khuyến mại</div>
                     </a>
                 </li>
-                <!-- Misc -->
-                <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-                <li class="menu-item">
-                    <a
-                            href=""
-                            target="_blank"
-                            class="menu-link"
-                    >
-                        <i class="menu-icon tf-icons bx bx-support"></i>
-                        <div data-i18n="Support">Support</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a
-                            href=""
-                            target="_blank"
-                            class="menu-link"
-                    >
-                        <i class="menu-icon tf-icons bx bx-file"></i>
-                        <div data-i18n="Documentation">Documentation</div>
-                    </a>
-                </li>
             </ul>
         </aside>
         <!-- / Menu -->
@@ -234,51 +212,27 @@
                     <!-- Search -->
                     <div class="navbar-nav align-items-center">
                         <div class="nav-item d-flex align-items-center">
-                            <i class="bx bx-search fs-4 lh-0"></i>
-                            <input
-                                    type="text"
-                                    class="form-control border-0 shadow-none"
-                                    placeholder="Search..."
-                                    aria-label="Search..."
-                            />
                         </div>
                     </div>
                     <!-- /Search -->
 
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <!-- Place this tag where you want the button to render. -->
-                        <li class="nav-item lh-1 me-3">
-                            <a
-                                    class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star"
-                                    data-size="large"
-                                    data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                            >Star</a
-                            >
-                        </li>
+
 
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user ">
                             <a class="nav-link" onclick="showDropdow()" href="javascript:void(0);">
                                 <div class="avatar avatar-online">
-                                    <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle"/>
+                                    <i style="font-size: 30px" class='bx bxs-user'></i> <span ></span>
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" id="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item" href="#">
                                         <div class="d-flex">
-                                            <div class="flex-shrink-0 me-3">
-                                                <div class="avatar avatar-online">
-                                                    <img src="../assets/img/avatars/1.png" alt
-                                                         class="w-px-40 h-auto rounded-circle"/>
-                                                </div>
-                                            </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block">John Doe</span>
-                                                <small class="text-muted">Admin</small>
+                                                <span class="fw-semibold d-block" id="taiKhoan"></span>
                                             </div>
                                         </div>
                                     </a>
@@ -290,21 +244,6 @@
                                     <a class="dropdown-item" href="#">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
                                     </a>
                                 </li>
                                 <li>

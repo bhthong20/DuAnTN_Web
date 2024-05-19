@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -86,7 +87,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Transactional
     public Boolean updateGioHang(List<BanHangRequest> list) throws BadRequestException {
         try {
-            for (BanHangRequest el: list) {
+            for (BanHangRequest el : list) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
                 Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
                         findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
@@ -114,15 +115,50 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
         return true;
     }
 
+    private static final int MAX_RETRY_ATTEMPTS = 1000; // Số lần thử tạo mã mới tối đa
+
+    // Hàm tạo mã hóa đơn ngẫu nhiên độ dài 4 chữ số
+    private String generateRandomCode() {
+        Random random = new Random();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            stringBuilder.append(random.nextInt(10)); // Random số từ 0 đến 9
+        }
+        return stringBuilder.toString();
+    }
+
+    // Hàm kiểm tra xem mã đã tồn tại trong danh sách hóa đơn hay chưa
+    private boolean isCodeExists(String code, List<HoaDon> hoaDons) {
+        for (HoaDon hoaDon : hoaDons) {
+            if (hoaDon.getMa().equals(code)) {
+                return true; // Mã đã tồn tại
+            }
+        }
+        return false; // Mã chưa tồn tại
+    }
+
     @Override
     @Transactional
     public UUID taoHoaDon(List<BanHangRequest> list) throws BadRequestException {
         try {
+
+            List<HoaDon> hoaDons = hoaDonRepository.findAll(); // Lấy danh sách hóa đơn từ cơ sở dữ liệu
+
+            int attempts = 0;
+            String newCode;
+            do {
+                newCode = "HĐ0" + generateRandomCode(); // Tạo mã mới
+                attempts++;
+                if (attempts > MAX_RETRY_ATTEMPTS) {
+                    throw new BadRequestException("Không thể tạo mã hóa đơn mới sau " + MAX_RETRY_ATTEMPTS + " lần thử.");
+                }
+            } while (isCodeExists(newCode, hoaDons)); // Kiểm tra mã mới có tồn tại không
+
             HoaDon hoaDon = new HoaDon();
             hoaDon.setKhachHang((KhachHang) common.getUserLogin());
             hoaDon.setLoai(1);
             hoaDon.setTrangThai(9);
-            hoaDon.setMa("HĐ" + hoaDonRepository.findAll().size());
+            hoaDon.setMa(newCode);
             hoaDon.setId(hoaDonRepository.save(hoaDon).getId());
 
             LichSuTrangThai lichSuTrangThai = new LichSuTrangThai();
@@ -131,7 +167,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             lichSuTrangThai.setIsDelete(1);
             lichSuTrangThaiRepository.save(lichSuTrangThai);
 
-            for (BanHangRequest el: list) {
+            for (BanHangRequest el : list) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
                 Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
                         findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
@@ -186,7 +222,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     public Boolean updateHoaDon(List<BanHangRequest> banHangRequests, UUID idHoaDon) throws BadRequestException {
         try {
             HoaDon hoaDon = hoaDonRepository.findById(idHoaDon).get();
-            for (BanHangRequest el: banHangRequests) {
+            for (BanHangRequest el : banHangRequests) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
                 Optional<HoaDonChiTiet> hoaDonChiTiet = hoaDonChiTietRepository.
                         findHoaDonChiTietByHoaDonAndChiTietSanPham(hoaDon, chiTietSanPham);
@@ -213,7 +249,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     public Boolean deleteHoaDon(List<UUID> listId, UUID idHoaDon) {
         try {
             HoaDon hoaDon = hoaDonRepository.findById(idHoaDon).get();
-            for (UUID el: listId) {
+            for (UUID el : listId) {
                 hoaDonChiTietRepository.deleteById(el);
             }
             if (hoaDonChiTietRepository.countByHoaDon(hoaDon) == 0) {
@@ -230,7 +266,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Transactional
     public String thanhToan(HoaDonRequest hoaDonRequest) throws BadRequestException {
         try {
-            for (SanPhamAddHoaDon el: hoaDonRequest.getSanPhamAddHoaDons()) {
+            for (SanPhamAddHoaDon el : hoaDonRequest.getSanPhamAddHoaDons()) {
                 ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(el.getSanPhamId()).get();
                 Optional<HoaDonChiTiet> hoaDonChiTiet = hoaDonChiTietRepository.
                         findById(el.getHoaDonId());
@@ -288,7 +324,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
             List<ChiTietSanPham> listChiTiet = new ArrayList<>();
 
-            for (HoaDonChiTiet el:list) {
+            for (HoaDonChiTiet el : list) {
                 ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
                 if (chiTietSanPham != null) {
                     el.getChiTietSanPham().setSoLuongTon(el.getChiTietSanPham().getSoLuongTon() + el.getSoLuong());
@@ -305,7 +341,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
             List<ChiTietSanPham> listChiTiet = new ArrayList<>();
 
-            for (HoaDonChiTiet el:list) {
+            for (HoaDonChiTiet el : list) {
                 ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
                 if (chiTietSanPham != null) {
                     if (el.getChiTietSanPham().getSoLuongTon() - el.getSoLuong() < 0) {
@@ -351,7 +387,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
             List<ChiTietSanPham> listChiTiet = new ArrayList<>();
 
-            for (HoaDonChiTiet el:hoaDonChiTietList) {
+            for (HoaDonChiTiet el : hoaDonChiTietList) {
                 ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
                 if (chiTietSanPham != null) {
                     el.getChiTietSanPham().setSoLuongTon(el.getChiTietSanPham().getSoLuongTon() - el.getSoLuong());
@@ -367,7 +403,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
             List<ChiTietSanPham> listChiTiet = new ArrayList<>();
 
-            for (HoaDonChiTiet el:hoaDonChiTietList) {
+            for (HoaDonChiTiet el : hoaDonChiTietList) {
                 ChiTietSanPham chiTietSanPham = el.getChiTietSanPham();
                 if (chiTietSanPham != null) {
                     el.getChiTietSanPham().setSoLuongTon(el.getChiTietSanPham().getSoLuongTon() + el.getSoLuong());

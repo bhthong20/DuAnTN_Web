@@ -197,7 +197,18 @@
             }
         });
     }
-
+    function formatDateTime(dateTimeStr) {
+        let date = new Date(dateTimeStr);
+        let options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        };
+        return date.toLocaleDateString('en-GB', options).replace(',', '');
+    }
     function loadHoaDon(listHoaDon) {
         let html = ""
         if (listHoaDon.length !== 0) {
@@ -213,7 +224,7 @@
                                         <p>Ngày tạo:</p>
                                     </div>
                                     <div class="col-7">
-                                        <p>` + el.ngayTao + `</p>
+                                        <p>` + formatDateTime(el.ngayTao) + `</p>
                                     </div>
                                 </div>
                                 <div class="row">
