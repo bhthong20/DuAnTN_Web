@@ -75,6 +75,7 @@
             border-color: #ff3e1d !important;
             box-shadow: 0 2px 4px 0 rgba(255, 105, 105, 0.4) !important;
         }
+
     </style>
 </head>
 
@@ -159,6 +160,7 @@
             </div>
             <div class="col-10 ps-4 ">
                 <section>
+
                     <h4 class="fw-bold py-3 m-0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
                              style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
@@ -244,6 +246,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
 <script>
+    function formatCurrency(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
     let filter = {
         ma: "",
         ten: "",
@@ -373,7 +378,7 @@
                                         <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
                                             <span aria-label="promotion price"></span>
                                             <div class="truncate flex items-baseline"><span
-                                                    class="text-base/5 truncate">` + (el.donGia) + ` VNĐ</span><span
+                                                    class="text-base/5 truncate">` + formatCurrency(el.donGia) + `</span><span
                                                     class="text-xs/sp14"></span></div>
                                         </div>
                                     </div>

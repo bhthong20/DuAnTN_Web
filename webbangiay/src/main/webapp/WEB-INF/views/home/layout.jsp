@@ -278,8 +278,10 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block">John Doe</span>
-                                                <small class="text-muted">Admin</small>
+
+ <span  id="taiKhoan">Tài khoản</span>
+                                                <br>
+<%--                                                <small class="text-muted" >Admin</small>--%>
                                             </div>
                                         </div>
                                     </a>
@@ -429,5 +431,24 @@
             $('#dropdown-menu').show();
         }
     }
+    var userInfoCookie = getCookie("user_info");
+    if (userInfoCookie) {
+        $('#taiKhoan').text(JSON.parse(userInfoCookie))
+    } else {
+        $.ajax({
+            type: "GET",
+            url: "/user-infor",
+            success: function (response) {
+                if (response) {
+                    setCookie("user_info", JSON.stringify(response.taiKhoan));
+                    $('#taiKhoan').text(response.taiKhoan)
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
 </script>
 </html>

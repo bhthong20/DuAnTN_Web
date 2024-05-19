@@ -190,7 +190,7 @@
                                     <div class="d-flex align-items-center QAc7_y">
                                         <div class="qg2n76" style="display: none" id="donGiaTruocSale">₫</div>
                                         <div class="d-flex align-items-center">
-                                            <div class="G27FPf">₫<span id="donGia"></span></div>
+                                            <div class="G27FPf"><span id="donGia"></span></div>
                                             <div class="o_z7q9" style="display: none" id="giamGia"></div>
                                         </div>
                                     </div>
@@ -355,6 +355,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
 <script>
+    function formatCurrency(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
     var url = window.location.href;
     var parts = url.split("/");
     var id = parts[parts.length - 1];
@@ -628,7 +631,7 @@
 
     function renderSanPham() {
         $('#tenSanPham').html(sanPham.tenSp);
-        $('#donGia').html(sanPham.donGia);
+        $('#donGia').html(formatCurrency(sanPham.donGia));
         $('#anh1').attr('src', sanPham.anh1);
         $('#anh2').attr('src', sanPham.anh2);
         $('#anh3').attr('src', sanPham.anh3);
@@ -667,7 +670,7 @@
                 }
             }
         } else {
-            $('#donGia').text(mauSacSelect.donGia);
+            $('#donGia').text(formatCurrency(mauSacSelect.donGia));
         }
     }
 
