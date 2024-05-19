@@ -48,11 +48,6 @@
     <!-- Page -->
     <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css"/>
     <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
 </head>
 
 <body>
@@ -69,10 +64,10 @@
                         <a href="" class="app-brand-link">
                             <img src="/uploads/Diamond_Sneaker-removebg.png">
                         </a>
-                  <span class="app-brand-logo demo">
+                        <span class="app-brand-logo demo">
 
                   </span>
-                            <span class="app-brand-text demo text-body fw-bolder"></span>
+                        <span class="app-brand-text demo text-body fw-bolder"></span>
                         </a>
                     </div>
                     <!-- /Logo -->
