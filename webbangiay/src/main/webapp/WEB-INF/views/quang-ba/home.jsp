@@ -105,25 +105,6 @@
 </body>
 <script>
 
-    function checkLoginAndBuy(productId) {
-        $.ajax({
-            type: "GET",
-            url: "/user-infor",
-            success: function (response) {
-                if (response && response.loggedIn) {
-                    // Người dùng đã đăng nhập, cho phép mua sản phẩm
-                    window.location.href = `/san-pham/${productId}`;
-                } else {
-                    // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
-                    window.location.href = "/login";
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
-    }
-
     function getListData() {
         const pageing = document.getElementById("pagination");
         let renderPage = '';
@@ -149,9 +130,7 @@
             }
         });
     }
-
     console.log(getListData());
-
     function renderCard(listCard) {
         const listSanPham = document.getElementById("listSanPham");
         let html = '';
@@ -205,7 +184,7 @@
                                         Đã bán ` + el.luotMua + `
                                     </div>
                                 </div>
-                                <a href="/san-pham/` + el.idSanPham + `" class="btn btn-danger btn-mua-ngay" data-product-id="1">Mua Ngay</a>
+                                <a href="/san-pham/` + el.idSanPham + `" class="btn btn-danger">Mua Ngay</a>
                             </div>
                         </div>
                     </div>
@@ -214,15 +193,6 @@
             })
         }
         listSanPham.innerHTML = html;
-
-        // Thêm sự kiện vào các nút "Mua Ngay"
-        document.querySelectorAll('.btn-mua-ngay').forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-                const productId = this.dataset.productId;
-                checkLoginAndBuy(productId);
-            });
-        });
     }
 </script>
 </html>
