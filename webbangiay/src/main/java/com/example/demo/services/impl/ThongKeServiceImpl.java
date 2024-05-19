@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import com.example.demo.models.ChiTietSanPham;
 import com.example.demo.models.HoaDon;
 import com.example.demo.models.HoaDonChiTiet;
 import com.example.demo.models.KhuyenMai;
@@ -9,7 +10,10 @@ import com.example.demo.models.dto.SanPhamThongKeDto;
 import com.example.demo.models.dto.ThongKeAllDto;
 import com.example.demo.models.dto.ThongKeDetailDto;
 import com.example.demo.models.dto.ThongKeTongDto;
+import com.example.demo.repositories.ChiTietSanPhamRepository;
+import com.example.demo.repositories.SanPhamRepository;
 import com.example.demo.repositories.ThongKeRepository;
+import com.example.demo.services.BanHangTaiQuayService;
 import com.example.demo.services.ThongKeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +45,12 @@ public class ThongKeServiceImpl implements ThongKeService {
 
     @Autowired
     private ThongKeRepository repository;
+
+    @Autowired
+    private ChiTietSanPhamRepository chiTietSanPhamRepository;
+
+    @Autowired
+    private SanPhamRepository sanPhamRepository;
 
     @Override
     public ThongKeAllDto getTongThongKe(int type) {
@@ -110,7 +120,7 @@ public class ThongKeServiceImpl implements ThongKeService {
 
         List<Object> listNgayTao = (List<Object>) listNgayTao(set, returnType);
 
-        return new ThongKeDetailDto(listNgayTao, getLineChartSanPhamDetail(list, listNgayTao), sanPhamThongKeDetailDtos(list, uuid));
+        return new ThongKeDetailDto(listNgayTao, getLineChartSanPhamDetail(list, listNgayTao, uuid), sanPhamThongKeDetailDtos(list, uuid));
     }
 
 
@@ -220,7 +230,7 @@ public class ThongKeServiceImpl implements ThongKeService {
             if (existingItem.isPresent()) {
                 int index = sanPhamThongKeDtos.indexOf(existingItem.get());
 
-                sanPhamThongKeDto.setSoLuongTon(sanPhamThongKeDto.getSoLuongTon() + existingItem.get().getSoLuongTon());
+//                sanPhamThongKeDto.setSoLuongTon(sanPhamThongKeDto.getSoLuongTon() + existingItem.get().getSoLuongTon());
                 sanPhamThongKeDto.setSoLuongBan(sanPhamThongKeDto.getSoLuongBan() + existingItem.get().getSoLuongBan());
                 sanPhamThongKeDto.setDoanhThu(sanPhamThongKeDto.getDoanhThu() + existingItem.get().getDoanhThu());
 
@@ -228,6 +238,14 @@ public class ThongKeServiceImpl implements ThongKeService {
             } else {
                 sanPhamThongKeDtos.add(sanPhamThongKeDto);
             }
+        });
+        sanPhamThongKeDtos.forEach(el -> {
+            List<SanPhamThongKeDetailDto> list = sanPhamThongKeDetailDtos(hoaDonChiTiets, el.getId());
+            int tongTien = 0;
+            for (SanPhamThongKeDetailDto detail : list) {
+                tongTien = +detail.getSoLuongTon();
+            }
+            el.setSoLuongTon(tongTien);
         });
         return sanPhamThongKeDtos;
     }
@@ -308,7 +326,7 @@ public class ThongKeServiceImpl implements ThongKeService {
 
                 sanPhamThongKeDto.setTenSanPham(el.getChiTietSanPham().getMa());
                 sanPhamThongKeDto.setId(el.getChiTietSanPham().getId());
-                sanPhamThongKeDto.setUrl(el.getChiTietSanPham().getHinhAnh().getAnh1());
+                sanPhamThongKeDto.setUrl(el.getChiTietSanPham().getHinhAnh() != null ? el.getChiTietSanPham().getHinhAnh().getAnh1() : "");
                 sanPhamThongKeDto.setChatLieu(el.getChiTietSanPham().getChatLieu().getTenChatLieu());
                 sanPhamThongKeDto.setKichThuoc(el.getChiTietSanPham().getKichThuoc().getSize());
                 sanPhamThongKeDto.setMauSac(el.getChiTietSanPham().getMauSac().getTen());
@@ -337,7 +355,7 @@ public class ThongKeServiceImpl implements ThongKeService {
                 if (existingItem.isPresent()) {
                     int index = sanPhamThongKeDtos.indexOf(existingItem.get());
 
-                    sanPhamThongKeDto.setSoLuongTon(sanPhamThongKeDto.getSoLuongTon() + existingItem.get().getSoLuongTon());
+//                    sanPhamThongKeDto.setSoLuongTon(sanPhamThongKeDto.getSoLuongTon() + existingItem.get().getSoLuongTon());
                     sanPhamThongKeDto.setSoLuongBan(sanPhamThongKeDto.getSoLuongBan() + existingItem.get().getSoLuongBan());
                     sanPhamThongKeDto.setDoanhThu(sanPhamThongKeDto.getDoanhThu() + existingItem.get().getDoanhThu());
 
@@ -347,18 +365,58 @@ public class ThongKeServiceImpl implements ThongKeService {
                 }
             }
         });
+
+        List<ChiTietSanPham> chiTietSanPhamList = chiTietSanPhamRepository.findAllBySanPhamAndIsDelete(sanPhamRepository.findById(id).get(), 1);
+        chiTietSanPhamList.forEach(el -> {
+
+            Optional<SanPhamThongKeDetailDto> existingItem = sanPhamThongKeDtos.stream()
+                    .filter(data -> data.getId().equals(el.getId()))
+                    .findFirst();
+
+            if (existingItem.isEmpty()) {
+                SanPhamThongKeDetailDto sanPhamThongKeDto = new SanPhamThongKeDetailDto();
+
+                sanPhamThongKeDto.setTenSanPham(el.getMa());
+                sanPhamThongKeDto.setId(el.getId());
+                sanPhamThongKeDto.setUrl(el.getHinhAnh() != null ? el.getHinhAnh().getAnh1() : "");
+                sanPhamThongKeDto.setChatLieu(el.getChatLieu().getTenChatLieu());
+                sanPhamThongKeDto.setKichThuoc(el.getKichThuoc().getSize());
+                sanPhamThongKeDto.setMauSac(el.getMauSac().getTen());
+                sanPhamThongKeDto.setSoLuongTon(el.getSoLuongTon());
+                sanPhamThongKeDto.setSoLuongBan(0);
+                sanPhamThongKeDto.setDoanhThu(0L);
+                sanPhamThongKeDto.setSoLuongTon(el.getSoLuongTon());
+                sanPhamThongKeDtos.add(sanPhamThongKeDto);
+            }
+        });
+
         return sanPhamThongKeDtos;
     }
 
     // Thống kê chi tiết sản phẩm theo tháng
-    public List<LineChartDto> getLineChartSanPhamDetail(List<HoaDonChiTiet> hoaDonChiTiets, List<Object> thangTrongKhoang) {
+    public List<LineChartDto> getLineChartSanPhamDetail(List<HoaDonChiTiet> hoaDonChiTiets, List<Object> thangTrongKhoang, UUID id) {
         List<LineChartDto> listReturn = new ArrayList<>();
 
         hoaDonChiTiets.forEach(el -> {
-            if (listReturn.stream().filter(sp -> sp.getId().equals(el.getChiTietSanPham().getId())).count() == 0) {
+            if (el.getChiTietSanPham().getSanPham().getId().equals(id)) {
+                if (listReturn.stream().filter(sp -> sp.getId().equals(el.getChiTietSanPham().getId())).count() == 0) {
+                    LineChartDto lineChartDto = new LineChartDto();
+                    lineChartDto.setId(el.getChiTietSanPham().getId());
+                    lineChartDto.setName(el.getChiTietSanPham().getMa());
+                    listReturn.add(lineChartDto);
+                }
+            }
+        });
+        List<ChiTietSanPham> chiTietSanPhamList = chiTietSanPhamRepository.findAllBySanPhamAndIsDelete(sanPhamRepository.findById(id).get(), 1);
+        chiTietSanPhamList.forEach(el -> {
+            Optional<LineChartDto> existingItem = listReturn.stream()
+                    .filter(data -> data.getId().equals(el.getId()))
+                    .findFirst();
+
+            if (existingItem.isEmpty()) {
                 LineChartDto lineChartDto = new LineChartDto();
-                lineChartDto.setId(el.getChiTietSanPham().getId());
-                lineChartDto.setName(el.getChiTietSanPham().getMa());
+                lineChartDto.setId(el.getId());
+                lineChartDto.setName(el.getMa());
                 listReturn.add(lineChartDto);
             }
         });

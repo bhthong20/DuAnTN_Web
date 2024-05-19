@@ -137,7 +137,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
 
     @Query(value = """
                         SELECT
-                            COUNT(hdct.id_hoa_don_chi_tiet) AS countLuotMua
+                            SUM(hdct.so_luong) AS countLuotMua
                         FROM hoa_don_chi_tiet hdct
                         JOIN chi_tiet_san_pham ctsp ON hdct.chi_tiet_san_pham_id = ctsp.id_chi_tiet_san_pham
                         JOIN hoa_don hd on hdct.hoa_don_id = hd.id_hoa_don
@@ -148,7 +148,7 @@ public interface SanPhamRepository extends JpaRepository<SanPham, UUID> {
     @Query(value = """
             WITH luotMua AS (
                 SELECT
-                    COUNT(hdct.id_hoa_don_chi_tiet) AS countLuotMua,
+                    SUM(hdct.so_luong) AS countLuotMua,
                     ctsp.san_pham_id 
                 FROM hoa_don_chi_tiet hdct
                 JOIN chi_tiet_san_pham ctsp ON hdct.chi_tiet_san_pham_id = ctsp.id_chi_tiet_san_pham

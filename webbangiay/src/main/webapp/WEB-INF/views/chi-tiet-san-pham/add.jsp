@@ -42,7 +42,6 @@
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
 </head>
 </head>
 
@@ -209,7 +208,10 @@
         </div>
 
         <div id="tableCreate" style="display: none" class="card mt-5">
-            <h5 class="card-header">Thêm mới chi tiết sản phẩm</h5>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Thêm mới chi tiết sản phẩm</h5>
+                <button id="updateAllBtn" class="btn btn-primary">Sửa tất cả</button>
+            </div>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table class="table table-striped" id="colorTable">
@@ -615,16 +617,6 @@
     }
 
 </script>
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
@@ -652,6 +644,7 @@
 
         downloadLink.click();
     }
+
     function validateImage(input) {
         if (input.files.length === 0) {
             alert(`không được để trống`);
@@ -986,7 +979,6 @@
     function updateColorTable() {
         var tableBody = document.getElementById('colorTableBody');
         var html = '';
-
         listProductDetail.forEach(function (product) {
             html +=
                 '<tr>' +
@@ -997,7 +989,7 @@
                 '<td>' + product.categoryName + '</td>' +
                 '<td>' + product.sizeName + '</td>' +
                 '<td>' + product.colorName + '</td>' +
-                '<td> <input class="form-control productMoney" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.money + '" /></td>' +
+                '<td> <input class="form-control number-input productMoney" index="' + product.index + '" type="text" placeholder="Default input" value="' + formatNumberWithCommas(product.money) + '" /></td>' +
                 '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
                 '<td>' + genComboboxImage(product.index,
                 product.image ? product.image.anh1 : "",
@@ -1005,10 +997,51 @@
                 product.image ? product.image.anh3 : "") + '</td>' +
                 '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
                 '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" ' + (product.status ? `checked` : ``) + ' /></div></td>' +
+                '<td><button class="btn btn-danger btn-sm" style="display: ' + (product.id ? 'none' : 'inline-block') + '" onclick="removeProductDetail(`' + product.index + '`)">Xóa</button></td>' + // Hiển thị nút xóa khi không có id
                 '</tr>';
         });
-
         tableBody.innerHTML = html;
+        document.querySelectorAll('.number-input').forEach(input => {
+            input.addEventListener('input', (event) => {
+                let value = event.target.value;
+                // Remove all non-digit characters
+                value = value.replace(/\D/g, '');
+                // Format the value with commas
+                value = formatNumberWithCommas(value);
+                event.target.value = value;
+            });
+        });
+    }
+    function removeProductDetail(index) {
+        listProductDetail = listProductDetail.filter(function(product) {
+            return parseInt(product.index) !== parseInt(index); // Chuyển đổi sang kiểu số và so sánh
+        });
+        updateColorTable(); // Cập nhật bảng sau khi xóa sản phẩm
+    }
+
+    // Hàm cập nhật tất cả sản phẩm
+    function updateAllProducts() {
+        var moneyInput = prompt("Nhập giá tiền mới cho tất cả sản phẩm:");
+        var quantityInput = prompt("Nhập số lượng mới cho tất cả sản phẩm:");
+
+        if (moneyInput !== null && quantityInput !== null) {
+            listProductDetail.forEach(function(product) {
+                product.money = moneyInput;
+                product.quantity = quantityInput;
+            });
+            updateColorTable(); // Cập nhật bảng sau khi cập nhật tất cả sản phẩm
+        }
+    }
+
+    // Gán sự kiện click cho nút sửa tất cả
+    document.getElementById('updateAllBtn').addEventListener('click', updateAllProducts);
+
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function removeCommas(number) {
+        return number.replace(/,/g, '');
     }
 
     function renderProductDetail() {
@@ -1060,13 +1093,14 @@
         var inputs = document.querySelectorAll('.productMoney');
         inputs.forEach(function (input) {
             var index = input.getAttribute('index');
-
-            listProductDetail = listProductDetail.map(el => {
-                if (parseInt(el.index) == parseInt(index)) {
-                    el.money = input.value
+            var valueWithoutCommas = input.value.replace(/,/g, ''); // Loại bỏ dấu ',' từ giá trị
+            input.value = valueWithoutCommas; // Gán giá trị mới vào trường input
+            listProductDetail = listProductDetail.map(function (el) {
+                if (parseInt(el.index) === parseInt(index)) {
+                    el.money = valueWithoutCommas; // Cập nhật giá trị mới trong mảng listProductDetail
                 }
                 return el;
-            })
+            });
         });
     }
 
@@ -1264,12 +1298,6 @@
             $('#bttCreate').show();
             $('#bttUpdate').hide();
         }
-        // getAllHoaDon();
-        // findHoaDonById();
-        //
-        // if (hoaDon.trangThai && (hoaDon.trangThai == 2 || hoaDon.trangThai == 8)) {
-        //     $(".checkStatus").attr('disabled', 'disabled')
-        // }
     };
 </script>
 </html>

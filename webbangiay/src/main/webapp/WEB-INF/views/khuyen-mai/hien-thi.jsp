@@ -44,39 +44,49 @@
 </head>
 <body>
 <div class="card mb-4">
-    <div class="container">
+    <table class="table container">
+        <tbody>
+
         <h3 class="card-header">Thông tin khuyến mại</h3>
-        <form action="/khuyen-mai/search" method="post" class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="search" class="visually-hidden">Tìm kiếm</label>
-                <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm...">
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
-            </div>
-        </form>
+        <tr>
+            <td style="text-align: center">
+                <form action="/khuyen-mai/search" method="post" class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="search" class="visually-hidden">Tìm kiếm</label>
+                        <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm...">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form action="/khuyen-mai/loc" method="post" class="row g-3 align-items-center mt-3">
+                    <div class="card-body" style="text-align: center">
 
-        <form action="/khuyen-mai/loc" method="post" class="row g-3 align-items-center mt-3">
-            <div class="col-auto">
-                <select class="form-select" name="locHTG">
-                    <option selected disabled>Loại</option>
-                    <option value=0>Tiền</option>
-                    <option value=1>%</option>
-                </select>
-            </div>
-            <div class="col-auto">
-                <select class="form-select" name="locTT">
-                    <option selected disabled>Trạng thái</option>
-                    <option value=0>Ngừng hoạt động</option>
-                    <option value=1>Hoạt động</option>
-                </select>
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-primary" type="submit">Lọc</button>
-            </div>
-        </form>
-    </div>
-
+                        <div class="btn-group">
+                            <select class="form-select" name="locHTG">
+                                <option selected disabled>Loại</option>
+                                <option value=0>Tiền</option>
+                                <option value=1>%</option>
+                            </select>
+                        </div>
+                        <div class="btn-group">
+                            <select class="form-select" name="locTT">
+                                <option selected disabled>Trạng thái</option>
+                                <option value=0>Ngừng hoạt động</option>
+                                <option value=1>Hoạt động</option>
+                            </select>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-primary" type="submit">Lọc</button>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <div class="text-center mt-3">
         <a type="button" class="btn btn-primary" href="/khuyen-mai/view-add">Thêm mới</a>
     </div>
@@ -94,7 +104,8 @@
                 <th>Ngày bắt đầu</th>
                 <th>Ngày kết thúc</th>
                 <th>Giá trị giảm</th>
-                <th>Tình trạng</th>
+                <th>Điều kiện giảm</th>
+<%--                <th>Tình trạng</th>--%>
                 <th>Chức năng</th>
             </tr>
             <c:forEach items="${listKhuyenMai}" var="hangSanPham" varStatus="stt">
@@ -109,12 +120,32 @@
                     <td>
                         <script>document.write(new Date(${hangSanPham.ngayKetThuc}).toLocaleString())</script>
                     </td>
-                    <td>${hangSanPham.giaTriGiam} <c:if test="${hangSanPham.hinhThucGiamGia==0}"> VNĐ</c:if>
-                        <c:if test="${hangSanPham.hinhThucGiamGia==1}"> %</c:if></td>
                     <td>
-                        <c:if test="${hangSanPham.trangThai==0}">Ngừng hoạt động</c:if>
-                        <c:if test="${hangSanPham.trangThai==1}">Hoạt động</c:if>
+                        <script>
+                            var hinhThucGiamGia = ${hangSanPham.hinhThucGiamGia};
+                            var giaTriGiam = ${hangSanPham.giaTriGiam};
+                            if (hinhThucGiamGia == 0) {
+                                document.write(formatCurrency(giaTriGiam) + " VNĐ");
+                            } else {
+                                document.write(giaTriGiam + " %");
+                            }
+
+                            function formatCurrency(value) {
+                                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                            }
+                        </script>
                     </td>
+                    <td>
+                        <script> function formatCurrency(value) {
+                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        }
+
+                        document.write(formatCurrency(${hangSanPham.dieuKienGia}) + " VNĐ");</script>
+                    </td>
+<%--                    <td>--%>
+<%--                        <c:if test="${hangSanPham.trangThai==0}">Ngừng hoạt động</c:if>--%>
+<%--                        <c:if test="${hangSanPham.trangThai==1}">Hoạt động</c:if>--%>
+<%--                    </td>--%>
                     <td>
                         <a href="/khuyen-mai/delete/${hangSanPham.id}" class="btn btn-success"
                            onclick="return tbxd()">Delete</a>
@@ -139,8 +170,8 @@
         </nav>
     </div>
 </div>
-</body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+</body>
 </html>

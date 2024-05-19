@@ -309,7 +309,7 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
                     chiTietSanPhams.add(chiTietSanPham);
                 }
 
-                List<ChiTietSanPham> listChiTietSanPhamDelete = repository.findAllByIdNotIn(listIdSave).stream().map(el -> {
+                List<ChiTietSanPham> listChiTietSanPhamDelete = repository.findAllByIdNotInAndSanPhamAndIsDelete(listIdSave, sanPham, 1).stream().map(el -> {
                     el.setIsDelete(0);
                     return el;
                 }).collect(Collectors.toList());

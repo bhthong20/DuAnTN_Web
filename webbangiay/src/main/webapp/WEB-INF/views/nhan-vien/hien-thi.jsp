@@ -50,7 +50,7 @@
         <h3 class="card-header">Thông tin nhân viên</h3>
         <tr>
             <td style="text-align: center">
-                <form action="/khach-hang/search" method="post">
+                <form action="/nhan-vien/search" method="post">
                     <div class="input-group" style="width:100%; text-align: center">
                         <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                aria-label="Bạn tìm gì..." name="search">
@@ -61,30 +61,27 @@
                 </form>
             </td>
             <td>
-                <form action="/khach-hang/loc" method="post">
+                <form action="/nhan-vien/loc" method="post">
                     <div class="card-body" style="text-align: center">
                         <div class="demo-inline-spacing">
                             <div class="btn-group">
                                 <select class="form-select" name="locTT">
                                     <option selected disabled>Trạng thái</option>
-                                    <c:forEach items="${listTT}" var="tt">
-                                        <option value="${tt.trangThai}">${tt.trangThai}</option>
-                                    </c:forEach>
+                                    <option value="0">Hoạt động</option>
+                                    <option value="1">Không hoạt động</option>
                                 </select>
                             </div>
 
                             <div class="btn-group">
-                                <select class="form-select" name="locPL">
+                                <select class="form-select" name="locGT">
                                     <option selected disabled>Giới tính</option>
-                                    <c:forEach items="${listGT}" var="gt">
-                                        <option value="${pl.gioiTinh}">${pl.gioiTinh}</option>
-                                    </c:forEach>
+                                    <option value="false">Nam</option>
+                                    <option value="true">Nữ</option>
                                 </select>
                             </div>
 
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-primary mr-2"
-                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
+                                <button type="submit" class="btn btn-primary mr-2">
                                     Lọc
                                 </button>
                             </div>
@@ -95,7 +92,6 @@
         </tr>
         <tr class="text-center">
             <td class="text-center" colspan="2">
-                <%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
                 <a type="button" class="btn btn-primary" href="/nhan-vien/view-add">Thêm mới nhân viên</a>
             </td>
         </tr>
@@ -117,11 +113,8 @@
                 <th>Chức Vụ</th>
                 <th>Địa Chỉ</th>
                 <th>CCCD</th>
-                <th>Hình Ảnh</th>
                 <th>Tài Khoản</th>
                 <th>Mật Khẩu</th>
-                <th>Ngày Tạo</th>
-                <th>Ngày Cập Nhập</th>
                 <th>Trạng Thái</th>
                 <th colspan="2">Chức năng</th>
             </tr>
@@ -142,13 +135,8 @@
                     <td>${nv.chucVu.ten}</td>
                     <td>${nv.diaChi}</td>
                     <td>${nv.canCuoc}</td>
-                    <td align="center">
-                        <img src="../../../uploads/${nv.urlAnh}" width="100" height="100">
-                    </td>
                     <td>${nv.taiKhoan}</td>
                     <td>${nv.matKhau}</td>
-                    <td>${nv.ngayTao}</td>
-                    <td>${nv.ngayCapNhat}</td>
                     <td>
                         <c:if test="${nv.tinhTrang == 0}">Hoạt Động</c:if>
                         <c:if test="${nv.tinhTrang == 1}">Không Hoạt Động</c:if>

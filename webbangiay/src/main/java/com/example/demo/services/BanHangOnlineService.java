@@ -24,4 +24,5 @@ public interface BanHangOnlineService {
     Boolean deleteHoaDon(List<UUID> listId, UUID idHoaDon);
     String thanhToan(HoaDonRequest hoaDonRequest) throws BadRequestException;
     Boolean thayDoiTrangThaiHoaDon(UUID idHoaDon, int trangThai) throws BadRequestException;
+    Boolean quayLaiTrangThai(UUID idHoaDon) throws BadRequestException;
 }

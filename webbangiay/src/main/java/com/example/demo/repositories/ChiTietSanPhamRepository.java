@@ -65,5 +65,5 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
 
     List<ChiTietSanPham> findAllByIsDelete(int delete);
 
-    List<ChiTietSanPham> findAllByIdNotIn(List<UUID> listId);
+    List<ChiTietSanPham> findAllByIdNotInAndSanPhamAndIsDelete(List<UUID> listId, SanPham sanPham, int delete);
 }

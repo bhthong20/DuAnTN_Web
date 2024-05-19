@@ -95,4 +95,9 @@ public class BanHangOnlineRestController {
         return service.thayDoiTrangThaiHoaDon(request.getIdHoaDon(), request.getTrangThai());
     }
 
+    @PostMapping("/quay-lai-trang-thai/{id}")
+    public Boolean quayLaiTrangThai(@PathVariable(name = "id") String id) throws BadRequestException {
+        return service.quayLaiTrangThai(UUID.fromString(id));
+    }
+
 }
