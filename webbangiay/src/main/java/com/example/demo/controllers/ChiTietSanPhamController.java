@@ -69,7 +69,7 @@ public class ChiTietSanPhamController {
     private ThuongHieuService thuongHieuService;
 
     @GetMapping("/hien-thi")
-    public String hienThi(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+    public String hienThi(Model model, @RequestParam("num") Optional<Integer> num, @RequestParam(name = "size", defaultValue = "10", required = false) Integer size) {
         model.addAttribute("listMS", mauSacService.findAll());
         model.addAttribute("listKT", kichThuocService.findAll());
         model.addAttribute("listCL", chatLieuService.findAll());

@@ -218,6 +218,11 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     }
 
     @Override
+    public int countHoaDonByTrangThai(int trangThai) {
+        return hoaDonRepository.findAllByTrangThai(trangThai).size();
+    }
+
+    @Override
     @Transactional
     public Boolean updateHoaDon(List<BanHangRequest> banHangRequests, UUID idHoaDon) throws BadRequestException {
         try {

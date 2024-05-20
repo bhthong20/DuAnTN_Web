@@ -75,6 +75,11 @@ public class BanHangOnlineRestController {
         return service.listHoaDon(trangThai);
     }
 
+    @GetMapping("/count-hoa-don")
+    public int countHoaDonByTrangThai(@RequestParam("trangThai") int trangThai) {
+        return service.countHoaDonByTrangThai(trangThai);
+    }
+
     @PostMapping("/update-hoa-don")
     public Boolean updateHoaDon(@RequestBody List<BanHangRequest> list, @RequestParam(name = "id") String id) throws BadRequestException {
         return service.updateHoaDon(list, UUID.fromString(id));

@@ -9,12 +9,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,6 +41,28 @@ public class SecurityController {
     public Object getUserInfor() {
         return common.getUserLogin();
     }
+
+    @PostMapping("/update-user")
+    @ResponseBody
+    public ResponseEntity<String> updateUser(@RequestBody KhachHang updatedKhachHang) {
+        KhachHang currentUser = (KhachHang) common.getUserLogin();
+        if (currentUser == null) {
+            return new ResponseEntity<>("User not logged in", HttpStatus.UNAUTHORIZED);
+        }
+
+        // Update current user's details with the new data, excluding the password
+        currentUser.setHoTen(updatedKhachHang.getHoTen());
+        currentUser.setEmail(updatedKhachHang.getEmail());
+        currentUser.setSdt(updatedKhachHang.getSdt());
+        currentUser.setNgaySinh(updatedKhachHang.getNgaySinh());
+
+        // Save the updated user information
+        service.updateKhachHang(currentUser.getId(), currentUser);
+
+        return new ResponseEntity<>("Cập nhật thành công!", HttpStatus.OK);
+    }
+
+
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
