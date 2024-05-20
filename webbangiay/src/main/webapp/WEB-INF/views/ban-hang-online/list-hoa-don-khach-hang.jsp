@@ -87,7 +87,7 @@
                  style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
                 <path d="M4 6h2v2H4zm0 5h2v2H4zm0 5h2v2H4zm16-8V6H8.023v2H18.8zM8 11h12v2H8zm0 5h12v2H8z"></path>
             </svg>
-            <span class="">Danh sách hóa đơn</span>
+            <span class="">Danh sách đơn mua</span>
         </h4>
         <section class="list-product shopee-search-item-result mb-3">
             <fieldset class="shopee-sort-bar" style="border: 0px;">
@@ -95,42 +95,50 @@
                 <div class="shopee-sort-bar__label">Tìm kiếm theo</div>
                 <div class="shopee-sort-by-options">
                     <section class="shopee-sort-by-options__option-group">
-                        <button aria-label=""
-                                onclick="orderBy(this, -1)" aria-pressed="false"
-                                class="shopee-sort-by-options__option shopee-sort-by-options__option--selected">
-                            <span aria-hidden="true">Xem tất cả</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 9)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Mới tạo</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 3)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Chờ thanh toán</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 0)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Chờ xác nhận</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 1)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Đã xác nhận</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 5)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Đang giao hàng</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 6)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Vận chuyển hoàn tất</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 8)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Đã hủy</span></button>
-                        <button aria-label=""
-                                onclick="orderBy(this, 10)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Đã hoàn tất</span></button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="orderBy(this, -1)">
+                            Xem tất cả
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_9" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 9)">
+                            Mới tạo
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_3" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 3)">
+                            Chờ thanh toán
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_0" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 0)">
+                            Chờ xác nhận
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_1" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 1)">
+                            Đã xác nhận
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_5" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 5)">
+                            Đang giao hàng
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_6" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 6)">
+                            Vận chuyển hoàn tất
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_8" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 8)">
+                            Đã hủy
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
+                        <button id="buttonTrangThai_10" type="button" class="btn btn-outline-secondary"
+                                onclick="orderBy(this, 10)">
+                            Đã hủy
+                            <span class="badge badge-center rounded-pill bg-danger"></span>
+                        </button>
                     </section>
                 </div>
             </fieldset>
@@ -197,6 +205,7 @@
             }
         });
     }
+
     function formatDateTime(dateTimeStr) {
         let date = new Date(dateTimeStr);
         let options = {
@@ -209,6 +218,7 @@
         };
         return date.toLocaleDateString('en-GB', options).replace(',', '');
     }
+
     function loadHoaDon(listHoaDon) {
         let html = ""
         if (listHoaDon.length !== 0) {
@@ -255,20 +265,92 @@
 
     function switchTrangThai(trangThai) {
         switch (trangThai) {
-            case 0: return "Đang chờ";
-            case 1: return "Đã xác nhận";
-            case 2: return "Đã thanh toán";
-            case 3: return "Chờ thanh toán";
-            case 4: return "Chờ vẫn chuyển";
-            case 5: return "Đang vận chuyển";
-            case 6: return "Vận chuyển hoàn tất";
-            case 7: return "Giao trễ";
-            case 8: return "Đã hủy";
-            case 9: return "Mới tạo";
-            case 10: return "Hoàn tất";
-            default: return "";
+            case 0:
+                return "Đang chờ";
+            case 1:
+                return "Đã xác nhận";
+            case 2:
+                return "Đã thanh toán";
+            case 3:
+                return "Chờ thanh toán";
+            case 4:
+                return "Chờ vẫn chuyển";
+            case 5:
+                return "Đang vận chuyển";
+            case 6:
+                return "Vận chuyển hoàn tất";
+            case 7:
+                return "Giao trễ";
+            case 8:
+                return "Đã hủy";
+            case 9:
+                return "Mới tạo";
+            case 10:
+                return "Hoàn tất";
+            default:
+                return "";
         }
     }
+
+    $(document).ready(function () {
+        updateButtonCounts(); // Cập nhật số lượng trên các nút khi trang được tải
+
+        // Hàm cập nhật số lượng trên các nút
+        function updateButtonCounts() {
+            // Mảng chứa các mã trạng thái
+            var trangThaiArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            // Duyệt qua mỗi trạng thái và cập nhật số lượng lên nút tương ứng
+            trangThaiArray.forEach(function (trangThai) {
+                $.ajax({
+                    type: "GET",
+                    url: "/count-hoa-don?trangThai=" + trangThai,
+                    success: function (response) {
+                        // Cập nhật số lượng lên nút
+                        $("#countTrangThai_" + trangThai).text(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        }
+    });
+
+    $(document).ready(function () {
+        updateButtonCounts(); // Cập nhật số lượng trên các nút khi trang được tải
+
+        // Hàm cập nhật số lượng trên các nút
+        function updateButtonCounts() {
+            // Mảng chứa các mã trạng thái
+            var trangThaiArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            // Duyệt qua mỗi trạng thái và cập nhật số lượng lên nút tương ứng
+            trangThaiArray.forEach(function (trangThai) {
+                $.ajax({
+                    type: "GET",
+                    url: "/ban-hang-online/rest/count-hoa-don?trangThai=" + trangThai,
+                    success: function (response) {
+                        // Cập nhật số lượng lên nút
+                        var buttonId = "#buttonTrangThai_" + trangThai;
+                        var badgeSpan = $(buttonId).find("span");
+                        badgeSpan.text(response);
+
+                        // Kiểm tra nếu số lượng hóa đơn bằng 0 thì ẩn nút
+                        if (response == 0) {
+                            badgeSpan.hide(); // Ẩn số lượng
+                        } else {
+                            badgeSpan.show(); // Hiện số lượng
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        }
+    });
+
 
 </script>
 </html>

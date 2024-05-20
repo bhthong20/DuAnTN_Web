@@ -25,4 +25,5 @@ public interface BanHangOnlineService {
     String thanhToan(HoaDonRequest hoaDonRequest) throws BadRequestException;
     Boolean thayDoiTrangThaiHoaDon(UUID idHoaDon, int trangThai) throws BadRequestException;
     Boolean quayLaiTrangThai(UUID idHoaDon) throws BadRequestException;
+    int countHoaDonByTrangThai(int trangThai);
 }
