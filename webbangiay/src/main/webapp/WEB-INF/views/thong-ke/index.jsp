@@ -150,7 +150,7 @@
             <div class="modal-content">
                 <div id="content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Thống kê chi tiết sản phẩm A</h4>
+                        <h4 class="modal-title">Thống kê chi tiết sản phẩm </h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -335,7 +335,7 @@
             html += `
                 <tr>
                     <td>` + index + `</td>
-                    <td align="center" onclick="detailSanPham('` + product.id + `')" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
+                    <td onclick="detailSanPham('` + product.id + `')" data-bs-toggle="modal" data-bs-target="#thongKeSanPham">
                         <img src="../../../uploads/` + product.url + `" width="50" height="50"
                         style="border-radius:50% 50% 50% 50%">
                         <span class="text-primary cursor-pointer">` + product.tenSanPham + `</span>

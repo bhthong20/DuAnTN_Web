@@ -141,9 +141,11 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Transactional
     public UUID taoHoaDon(List<BanHangRequest> list) throws BadRequestException {
         try {
-
+            List<HoaDon> hoaDonss = hoaDonRepository.findAllByLoaiAndTrangThai(1, 9);
             List<HoaDon> hoaDons = hoaDonRepository.findAll(); // Lấy danh sách hóa đơn từ cơ sở dữ liệu
-
+            if (hoaDonss.size() >= 10) {
+                throw new BadRequestException("Xin lỗi! Vì sự bất tiện này nhưng bạn chỉ được tạo tối thiểu 10 hóa đơn chờ!");
+            }
             int attempts = 0;
             String newCode;
             do {

@@ -109,7 +109,7 @@
                 <li class="menu-item">
                     <a href="/hoa-don" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                        <div data-i18n="Account Settings">Quản Lí Đơn Hàng</div>
+                        <div data-i18n="Account Settings">Quản Lý Đơn Hàng</div>
                     </a>
                 </li>
 

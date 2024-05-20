@@ -84,7 +84,10 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     // Hàm tạo hóa đơn mới với mã hóa đơn không trùng lặp
     public List<HoaDon> createHoaDon() throws BadRequestException {
         List<HoaDon> hoaDons = hoaDonRepository.findAll(); // Lấy danh sách hóa đơn từ cơ sở dữ liệu
-
+        List<HoaDon> hoaDonss = hoaDonRepository.findAllByLoaiAndTrangThai(0, 9);
+        if (hoaDonss.size() >= 10) {
+            throw new BadRequestException("Bạn chỉ được tạo tối thiểu 10 hóa đơn chờ");
+        }
         int attempts = 0;
         String newCode;
         do {

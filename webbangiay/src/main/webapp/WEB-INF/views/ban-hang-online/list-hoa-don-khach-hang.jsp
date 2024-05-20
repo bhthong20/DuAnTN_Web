@@ -97,7 +97,6 @@
                     <section class="shopee-sort-by-options__option-group">
                         <button type="button" class="btn btn-outline-secondary" onclick="orderBy(this, -1)">
                             Xem tất cả
-                            <span class="badge badge-center rounded-pill bg-danger"></span>
                         </button>
                         <button id="buttonTrangThai_9" type="button" class="btn btn-outline-secondary"
                                 onclick="orderBy(this, 9)">
