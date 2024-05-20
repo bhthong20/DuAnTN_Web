@@ -97,8 +97,8 @@
                         <i style="font-size: 30px" class='bx bxs-user'></i> <span id="taiKhoan">Tài khoản</span>
                     </span>
                     <ul class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="/ban-hang-online/hoa-don">Danh sách hóa đơn</a></li>
-                        <li><a class="dropdown-item" href="/khach-hang/thong-tin-ca-nhan">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="/ban-hang-online/hoa-don">Danh Sách Đơn Mua</a></li>
+                        <li><a class="dropdown-item" href="/khach-hang/thong-tin-ca-nhan">Tài Khoản Của Tôi</a></li>
                         <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                     </ul>
                     <a href="/gio-hang" class="position-relative"><i style="font-size: 30px; background-color: #8c8c8cư" class='bx bx-cart'></i>
