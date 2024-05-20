@@ -86,7 +86,7 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
         List<HoaDon> hoaDons = hoaDonRepository.findAll(); // Lấy danh sách hóa đơn từ cơ sở dữ liệu
         List<HoaDon> hoaDonss = hoaDonRepository.findAllByLoaiAndTrangThai(0, 9);
         if (hoaDonss.size() >= 10) {
-            throw new BadRequestException("Bạn chỉ được tạo tối thiểu 10 hóa đơn chờ");
+            throw new BadRequestException("Bạn chỉ được tạo tối đa 10 hóa đơn chờ");
         }
         int attempts = 0;
         String newCode;

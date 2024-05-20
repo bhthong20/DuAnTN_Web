@@ -144,7 +144,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             List<HoaDon> hoaDonss = hoaDonRepository.findAllByLoaiAndTrangThai(1, 9);
             List<HoaDon> hoaDons = hoaDonRepository.findAll(); // Lấy danh sách hóa đơn từ cơ sở dữ liệu
             if (hoaDonss.size() >= 10) {
-                throw new BadRequestException("Xin lỗi! Vì sự bất tiện này nhưng bạn chỉ được tạo tối thiểu 10 hóa đơn chờ!");
+                throw new BadRequestException("Xin lỗi! Nhưng bạn chỉ được tạo tối đa 10 hóa đơn chờ!Vui lòng vào vào đơn mua hủy đơn hàng để tiếp tục mua sắm ");
             }
             int attempts = 0;
             String newCode;
