@@ -96,12 +96,12 @@
                         <div class="card-title w-100">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-0">Danh sách sản phẩm</h5>
-<%--                                <span>--%>
-<%--                                    <button class="btn btn-danger checkHidden"--%>
-<%--                                            onclick="deleteProduct()">Xóa sản phẩm</button>--%>
-<%--                                    <button class="btn btn-danger checkHidden"--%>
-<%--                                            onclick="updateProduct()">Sửa số lượng</button>--%>
-<%--                                </span>--%>
+                                <span>
+                                    <button class="btn btn-danger checkHidden"
+                                            onclick="deleteProduct()">Xóa sản phẩm</button>
+                                    <button class="btn btn-danger checkHidden"
+                                            onclick="updateProduct()">Sửa số lượng</button>
+                                </span>
                             </div>
                         </div>
                     </div>
