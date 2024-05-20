@@ -198,22 +198,6 @@ GO
 
 -- DROP TABLE WEB_BAN_GIAY.dbo.dia_chi;
 
-CREATE TABLE dia_chi (
-	id_dia_chi uniqueidentifier DEFAULT newid() NOT NULL,
-	ma varchar(50) NULL,
-	dia_chi_chi_tiet nvarchar(50) NULL,
-	quan_huyen nvarchar(MAX) NULL,
-	phuong_xa nvarchar(50) NULL,
-	thanh_pho nvarchar(50) NULL,
-	khach_hang_id uniqueidentifier NULL,
-	ngay_tao date DEFAULT getdate() NULL,
-	ngay_cap_nhat date NULL,
-	trang_thai int NULL,
-	CONSTRAINT PK__dia_chi__9484151DC35012B8 PRIMARY KEY (id_dia_chi),
-	CONSTRAINT FK__dia_chi__khach_h__3C69FB99 FOREIGN KEY (khach_hang_id) REFERENCES khach_hang(id_khach_hang)
-);
-
-GO
 
 
 -- WEB_BAN_GIAY.dbo.hoa_don definition
@@ -333,24 +317,6 @@ CREATE TABLE chi_tiet_san_pham (
 
 GO
 
--- WEB_BAN_GIAY.dbo.danh_gia definition
-
--- Drop table
-
--- DROP TABLE WEB_BAN_GIAY.dbo.danh_gia;
-
-CREATE TABLE danh_gia (
-	id_danh_gia uniqueidentifier DEFAULT newid() NOT NULL,
-	ma varchar(50) NULL,
-	chi_tiet_san_pham_id uniqueidentifier NULL,
-	khach_hang_id uniqueidentifier NULL,
-	ghi_chu nvarchar(50) NULL,
-	CONSTRAINT PK__danh_gia__8C55D6B34CC350D5 PRIMARY KEY (id_danh_gia),
-	CONSTRAINT FK__danh_gia__chi_ti__08B54D69 FOREIGN KEY (chi_tiet_san_pham_id) REFERENCES chi_tiet_san_pham(id_chi_tiet_san_pham),
-	CONSTRAINT FK__danh_gia__khach___09A971A2 FOREIGN KEY (khach_hang_id) REFERENCES khach_hang(id_khach_hang)
-);
-
-GO
 
 -- WEB_BAN_GIAY.dbo.gio_hang_chi_tiet definition
 
