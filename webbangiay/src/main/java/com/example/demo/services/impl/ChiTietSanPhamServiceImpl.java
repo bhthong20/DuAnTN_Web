@@ -334,6 +334,12 @@ public class ChiTietSanPhamServiceImpl implements ChiTietSanPhamService {
         return repository.findAllBySanPhamAndIsDelete(sanPham, 1);
     }
 
+
+    @Override
+    public List<ChiTietSanPham> findChiTietSanPhamBySanPhamHome(SanPham sanPham) {
+        return repository.findAllBySanPhamAndIsDeleteAndTrangThai(sanPham, 1, 1);
+    }
+
     @Override
     public ChiTietSanPham add(ChiTietSanPham chiTietSanPham) {
         return repository.save(chiTietSanPham);

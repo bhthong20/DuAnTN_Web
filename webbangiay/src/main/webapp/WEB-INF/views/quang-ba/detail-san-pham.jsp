@@ -111,38 +111,6 @@
                         <span class="visually-hidden">Next</span>
                     </a>
                 </div>
-<%--                <div style="margin-top: 30px; border-top: 1px solid rgba(0, 0, 0, 0.05);">--%>
-<%--                    <div class="gIL8h3">--%>
-<%--                        <div>--%>
-<%--                            <div class="fqmTt_">--%>
-<%--                                <div class="Nm4HEX">--%>
-<%--                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-2" tabindex="0">--%>
-<%--                                        <div class="XklnWA flex items-center"><img class="oZtSFx"--%>
-<%--                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/2bcf834c40468ebcb90b.svg">--%>
-<%--                                            <div class="YzLslW">Đổi ý miễn phí 15 ngày</div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="Nm4HEX">--%>
-<%--                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-3" tabindex="0">--%>
-<%--                                        <div class="XklnWA flex items-center"><img class="oZtSFx"--%>
-<%--                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/511aca04cc3ba9234ab0.png">--%>
-<%--                                            <div class="YzLslW">Hàng chính hãng 100%</div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="Nm4HEX">--%>
-<%--                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-4" tabindex="0">--%>
-<%--                                        <div class="XklnWA flex items-center"><img class="oZtSFx"--%>
-<%--                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/16ead7e0a68c3cff9f32.png">--%>
-<%--                                            <div class="YzLslW">Miễn phí vận chuyển</div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
             </div>
             <div class="col-7 px-4">
                 <div class="row">
@@ -237,18 +205,6 @@
                                 </div>
                             </div>
                         </c:if>
-<%--                        <div class="row mt-4">--%>
-<%--                            <div class="col-4">--%>
-<%--                                Vận chuyển--%>
-<%--                            </div>--%>
-<%--                            <div class="col-8">--%>
-<%--                                <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">--%>
-<%--                                    <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/d9e992985b18d96aab90.png"--%>
-<%--                                         height="20" class="Fy4A_Q">--%>
-<%--                                    Miễn phí vận chuyển--%>
-<%--                                </span>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
                         <div class="row mt-4">
                             <div class="col-4">
                                 Màu sắc
@@ -356,8 +312,9 @@
 <script src="../../../js/select-2.js"></script>
 <script>
     function formatCurrency(number) {
-        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+        return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(number);
     }
+
     var url = window.location.href;
     var parts = url.split("/");
     var id = parts[parts.length - 1];
@@ -509,9 +466,15 @@
         const mauSac = $('.mauSac.checked').first().attr("identity");
 
         const chiTietSanPhamSelect = chiTietSanPham.filter(el => el.mauSac.id === mauSac && el.kichThuoc.id === btnSize && el.chatLieu.id === btnChatLieu)[0];
-        chiTietSanPhamSelect.soLuongMua = parseInt($('#soLuongInput').val());
 
-        return chiTietSanPhamSelect;
+        if (chiTietSanPhamSelect) {
+            chiTietSanPhamSelect.soLuongMua = parseInt($('#soLuongInput').val());
+            return chiTietSanPhamSelect;
+        } else {
+            alert("Sản phẩm hiện tại chưa được cập nhập");
+            return;
+        }
+
     }
 
     window.onload = function () {
@@ -520,7 +483,6 @@
             url: "/home/rest/" + id,
             success: function (response) {
                 if (response.sanPham) {
-                    console.log(response)
                     sanPham.tenSp = response.sanPham.tenSP
                     sanPham.daBan = response.soLuongDaBan
                     $('#daBan').text(sanPham.daBan);
@@ -538,6 +500,9 @@
                     sanPham.anh1 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh1
                     sanPham.anh2 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh2
                     sanPham.anh3 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh3
+                } else {
+                    alert("Sản phẩm hiện tại đang tạm dừng bán");
+                    window.location.href = "/san-pham";
                 }
                 renderListCombobox(response.chiTietSanPham);
 
@@ -631,18 +596,38 @@
     function renderKichThuoc() {
         const listKichThuoc = document.getElementById("listKichThuoc");
         let html = '';
+
+        // Sort the size array numerically
+        size.sort((a, b) => parseInt(a.size) - parseInt(b.size));
+
         if (size && size.length !== 0) {
             size.forEach(el => {
                 html += `
-                    <button class="sApkZm SkhBL1 btnSize ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
-                            fdprocessedid="wb3xko">
-                        ` + el.ten + `
-                    </button>
-                `
-            })
+                <button class="sApkZm SkhBL1 btnSize ` + (el.id === idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false" fdprocessedid="wb3xko">
+                    ` + el.ten + `
+                </button>
+            `;
+            });
             listKichThuoc.innerHTML = html;
         }
     }
+
+
+    // function renderKichThuoc() {
+    //     const listKichThuoc = document.getElementById("listKichThuoc");
+    //     let html = '';
+    //     if (size && size.length !== 0) {
+    //         size.forEach(el => {
+    //             html += `
+    //                 <button class="sApkZm SkhBL1 btnSize ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
+    //                         fdprocessedid="wb3xko">
+    //                     ` + el.ten + `
+    //                 </button>
+    //             `
+    //         })
+    //         listKichThuoc.innerHTML = html;
+    //     }
+    // }
 
     function renderChatLieu() {
         const listChatLieu = document.getElementById("listChatLieu");

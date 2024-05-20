@@ -59,7 +59,13 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query(value = "update chi_tiet_san_pham set tinh_trang=0", nativeQuery = true)
     void updateTT();
 
+    List<ChiTietSanPham> findAllBySanPhamAndIsDeleteAndTrangThai(SanPham sanPham, int delete, int trangThai);
+
     List<ChiTietSanPham> findAllBySanPhamAndIsDelete(SanPham sanPham, int delete);
+
+    List<ChiTietSanPham> findAllByIsDeleteAndIdNotInAndTrangThai(int delete, List<UUID> uuidList, int trangThai);
+
+    List<ChiTietSanPham> findAllByIsDeleteAndTrangThai(int delete, int trangThai);
 
     List<ChiTietSanPham> findAllByIsDeleteAndIdNotIn(int delete, List<UUID> uuidList);
 

@@ -37,7 +37,7 @@ public class HomeRestController {
     public SanPhamDetail detailSanPham(@PathVariable("id") String id) {
         SanPhamDetail sanPhamDetail = new SanPhamDetail();
         sanPhamDetail.setSanPham(sanPhamService.findById(UUID.fromString(id)));
-        sanPhamDetail.setChiTietSanPham(chiTietSanPhamService.findChiTietSanPhamBySanPham(sanPhamDetail.getSanPham()));
+        sanPhamDetail.setChiTietSanPham(chiTietSanPhamService.findChiTietSanPhamBySanPhamHome(sanPhamDetail.getSanPham()));
         sanPhamDetail.setSoLuongDaBan(service.getSoLuongDaBan(UUID.fromString(id)));
         return sanPhamDetail;
     }

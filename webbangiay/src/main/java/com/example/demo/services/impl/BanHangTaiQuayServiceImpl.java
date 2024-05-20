@@ -114,9 +114,9 @@ public class BanHangTaiQuayServiceImpl implements BanHangTaiQuayService {
     @Override
     public List<ChiTietSanPham> getChiTietSanPham(List<UUID> listId) {
         if (listId.size() == 0) {
-            return chiTietSanPhamService.findAllByIsDelete(1);
+            return chiTietSanPhamService.findAllByIsDeleteAndTrangThai(1, 1);
         }
-        return chiTietSanPhamService.findAllByIsDeleteAndIdNotIn(1, listId);
+        return chiTietSanPhamService.findAllByIsDeleteAndIdNotInAndTrangThai(1, listId, 1);
     }
 
     @Override

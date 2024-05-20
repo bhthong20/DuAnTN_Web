@@ -27,6 +27,8 @@ public interface ChiTietSanPhamService {
 
     List<ChiTietSanPham> findChiTietSanPhamBySanPham(SanPham sanPham);
 
+    List<ChiTietSanPham> findChiTietSanPhamBySanPhamHome(SanPham sanPham);
+
     //thêm
     public ChiTietSanPham add(ChiTietSanPham chiTietSanPham);
 
