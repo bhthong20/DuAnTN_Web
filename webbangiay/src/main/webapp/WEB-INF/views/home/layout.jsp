@@ -232,7 +232,7 @@
                                     <a class="dropdown-item" href="#">
                                         <div class="d-flex">
                                             <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block" id="taiKhoan"></span>
+                                                <span id="taiKhoan">Tài khoản</span>
                                             </div>
                                         </div>
                                     </a>

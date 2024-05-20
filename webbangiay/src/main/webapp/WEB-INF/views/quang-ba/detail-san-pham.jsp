@@ -111,38 +111,38 @@
                         <span class="visually-hidden">Next</span>
                     </a>
                 </div>
-                <div style="margin-top: 30px; border-top: 1px solid rgba(0, 0, 0, 0.05);">
-                    <div class="gIL8h3">
-                        <div>
-                            <div class="fqmTt_">
-                                <div class="Nm4HEX">
-                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-2" tabindex="0">
-                                        <div class="XklnWA flex items-center"><img class="oZtSFx"
-                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/2bcf834c40468ebcb90b.svg">
-                                            <div class="YzLslW">Đổi ý miễn phí 15 ngày</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="Nm4HEX">
-                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-3" tabindex="0">
-                                        <div class="XklnWA flex items-center"><img class="oZtSFx"
-                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/511aca04cc3ba9234ab0.png">
-                                            <div class="YzLslW">Hàng chính hãng 100%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="Nm4HEX">
-                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-4" tabindex="0">
-                                        <div class="XklnWA flex items-center"><img class="oZtSFx"
-                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/16ead7e0a68c3cff9f32.png">
-                                            <div class="YzLslW">Miễn phí vận chuyển</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<%--                <div style="margin-top: 30px; border-top: 1px solid rgba(0, 0, 0, 0.05);">--%>
+<%--                    <div class="gIL8h3">--%>
+<%--                        <div>--%>
+<%--                            <div class="fqmTt_">--%>
+<%--                                <div class="Nm4HEX">--%>
+<%--                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-2" tabindex="0">--%>
+<%--                                        <div class="XklnWA flex items-center"><img class="oZtSFx"--%>
+<%--                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/2bcf834c40468ebcb90b.svg">--%>
+<%--                                            <div class="YzLslW">Đổi ý miễn phí 15 ngày</div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="Nm4HEX">--%>
+<%--                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-3" tabindex="0">--%>
+<%--                                        <div class="XklnWA flex items-center"><img class="oZtSFx"--%>
+<%--                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/511aca04cc3ba9234ab0.png">--%>
+<%--                                            <div class="YzLslW">Hàng chính hãng 100%</div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="Nm4HEX">--%>
+<%--                                    <div class="shopee-drawer _7dS96" id="pc-drawer-id-4" tabindex="0">--%>
+<%--                                        <div class="XklnWA flex items-center"><img class="oZtSFx"--%>
+<%--                                                                                   src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/16ead7e0a68c3cff9f32.png">--%>
+<%--                                            <div class="YzLslW">Miễn phí vận chuyển</div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
             <div class="col-7 px-4">
                 <div class="row">
@@ -237,18 +237,18 @@
                                 </div>
                             </div>
                         </c:if>
-                        <div class="row mt-4">
-                            <div class="col-4">
-                                Vận chuyển
-                            </div>
-                            <div class="col-8">
-                                <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
-                                    <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/d9e992985b18d96aab90.png"
-                                         height="20" class="Fy4A_Q">
-                                    Miễn phí vận chuyển
-                                </span>
-                            </div>
-                        </div>
+<%--                        <div class="row mt-4">--%>
+<%--                            <div class="col-4">--%>
+<%--                                Vận chuyển--%>
+<%--                            </div>--%>
+<%--                            <div class="col-8">--%>
+<%--                                <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">--%>
+<%--                                    <img src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/d9e992985b18d96aab90.png"--%>
+<%--                                         height="20" class="Fy4A_Q">--%>
+<%--                                    Miễn phí vận chuyển--%>
+<%--                                </span>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                         <div class="row mt-4">
                             <div class="col-4">
                                 Màu sắc
@@ -383,33 +383,61 @@
     let chiTietSanPham = [];
     let idChiTietSanPham = "";
 
+    // function renderSale(sale) {
+    //     const listSale = $('.voucher-ticket');
+    //     const saleSelect = $(sale);
+    //     const hinhThucGiam = parseInt(saleSelect.attr('hinhThucGiam'));
+    //     const giaTriGiam = parseInt(saleSelect.attr('giaTriGiam'));
+    //
+    //     listSale.removeClass('checked');
+    //     saleSelect.addClass('checked');
+    //
+    //     $('#tenMaGiamGia').text(saleSelect.attr('ten'));
+    //     $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect.attr('ngayKetThuc'))).toLocaleString());
+    //     $('#donGiaTruocSale').text("₫" + sanPham.donGia);
+    //
+    //     if (hinhThucGiam == 1) {
+    //         $('#donGia').text(sanPham.donGia * (100 - giaTriGiam) / 100);
+    //         $('#giamGia').text('' + giaTriGiam + ' % giảm');
+    //     } else {
+    //         $('#donGia').text(sanPham.donGia - giaTriGiam);
+    //         $('#giamGia').text('' + giaTriGiam + ' VNĐ giảm');
+    //         if (sanPham.donGia - giaTriGiam < 0) {
+    //             $('#donGia').text(0);
+    //         }
+    //     }
+    //
+    //     $('#donGiaTruocSale').show();
+    //     $('#giamGia').show();
+    // }
     function renderSale(sale) {
         const listSale = $('.voucher-ticket');
         const saleSelect = $(sale);
         const hinhThucGiam = parseInt(saleSelect.attr('hinhThucGiam'));
-        const giaTriGiam = parseInt(saleSelect.attr('giaTriGiam'));
+        const giaTriGiam = parseFloat(saleSelect.attr('giaTriGiam')); // Dùng parseFloat thay vì parseInt
 
         listSale.removeClass('checked');
         saleSelect.addClass('checked');
 
         $('#tenMaGiamGia').text(saleSelect.attr('ten'));
         $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect.attr('ngayKetThuc'))).toLocaleString());
-        $('#donGiaTruocSale').text("₫" + sanPham.donGia);
+        $('#donGiaTruocSale').text("₫" + sanPham.donGia.toLocaleString('vi-VN'));
 
         if (hinhThucGiam == 1) {
-            $('#donGia').text(sanPham.donGia * (100 - giaTriGiam) / 100);
-            $('#giamGia').text('' + giaTriGiam + ' % giảm');
+            $('#donGia').text((sanPham.donGia * (100 - giaTriGiam) / 100).toLocaleString('vi-VN') + ' đ');
+            $('#giamGia').text(giaTriGiam + ' % giảm');
         } else {
-            $('#donGia').text(sanPham.donGia - giaTriGiam);
-            $('#giamGia').text('' + giaTriGiam + ' VNĐ giảm');
-            if (sanPham.donGia - giaTriGiam < 0) {
-                $('#donGia').text(0);
-            }
+            const formattedGiaTriGiam = giaTriGiam.toLocaleString('vi-VN');
+            const finalPrice = Math.max(sanPham.donGia - giaTriGiam, 0);
+
+            $('#donGia').text(finalPrice.toLocaleString('vi-VN') + ' đ');
+            $('#giamGia').text(formattedGiaTriGiam + ' đ giảm');
         }
 
         $('#donGiaTruocSale').show();
         $('#giamGia').show();
     }
+
 
     function muaNgay() {
         let sanPham = getChiTietSanPhamSelect();
