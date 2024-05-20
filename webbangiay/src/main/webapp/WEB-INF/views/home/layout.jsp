@@ -229,21 +229,11 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" id="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="#">
-                                        <div class="d-flex">
-                                            <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block" id="taiKhoan"></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
+                                    <a class="dropdown-item">
+                                        <a id="myProfileLink" class="dropdown-item" href="#">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle" id="taiKhoan"></span>
+                                        </a>
                                     </a>
                                 </li>
                                 <li>
@@ -315,6 +305,7 @@
 
 <%--<script src="../../../js/select-2.js"></script>--%>
 <script>
+
     var url = window.location.href;
     var domain = new URL(url).pathname;
     var menuItem = $('.menu-item')
@@ -339,24 +330,20 @@
             $('#dropdown-menu').show();
         }
     }
-    var userInfoCookie = getCookie("user_info");
-    if (userInfoCookie) {
-        $('#taiKhoan').text(JSON.parse(userInfoCookie))
-    } else {
+
+    $(document).ready(function() {
         $.ajax({
-            type: "GET",
-            url: "/user-infor",
-            success: function (response) {
-                if (response) {
-                    setCookie("user_info", JSON.stringify(response.taiKhoan));
-                    $('#taiKhoan').text(response.taiKhoan)
+            url: '/user-infor',
+            method: 'GET',
+            success: function(data) {
+                if (data) {
+                    $('#taiKhoan').text(data.hoTen);  // Assuming `ten` is the property for the name
+                    $('#idNV').text(data.id);
+                    // Set href attribute dynamically
+                    $('#myProfileLink').attr('href', '/nhan-vien/view-update?id=' + data.id);
                 }
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
             }
         });
-    }
-
+    });
 </script>
 </html>

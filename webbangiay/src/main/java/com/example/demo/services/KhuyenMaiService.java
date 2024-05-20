@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,6 +27,6 @@ public interface KhuyenMaiService {
 
     List<KhuyenMai> getComboboxKhuyenMai();
 
-    List<KhuyenMai> loc(Integer locTT, Integer locHTG);
+    public List<KhuyenMai> loc(Integer locTT, Integer locHTG, LocalDate ngayKiemTra);
 
 }

@@ -158,12 +158,14 @@ public class ChiTietSanPhamController {
     }
 
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public String search(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham, @RequestParam("search") String search) {
         model.addAttribute("listSP", sanPhamRepository.findAll());
         model.addAttribute("listMS", mauSacService.findAll());
         model.addAttribute("listKT", kichThuocService.findAll());
         model.addAttribute("listCL", chatLieuService.findAll());
+        model.addAttribute("listTH", thuongHieuService.findAll());
+        model.addAttribute("listPL", phanLoaiService.findAll());
 
         List<SanPham> list = chiTietSanPhamService.search0(search);
         model.addAttribute("listCTSP", list);
@@ -171,38 +173,33 @@ public class ChiTietSanPhamController {
         return "home/layout";
     }
 
-    @PostMapping("/loc")
-    public String loc(Model model, @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham,
+    @GetMapping("/loc")
+    public String loc(Model model,
+                      @ModelAttribute("chiTietSanPham") ChiTietSanPham chiTietSanPham,
                       @RequestParam(value = "locTH", required = false) String locTH,
                       @RequestParam(value = "locPL", required = false) String locPL,
-                      @RequestParam(value = "locTT", required = false) Integer locTT, @RequestParam("num") Optional<Integer> num,
+                      @RequestParam(value = "locTT", required = false) Integer locTT,
+                      @RequestParam("num") Optional<Integer> num,
                       @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
+
         model.addAttribute("listTH", thuongHieuService.findAll());
         model.addAttribute("listPL", phanLoaiService.findAll());
+        model.addAttribute("locTH", locTH);
+        model.addAttribute("locPL", locPL);
+        model.addAttribute("locTT", locTT);
+
         List<SanPham> list;
         if (locTT != null) {
-            // Xử lý tìm kiếm dựa trên option1
             list = chiTietSanPhamService.loc1(locTH, locPL, locTT);
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-            model.addAttribute("listCTSP", list);
-            return "home/layout";
-        } else if (locTT == null) {
-            // Xử lý tìm kiếm dựa trên option2
-            list = chiTietSanPhamService.loc(locTH, locPL);
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-            model.addAttribute("listCTSP", list);
-            return "home/layout";
         } else {
-            // Nếu không có lựa chọn nào được chọn, trả về tất cả các kết quả
-            Sort sort = Sort.by("ngayTao").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<SanPham> lists = sanPhamService.getAll(pageable);
-            model.addAttribute("listCTSP", lists.getContent());
-            model.addAttribute("total", lists.getTotalPages());
-            model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
-            return "home/layout";
+            list = chiTietSanPhamService.loc(locTH, locPL);
         }
+
+        model.addAttribute("contentPage", "../chi-tiet-san-pham/hien-thi.jsp");
+        model.addAttribute("listCTSP", list);
+        return "home/layout";
     }
+
 
     @PostMapping("/modal-add-mau-sac")
     public ModelAndView addMauSac(@ModelAttribute("chiTietSanPham") ChiTietSanPham

@@ -2,12 +2,14 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.models.KhuyenMai;
+import com.example.demo.repositories.KhuyenMaiRepository;
 import com.example.demo.services.KhuyenMaiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,8 @@ import java.util.UUID;
 public class KhuyenMaiController {
     @Autowired
     private KhuyenMaiService khuyenMaiService;
+    @Autowired
+    private KhuyenMaiRepository khuyenMaiRepository;
 
     @GetMapping("/hien-thi")
     public String hienThi(Model model, @RequestParam("num") Optional<Integer> num,
@@ -84,7 +88,7 @@ public class KhuyenMaiController {
         return khuyenMaiService.update(id, khuyenMai);
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public String search(Model model, @ModelAttribute("khuyenMai") KhuyenMai khuyenMai, @RequestParam("search") String search) {
         List<KhuyenMai> list = khuyenMaiService.search(search);
         model.addAttribute("listKhuyenMai", list);
@@ -93,17 +97,25 @@ public class KhuyenMaiController {
     }
 
 
-    @PostMapping("/loc")
+    @GetMapping("/loc")
     public String loc(Model model,
                       @RequestParam(value = "locTT", required = false) Integer locTT,
                       @RequestParam(value = "locHTG", required = false) Integer locHTG,
-                      @ModelAttribute("khuyenMai") KhuyenMai khuyenMai) {
+                      @RequestParam(value = "ngayKiemTra", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate ngayKiemTra) {
 
-
-        List<KhuyenMai> list = khuyenMaiService.loc(locTT, locHTG);
+        Long ngayKiemTraMillis = (ngayKiemTra == null) ? null : ngayKiemTra.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
+        List<KhuyenMai> list = khuyenMaiRepository.loc(locTT, locHTG, ngayKiemTraMillis);
         model.addAttribute("listKhuyenMai", list);
+
+        // Add the input values to the model
+        model.addAttribute("locTT", locTT);
+        model.addAttribute("locHTG", locHTG);
+        model.addAttribute("ngayKiemTra", ngayKiemTra);
+
         model.addAttribute("contentPage", "../khuyen-mai/hien-thi.jsp");
         return "home/layout";
     }
+
+
 
 }

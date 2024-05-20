@@ -48,9 +48,9 @@
         <h3 class="card-header">Thông tin sản phẩm</h3>
         <tr>
             <td style="text-align: center">
-                <form action="/chi-tiet-san-pham/search" method="post">
+                <form action="/chi-tiet-san-pham/search" method="get">
                     <div class="input-group" style="width:100%; text-align: center">
-                        <input type="text" class="form-control" placeholder="Bạn tìm gì..."
+                        <input type="text" class="form-control" value="${param.search}" placeholder="Bạn tìm gì..."
                                aria-label="Bạn tìm gì..." name="search">
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-primary" style="height: 40px" type="submit">Search</button>
@@ -59,14 +59,14 @@
                 </form>
             </td>
             <td>
-                <form action="/chi-tiet-san-pham/loc" method="post">
+                <form action="/chi-tiet-san-pham/loc" method="get">
                     <div class="card-body" style="text-align: center">
                         <div class="demo-inline-spacing">
                             <div class="btn-group">
                                 <select class="form-select" name="locTH">
                                     <option selected disabled>Thương hiệu</option>
                                     <c:forEach items="${listTH}" var="th">
-                                        <option value="${th.ten}">${th.ten}</option>
+                                        <option value="${th.ten}" ${param.locTH == th.ten ? 'selected' : ''}>${th.ten}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -75,7 +75,7 @@
                                 <select class="form-select" name="locPL">
                                     <option selected disabled>Phân loại</option>
                                     <c:forEach items="${listPL}" var="pl">
-                                        <option value="${pl.tenLoai}">${pl.tenLoai}</option>
+                                        <option value="${pl.tenLoai}" ${param.locPL == pl.tenLoai ? 'selected' : ''}>${pl.tenLoai}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -83,20 +83,18 @@
                             <div class="btn-group">
                                 <select class="form-select" name="locTT">
                                     <option selected disabled>Trạng thái</option>
-                                    <option value="0">Ngừng bán</option>
-                                    <option value="1">Còn bán</option>
+                                    <option value="0" ${param.locTT != null && param.locTT == '0' ? 'selected' : ''}>Ngừng bán</option>
+                                    <option value="1" ${param.locTT != null && param.locTT == '1' ? 'selected' : ''}>Còn bán</option>
                                 </select>
                             </div>
 
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-primary mr-2"
-                                        onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">
-                                    Lọc
-                                </button>
+                                <button type="submit" class="btn btn-primary mr-2">Lọc</button>
                             </div>
                         </div>
                     </div>
                 </form>
+
             </td>
         </tr>
         <tr class="text-center">

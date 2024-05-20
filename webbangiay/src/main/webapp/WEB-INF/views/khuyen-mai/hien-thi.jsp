@@ -50,10 +50,10 @@
         <h3 class="card-header">Thông tin khuyến mại</h3>
         <tr>
             <td style="text-align: center">
-                <form action="/khuyen-mai/search" method="post" class="row g-3 align-items-center">
+                <form action="/khuyen-mai/search" method="get" class="row g-3 align-items-center">
                     <div class="col-auto">
                         <label for="search" class="visually-hidden">Tìm kiếm</label>
-                        <input type="text" class="form-control" id="search" name="search" placeholder="Tìm kiếm...">
+                        <input type="text" class="form-control" id="search" value="${param.search}" name="search" placeholder="Tìm kiếm...">
                     </div>
                     <div class="col-auto">
                         <button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -61,22 +61,24 @@
                 </form>
             </td>
             <td>
-                <form action="/khuyen-mai/loc" method="post" class="row g-3 align-items-center mt-3">
+                <form action="/khuyen-mai/loc" method="get" class="row g-3 align-items-center mt-3">
                     <div class="card-body" style="text-align: center">
-
                         <div class="btn-group">
                             <select class="form-select" name="locHTG">
                                 <option selected disabled>Loại</option>
-                                <option value=0>Tiền</option>
-                                <option value=1>%</option>
+                                <option value="0" ${locHTG != null && locHTG == 0 ? 'selected' : ''}>Tiền</option>
+                                <option value="1" ${locHTG != null && locHTG == 1 ? 'selected' : ''}>%</option>
                             </select>
                         </div>
                         <div class="btn-group">
                             <select class="form-select" name="locTT">
                                 <option selected disabled>Trạng thái</option>
-                                <option value=0>Ngừng hoạt động</option>
-                                <option value=1>Hoạt động</option>
+                                <option value="0" ${locTT != null && locTT == 0 ? 'selected' : ''}>Ngừng hoạt động</option>
+                                <option value="1" ${locTT != null && locTT == 1 ? 'selected' : ''}>Hoạt động</option>
                             </select>
+                        </div>
+                        <div class="btn-group">
+                            <input type="date" class="form-control" name="ngayKiemTra" value="${ngayKiemTra}">
                         </div>
                         <div class="btn-group">
                             <button class="btn btn-primary" type="submit">Lọc</button>
@@ -105,7 +107,7 @@
                 <th>Ngày kết thúc</th>
                 <th>Giá trị giảm</th>
                 <th>Điều kiện giảm</th>
-<%--                <th>Tình trạng</th>--%>
+                <%--                <th>Tình trạng</th>--%>
                 <th>Chức năng</th>
             </tr>
             <c:forEach items="${listKhuyenMai}" var="hangSanPham" varStatus="stt">
@@ -142,10 +144,10 @@
 
                         document.write(formatCurrency(${hangSanPham.dieuKienGia}) + " VNĐ");</script>
                     </td>
-<%--                    <td>--%>
-<%--                        <c:if test="${hangSanPham.trangThai==0}">Ngừng hoạt động</c:if>--%>
-<%--                        <c:if test="${hangSanPham.trangThai==1}">Hoạt động</c:if>--%>
-<%--                    </td>--%>
+                        <%--                    <td>--%>
+                        <%--                        <c:if test="${hangSanPham.trangThai==0}">Ngừng hoạt động</c:if>--%>
+                        <%--                        <c:if test="${hangSanPham.trangThai==1}">Hoạt động</c:if>--%>
+                        <%--                    </td>--%>
                     <td>
                         <a href="/khuyen-mai/delete/${hangSanPham.id}" class="btn btn-success"
                            onclick="return tbxd()">Delete</a>
