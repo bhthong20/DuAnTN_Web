@@ -98,8 +98,9 @@
                         <p class="text-muted mb-1">Mã người dùng <span id="maKhachHang"></span></p>
                         <p class="text-muted mb-4">Tài khoản người dùng <span id="taiKhoanText"></span></p>
                         <div class="d-flex justify-content-center mb-2">
-                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Thay đổi mật khẩu</button>
-                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Cập nhật dữ liệu</button>
+                            <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                    class="btn btn-outline-primary ms-1" id="updateButton">Cập nhật dữ liệu
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -112,7 +113,7 @@
                                 <p class="mb-0">Tên tài khoản</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0"><input id="taiKhoanForm" disabled class="form-control" /></p>
+                                <p class="text-muted mb-0"><input id="taiKhoanForm" disabled class="form-control"/></p>
                             </div>
                         </div>
                         <hr>
@@ -121,7 +122,7 @@
                                 <p class="mb-0">Họ tên</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0"><input id="hoTen" class="form-control" /></p>
+                                <p class="text-muted mb-0"><input id="hoTen" class="form-control"/></p>
                             </div>
                         </div>
                         <hr>
@@ -130,7 +131,7 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0"><input id="email" class="form-control" /></p>
+                                <p class="text-muted mb-0"><input id="email" class="form-control"/></p>
                             </div>
                         </div>
                         <hr>
@@ -139,7 +140,7 @@
                                 <p class="mb-0">Số điện thoại</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0"><input id="sdt" class="form-control" /></p>
+                                <p class="text-muted mb-0"><input id="sdt" class="form-control"/></p>
                             </div>
                         </div>
                         <hr>
@@ -148,7 +149,7 @@
                                 <p class="mb-0">Ngày sinh</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0"><input id="ngaySinh" type="date" class="form-control" /></p>
+                                <p class="text-muted mb-0"><input id="ngaySinh" type="date" class="form-control"/></p>
                             </div>
                         </div>
                         <hr>
@@ -157,7 +158,8 @@
                                 <p class="mb-0">Mật khẩu</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0"><input id="matKhau" type="password" disabled value="**********" class="form-control" /></p>
+                                <p class="text-muted mb-0"><input id="matKhau" type="password" disabled
+                                                                  value="**********" class="form-control"/></p>
                             </div>
                         </div>
                     </div>
@@ -200,7 +202,31 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+
 <script>
+    async function updateUser() {
+        const updatedKhachHang = {
+            hoTen: $('#hoTen').val(),
+            email: $('#email').val(),
+            sdt: $('#sdt').val(),
+            ngaySinh: $('#ngaySinh').val(),
+            // Add other necessary fields
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/update-user",
+            contentType: "application/json",
+            data: JSON.stringify(updatedKhachHang),
+            success: function (response) {
+                alert(response);
+            },
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    }
 
     window.onload = async function () {
         await loadUserLogin();
@@ -228,5 +254,10 @@
         });
     }
 
+    // Bind the update function to the button click
+    $('#updateButton').click(function () {
+        updateUser();
+    });
 </script>
+
 </html>

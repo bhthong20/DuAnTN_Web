@@ -192,12 +192,6 @@
                                     <div class="col-sm-7">
                                         <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
                                             <span id="renderMaGiamGia">
-<%--                                                <div class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover">--%>
-<%--                                                    <div class=""><span--%>
-<%--                                                            class="voucher-promo-value voucher-promo-value--percent">20</span><span--%>
-<%--                                                            class="voucher-promo-label">%</span><span--%>
-<%--                                                            class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>--%>
-<%--                                                </div>--%>
                                             </span>
                                             <span>
                                                 <button type="button" class="btn btn-danger checkHidden"
@@ -413,6 +407,13 @@
         const soDienThoaiVal = soDienThoai.val();
         const diaChiVal = diaChi.val();
         const moTaVal = moTa.val();
+
+        // Kiểm tra định dạng số điện thoại (chỉ chứa chữ số và có độ dài từ 10 đến 11)
+        const phonePattern = /^\d{10,11}$/;
+        if (!phonePattern.test(soDienThoai.val())) {
+            alert("Số điện thoại không đúng định dạng");
+            check = false;
+        }
 
         if (!tenNguoiNhanVal.trim()) {
             alert("Vui lòng nhập tên người nhận.");

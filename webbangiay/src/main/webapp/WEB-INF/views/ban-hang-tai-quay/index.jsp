@@ -507,136 +507,103 @@
         <div class="modal-content">
             <div id="content">
                 <div style="width: 100%; text-align: center; padding: 30px 0">
-                    <h1>THÔNG TIN HÓA ĐƠN</h1>
+                    <h1>HÓA ĐƠN BÁN HÀNG</h1>
+                    <span>Mã hóa đơn: <span id="maHoaDonPdf" style="font-weight: 900;">HD0222</span></span>
+                    <div class="pb-2" style=""><img style="background: #FFFFFF; padding: 10px"
+                                                    src="../uploads/barcode.png" width="200px" height="70px"/></div>
+                    <span>Ngày tạo: <span id="ngayTaoPdf" style="font-weight: 900;">18/05/2024</span></span>
                 </div>
                 <div class="container">
-
-                    <div class="divider">
-                        <div class="divider-text">Thông tin hóa đơn</div>
-                    </div>
                     <!--        row 1-->
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Mã hóa đơn</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="maHoaDonPdf"></h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Ngày tạo</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="ngayTaoPdf"></h5>
-                        </div>
-                    </div>
+                    <%--                    <div class="row">--%>
+                    <%--                        <div class="col-2">--%>
+                    <%--                            <span class="text-end">Mã hóa đơn</span>--%>
+                    <%--                        </div>--%>
+                    <%--                        <div class="col-4">--%>
+                    <%--                            <span id="maHoaDonPdf"></span>--%>
+                    <%--                        </div>--%>
+                    <%--                        <div class="col-2">--%>
+                    <%--                            <span class="text-end">Ngày tạo</span>--%>
+                    <%--                        </div>--%>
+                    <%--                        <div class="col-4">--%>
+                    <%--                            <span id="ngayTaoPdf"></span>--%>
+                    <%--                        </div>--%>
+                    <%--                    </div>--%>
                     <!--        row 2-->
                     <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Mã người đặt hàng</h5>
-                        </div>
                         <div class="col-4">
-                            <h5 id="maKhachHangPdf"></h5>
+                            <span class="text-end">Chi nhánh:</span>
                         </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Tên người nhận</h5>
+                        <div class="col-8">
+                            <span>Sneaker Hà Nội</span>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-4">
-                            <h5 id="tenNguoiNhanPdf"></h5>
+                            <span class="text-end">Nhân viên:</span>
+                        </div>
+                        <div class="col-8">
+                            <span id="nhanVien"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <%--                        <div class="col-2">--%>
+                        <%--                            <span class="text-end">Mã người đặt hàng</span>--%>
+                        <%--                        </div>--%>
+                        <%--                        <div class="col-4">--%>
+                        <%--                            <span id="maKhachHangPdf"></span>--%>
+                        <%--                        </div>--%>
+                        <div class="col-4">
+                            <span class="text-end">Tên người nhận</span>
+                        </div>
+                        <div class="col-8">
+                            <span id="tenNguoiNhanPdf"></span>
                         </div>
                     </div>
                     <!--        row 3-->
                     <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Tên người đặt hàng</h5>
-                        </div>
+                        <%--                        <div class="col-4">--%>
+                        <%--                            <span class="text-end">Tên người đặt hàng</span>--%>
+                        <%--                        </div>--%>
+                        <%--                        <div class="col-8">--%>
+                        <%--                            <span id="tenKhachHangPdf"></span>--%>
+                        <%--                        </div>--%>
                         <div class="col-4">
-                            <h5 id="tenKhachHangPdf"></h5>
+                            <span class="text-end">Địa chỉ người nhận</span>
                         </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Địa chỉ người nhận</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="diaChiNhanPdf"></h5>
+                        <div class="col-8">
+                            <span id="diaChiNhanPdf"></span>
                         </div>
                     </div>
                     <!--        row 4-->
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Số điện thoại người đặt</h5>
-                        </div>
+                    <div class="row mb-5">
+                        <%--                        <div class="col-2">--%>
+                        <%--                            <span class="text-end">Số điện thoại người đặt</span>--%>
+                        <%--                        </div>--%>
+                        <%--                        <div class="col-4">--%>
+                        <%--                            <span id="soDienThoaiNguoiDatPdf"></span>--%>
+                        <%--                        </div>--%>
                         <div class="col-4">
-                            <h5 id="soDienThoaiNguoiDatPdf"></h5>
+                            <span class="text-end">Sđt người nhận</span>
                         </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Số điện thoại người nhận</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="soDienThoaiNguoiNhanPdf"></h5>
+                        <div class="col-8">
+                            <span id="soDienThoaiNguoiNhanPdf"></span>
                         </div>
                     </div>
                     <!--        row 5-->
 
-                    <div class="divider">
-                        <div class="divider-text">Thông tin giá</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Đơn giá</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="donGiaPdf"></h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Phí ship</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="phiShipPdf"></h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Mã giảm giá</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="tenMaGiamGiaPdf"></h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Tiền được giảm</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="tienDuocGiamPdf"></h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <h5 class="text-end">Tổng tiền thanh toán</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="tongTienPdf"></h5>
-                        </div>
-                        <div class="col-2">
-                            <h5 class="text-end">Trạng thái</h5>
-                        </div>
-                        <div class="col-4">
-                            <h5 id="trangThaiPdf"></h5>
-                        </div>
-                    </div>
-
                     <div class="row mb-5">
-                        <div class="divider">
-                            <div class="divider-text">Danh sách sản phẩm</div>
-                        </div>
                         <div class="text-nowrap">
-                            <table class="table table-striped">
+                            <table border="1" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Ảnh</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Màu sắc</th>
-                                    <th>Kích cỡ</th>
-                                    <th>Chất liệu</th>
+                                    <%--                                    <th>Màu sắc</th>--%>
+                                    <%--                                    <th>Kích cỡ</th>--%>
+                                    <%--                                    <th>Chất liệu</th>--%>
                                     <th>Giá(VNĐ)</th>
                                     <th>Sl Mua</th>
+                                    <th>Tổng tiền</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-2" id="listSanPhamPdf">
@@ -645,12 +612,73 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <div>
+                                ghi chú:
+                                <span id="ghiChuPdf">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <span class="text-end">Đơn giá</span>
+                                </div>
+                                <div class="col-8">
+                                    <span id="donGiaPdf"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span class="text-end">Phí ship</span>
+                                </div>
+                                <div class="col-8">
+                                    <span id="phiShipPdf"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span class="text-end">Tiền giảm</span>
+                                </div>
+                                <div class="col-8">
+                                    <span id="tienDuocGiamPdf"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <span class="text-end">Tổng tiền</span>
+                                </div>
+                                <div class="col-8">
+                                    <span id="tongTienPdf"></span>
+                                </div>
+                                <%--                        <div class="col-2">--%>
+                                <%--                            <span class="text-end">Trạng thái</span>--%>
+                                <%--                        </div>--%>
+                                <%--                        <div class="col-4">--%>
+                                <%--                            <span id="trangThaiPdf"></span>--%>
+                                <%--                        </div>--%>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            Người đặt hàng
+                        </div>
+                        <div class="col-6 text-center">
+                            Người nhận hàng
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
 </body>
 <script
         src="https://unpkg.com/html5-qrcode">
@@ -919,42 +947,39 @@
     }
 
     const fillExportHoaDon = () => {
-        fillTongTien();
-
+        console.log(hoaDon)
         $("#maHoaDonPdf").text(hoaDon.ma);
-        $("#ngayTaoPdf").text(formatDateTime(hoaDon.ngayTao));
+        $("#ngayTaoPdf").text(hoaDon.ngayTao);
+        $("#nhanVien").text(hoaDon.nhanVien ? hoaDon.nhanVien.hoTen : "Không có dữ liệu");
         $("#maKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.ma : "Không có dữ liệu");
         $("#tenKhachHangPdf").text(hoaDon.khachHang ? hoaDon.khachHang.hoTen : "Không có dữ liệu");
-        $("#tenNguoiNhanPdf").text(hoaDon.tenNguoiNhan ? hoaDon.tenNguoiNhan : "Không có dữ liệu");
-        $("#diaChiNhanPdf").text("Không có dữ liệu");
+        $("#tenNguoiNhanPdf").text(hoaDon.khachHang ? hoaDon.khachHang.hoTen : "Không có dữ liệu");
+        $("#diaChiNhanPdf").text(hoaDon.khachHang && hoaDon.khachHang.diaChi ? hoaDon.khachHang.diaChi.replaceAll("{,}", ",") : "Không có dữ liệu");
         $("#soDienThoaiNguoiDatPdf").text(hoaDon.khachHang ? hoaDon.khachHang.sdt : "Không có dữ liệu");
-        $("#soDienThoaiNguoiNhanPdf").text(hoaDon.sdt ? hoaDon.sdt : "Không có dữ liệu");
-        $("#donGiaPdf").text((hoaDon.tongTien + hoaDon.tienGiam).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ");
+        $("#soDienThoaiNguoiNhanPdf").text(hoaDon.khachHang ? hoaDon.khachHang.sdt : "Không có dữ liệu");
+        $("#donGiaPdf").text((hoaDon.tongTien + hoaDon.tienGiam - hoaDon.tienShip).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ");
         $("#phiShipPdf").text(hoaDon.tienShip ? hoaDon.tienShip.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
         $("#tenMaGiamGiaPdf").text(hoaDon.khuyenMai ? hoaDon.khuyenMai.ten : "Không có dữ liệu");
         $("#tienDuocGiamPdf").text(hoaDon.tienGiam ? hoaDon.tienGiam.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
         $("#tongTienPdf").text(hoaDon.tongTien ? hoaDon.tongTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " VNĐ" : "0 VNĐ");
         $("#trangThaiPdf").text(switchTrangThai(hoaDon.trangThai));
-        console.log(hoaDon)
+        $("#ghiChu").text(hoaDon.ghiChu);
+
         const tableProduct = document.getElementById("listSanPhamPdf");
         let html = '';
         $('#listHoaDonSanPham').find('tr').each(function () {
             const lastInput = $(this).find('input:last');
-            checkRecordProduct = true;
             let product = JSON.parse($(this).attr('item'));
             const lastInputValue = lastInput.val();
             html += `
                 <tr>
-                    <td align="center">
-                        <img src="../uploads/` + product.chiTietSanPham.hinhAnh.anh1 + `" width="50" height="50"
-                             style="border-radius:50% 50% 50% 50%">
+                    <td>
+                        ` + product.chiTietSanPham.sanPham.tenSP + `
+                        (` + product.chiTietSanPham.mauSac.ten + ` - ` + product.chiTietSanPham.kichThuoc.size + ` - ` + product.chiTietSanPham.chatLieu.tenChatLieu + `)
                     </td>
-                    <td>` + product.chiTietSanPham.sanPham.tenSP + `</td>
-                    <td>` + product.chiTietSanPham.mauSac.ten + `</td>
-                    <td>` + product.chiTietSanPham.kichThuoc.size + `</td>
-                    <td>` + product.chiTietSanPham.chatLieu.tenChatLieu + `</td>
-                    <td><strong>` + product.chiTietSanPham.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
-                    <td><strong>` + lastInputValue + `</strong></td>
+                    <td><strong>` + product.donGia.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
+                    <td><strong>` + product.soLuong.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
+                    <td><strong>` + (product.soLuong * product.donGia).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + `</strong></td>
                 </tr>
             `
         });

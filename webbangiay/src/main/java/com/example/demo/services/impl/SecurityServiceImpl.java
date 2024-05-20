@@ -5,6 +5,7 @@ import com.example.demo.repositories.KhachHangRepository;
 import com.example.demo.repositories.NhanVienRepository;
 import com.example.demo.services.KhachHangService;
 import com.example.demo.services.SecurityService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -44,6 +45,20 @@ public class SecurityServiceImpl implements SecurityService {
         khachHang.setMa(maKhachHang);
 
         return service.add(khachHang);
+    }
+
+    @Override
+    public KhachHang updateKhachHang(UUID id, KhachHang khachHang) {
+        if (id != null) {
+            KhachHang existingKhachHang = repository.findById(id).orElse(null);
+            if (existingKhachHang != null) {
+                String existingPassword = existingKhachHang.getMatKhau(); // Retain the existing password
+                BeanUtils.copyProperties(khachHang, existingKhachHang, "matKhau"); // Exclude password from copying
+                existingKhachHang.setMatKhau(existingPassword); // Set the existing password
+                return repository.save(existingKhachHang);
+            }
+        }
+        return null;
     }
 
 
