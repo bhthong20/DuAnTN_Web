@@ -22,7 +22,7 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, UUID> {
 
     List<HoaDon> findAllByLoaiAndTrangThai(int loai, int trangThai);
 
-    List<HoaDon> findAllByTrangThai(int trangThai);
+    List<HoaDon> findAllByTrangThaiAndKhachHang(int trangThai, KhachHang khachHang);
 
     List<HoaDon> findAllByLoai(int loai);
 

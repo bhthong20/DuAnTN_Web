@@ -136,7 +136,7 @@
                         </button>
                         <button id="buttonTrangThai_10" type="button" class="btn btn-outline-secondary"
                                 onclick="orderBy(this, 10)">
-                            Đã hủy
+                            Hoàn tất
                             <span class="badge badge-center rounded-pill bg-danger"></span>
                         </button>
                     </section>

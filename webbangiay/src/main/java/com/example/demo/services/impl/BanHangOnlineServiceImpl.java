@@ -219,7 +219,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     public int countHoaDonByTrangThai(int trangThai) {
-        return hoaDonRepository.findAllByTrangThai(trangThai).size();
+        return hoaDonRepository.findAllByTrangThaiAndKhachHang(trangThai, (KhachHang) common.getUserLogin()).size();
     }
 
     @Override

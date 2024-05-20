@@ -585,6 +585,19 @@
         fillTongTien();
     }
 
+    function rowDisabledInput() {
+        $('#listChiTietSanPham').find('tr').each(function () {
+            const firstCheckbox = $(this).find('input[type="checkbox"]:first');
+            const lastInput = $(this).find('input:last');
+
+            if (firstCheckbox.is(':checked')) {
+                lastInput.prop('disabled', false);
+            } else {
+                lastInput.prop('disabled', true);
+            }
+        });
+    }
+
     const loadChiTietSanPham = async () => {
         const tableProduct = document.getElementById("listChiTietSanPham");
         await $.ajax({
@@ -604,7 +617,7 @@
                     response.hoaDonChiTiet.forEach(el => {
                         index++;
                         html += `<tr item='` + JSON.stringify(el) + `'>
-                                <td><input class="form-check-input checkStatus" onchange="fillTongTien()" type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
+                                <td><input class="form-check-input checkStatus" onchange="rowDisabledInput()"  type="checkbox" name="chiTietSanPham" value="` + el.chiTietSanPham.id + `" /></td>
                                 <td>` + (el.chiTietSanPham.sanPham ? el.chiTietSanPham.sanPham.tenSP : "") + `</td>
                                 <td>` + (el.chiTietSanPham.mauSac ? el.chiTietSanPham.mauSac.ten : "") + `</td>
                                 <td>` + (el.chiTietSanPham.kichThuoc ? el.chiTietSanPham.kichThuoc.size : "") + `</td>
