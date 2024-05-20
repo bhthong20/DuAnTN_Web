@@ -92,24 +92,11 @@
                 <hr class="m-0"/>
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="ma" class="col-form-label">Mã giày</label>
-                        <div>
-                            <input class="form-control" type="text" value="" id="ma"/>
-                        </div>
-                    </div>
-                    <div class="mb-3">
                         <label for="ten" class="col-form-label">Tên giày</label>
                         <div>
                             <input class="form-control" type="text" value="" id="ten"/>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="moTa" class="col-form-label">Mô tả</label>
-                        <div>
-                            <input class="form-control" type="text" value="" id="moTa"/>
-                        </div>
-                    </div>
-
                     <div class="divider">
                         <div class="divider-text">Màu sắc</div>
                     </div>
@@ -247,8 +234,9 @@
 <script src="../../../js/select-2.js"></script>
 <script>
     function formatCurrency(number) {
-        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+        return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(number);
     }
+
     let filter = {
         ma: "",
         ten: "",
@@ -309,39 +297,69 @@
         filterSanPham();
     }
 
+    function formatCurrencyInput(input) {
+        input = input.replace(/\D/g, ''); // Remove non-digit characters
+        return input.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas for thousands
+    }
+
+    function removeFormatCurrency(input) {
+        return input.replace(/,/g, ''); // Remove commas
+    }
+
     function filterSanPham() {
+        // Validate giá bắt đầu và giá kết thúc
+        let giaBatDau = removeFormatCurrency($('#giaBatDau').val());
+        let giaKetThuc = removeFormatCurrency($('#giaKetThuc').val());
+
+        if (parseInt(giaKetThuc) < parseInt(giaBatDau)) {
+            alert('Giá kết thúc không được nhỏ hơn giá bắt đầu');
+            return;
+        }
+
         filter.listIdMauSac = [];
         filter.listIdThuongHieu = [];
         filter.listIdPhanLoai = [];
 
         filter.ma = $("#ma").val();
         filter.ten = $("#ten").val();
-        filter.giaBatDau = $('#giaBatDau').val();
-        filter.giaKetThuc = $('#giaKetThuc').val();
+        filter.giaBatDau = giaBatDau ? parseInt(giaBatDau) : null;
+        filter.giaKetThuc = giaKetThuc ? parseInt(giaKetThuc) : null;
 
         let mauSac = $(".mauSac");
         let thuongHieu = $(".thuongHieu");
         let phanLoai = $(".phanLoai");
         mauSac.each(function () {
             if ($(this).prop("checked")) {
-                filter.listIdMauSac.push($(this).val())
+                filter.listIdMauSac.push($(this).val());
             }
         });
 
         thuongHieu.each(function () {
             if ($(this).prop("checked")) {
-                filter.listIdThuongHieu.push($(this).val())
+                filter.listIdThuongHieu.push($(this).val());
             }
         });
 
         phanLoai.each(function () {
             if ($(this).prop("checked")) {
-                filter.listIdPhanLoai.push($(this).val())
+                filter.listIdPhanLoai.push($(this).val());
             }
-        })
+        });
+
         getListData();
         renderCard();
     }
+
+    $(document).ready(function () {
+        // Add event listeners to format currency on input
+        $('#giaBatDau, #giaKetThuc').on('input', function () {
+            let formattedValue = formatCurrencyInput($(this).val());
+            $(this).val(formattedValue);
+        });
+
+        // Initialize filter when page loads
+        filterSanPham();
+    });
 
     window.onload = function () {
         filterSanPham();

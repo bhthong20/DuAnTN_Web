@@ -229,12 +229,11 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="loaiSearch">Loại</label>
-                                <select class="form-select" id="loaiSearch">
+                                <label class="form-label" for="trangThaiSearch">Trạng thái</label>
+                                <select class="form-select" id="trangThaiSearch">
                                     <option selected value="">Lựa chọn</option>
-                                    <c:forEach items="${listPL}" var="item">
-                                        <option value="${item.id}">${item.tenLoai}</option>
-                                    </c:forEach>
+                                    <option value='0'>Ngưng bán</option>
+                                    <option value='1'>Còn bán</option>
                                 </select>
                             </div>
                         </div>
@@ -386,6 +385,8 @@
         let chatLieuSearch = $('#chatLieuSearch').val();
         let hinhAnhSearch = $('#hinhAnhSearch').val();
         let loaiSearch = $('#loaiSearch').val();
+        let thuongHieuSearch = $('#thuongHieuSearch').val();
+        let trangThaiSearch = $('#trangThaiSearch').val(); // Giá trị của trạng thái
         $('#listProduct').find('tr').each(function () {
             let product = JSON.parse($(this).attr('item'));
             let check = true;
@@ -437,6 +438,18 @@
                     check = false;
                 }
             }
+            if (thuongHieuSearch) {
+                if (!product.thuongHieu.id.toLowerCase().includes(thuongHieuSearch.toLowerCase())) {
+                    check = false;
+                }
+            }
+            if (trangThaiSearch !== "") {
+                // Nếu trạng thái của sản phẩm không trùng khớp với giá trị trạng thái được chọn, đặt check thành false
+                if (product.trangThai != trangThaiSearch) {
+                    check = false;
+                }
+            }
+
 
             // Nếu sản phẩm không thỏa mãn các điều kiện tìm kiếm, ẩn nó đi
             if (!check) {

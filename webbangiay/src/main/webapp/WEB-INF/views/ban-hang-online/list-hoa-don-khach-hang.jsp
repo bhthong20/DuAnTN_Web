@@ -120,13 +120,13 @@
                                 class="shopee-sort-by-options__option">
                             <span aria-hidden="true">Đang giao hàng</span></button>
                         <button aria-label=""
-                                onclick="orderBy(this, 8)" aria-pressed="false"
-                                class="shopee-sort-by-options__option">
-                            <span aria-hidden="true">Đã hủy</span></button>
-                        <button aria-label=""
                                 onclick="orderBy(this, 6)" aria-pressed="false"
                                 class="shopee-sort-by-options__option">
                             <span aria-hidden="true">Vận chuyển hoàn tất</span></button>
+                        <button aria-label=""
+                                onclick="orderBy(this, 8)" aria-pressed="false"
+                                class="shopee-sort-by-options__option">
+                            <span aria-hidden="true">Đã hủy</span></button>
                         <button aria-label=""
                                 onclick="orderBy(this, 10)" aria-pressed="false"
                                 class="shopee-sort-by-options__option">
@@ -246,7 +246,7 @@
             })
         } else {
             html = `
-                <div class="w-100 text-center"><h4>Không có hóa đơn 🤷‍♂️🤷‍♀️</h4></div>
+                <div class="w-100 text-center"><h4>Không có đơn hàng 🤷‍♂️🤷‍♀️</h4></div>
             `
         }
 

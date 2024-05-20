@@ -101,29 +101,7 @@
 
 <section id="content" class="mt-4">
     <section id="banner__page" style="height: 100%">
-<%--        <img class="w-100"--%>
-<%--             data-src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png"--%>
-<%--             src="https://file.hstatic.net/1000356936/file/ch_banner_full_desktop_hp_1920x960px_1_d2efa97a8e5042babad039e94b892ecb.png"--%>
-<%--             alt="">--%>
-<%--        <div style="    right: 200px;--%>
-<%--    bottom: 200px;" class="item-content-wrap position-absolute item-content-center">--%>
-<%--            <div class="item-content-title main-subheader" style="color: #ffffff;text-align: right;font-size: 70px;--%>
-<%--    line-height: 70px; font-weight: bolder;font-family: 'LibreItalic', 'Libre Bodoni', serif !important; font-style: italic;">--%>
-<%--                Introducing<br>ZERØGRAND<br>REMASTERED--%>
-<%--            </div>--%>
-<%--            <div class="item-content-des" style="color: #ffffff;text-align: right;font-size: 30px;">Our Best Just Got--%>
-<%--                Better--%>
-<%--            </div>--%>
-<%--            <div class="item-content-btn" style="color: #ffffff;text-align: right">--%>
-<%--                        <span>--%>
-<%--                            <a href="#" class="btn btn-dark">MUA NGAY</a>--%>
-<%--                        </span>--%>
-<%--                <span style="font-size: 22px; margin: 0 10px;line-height: 60px;"> | </span>--%>
-<%--                <span>--%>
-<%--                            <a href="#" class="btn btn-dark">TÌM HIỂU THÊM</a>--%>
-<%--                        </span>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
@@ -136,17 +114,17 @@
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="3000">
                     <img style="width: 100%; height: 500px; object-fit: cover;"
-                         src="https://thietke6d.com/wp-content/uploads/2021/05/banner-quang-cao-giay-2.webp"
+                         src="/uploads/banner8.jpg"
                          class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
                     <img style="width: 100%; height: 500px; object-fit: cover;"
-                         src="https://intphcm.com/data/upload/poster-giay.jpg"
+                         src="/uploads/banner6.jpg"
                          class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="3000">
                     <img style="width: 100%; height: 500px; object-fit: cover;"
-                         src="https://thietke6d.com/wp-content/uploads/2021/05/banner-quang-cao-giay-6.webp"
+                         src="/uploads/banner5.jpg"
                          class="d-block w-100" alt="...">
                 </div>
             </div>

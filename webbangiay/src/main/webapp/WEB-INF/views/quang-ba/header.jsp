@@ -88,18 +88,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/san-pham"><i class="bi bi-bag"></i>Sản phẩm</a>
                         </li>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="/san-pham">Giới thiệu</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="/tin-tuc">Tin tức</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="/san-pham">Liên hệ</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" href="/san-pham">Tra cứu</a>--%>
-<%--                        </li>--%>
                     </ul>
                 </div>
             </div>
