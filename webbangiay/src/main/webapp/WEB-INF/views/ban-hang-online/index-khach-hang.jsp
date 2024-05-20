@@ -96,12 +96,12 @@
                         <div class="card-title w-100">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="mb-0">Danh sách sản phẩm</h5>
-                                <span>
-                                    <button class="btn btn-danger checkHidden"
-                                            onclick="deleteProduct()">Xóa sản phẩm</button>
-                                    <button class="btn btn-danger checkHidden"
-                                            onclick="updateProduct()">Sửa số lượng</button>
-                                </span>
+<%--                                <span>--%>
+<%--                                    <button class="btn btn-danger checkHidden"--%>
+<%--                                            onclick="deleteProduct()">Xóa sản phẩm</button>--%>
+<%--                                    <button class="btn btn-danger checkHidden"--%>
+<%--                                            onclick="updateProduct()">Sửa số lượng</button>--%>
+<%--                                </span>--%>
                             </div>
                         </div>
                     </div>
@@ -262,12 +262,12 @@
 
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>
+<%--                                    <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>--%>
                                     <button type="button" id="btnHuyDonHang" onclick="huyDonHang()"
                                             class="btn btn-danger">Hủy đơn hàng
                                     </button>
                                     <button type="button" id="btnThanhToan" onclick="thanhToan()"
-                                            class="btn btn-danger">Đặt Hàng
+                                            class="btn btn-danger">Hoàn Tất Đặt Hàng
                                     </button>
                                     <button type="button" id="hoanThanhDonHang" onclick="hoanThanhDonHangKhachHang()"
                                             class="btn btn-danger">Đã nhận đơn hàng
@@ -593,7 +593,8 @@
                 let index = 0;
                 let html = '';
                 if (response && response.length != 0) {
-                    $('#title').text("Thông Tin Thanh Toán " + response.hoaDon.ma)
+                    $('#title').text("Thông Tin Thanh Toán ")
+                    // $('#title').text("Thông Tin Thanh Toán " + response.hoaDon.ma)
                     $('#gioHangShow').show();
 
                     $('#trangThai').text(switchTrangThai(response.hoaDon.trangThai));
@@ -609,7 +610,7 @@
                                 <td>` + (el.chiTietSanPham.chatLieu ? el.chiTietSanPham.chatLieu.tenChatLieu : "") + `</td>
                                 <td><strong>` + formatCurrency(el.donGia) + `</strong></td>
                                 <td colspan="2">
-                                    <input class="form-control checkStatus" type="number" onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" value="` + el.soLuong + `" />
+                                    <input class="form-control checkStatus" type="number" onchange="validateInputSoLuong(this)" placeholder="Chọn số lượng" min="1" value="` + el.soLuong + `" disabled/>
                                 </td>
                             </tr>
                             `

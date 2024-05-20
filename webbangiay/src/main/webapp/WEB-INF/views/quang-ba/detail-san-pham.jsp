@@ -403,7 +403,7 @@
             return;
         }
         let productShopping = []
-        let kt = confirm("Bạn có chắc chắn muốn tạo hóa đơn không?");
+        let kt = confirm("Bạn có chắc chắn muốn tạo đơn hàng không?");
         if (kt) {
             productShopping.push({
                 chiTietSanPham: sanPham.id,
@@ -416,7 +416,7 @@
                 contentType: "application/json",
                 data: JSON.stringify(productShopping),
                 success: function (response) {
-                    alert("Tạo hóa đơn thành công");
+                    alert("Tạo đơn hàng thành công");
                     window.location.href = "/ban-hang-online/hoa-don-detail?id=" + response;
                 },
                 error: function (xhr, status, error) {
