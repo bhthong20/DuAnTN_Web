@@ -328,7 +328,7 @@
                     contentType: "application/json",
                     data: JSON.stringify(productShopping),
                     success: function (response) {
-                        alert("Tạo hóa đơn thành công");
+                        alert("Thành Công! Mời Bạn Đến Thông Tin Thanh Toán.");
                         window.location.href = "/ban-hang-online/hoa-don-detail?id=" + response;
                     },
                     error: function (xhr, status, error) {

@@ -665,7 +665,7 @@
         if (hoaDon.khuyenMai) {
             renderSale($('#' + hoaDon.khuyenMai.id))
         }
-        $('#tienShip').text(hoaDon.tienShip ? hoaDon.tienShip : 0)
+        $('#tienShip').text(formatCurrency(hoaDon.tienShip ? hoaDon.tienShip : 0))
     }
 
     const fillTongTien = () => {
