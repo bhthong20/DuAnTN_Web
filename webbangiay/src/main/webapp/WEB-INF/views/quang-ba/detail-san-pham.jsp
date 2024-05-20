@@ -674,9 +674,9 @@
         if (saleSelect.length != 0) {
             $('#tenMaGiamGia').text(saleSelect[0].getAttribute('ten'));
             $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect[0].getAttribute('ngayKetThuc'))).toLocaleString());
-            $('#donGiaTruocSale').text("₫" + mauSacSelect.donGia);
+            $('#donGiaTruocSale').text("₫" + mauSacSelect.donGiatoLocaleString('vi-VN'));
             if (saleSelect[0].getAttribute('hinhThucGiam') == 1) {
-                $('#donGia').text(mauSacSelect.donGia * (100 - saleSelect[0].getAttribute('giaTriGiam')) / 100);
+                $('#donGia').text(mauSacSelect.donGia * (100 - saleSelect[0].getAttribute('giaTriGiam')) / 100).toLocaleString('vi-VN') + ' đ';
                 $('#giamGia').text('' + saleSelect[0].getAttribute('giaTriGiam') + ' % giảm');
             } else {
                 $('#donGia').text(mauSacSelect.donGia - saleSelect[0].getAttribute('giaTriGiam'));
