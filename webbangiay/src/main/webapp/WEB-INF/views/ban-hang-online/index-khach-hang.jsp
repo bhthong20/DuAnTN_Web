@@ -266,6 +266,7 @@
                                     <button type="button" id="hoanThanhDonHang" onclick="hoanThanhDonHangKhachHang()"
                                             class="btn btn-danger">Đã nhận đơn hàng
                                     </button>
+                                        <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>
                                 </div>
                             </div>
                         </form>
@@ -607,8 +608,8 @@
                 let index = 0;
                 let html = '';
                 if (response && response.length != 0) {
-                    $('#title').text("Thông Tin Thanh Toán ")
-                    // $('#title').text("Thông Tin Thanh Toán " + response.hoaDon.ma)
+                    // $('#title').text("Thông Tin Thanh Toán ")
+                    $('#title').text("Thông Tin Thanh Toán " + response.hoaDon.ma)
                     $('#gioHangShow').show();
 
                     $('#trangThai').text(switchTrangThai(response.hoaDon.trangThai));
@@ -716,6 +717,7 @@
             } else {
                 alert("Hóa đơn không đủ điều kiện để áp dụng mã giảm giá")
                 clearKhuyenMai();
+                tienGiam.text(0)
                 $('#renderMaGiamGia').html('');
                 tienGiam.val(0);
             }

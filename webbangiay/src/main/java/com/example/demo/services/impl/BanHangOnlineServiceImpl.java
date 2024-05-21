@@ -425,7 +425,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
             LichSuTrangThai lichSuTrangThaiDelete0 = list.get(0);
             lichSuTrangThaiDelete0.setIsDelete(0);
             LichSuTrangThai lichSuTrangThaiDelete1 = list.get(1);
-            lichSuTrangThaiDelete1.setIsDelete(1);
+            lichSuTrangThaiDelete1.setIsDelete(0);
             lichSuTrangThaiRepository.save(lichSuTrangThaiDelete0);
             lichSuTrangThaiRepository.save(lichSuTrangThaiDelete1);
         }
