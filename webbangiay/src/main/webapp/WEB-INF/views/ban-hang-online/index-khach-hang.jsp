@@ -266,7 +266,7 @@
                                     <button type="button" id="hoanThanhDonHang" onclick="hoanThanhDonHangKhachHang()"
                                             class="btn btn-danger">Đã nhận đơn hàng
                                     </button>
-                                        <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>
+<%--                                        <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>--%>
                                 </div>
                             </div>
                         </form>
@@ -381,8 +381,8 @@
         await loadChiTietSanPham();
         if (hoaDonSelect.trangThai == 9) {
             await loadUserLogin();
+            fillTongTien();
         }
-        fillTongTien();
     };
 
     function loadUserLogin() {
@@ -632,6 +632,7 @@
                     })
                     tableProduct.innerHTML = html;
                     hoaDonSelect = response.hoaDon;
+                    console.log(hoaDonSelect)
                     fillDataFiled(response.hoaDon);
                     if (response.hoaDon.trangThai != 3 && response.hoaDon.trangThai != 9) {
                         disableFiled();
@@ -679,9 +680,17 @@
         moTa.val(hoaDon.ghiChu);
         hoaDon.phuongThucThanhToan == 1 ? $('#defaultRadio2').attr("checked", true) : $('#defaultRadio1').attr("checked", true)
         if (hoaDon.khuyenMai) {
-            renderSale($('#' + hoaDon.khuyenMai.id))
+            document.getElementById("renderMaGiamGia").innerHTML = `
+                <div class="voucher-ticket mb-1 voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover" id="4ddefdc1-1bf3-4656-a151-3d5f2186d4ec" hinhthucgiam="0" giatrigiam="5000.00" dieukiengia="200000" ngayketthuc="1717042680000" ten="Sale 25/5" value="4ddefdc1-1bf3-4656-a151-3d5f2186d4ec">
+                    <div class=""><span class="voucher-promo-value voucher-promo-value--percent">` + formatCurrency(hoaDon.tienGiam ? hoaDon.tienGiam : 0) + `</span><span class="voucher-promo-label"> VNĐ
+                    </span><span class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>
+                </div>
+            `
         }
         $('#tienShip').text(formatCurrency(hoaDon.tienShip ? hoaDon.tienShip : 0))
+        $('#tongTien').text(formatCurrency(hoaDon.tongTien ? hoaDon.tongTien : 0))
+        $('#tienGiam').text(formatCurrency(hoaDon.tienGiam ? hoaDon.tienGiam : 0))
+        $('#donGia').text(formatCurrency((hoaDon.tongTien - hoaDon.tienShip + hoaDon.tienGiam) ? hoaDon.tongTien - hoaDon.tienShip + hoaDon.tienGiam : 0))
     }
 
     const fillTongTien = () => {
