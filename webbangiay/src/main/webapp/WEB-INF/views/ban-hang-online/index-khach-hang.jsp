@@ -258,7 +258,7 @@
                                 <div class="col-12 text-center">
 <%--                                    <a href="/san-pham" type="button" class="btn btn-danger">Quay lại</a>--%>
                                     <button type="button" id="btnHuyDonHang" onclick="huyDonHang()"
-                                            class="btn btn-danger">Hủy đơn hàng
+                                            class="btn btn-danger">Hủy đơn hàng`
                                     </button>
                                     <button type="button" id="btnThanhToan" onclick="thanhToan()"
                                             class="btn btn-danger">Hoàn Tất Đặt Hàng
@@ -355,7 +355,7 @@
 <script src="../assets/vendor/api-province/api.js"></script>
 <script>
     function formatCurrency(number) {
-        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+        return number;
     }
     let urlBanHangTaiQuay = window.location.href;
 
@@ -439,12 +439,13 @@
         return true;
     }
     function removeCurrencyFormat(value) {
-        // Loại bỏ các ký tự không phải là số hoặc dấu phẩy
-        return value.replace(/[^\d.,]/g, '')
-            // Loại bỏ dấu phẩy nếu nó ở giữa các số
-            .replace(/,(?=\d{3})/g, '')
-            // Loại bỏ dấu chấm nếu nó ở cuối số
-            .replace(/\.(?=\d*$)/g, '');
+        // // Loại bỏ các ký tự không phải là số hoặc dấu phẩy
+        // return value.replace(/[^\d.,]/g, '')
+        //     // Loại bỏ dấu phẩy nếu nó ở giữa các số
+        //     .replace(/,(?=\d{3})/g, '')
+        //     // Loại bỏ dấu chấm nếu nó ở cuối số
+        //     .replace(/\.(?=\d*$)/g, '');
+        return value;
     }
 
     function thanhToan() {
@@ -482,6 +483,7 @@
                     hoaDon: hoaDonSelect,
                     idKhuyenMai: khuyenMaiSelect.id
                 }
+
                 $.ajax({
                     type: "POST",
                     url: "/ban-hang-online/rest/thanh-toan-hoa-don",
