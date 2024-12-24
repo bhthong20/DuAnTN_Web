@@ -40,11 +40,15 @@ public class GioHangChiTiet {
     @Column(name = "don_gia")
     private BigDecimal donGia;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_gio_hang")
-    private GioHang gioHang;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_gio_hang")
+//    private GioHang gioHang;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_chi_tiet_san_pham")
     private ChiTietSanPham chiTietSanPham;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_khach_hang")
+    private KhachHang khachHang;
 }

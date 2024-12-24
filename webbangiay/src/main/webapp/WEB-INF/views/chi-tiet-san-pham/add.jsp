@@ -42,50 +42,28 @@
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
 </head>
 </head>
 
 <body>
-<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thông tin chi tiết
-            sản phẩm</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-da-xoa" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xóa</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-           aria-controls="description" aria-selected="true" role="tab">Thêm mới chi tiết sản phẩm</a>
-    </li>
-</ul>
 <div class="container">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Thêm mới sản phẩm</h4>
-            <%--@elvariable id="chiTietSanPham" type=""--%>
+            <h3 class="card-header">Thêm mới sản phẩm</h3>
             <div class="card-body">
                 <form>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mt-3">
-                                <input id="tenSP" class="form-control" placeholder="" path="sanPham"/>
-                                <label for="tenSP" path="sanPham">Tên sản phẩm:</label>
+                                <input id="ma" disabled class="form-control" placeholder=""/>
+                                <label for="ma" path="sanPham">Mã sản phẩm:</label>
                                 <span path="sanPham" cssStyle="color: red"></span>
                             </div>
 
                             <div class="form-floating mb-3 mt-3">
-                                <input id="soLuongTon" type="number" class="form-control" placeholder="" path="soLuongTon"/>
-                                <label for="soLuongTon" path="soLuongTon">Số lượng tồn:</label>
-                                <span path="soLuongTon" cssStyle="color: red"></span>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <input id="donGia" class="form-control" type="number" placeholder="" path="donGia"/>
-                                <label for="donGia" path="donGia">Đơn giá:</label>
-                                <span path="donGia" cssStyle="color: red"></span>
+                                <input id="tenSP" class="form-control" placeholder="" path="sanPham"/>
+                                <label for="tenSP" path="sanPham">Tên sản phẩm:</label>
+                                <span path="sanPham" cssStyle="color: red"></span>
                             </div>
                             <div class="form-floating mb-3 mt-3">
                                 <select class="form-select" id="phanLoai">
@@ -97,6 +75,22 @@
                                 <label for="phanLoai" path="phanLoai">Phân loại:</label>
                             </div>
                             <div class="form-floating mb-3 mt-3">
+                                <select class="form-select" id="thuongHieu">
+                                    <option selected disabled>Thương hiệu</option>
+                                    <c:forEach items="${listTH}" var="thuongHieu">
+                                        <option value="${thuongHieu.id}">${thuongHieu.ten}</option>
+                                    </c:forEach>
+                                </select>
+                                <label for="thuongHieu" path="thuongHieu">Thương hiệu:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3 mt-3">
+                                <textarea id="moTa" class="form-control" path="moTa"></textarea>
+                                <label for="moTa" path="moTa">Mô tả quảng bá:</label>
+                                <span path="moTa" cssStyle="color: red"></span>
+                            </div>
+                            <div class="form-floating mb-3 mt-3" style="display:none;">
                                 <select class="form-select" id="hinhAnh">
                                     <option selected disabled value="">Hình ảnh</option>
                                     <c:forEach items="${listHA}" var="hinhAnh">
@@ -106,39 +100,58 @@
                                                 anh3="${hinhAnh.anh3}">${hinhAnh.ten}</option>
                                     </c:forEach>
                                 </select>
-                                <label for="hinhAnh" path="hinhAnh">Hình ảnh:</label>
+                                <label for="hinhAnh" path="hinhAnh">Hình ảnh quảng bá:</label>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating mb-3 mt-3">
-                                <textarea id="moTa" class="form-control" path="moTa"></textarea>
-                                <label for="moTa" path="moTa">Mô tả:</label>
-                                <span path="moTa" cssStyle="color: red"></span>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <select class="form-select" id="thuongHieu">
-                                    <option selected disabled>Thương hiệu</option>
-                                    <c:forEach items="${listTH}" var="thuongHieu">
-                                        <option value="${thuongHieu.id}">${thuongHieu.ten}</option>
-                                    </c:forEach>
-                                </select>
-                                <label for="thuongHieu" path="thuongHieu">Thương hiệu:</label>
-                            </div>
-                            <div class="form-floating mb-3 mt-3 d-flex justify-content-between">
-                                <img id="preview-anh1" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                <img id="preview-anh2" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
-                                <img id="preview-anh3" class="preview-image"
-                                     width="30%" height="100%"
-                                     style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                            <div align="center" class="row">
+                                <div class="col-4">
+                                    <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                           for="hinhAnh1">
+                                        <img id="preview-anh-hinhAnh1" class="preview-image" src="" alt=""
+                                             width="100%" height="100%"
+                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                    </label>
+                                    <div style="display: none">
+                                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s"
+                                               accept="image/jpeg, image/png"
+                                               id="hinhAnh1">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                           for="hinhAnh2">
+                                        <img id="preview-anh-hinhAnh2" class="preview-image" src="" alt=""
+                                             width="100%" height="100%"
+                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                    </label>
+                                    <div style="display: none">
+                                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s"
+                                               accept="image/jpeg, image/png"
+                                               id="hinhAnh2">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label style="border: 5px solid white;width: 100%;height: 100%;border-radius:50% 50% 50% 50%;"
+                                           for="hinhAnh3">
+                                        <img id="preview-anh-hinhAnh3" class="preview-image" src="" alt=""
+                                             width="100%" height="100%"
+                                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                                    </label>
+                                    <div style="display: none">
+                                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s"
+                                               accept="image/jpeg, image/png"
+                                               id="hinhAnh3">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </form>
 
+                <div class="row">
+                    <div class="col-12" style="text-align: center">
+                        <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi">Quay lại</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -155,13 +168,10 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <c:forEach var="mauSacItem" items="${listMS}">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" name="mauSac" value="${mauSacItem.id}"
-                                               onclick="addRow(this, '${mauSacItem.ten}', '${mauSacItem.id}', 'COLOR')" id="${mauSacItem.id}" />
-                                        <label class="form-check-label" for="${mauSacItem.id}"> ${mauSacItem.ten} </label>
-                                    </div>
-                                </c:forEach>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleChonModalMauSac">
+                                    Chọn màu sắc
+                                </button>
                             </div>
                         </div>
                         <div class="mt-3 col-4 row">
@@ -172,12 +182,10 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <c:forEach var="kichThuoc" items="${listKT}">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" name="kichThuoc" onclick="addRow(this, '${kichThuoc.size}', '${kichThuoc.id}', 'SIZE')" type="checkbox" value="${kichThuoc.id}" id="${kichThuoc.id}" />
-                                        <label class="form-check-label" for="${kichThuoc.id}"> ${kichThuoc.size} </label>
-                                    </div>
-                                </c:forEach>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleChonModalKichThuoc">
+                                    Chọn kích thước
+                                </button>
                             </div>
                         </div>
                         <div class="mt-3 col-4 row">
@@ -188,13 +196,10 @@
                                 </a>
                             </label>
                             <div class="col-md-7">
-                                <c:forEach var="chatLieu" items="${listCL}">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" name="chatLieu" value="${chatLieu.id}"
-                                               onclick="addRow(this, '${chatLieu.tenChatLieu}', '${chatLieu.id}', 'CATEGORY')" id="${chatLieu.id}" />
-                                        <label class="form-check-label" for="${chatLieu.id}"> ${chatLieu.tenChatLieu} </label>
-                                    </div>
-                                </c:forEach>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleChonModalChatLieu">
+                                    Chọn chất liệu
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -203,19 +208,23 @@
         </div>
 
         <div id="tableCreate" style="display: none" class="card mt-5">
-            <h5 class="card-header">Thêm mới chi tiết sản phẩm</h5>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Thêm mới chi tiết sản phẩm</h5>
+                <button id="updateAllBtn" class="btn btn-primary">Sửa tất cả</button>
+            </div>
             <div class="card-body">
                 <div class="table-responsive text-nowrap">
                     <table class="table table-striped" id="colorTable">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Giá tiền</th>
-                            <th>Số lượng</th>
-                            <th>Thể loại</th>
+                            <th>Sản phẩm</th>
+                            <th>Chất liệu</th>
                             <th>Size</th>
                             <th>Màu sắc</th>
+                            <th>Giá tiền</th>
+                            <th>Số lượng</th>
+                            <th>Hình ảnh</th>
                             <th>Mô tả</th>
                             <th>Tình trạng</th>
                         </tr>
@@ -225,11 +234,110 @@
                     </table>
                 </div>
                 <div class="row">
-                    <div class="col-12" style="text-align: center">
+                    <div class="col-12 mt-2" style="text-align: center">
                         <button type="button" class="btn btn-success"
-                                id="btt" onclick="return myFunction1()">Thêm mới
+                                id="bttCreate" onclick="return myFunction1()">Thêm mới
+                        </button>
+                        <button type="button" class="btn btn-success"
+                                id="bttUpdate" onclick="return myFunction2()">Chỉnh sửa
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%-- modalOpenQrCode --%>
+    <div class="modal fade" id="modalOpenQrCode" tabindex="-1" aria-labelledby="modalOpenQrCode"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h1 class="modal-title">QR code sản phẩm</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="qr-code" class="m-auto d-flex justify-content-center"></div>
+                    <a href="#"><h3 onclick="downloadQrCode()" class="mt-3 text-primary">DOWNLOAD QR CODE HERE !!!</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Chon mau sac--%>
+    <div class="modal fade" id="exampleChonModalMauSac" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Chọn màu Sắc</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <c:forEach var="mauSacItem" items="${listMS}">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="mauSac" value="${mauSacItem.id}"
+                                   onclick="addRow(this, '${mauSacItem.ten}', '${mauSacItem.id}', 'COLOR')"
+                                   id="${mauSacItem.id}"/>
+                            <label class="form-check-label" for="${mauSacItem.id}"> ${mauSacItem.ten} </label>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Chon kich thuoc--%>
+    <div class="modal fade" id="exampleChonModalKichThuoc" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Chọn kích thước</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <c:forEach var="kichThuoc" items="${listKT}">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" name="kichThuoc"
+                                   onclick="addRow(this, '${kichThuoc.size}', '${kichThuoc.id}', 'SIZE')"
+                                   type="checkbox" value="${kichThuoc.id}" id="${kichThuoc.id}"/>
+                            <label class="form-check-label" for="${kichThuoc.id}"> ${kichThuoc.size} </label>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--Chon chat lieu--%>
+    <div class="modal fade" id="exampleChonModalChatLieu" tabindex="-1" aria-labelledby="exampleModalLabelMauSac"
+         aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Chọn chất liệu</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <c:forEach var="chatLieu" items="${listCL}">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="chatLieu" value="${chatLieu.id}"
+                                   onclick="addRow(this, '${chatLieu.tenChatLieu}', '${chatLieu.id}', 'CATEGORY')"
+                                   id="${chatLieu.id}"/>
+                            <label class="form-check-label" for="${chatLieu.id}"> ${chatLieu.tenChatLieu} </label>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -277,7 +385,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="myFunction1()">Add
+                                                    onclick="themNhanhMauSac()">Add
                                             </button>
                                         </div>
                                     </div>
@@ -334,7 +442,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="myFunction1()">Add
+                                                    onclick="themNhanhKichThuoc()">Add
                                             </button>
                                         </div>
                                     </div>
@@ -392,7 +500,7 @@
                                     <div class="row">
                                         <div class="col-12" style="text-align: center">
                                             <button type="submit" class="btn btn-success"
-                                                    onclick="myFunction1()">Add
+                                                    onclick="themNhanhLoaiDe()">Add
                                             </button>
                                         </div>
                                     </div>
@@ -409,11 +517,48 @@
     </div>
 </body>
 <script>
+    function previewAnh(input) {
+        const previewAnh22 = document.getElementById('preview-anh-' + input.getAttribute('id'));
 
-    function myFunction2() {
-        let text = "Bạn chắc chắn muốn sửa";
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewAnh22.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewAnh22.src = '';
+        }
+    }
+
+    function themNhanhMauSac() {
+        let text = "Bạn chắc chắn muốn thêm nhanh màu sắc không?";
         let kt = confirm(text);
         if (kt == true) {
+            alert("Thêm nhanh màu sắc thành công.")
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    function themNhanhKichThuoc() {
+        let text = "Bạn chắc chắn muốn thêm nhanh kích thước không?";
+        let kt = confirm(text);
+        if (kt == true) {
+            alert("Thêm nhanh kích thước thành công.")
+            return true
+        } else {
+            return false;
+        }
+    }
+
+    function themNhanhLoaiDe() {
+        let text = "Bạn chắc chắn muốn thêm nhanh loại đế không";
+        let kt = confirm(text);
+        if (kt == true) {
+            alert("Thêm nhanh loại đế thành công.")
             return true
         } else {
             return false;
@@ -472,34 +617,135 @@
     }
 
 </script>
-<script src="../../vendors/js/vendor.bundle.base.js"></script>
-<script src="../../js/off-canvas.js"></script>
-<script src="../../js/hoverable-collapse.js"></script>
-<script src="../../js/template.js"></script>
-<script src="../../js/settings.js"></script>
-<script src="../../js/todolist.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+        integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+></script>
+
 <script>
-    function myFunction1() {
+    const generateQrCode = (content) => {
+        document.getElementById("qr-code").innerHTML = ''
+        const qr = new QRCode(document.getElementById("qr-code"), {
+            text: content,
+            width: 300,
+            height: 300,
+        });
+    };
+
+    const downloadQrCode = () => {
+        var qrCodeDataURI = document.getElementById("qr-code").getElementsByTagName("img")[0].src;
+
+        var downloadLink = document.createElement("a");
+        downloadLink.href = qrCodeDataURI;
+        downloadLink.download = "qrcode.png";
+
+        downloadLink.click();
+    }
+
+    function validateImage(input) {
+        if (input.files.length === 0) {
+            alert(`không được để trống`);
+            return false;
+        }
+        return true;
+    }
+
+    function validateSanPham(sanPham) {
+        if (!sanPham.tenSanPham) {
+            alert("Tên sản phẩm không được để trống");
+            return false;
+        }
+        if (!sanPham.idLoaiSanPham) {
+            alert("Loại sản phẩm không được để trống");
+            return false;
+        }
+        if (!sanPham.idThuongHieu) {
+            alert("Thương hiệu không được để trống")
+            return false;
+        }
+        if (!sanPham.moTa) {
+            alert("Mô tả quảng bá không được để trống");
+            return false;
+        }
+        if (!sanPham.chiTietSanPhamDtos) {
+            alert("Chi tiết sản phẩm không được để trống")
+            return false;
+        }
+
+
+        let check = true;
+        sanPham.chiTietSanPhamDtos.forEach(el => {
+            if (!el.soLuongTon) {
+                check = false;
+            }
+            if (!el.donGia) {
+                check = false;
+            }
+            if (!el.moTa) {
+                check = false;
+            }
+        })
+        if (!check) {
+            alert("Chi tiết sản phẩm phải nhập đủ thông tin");
+            return false;
+        }
+        return true;
+    }
+
+    async function myFunction1() {
         let text = "Bạn chắc chắn muốn thêm";
         var tenSPValue = document.getElementById('tenSP').value;
         var moTaValue = document.getElementById('moTa').value;
         var thuongHieu = document.getElementById('thuongHieu').value;
-        var hinhAnh = document.getElementById('hinhAnh').value;
+        var hinhAnh = {
+            anh1: null,
+            anh2: null,
+            anh3: null,
+        };
         var phanLoai = document.getElementById('phanLoai').value;
+
+        var anh1 = document.getElementById('hinhAnh1');
+        var anh2 = document.getElementById('hinhAnh2');
+        var anh3 = document.getElementById('hinhAnh3');
+
+        if (!validateImage(anh1)) return false;
+        if (!validateImage(anh2)) return false;
+        if (!validateImage(anh3)) return false;
+
+        if ((anh1.files && anh1.files[0])) {
+            await convertInputToBase64(anh1).then(response => {
+                hinhAnh.anh1 = response;
+            });
+        }
+
+        if (anh2.files && anh2.files[0]) {
+            await convertInputToBase64(anh2).then(response => {
+                hinhAnh.anh2 = response;
+            });
+        }
+
+        if (anh3.files && anh3.files[0]) {
+            await convertInputToBase64(anh3).then(response => {
+                hinhAnh.anh3 = response;
+            });
+        }
+
         getMoney();
         getQuantity();
         getNote();
         getStatus();
+        await getImages();
         let sanPham = {
             id: null,
             tenSanPham: tenSPValue,
             idLoaiSanPham: phanLoai,
-            idHinhAnh: hinhAnh,
+            idHinhAnh: null,
+            anh1: hinhAnh.anh1,
+            anh2: hinhAnh.anh2,
+            anh3: hinhAnh.anh3,
             idThuongHieu: thuongHieu,
             moTa: moTaValue,
             chiTietSanPhamDtos: listProductDetail.map(el => {
@@ -511,12 +757,18 @@
                     soLuongTon: el.quantity,
                     donGia: el.money,
                     moTa: el.note,
-                    trangThai: el.status
+                    trangThai: el.status,
+                    idHinhAnh: null,
+                    anh1: el.anh1,
+                    anh2: el.anh2,
+                    anh3: el.anh3
                 }
             })
         };
-        console.log(sanPham);
 
+        if (!validateSanPham(sanPham)) {
+            return
+        }
         let kt = confirm(text);
         if (kt == true) {
             $.ajax({
@@ -524,12 +776,12 @@
                 url: "/chi-tiet-san-pham/rest/them-san-pham",
                 contentType: "application/json",
                 data: JSON.stringify(sanPham),
-                success: function(response){
+                success: function (response) {
                     alert("Thêm sản phẩm mới thành công");
                     console.log(response)
                     window.location.href = "/chi-tiet-san-pham/hien-thi";
                 },
-                error: function(xhr, status, error){
+                error: function (xhr, status, error) {
                     console.log(xhr.responseText);
                 }
             });
@@ -539,23 +791,113 @@
         }
     }
 
-    document.getElementById("hinhAnh").addEventListener("change", function() {
-        var selectedOptionValue = this.value;
-        var selectedOption = this.options[this.selectedIndex];
+    async function myFunction2() {
+        let text = "Bạn chắc chắn muốn sửa";
+        var tenSPValue = document.getElementById('tenSP').value;
+        var moTaValue = document.getElementById('moTa').value;
+        var thuongHieu = document.getElementById('thuongHieu').value;
+        var hinhAnh = {
+            anh1: null,
+            anh2: null,
+            anh3: null,
+        };
+        var phanLoai = document.getElementById('phanLoai').value;
 
-        var anh1Value = selectedOption.getAttribute("anh1");
-        var anh2Value = selectedOption.getAttribute("anh2");
-        var anh3Value = selectedOption.getAttribute("anh3");
+        var anh1 = document.getElementById('hinhAnh1');
+        var anh2 = document.getElementById('hinhAnh2');
+        var anh3 = document.getElementById('hinhAnh3');
 
-        document.getElementById("preview-anh1").src = '../../../uploads/' + anh1Value;
-        document.getElementById("preview-anh2").src = '../../../uploads/' + anh2Value;
-        document.getElementById("preview-anh3").src = '../../../uploads/' + anh3Value;
-    });
+        if ((anh1.files && anh1.files[0])) {
+            await convertInputToBase64(anh1).then(response => {
+                hinhAnh.anh1 = response;
+            });
+        }
+
+        if (anh2.files && anh2.files[0]) {
+            await convertInputToBase64(anh2).then(response => {
+                hinhAnh.anh2 = response;
+            });
+        }
+
+        if (anh3.files && anh3.files[0]) {
+            await convertInputToBase64(anh3).then(response => {
+                hinhAnh.anh3 = response;
+            });
+        }
+
+        getMoney();
+        getQuantity();
+        getNote();
+        getStatus();
+        await getImages();
+        let sanPham = {
+            id: id,
+            tenSanPham: tenSPValue,
+            idLoaiSanPham: phanLoai,
+            idHinhAnh: null,
+            anh1: hinhAnh.anh1,
+            anh2: hinhAnh.anh2,
+            anh3: hinhAnh.anh3,
+            idThuongHieu: thuongHieu,
+            moTa: moTaValue,
+            chiTietSanPhamDtos: listProductDetail.map(el => {
+                var listDetail = dataProductDetailUpdate.filter(detail => detail.sizeId === el.sizeId && detail.colorId === el.colorId && detail.categoryId === el.categoryId);
+                return {
+                    id: listDetail.length === 0 ? null : listDetail[0].id,
+                    idKichThuoc: el.sizeId,
+                    idMauSac: el.colorId,
+                    idChatLieu: el.categoryId,
+                    soLuongTon: el.quantity,
+                    donGia: el.money,
+                    moTa: el.note,
+                    trangThai: el.status,
+                    idHinhAnh: null,
+                    anh1: el.anh1,
+                    anh2: el.anh2,
+                    anh3: el.anh3
+                }
+            })
+        };
+
+        if (!validateSanPham(sanPham)) {
+            return
+        }
+
+        let kt = confirm(text);
+        if (kt == true) {
+            $.ajax({
+                type: "POST",
+                url: "/chi-tiet-san-pham/rest/update-san-pham",
+                contentType: "application/json",
+                data: JSON.stringify(sanPham),
+                success: function (response) {
+                    alert("Update sản phẩm thành công");
+                    console.log(response)
+                    window.location.href = "/chi-tiet-san-pham/hien-thi";
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+            return true
+        } else {
+            return false;
+        }
+    }
 
     let listMauSac = [];
     let listSize = [];
     let listCategory = [];
     let listProductDetail = [];
+    let listProductDetailUpdate = [];
+
+    let dataProductDetailUpdate = [];
+
+    var url = window.location.href;
+
+    var urlParams = new URLSearchParams(new URL(url).search);
+
+    var id = urlParams.get("idctsp");
 
     function addRow(checkbox, name, id, type) {
         if (checkbox.checked) {
@@ -592,25 +934,114 @@
         updateColorTable();
     }
 
+    //hiển thị hình ảnh lên ctsp
+    function genComboboxImage(index, anh1, anh2, anh3) {
+        var htmlSelect = `
+                <div align="center" style="
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: row;">
+                    <label style="border: 5px solid white;width: 50px;height: 50px;border-radius:50% 50% 50% 50%;"
+                           for="anhmoi1` + index + `">
+                        <img id="preview-anh-anhmoi1` + index + `" class="preview-image" src="../../../uploads/` + anh1 + `" alt=""
+                             width="100%" height="100%"
+                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                    </label>
+                    <div style="display: none">
+                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                               id="anhmoi1` + index + `">
+                    </div>
+                    <label style="border: 5px solid white;width: 50px;height: 50px;border-radius:50% 50% 50% 50%;"
+                           for="anhmoi2` + index + `">
+                        <img id="preview-anh-anhmoi2` + index + `" class="preview-image" src="../../../uploads/` + anh2 + `" alt=""
+                             width="100%" height="100%"
+                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                    </label>
+                    <div style="display: none">
+                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                               id="anhmoi2` + index + `">
+                    </div>
+                    <label style="border: 5px solid white;width: 50px;height: 50px;border-radius:50% 50% 50% 50%;"
+                           for="anhmoi3` + index + `">
+                        <img id="preview-anh-anhmoi3` + index + `" class="preview-image" src="../../../uploads/` + anh3 + `" alt=""
+                             width="100%" height="100%"
+                             style="border-radius:50% 50% 50% 50%;border: 2px solid #8c8c8c">
+                    </label>
+                    <div style="display: none">
+                        <input type="file" onchange="previewAnh(this)" class="productImg" name="anh2s" accept="image/jpeg, image/png"
+                               id="anhmoi3` + index + `">
+                    </div>
+                </div>`;
+
+        return htmlSelect;
+    }
+
     function updateColorTable() {
         var tableBody = document.getElementById('colorTableBody');
         var html = '';
         listProductDetail.forEach(function (product) {
             html +=
                 '<tr>' +
-                    '<td>' + product.index + '</td>' +
-                    '<td>' + product.name + '</td>' +
-                    '<td> <input class="form-control productMoney" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.money + '" /></td>' +
-                    '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
-                    '<td>' + product.categoryName + '</td>' +
-                    '<td>' + product.sizeName + '</td>' +
-                    '<td>' + product.colorName + '</td>' +
-                    '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
-                    '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" checked="' + (product.status) + '" /></div></td>' +
+                '<td>' + product.index + '</td>' +
+                '<td>' + product.name +
+                '<a style="display: ' + (product.id ? 'inline-block' : 'none') + '" onclick="generateQrCode(`' + product.id + '`)" data-bs-toggle="modal" data-bs-target="#modalOpenQrCode"><img src="/uploads/plus.png"></a>' +
+                '</td>' +
+                '<td>' + product.categoryName + '</td>' +
+                '<td>' + product.sizeName + '</td>' +
+                '<td>' + product.colorName + '</td>' +
+                '<td> <input class="form-control number-input productMoney" index="' + product.index + '" type="text" placeholder="Default input" value="' + formatNumberWithCommas(product.money) + '" /></td>' +
+                '<td> <input class="form-control productQuantity" index="' + product.index + '" type="number" placeholder="Default input" value="' + product.quantity + '" /></td>' +
+                '<td>' + genComboboxImage(product.index,
+                product.image ? product.image.anh1 : "",
+                product.image ? product.image.anh2 : "",
+                product.image ? product.image.anh3 : "") + '</td>' +
+                '<td><input class="form-control productNote" type="text" index="' + product.index + '" placeholder="Default input" value="' + product.note + '" /></td>' +
+                '<td><div class="form-check form-switch text-center"><input index="' + product.index + '" class="form-check-input productStatus" type="checkbox" ' + (product.status ? `checked` : ``) + ' /></div></td>' +
+                '<td><button class="btn btn-danger btn-sm" style="display: ' + (product.id ? 'none' : 'inline-block') + '" onclick="removeProductDetail(`' + product.index + '`)">Xóa</button></td>' + // Hiển thị nút xóa khi không có id
                 '</tr>';
         });
-
         tableBody.innerHTML = html;
+        document.querySelectorAll('.number-input').forEach(input => {
+            input.addEventListener('input', (event) => {
+                let value = event.target.value;
+                // Remove all non-digit characters
+                value = value.replace(/\D/g, '');
+                // Format the value with commas
+                value = formatNumberWithCommas(value);
+                event.target.value = value;
+            });
+        });
+    }
+    function removeProductDetail(index) {
+        listProductDetail = listProductDetail.filter(function(product) {
+            return parseInt(product.index) !== parseInt(index); // Chuyển đổi sang kiểu số và so sánh
+        });
+        updateColorTable(); // Cập nhật bảng sau khi xóa sản phẩm
+    }
+
+    // Hàm cập nhật tất cả sản phẩm
+    function updateAllProducts() {
+        var moneyInput = prompt("Nhập giá tiền mới cho tất cả sản phẩm:");
+        var quantityInput = prompt("Nhập số lượng mới cho tất cả sản phẩm:");
+
+        if (moneyInput !== null && quantityInput !== null) {
+            listProductDetail.forEach(function(product) {
+                product.money = moneyInput;
+                product.quantity = quantityInput;
+            });
+            updateColorTable(); // Cập nhật bảng sau khi cập nhật tất cả sản phẩm
+        }
+    }
+
+    // Gán sự kiện click cho nút sửa tất cả
+    document.getElementById('updateAllBtn').addEventListener('click', updateAllProducts);
+
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function removeCommas(number) {
+        return number.replace(/,/g, '');
     }
 
     function renderProductDetail() {
@@ -621,51 +1052,61 @@
         if (listMauSac.length !== 0 && listSize.length !== 0 && listCategory.length !== 0) {
             let index = 0;
             var tenSPValue = document.getElementById('tenSP').value;
-            var donGia = document.getElementById('donGia').value;
-            var soLuongTon = document.getElementById('soLuongTon').value;
-
+            // var donGia = document.getElementById('donGia').value;
+            // var soLuongTon = document.getElementById('soLuongTon').value;
             tableCreate.style.display = 'block';
             listMauSac.forEach(color => {
                 listSize.forEach(size => {
                     listCategory.forEach(category => {
                         index++;
-                        listProductDetail.push({
-                            index: index,
-                            colorId: color.id,
-                            colorName: color.name,
-                            sizeId: size.id,
-                            sizeName: size.name,
-                            categoryId: category.id,
-                            categoryName: category.name,
-                            quantity: soLuongTon,
-                            money: donGia,
-                            name: tenSPValue,
-                            note: "",
-                            status: true,
-                        })
+                        if (listProductDetailUpdate.filter(el => el.colorId == color.id && el.sizeId == size.id && el.categoryId == category.id).length == 0) {
+                            listProductDetail.push({
+                                index: index,
+                                colorId: color.id,
+                                colorName: color.name,
+                                sizeId: size.id,
+                                sizeName: size.name,
+                                categoryId: category.id,
+                                categoryName: category.name,
+                                quantity: 1,
+                                money: 1,
+                                name: tenSPValue,
+                                note: "Sản phẩm đẹp",
+                                status: true,
+                                image: {}
+                            })
+                        } else {
+                            let sanPham = listProductDetailUpdate.filter(el => el.colorId == color.id && el.sizeId == size.id && el.categoryId == category.id)[0]
+                            sanPham.index = index
+                            listProductDetail.push(
+                                sanPham
+                            )
+                        }
                     })
                 })
             })
         }
     }
 
+    //lấy giá trị input
     function getMoney() {
         var inputs = document.querySelectorAll('.productMoney');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
-
-            listProductDetail = listProductDetail.map(el => {
-                if (parseInt(el.index) == parseInt(index)) {
-                    el.money = input.value
+            var valueWithoutCommas = input.value.replace(/,/g, ''); // Loại bỏ dấu ',' từ giá trị
+            input.value = valueWithoutCommas; // Gán giá trị mới vào trường input
+            listProductDetail = listProductDetail.map(function (el) {
+                if (parseInt(el.index) === parseInt(index)) {
+                    el.money = valueWithoutCommas; // Cập nhật giá trị mới trong mảng listProductDetail
                 }
                 return el;
-            })
+            });
         });
     }
 
     function getQuantity() {
         var inputs = document.querySelectorAll('.productQuantity');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -679,7 +1120,7 @@
 
     function getNote() {
         var inputs = document.querySelectorAll('.productNote');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -693,7 +1134,7 @@
 
     function getStatus() {
         var inputs = document.querySelectorAll('.productStatus');
-        inputs.forEach(function(input) {
+        inputs.forEach(function (input) {
             var index = input.getAttribute('index');
 
             listProductDetail = listProductDetail.map(el => {
@@ -704,24 +1145,159 @@
             })
         });
     }
+
+    async function getImages() {
+        await Promise.all(listProductDetail.map(async (el) => {
+
+            var anh1 = document.getElementById('anhmoi1' + el.index);
+            var anh2 = document.getElementById('anhmoi2' + el.index);
+            var anh3 = document.getElementById('anhmoi3' + el.index);
+
+            try {
+                if ((anh1.files && anh1.files[0])) {
+                    el.anh1 = await convertInputToBase64(anh1);
+                }
+                if (anh2.files && anh2.files[0]) {
+                    el.anh2 = await convertInputToBase64(anh2);
+                }
+                if (anh3.files && anh3.files[0]) {
+                    el.anh3 = await convertInputToBase64(anh3);
+                }
+            } catch (error) {
+                console.error("Error converting input to base64:", error);
+            }
+        }));
+        return listProductDetail;
+    }
+
+    function convertInputToBase64(input) {
+        return new Promise((resolve, reject) => {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    resolve(e.target.result.split(',')[1]);
+                };
+                reader.onerror = function (error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    }
+
+    window.onload = function () {
+        if (id) {
+            $('#bttCreate').hide();
+            $('#bttUpdate').show();
+
+            var tableCreate = document.getElementById('tableCreate');
+            tableCreate.style.display = 'block';
+            $.ajax({
+                type: "GET",
+                url: "/chi-tiet-san-pham/rest/detail-san-pham?idctsp=" + id,
+                success: function (response) {
+                    if (response.sanPham) {
+                        $('#tenSP').val(response.sanPham.tenSP);
+                        $('#ma').val(response.sanPham.ma);
+                        $('#moTa').val(response.sanPham.moTa);
+                        $('#hinhAnh').val(response.sanPham.hinhAnh ? response.sanPham.hinhAnh.id : "");
+                        $('#thuongHieu').val(response.sanPham.thuongHieu ? response.sanPham.thuongHieu.id : "");
+                        $('#phanLoai').val(response.sanPham.phanLoai ? response.sanPham.phanLoai.id : "");
+                        if (response.sanPham.hinhAnh) {
+                            document.getElementById("preview-anh-hinhAnh1").src = '../../../uploads/' + response.sanPham.hinhAnh.anh1;
+                            document.getElementById("preview-anh-hinhAnh2").src = '../../../uploads/' + response.sanPham.hinhAnh.anh2;
+                            document.getElementById("preview-anh-hinhAnh3").src = '../../../uploads/' + response.sanPham.hinhAnh.anh3;
+                        }
+                    }
+                    if (response.chiTietSanPham) {
+                        var mauSacElements = $('input[name="mauSac"]');
+                        var kichThuocElements = $('input[name="kichThuoc"]');
+                        var chatLieuElements = $('input[name="chatLieu"]');
+                        let index = 0;
+                        response.chiTietSanPham.forEach(el => {
+                            mauSacElements.each(function () {
+                                if (el.mauSac.id.toString() === $(this).val()) {
+                                    $(this).prop('checked', true);
+                                    if (listMauSac.filter(color => color.id == el.mauSac.id).length == 0) {
+                                        listMauSac.push({
+                                            id: el.mauSac.id,
+                                            name: el.mauSac.ten
+                                        });
+                                    }
+                                }
+                            });
+                            kichThuocElements.each(function () {
+                                if (el.kichThuoc.id.toString() === $(this).val()) {
+                                    $(this).prop('checked', true);
+                                    if (listSize.filter(size => size.id == el.kichThuoc.id).length == 0) {
+                                        listSize.push({
+                                            id: el.kichThuoc.id,
+                                            name: el.kichThuoc.size
+                                        });
+                                    }
+                                }
+                            });
+                            chatLieuElements.each(function () {
+                                if (el.chatLieu.id.toString() === $(this).val()) {
+                                    $(this).prop('checked', true);
+                                    if (listCategory.filter(category => category.id == el.chatLieu.id).length == 0) {
+                                        listCategory.push({
+                                            id: el.chatLieu.id,
+                                            name: el.chatLieu.tenChatLieu
+                                        });
+                                    }
+                                }
+                            });
+
+                            index++;
+                            listProductDetail.push({
+                                id: el.id,
+                                index: index,
+                                colorId: el.mauSac.id,
+                                colorName: el.mauSac.ten,
+                                sizeId: el.kichThuoc.id,
+                                sizeName: el.kichThuoc.size,
+                                categoryId: el.chatLieu.id,
+                                categoryName: el.chatLieu.tenChatLieu,
+                                quantity: el.soLuongTon,
+                                money: el.donGia,
+                                name: el.sanPham.tenSP,
+                                note: el.moTa,
+                                status: el.trangThai === 1,
+                                image: el.hinhAnh
+                            });
+                            dataProductDetailUpdate.push({
+                                id: el.id,
+                                colorId: el.mauSac.id,
+                                sizeId: el.kichThuoc.id,
+                                categoryId: el.chatLieu.id,
+                                image: el.hinhAnh
+                            })
+                        });
+                        listProductDetailUpdate = listProductDetail;
+                        updateColorTable();
+                        var inputs = $('.productImg');
+                        inputs.each(function () {
+                            var currentIndex = $(this).attr('index');
+
+                            var matchedProductDetail = listProductDetail.find(function (el) {
+                                return parseInt(el.index) === parseInt(currentIndex);
+                            });
+
+                            if (matchedProductDetail) {
+                                $(this).val(matchedProductDetail.image);
+                            }
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        } else {
+            $('#bttCreate').show();
+            $('#bttUpdate').hide();
+        }
+    };
 </script>
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-<script src="../assets/vendor/js/menu.js"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-
-<!-- Main JS -->
-<script src="../assets/js/main.js"></script>
-
-<!-- Page JS -->
-
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 </html>

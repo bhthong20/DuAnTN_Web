@@ -18,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -42,18 +43,33 @@ public class HoaDon {
     @Column(name = "sdt")
     private String sdt;
 
+    @Column(name = "tien_mat")
+    private BigDecimal tienMat;
+
+    @Column(name = "chuyen_khoan")
+    private BigDecimal chuyenKhoan;
+
+    @Column(name = "tien_giam")
+    private BigDecimal tienGiam;
+
     @Column(name = "tong_tien")
     private BigDecimal tongTien;
 
     @CreationTimestamp
     @Column(name = "ngay_tao")
-    private Date ngayTao;
+    private LocalDateTime ngayTao;
+
+    @Column(name = "ngay_cap_nhat")
+    private LocalDateTime ngayCapNhat;
 
     @Column(name = "phuong_thuc_thanh_toan")
     private int phuongThucThanhToan;
 
     @Column(name = "trang_thai")
     private int trangThai;
+
+    @Column(name = "loai")
+    private int loai;
 
     @Column(name = "ghi_chu")
     private String ghiChu;
@@ -73,4 +89,6 @@ public class HoaDon {
     @Column(name = "dia_chi")
     private String diaChi;
 
+    @Column(name = "tien_ship")
+    private BigDecimal tienShip;
 }

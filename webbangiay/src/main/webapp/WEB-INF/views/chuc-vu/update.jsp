@@ -50,7 +50,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="col-md-12">
         <div class="card">
-            <h4 class="card-header" style="text-align: center">Thông tin chi tiết sản phẩm</h4>
+            <h4 class="card-header" style="text-align: center">Update chức vụ</h4>
             <%--@elvariable id="chiTietSanPham" type=""--%>
             <div class="card-body">
                 <form:form action="/chuc-vu/update/${chucVu.id}" method="post" modelAttribute="chucVu">
@@ -76,8 +76,8 @@
                                 <form:errors path="moTa" cssStyle="color: #ff0000"/>
                             </div>
                             <form:label class="form-label" path="trangThai">Trạng Thái:</form:label>
-                            <form:radiobutton path="trangThai" value="0" checked="true"/>Không Hoạt Động
-                            <form:radiobutton path="trangThai" value="1"/>Hoạt Độngz
+                            <form:radiobutton path="trangThai" value="0" checked="true"/> Hoạt Động
+                            <form:radiobutton path="trangThai" value="1"/> Không Hoạt Động
                         </div>
                         <div class="row">
                             <div class="col-12" style="text-align: center">
@@ -88,11 +88,6 @@
                         </div>
                     </div>
                 </form:form>
-                </table>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
@@ -182,14 +177,6 @@
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#selectMauSac').select2();
-        $('#selectKichThuoc').select2();
-        $('#selectChatLieu').select2();
-    });
-
-</script>
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="../assets/vendor/libs/jquery/jquery.js"></script>
@@ -210,3 +197,4 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </html>
+

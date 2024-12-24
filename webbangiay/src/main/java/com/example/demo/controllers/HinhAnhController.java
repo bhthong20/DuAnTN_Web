@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.HinhAnh;
+import com.example.demo.models.dto.SanPhamDetail;
 import com.example.demo.services.HinhAnhService;
 import com.example.demo.util.FileUploadUtil;
 import jakarta.validation.Valid;
@@ -41,95 +42,37 @@ public class HinhAnhController {
         Page<HinhAnh> list = anhService.getAll(pageable);
         model.addAttribute("listAnh", list.getContent());
         model.addAttribute("total", list.getTotalPages());
-        model.addAttribute("contentPage", "hinh-anh/hien-thi.jsp");
-        return "hinh-anh/hien-thi";
-    }
-
-    @GetMapping("/hien-thi-delete")
-    public String hienThiDelete(Model model, @ModelAttribute("anh") HinhAnh anh,
-                                @RequestParam("pageNum") Optional<Integer> num,
-                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer size) {
-
-        Sort sort = Sort.by("ngayTao").descending();
-        Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-        Page<HinhAnh> page = anhService.getAll1(pageable);
-        model.addAttribute("contentPage", "hinh-anh/anh-delete.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
-        return "hinh-anh/anh-delete";
+        model.addAttribute("contentPage", "../hinh-anh/hien-thi.jsp");
+        return "home/layout";
     }
 
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("anh") HinhAnh anh) {
         model.addAttribute("anh", new HinhAnh());
-        model.addAttribute("contentPage", "hinh-anh/add.jsp");
-        return "hinh-anh/add";
+        model.addAttribute("contentPage", "../hinh-anh/add.jsp");
+        return "home/layout";
     }
 
-    @GetMapping("/detail/{id}")
-    public String detail(Model model, @ModelAttribute("anh") HinhAnh anh, @PathVariable("id") UUID id) {
+//    @GetMapping("/detail-san-pham")
+//    public SanPhamDetail detailSanPham(@RequestParam("id") UUID id) {
+//        SanPhamDetail sanPhamDetail = new SanPhamDetail();
+////        sanPhamDetail.setSanPham(sanPhamService.findById(id));
+//        sanPhamDetail.setChiTietSanPham(chiTietSanPhamService.findChiTietSanPhamBySanPham(sanPhamDetail.getSanPham()));
+//        return sanPhamDetail;
+//    }
+
+    @GetMapping("/detail")
+    public String detail(Model model, @ModelAttribute("anh") HinhAnh anh, @RequestParam("id") UUID id) {
         model.addAttribute("anh", anhService.findById(id));
-        model.addAttribute("contentPage", "hinh-anh/update.jsp");
-        return "hinh-anh/update";
+        model.addAttribute("contentPage", "../hinh-anh/update.jsp");
+        return "home/layout";
     }
 
-    @GetMapping("/update-tt")
-    public String updateTT(Model model, @RequestParam("pageNum") Optional<Integer> pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize,
-                           @ModelAttribute("anh") HinhAnh anh) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        anh.setNgayCapNhat(date);
-        anhService.updateTT();
-        Page<HinhAnh> page = anhService.getAll1(pageable);
-        model.addAttribute("contentPage", "hinh-anh/anh-delete.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
-        return "hinh-anh/anh-delete";
-    }
-
-    @GetMapping("/update-status/{id}")
-    public String updateStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
+    @GetMapping("/delete/{id}")
+    public String deleteHa(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
                                @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("anh") HinhAnh anh) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-
-        HinhAnh anh1 = anhService.findById(id);
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        anh1.setNgayCapNhat(date);
-        anh1.setTrangThai(1);
-        anhService.update(id, anh1);
-        Page<HinhAnh> page = anhService.getAll(pageable);
-        model.addAttribute("contentPage", "hinh-anh/hien-thi.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
-        return "hinh-anh/hien-thi";
-    }
-
-    @GetMapping("/reset-status/{id}")
-    public String resetStatus(Model model, @PathVariable("id") UUID id, @RequestParam("pageNum") Optional<Integer> pageNum,
-                              @RequestParam(name = "pageSize", required = false, defaultValue = "5") Integer pageSize, @ModelAttribute("anh") HinhAnh anh) {
-        Sort sort = Sort.by("ngayTao").ascending();
-        Pageable pageable = PageRequest.of(pageNum.orElse(0), pageSize, sort);
-        HinhAnh anh1 = anhService.findById(id);
-        long millis = System.currentTimeMillis();
-        Date date = new Date(millis);
-        anh1.setNgayCapNhat(date);
-
-        anh1.setTrangThai(0);
-        anhService.update(id, anh1);
-        Page<HinhAnh> page = anhService.getAll1(pageable);
-        model.addAttribute("contentPage", "hinh-anh/anh-delete.jsp");
-        model.addAttribute("listAnh", page.getContent());
-        model.addAttribute("page", page.getNumber());
-        model.addAttribute("total", page.getTotalPages());
-        return "hinh-anh/hien-thi";
+        anhService.delete(id);
+        return "redirect:/hinh-anh/hien-thi";
     }
 
     @PostMapping("/search-0")
@@ -147,29 +90,8 @@ public class HinhAnhController {
         } else {
             List<HinhAnh> list = anhService.search0(search);
             model.addAttribute("listAnh", list);
-            model.addAttribute("contentPage", "hinh-anh/hien-thi.jsp");
-            return "hinh-anh/hien-thi";
-        }
-
-    }
-
-    @PostMapping("/search-1")
-    public String search1(Model model, @ModelAttribute("anh") HinhAnh anh, @RequestParam("search") String search, @RequestParam("num") Optional<Integer> num,
-                          @RequestParam(name = "size", defaultValue = "5", required = false) Integer size) {
-        if (search.isEmpty()) {
-            model.addAttribute("thongBao", "Không để trống thông tin");
-            Sort sort = Sort.by("ngayTao").descending();
-            Pageable pageable = PageRequest.of(num.orElse(0), size, sort);
-            Page<HinhAnh> list = anhService.getAll1(pageable);
-            model.addAttribute("listAnh", list.getContent());
-            model.addAttribute("total", list.getTotalPages());
-            model.addAttribute("contentPage", "anh/anh-delete.jsp");
-            return "hinh-anh/anh-delete";
-        } else {
-            List<HinhAnh> list = anhService.search1(search);
-            model.addAttribute("listAnh", list);
-            model.addAttribute("contentPage", "anh/anh-delete.jsp");
-            return "hinh-anh/anh-delete";
+            model.addAttribute("contentPage", "../hinh-anh/hien-thi.jsp");
+            return "home/layout";
         }
 
     }

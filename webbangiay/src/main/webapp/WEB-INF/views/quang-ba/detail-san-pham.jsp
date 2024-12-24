@@ -73,888 +73,216 @@
 
 <body>
 
-    <jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 
-        <section id="content" class="mt-4" style="background-color: #f5f5f9;">
-            <section class="container-fluid">
-                <div class="row">
-                    <div class="col-2 min-vh-100 card">
-                        <h5 class="card-header">
-                            Tìm kiếm sản phẩm</h5>
-                        <hr class="m-0" />
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label for="html5-text-input" class="col-form-label">Tên giày</label>
-                                <div>
-                                    <input class="form-control" type="text" value="Sneat" id="html5-text-input"/>
-                                </div>
+<section id="content" class="mt-4" style="background-color: #f5f5f9;">
+    <section class="container bg-white">
+        <div class="row py-4">
+            <div class="col-5">
+                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img id="anh1" class="d-block w-100" src="" alt="First slide"/>
+                            <div class="carousel-caption d-none d-md-block">
                             </div>
-                            <div class="mb-3">
-                                <label for="html5-text-input" class="col-form-label">Mã giày</label>
-                                <div>
-                                    <input class="form-control" type="text" value="Sneat" id="html5-text-input"/>
-                                </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img id="anh2" class="d-block w-100" src="" alt="Second slide"/>
+                            <div class="carousel-caption d-none d-md-block">
                             </div>
-                            <div class="mb-3">
-                                <label for="html5-text-input" class="col-form-label">Mô tả</label>
-                                <div>
-                                    <input class="form-control" type="text" value="Sneat" id="html5-text-input"/>
-                                </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img id="anh3" class="d-block w-100" src="" alt="Third slide"/>
+                            <div class="carousel-caption d-none d-md-block">
                             </div>
-
-                            <div class="divider">
-                                <div class="divider-text">Màu sắc</div>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Xanh </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Đỏ </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Tím </label>
-                            </div>
-
-                            <div class="divider">
-                                <div class="divider-text">Phân loại</div>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Giày cao cổ </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Giày thấp cổ </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Giày thể thao </label>
-                            </div>
-
-                            <div class="divider">
-                                <div class="divider-text">Thương hiệu</div>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Sneaker </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> Adi dat </label>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                <label class="form-check-label" for="defaultCheck1"> contruct </label>
-                            </div>
-
-                            <div class="divider">
-                                <div class="divider-text">Giá thành</div>
-                            </div>
-                            <div class="form-check mb-3 p-0 d-flex justify-between align-items-center">
-                                <input class="form-control" type="text" value="" id="html5-text-input" placeholder="Từ" />
-                                <span class="d-flex justify-between align-items-center mx-2"> - </span>
-                                <input class="form-control" type="text" value="" id="html5-text-input" placeholder="Đến"/>
-                            </div>
-
-                            <a href="#" class="btn btn-primary w-100">Tìm kiếm</a>
                         </div>
                     </div>
-                    <div class="col-10 ps-4 ">
-                        <section>
-                            <h4 class="fw-bold py-3 m-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
-                                     style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                                    <path d="M4 6h2v2H4zm0 5h2v2H4zm0 5h2v2H4zm16-8V6H8.023v2H18.8zM8 11h12v2H8zm0 5h12v2H8z"></path>
-                                </svg>
-                                <span class="">Danh sách sản phẩm</span>
-                            </h4>
-
-                            <section class="list-product shopee-search-item-result">
-                                <fieldset class="shopee-sort-bar" style="border: 0px;">
-                                    <legend style="display: none;"></legend>
-                                    <div class="shopee-sort-bar__label">Sắp xếp theo</div>
-                                    <div class="shopee-sort-by-options">
-                                        <section class="shopee-sort-by-options__option-group">
-                                            <button aria-label="" aria-pressed="true"
-                                                    class="shopee-sort-by-options__option shopee-sort-by-options__option--selected"
-                                                    style="background-color: #696cff;"><span aria-hidden="true">Liên quan</span>
-                                            </button>
-                                            <button aria-label="" aria-pressed="false" class="shopee-sort-by-options__option">
-                                                <span aria-hidden="true">Mới nhất</span></button>
-                                            <button aria-label="" aria-pressed="false" class="shopee-sort-by-options__option">
-                                                <span aria-hidden="true">Bán chạy</span></button>
-                                        </section>
-                                        <section>
-                                            <div style="pointer-events: auto;">
-                                                <select class="sort-price-select" id="exampleFormControlSelect1"
-                                                        aria-label="Default select example">
-                                                    <option selected>Giá</option>
-                                                    <option value="1">Giá: Thấp đến cao</option>
-                                                    <option value="2">Giá: Cao đến thấp</option>
-                                                </select>
-                                            </div>
-                                        </section>
-                                    </div>
-                                </fieldset>
-                            </section>
-
-                            <section>
-                                <div class="row">
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 mt-4">
-                                        <div class="card card__product">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lllv9vshh4cv25_tn.webp"
-                                                 class="card-img-top" alt="...">
-                                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-caf8b883b8713804c28abfe16ed9ec0d"
-                                                 class="position-absolute w-100"/>
-                                            <div class="card-body shopee_ic">
-                                                <h5 class="card-title">Giày thể thao
-                                                    sneaker </h5>
-                                                <div class="space-y-1 mb-1 flex-1 flex flex-col justify-between min-h-[4rem]">
-                                                    <div class="line-clamp-2 break-words min-h-[2.5rem] text-sm">Giày thể thao
-                                                        sneaker nam hot trend 2023 , đế cao su non 5cm êm chân , tôn dáng - G08
-                                                        - 2Seven
-                                                    </div>
-                                                </div>
-                                                <div class="flex-1 flex flex-col justify-between">
-                                                    <div class="mb-2 flex items-center">
-                                                        <div class="flex-shrink flex flex-row min-w-0 space-x-1 mr-1">
-                                                            <div class="shrink-0 max-w-full truncate text-shopee-primary flex items-center font-normal">
-                                                                <span aria-label="promotion price"></span>
-                                                                <div class="truncate flex items-baseline"><span
-                                                                        class="text-xs/sp14">₫</span><span
-                                                                        class="text-base/5 truncate">125.000</span><span
-                                                                        class="text-xs/sp14"></span></div>
-                                                            </div>
-                                                            <div class="flex-grow-0 flex-shrink  text-shopee-black26 line-through truncate flex items-center text-xs/sp14"
-                                                                 aria-hidden="true">
-                                                                <div class="truncate flex items-baseline"><span>₫</span><span
-                                                                        class="truncate">250.000</span><span></span></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-shopee-primary font-medium bg-shopee-pink py-0.5 px-1 text-sp10/3 h-4 shrink-0 mr-1">
-                                                            <span aria-label="-50%"></span>-50%
-                                                        </div>
-                                                    </div>
-                                                    <div class="flex justify-between items-center space-x-1 mb-2 last:mb-0">
-                                                        <div class="rating">
-                                                            <input value="5" name="rate" id="star5" type="radio">
-                                                            <label title="text" for="star5"></label>
-                                                            <input value="4" name="rate" id="star4" type="radio">
-                                                            <label title="text" for="star4"></label>
-                                                            <input value="3" name="rate" id="star3" type="radio" checked="">
-                                                            <label title="text" for="star3"></label>
-                                                            <input value="2" name="rate" id="star2" type="radio">
-                                                            <label title="text" for="star2"></label>
-                                                            <input value="1" name="rate" id="star1" type="radio">
-                                                            <label title="text" for="star1"></label>
-                                                        </div>
-                                                        <div class="truncate text-shopee-black87 text-xs min-h-4 flex-shrink-1">
-                                                            Đã bán 5,3k
-                                                        </div>
-                                                    </div>
-                                                    <a href="#" class="btn btn-primary">Mua Ngay</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <nav aria-label="Page navigation example" class="pt-4 d-flex align-items-end justify-content-center">
-                                    <ul class="pagination m-0">
-                                        <li class="page-item">
-                                            <a class="page-link bg-white" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link bg-white" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link bg-white" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link bg-white" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link bg-white" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </section>
-                        </section>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-7 px-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="title" id="tenSanPham"></h3>
                     </div>
                 </div>
-            </section>
-        </section>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <span class="title text-sub-title-detail me-1">Đánh giá: </span><span id="value_star"
+                                                                                                      class="title text-sub-title-detail me-1">5</span>
+                                <div class="rating">
+                                    <input value="5" onchange="$('#value_star').text('5')" name="rate" id="star5"
+                                           type="radio" checked="">
+                                    <label title="text" for="star5"></label>
+                                    <input value="4" onchange="$('#value_star').text('4')" name="rate" id="star4"
+                                           type="radio">
+                                    <label title="text" for="star4"></label>
+                                    <input value="3" onchange="$('#value_star').text('3')" name="rate" id="star3"
+                                           type="radio">
+                                    <label title="text" for="star3"></label>
+                                    <input value="2" onchange="$('#value_star').text('2')" name="rate" id="star2"
+                                           type="radio">
+                                    <label title="text" for="star2"></label>
+                                    <input value="1" onchange="$('#value_star').text('1')" name="rate" id="star1"
+                                           type="radio">
+                                    <label title="text" for="star1"></label>
+                                </div>
+                            </div>
+                            <div class=" text-sub-title-detail">
+                                Đã bán <span id="daBan">0</span> 👟
+                            </div>
+                        </div>
 
-    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#carouselExample" data-bs-slide-to="1"></li>
-            <li data-bs-target="#carouselExample" data-bs-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="../assets/img/elements/13.jpg" alt="First slide" />
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>First slide</h3>
-                    <p>Eos mutat malis maluisset et, agam ancillae quo te, in vim congue pertinacia.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../assets/img/elements/2.jpg" alt="Second slide" />
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Second slide</h3>
-                    <p>In numquam omittam sea.</p>
+                <div class="row">
+                    <div style="margin-top: 10px;">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex flex-column CWiSMQ">
+                                <section class="d-flex align-items-center" aria-live="polite"><h2 class="Bf9ap6">Price
+                                    Section</h2>
+                                    <div class="d-flex align-items-center QAc7_y">
+                                        <div class="qg2n76" style="display: none" id="donGiaTruocSale">₫</div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="G27FPf"><span id="donGia"></span></div>
+                                            <div class="o_z7q9" style="display: none" id="giamGia"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <span class="d-flex align-items-center ZRb8YF"><span
+                                        style="color: #ff3e1d;
+                                        font-size: xx-large;
+                                        font-weight: bolder;" id="tenMaGiamGia"></span>
+                                    <div class="eLrI5y" id="thoiGianKetThuc">Chưa có đợt giảm giá</div>
+                                    <img alt="icon arrow right" class="d24OWs"
+                                         src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/966fbe37fe1c72e3f2dd.svg"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../assets/img/elements/18.jpg" alt="Third slide" />
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Third slide</h3>
-                    <p>Lorem ipsum dolor sit amet, virtute consequat ea qui, minim graeco mel no.</p>
+                <div class="row">
+                    <div class="col-12">
+                        <c:if
+                                test="${not empty listKM}">
+                            <div class="row mt-4">
+                                <div class="col-4">
+                                    Mã giảm giá của shop
+                                </div>
+                                <div class="col-8">
+                                <span class="mini-vouchers__vouchers flex flex-auto flex-no-overflow">
+                                    <c:forEach items="${listKM}" var="item" varStatus="loop">
+                                        <div onclick="renderSale(this)"
+                                             class="voucher-ticket voucher-ticket--VN voucher-ticket--seller-mini-solid mini-voucher-with-popover <c:if test='${loop.first}'>checked</c:if>"
+                                             hinhThucGiam="${item.hinhThucGiamGia}"
+                                             giaTriGiam="${item.giaTriGiam}"
+                                             ngayKetThuc="${item.ngayKetThuc}"
+                                             ten="${item.ten}"
+                                             id="${item.id}"
+                                        >
+                                            <div class=""><span
+                                                    class="voucher-promo-value voucher-promo-value--percent">${item.giaTriGiam}</span><span
+                                                    class="voucher-promo-label"><c:if
+                                                    test="${item.hinhThucGiamGia==0}"> VNĐ</c:if>
+                                            <c:if test="${item.hinhThucGiamGia==1}"> %</c:if></span><span
+                                                    class="voucher-promo-label voucher-promo-label--off">GIẢM</span></div>
+                                        </div>
+                                    </c:forEach>
+                                </span>
+                                </div>
+                            </div>
+                        </c:if>
+                        <div class="row mt-4">
+                            <div class="col-4">
+                                Màu sắc
+                            </div>
+                            <div class="col-8">
+                                <div id="listMauSac" class="d-flex align-items-center j7HL5Q">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-4">
+                                Size
+                            </div>
+                            <div class="col-8">
+                                <div id="listKichThuoc" class="d-flex align-items-center j7HL5Q">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-4">
+                                Chất liệu
+                            </div>
+                            <div class="col-8">
+                                <div id="listChatLieu" class="d-flex align-items-center j7HL5Q">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-4">
+                                Số lượng
+                            </div>
+                            <div class="col-8">
+                                <div class="d-flex align-items-center">
+                                    <div style="margin-right: 15px;">
+                                        <div class="_9m0o30 shopee-input-quantity">
+                                            <button aria-label="Decrease" class="suQW3X" onclick="validateInputTru()"
+                                                    fdprocessedid="yi4z8l">
+                                                -
+                                            </button>
+                                            <input class="suQW3X u00pLG" id="soLuongInput" min="0" type="text" value="1"
+                                                   onchange="validateInput(this)">
+                                            <button aria-label="Increase" onclick="validateInputCong()" class="suQW3X"
+                                                    fdprocessedid="qikb1a">
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div><span id="soLuong"></span> sản phẩm có sẵn</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-4">
+                                Mô tả
+                            </div>
+                            <div class="col-8">
+                                <div class="d-flex align-items-center" id="moTa">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <button type="button" onclick="themVaoGioHang()" class="btn btn-danger">Thêm vào giỏ hàng
+                            </button>
+                            <button type="button" onclick="muaNgay()" class="btn btn-danger">Mua ngay</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
+    </section>
+</section>
 
 
-
-
-    <jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
 <!-- Core JS -->
@@ -982,4 +310,405 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="../../../js/select-2.js"></script>
+<script>
+    function formatCurrency(number) {
+        return new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(number);
+    }
+
+    var url = window.location.href;
+    var parts = url.split("/");
+    var id = parts[parts.length - 1];
+
+    let sanPham = {
+        tenSp: "",
+        daBan: 0,
+        donGia: 0,
+        sale: 30,
+        mauSac: "",
+        size: "",
+        chatLieu: "",
+        soLuong: 0,
+        moTa: "",
+        anh1: "",
+        anh2: "",
+        anh3: "",
+    }
+
+    let mauSac = [];
+    let size = [];
+    let chatLieu = [];
+    let chiTietSanPham = [];
+    let idChiTietSanPham = "";
+
+    // function renderSale(sale) {
+    //     const listSale = $('.voucher-ticket');
+    //     const saleSelect = $(sale);
+    //     const hinhThucGiam = parseInt(saleSelect.attr('hinhThucGiam'));
+    //     const giaTriGiam = parseInt(saleSelect.attr('giaTriGiam'));
+    //
+    //     listSale.removeClass('checked');
+    //     saleSelect.addClass('checked');
+    //
+    //     $('#tenMaGiamGia').text(saleSelect.attr('ten'));
+    //     $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect.attr('ngayKetThuc'))).toLocaleString());
+    //     $('#donGiaTruocSale').text("₫" + sanPham.donGia);
+    //
+    //     if (hinhThucGiam == 1) {
+    //         $('#donGia').text(sanPham.donGia * (100 - giaTriGiam) / 100);
+    //         $('#giamGia').text('' + giaTriGiam + ' % giảm');
+    //     } else {
+    //         $('#donGia').text(sanPham.donGia - giaTriGiam);
+    //         $('#giamGia').text('' + giaTriGiam + ' VNĐ giảm');
+    //         if (sanPham.donGia - giaTriGiam < 0) {
+    //             $('#donGia').text(0);
+    //         }
+    //     }
+    //
+    //     $('#donGiaTruocSale').show();
+    //     $('#giamGia').show();
+    // }
+    function renderSale(sale) {
+        const listSale = $('.voucher-ticket');
+        const saleSelect = $(sale);
+        const hinhThucGiam = parseInt(saleSelect.attr('hinhThucGiam'));
+        const giaTriGiam = parseFloat(saleSelect.attr('giaTriGiam')); // Dùng parseFloat thay vì parseInt
+
+        listSale.removeClass('checked');
+        saleSelect.addClass('checked');
+
+        $('#tenMaGiamGia').text(saleSelect.attr('ten'));
+        $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect.attr('ngayKetThuc'))).toLocaleString());
+        $('#donGiaTruocSale').text("₫" + sanPham.donGia.toLocaleString('vi-VN'));
+
+        if (hinhThucGiam == 1) {
+            $('#donGia').text((sanPham.donGia * (100 - giaTriGiam) / 100).toLocaleString('vi-VN') + ' đ');
+            $('#giamGia').text(giaTriGiam + ' % giảm');
+        } else {
+            const formattedGiaTriGiam = giaTriGiam.toLocaleString('vi-VN');
+            const finalPrice = Math.max(sanPham.donGia - giaTriGiam, 0);
+
+            $('#donGia').text(finalPrice.toLocaleString('vi-VN') + ' đ');
+            $('#giamGia').text(formattedGiaTriGiam + ' đ giảm');
+        }
+
+        $('#donGiaTruocSale').show();
+        $('#giamGia').show();
+    }
+
+
+    function muaNgay() {
+        let sanPham = getChiTietSanPhamSelect();
+        if (sanPham.soLuongTon <= 0) {
+            alert("Sản phẩm đã hết hàng");
+            return;
+        }
+        let productShopping = []
+        let kt = confirm("Bạn có chắc chắn muốn tạo đơn hàng không?");
+        if (kt) {
+            productShopping.push({
+                chiTietSanPham: sanPham.id,
+                soLuong: sanPham.soLuongMua,
+                donGia: sanPham.donGia
+            })
+            $.ajax({
+                type: "POST",
+                url: "/ban-hang-online/rest/tao-hoa-don",
+                contentType: "application/json",
+                data: JSON.stringify(productShopping),
+                success: function (response) {
+                    alert("Tạo đơn hàng thành công");
+                    window.location.href = "/ban-hang-online/hoa-don-detail?id=" + response;
+                },
+                error: function (xhr, status, error) {
+                    if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
+                        alert(xhr.responseJSON.message)
+                    }
+                }
+            });
+        }
+    }
+
+    function themVaoGioHang() {
+        let chiTiet = getChiTietSanPhamSelect();
+        let data = {
+            chiTietSanPham: chiTiet.id,
+            soLuong: chiTiet.soLuongMua,
+            donGia: chiTiet.donGia
+        };
+
+        let kt = confirm("Bạn có chắc chắn muốn thêm vào giỏ hàng không?");
+        if (kt) {
+            $.ajax({
+                type: "POST",
+                url: "/ban-hang-online/rest/them-gio-hang",
+                contentType: "application/json",
+                data: JSON.stringify(data), // Chuyển đổi dữ liệu thành chuỗi JSON
+                success: function (response) {
+                    alert("Sản phẩm đã được thêm vào giỏ hàng");
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    if (xhr.responseJSON.status && xhr.responseJSON.status === 400) {
+                        alert(xhr.responseJSON.message)
+                    }
+                }
+            });
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    function getChiTietSanPhamSelect() {
+        const btnChatLieu = $('.btnChatLieu.checked').first().attr("identity");
+        const btnSize = $('.btnSize.checked').first().attr("identity");
+        const mauSac = $('.mauSac.checked').first().attr("identity");
+
+        const chiTietSanPhamSelect = chiTietSanPham.filter(el => el.mauSac.id === mauSac && el.kichThuoc.id === btnSize && el.chatLieu.id === btnChatLieu)[0];
+
+        if (chiTietSanPhamSelect) {
+            chiTietSanPhamSelect.soLuongMua = parseInt($('#soLuongInput').val());
+            return chiTietSanPhamSelect;
+        } else {
+            alert("Sản phẩm hiện tại chưa được cập nhập");
+            return;
+        }
+
+    }
+
+    window.onload = function () {
+        $.ajax({
+            type: "GET",
+            url: "/home/rest/" + id,
+            success: function (response) {
+                if (response.sanPham) {
+                    sanPham.tenSp = response.sanPham.tenSP
+                    sanPham.daBan = response.soLuongDaBan
+                    $('#daBan').text(sanPham.daBan);
+                }
+                if (response.chiTietSanPham && response.chiTietSanPham.length !== 0) {
+                    chiTietSanPham = response.chiTietSanPham
+                    idChiTietSanPham = response.chiTietSanPham[0].id
+                    sanPham.mauSac = response.chiTietSanPham[0].mauSac.ten
+                    sanPham.size = response.chiTietSanPham[0].kichThuoc.size
+                    sanPham.chatLieu = response.chiTietSanPham[0].chatLieu.tenChatLieu
+                    sanPham.soLuong = response.chiTietSanPham[0].soLuongTon
+                    sanPham.donGia = response.chiTietSanPham[0].donGia
+                    sanPham.moTa = response.chiTietSanPham[0].moTa
+
+                    sanPham.anh1 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh1
+                    sanPham.anh2 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh2
+                    sanPham.anh3 = '../../../uploads/' + response.chiTietSanPham[0].hinhAnh.anh3
+                } else {
+                    alert("Sản phẩm hiện tại đang tạm dừng bán");
+                    window.location.href = "/san-pham";
+                }
+                renderListCombobox(response.chiTietSanPham);
+
+                renderMauSac();
+                renderKichThuoc();
+                renderChatLieu();
+                renderSanPham();
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    function validateInput(input) {
+        var value = input.value;
+        const matched = value.match(/^[0-9]+$/);
+
+        if (!matched) {
+            input.value = 1;
+        } else {
+            if (parseInt(input.value) <= 0) {
+                input.value = 1;
+            } else if (parseInt(input.value) > sanPham.soLuong) {
+                input.value = sanPham.soLuong;
+            }
+        }
+    }
+
+    function validateInputCong() {
+        if ($('#soLuongInput').val() >= sanPham.soLuong) {
+            $('#soLuongInput').val(sanPham.soLuong);
+        } else {
+            $('#soLuongInput').val(parseInt($('#soLuongInput').val()) + 1)
+        }
+    }
+
+    function validateInputTru() {
+        if ($('#soLuongInput').val() <= 1) {
+            $('#soLuongInput').val(1);
+        } else {
+            $('#soLuongInput').val(parseInt($('#soLuongInput').val()) - 1)
+        }
+    }
+
+    function renderListCombobox(listChiTietSanPham) {
+        listChiTietSanPham.forEach(el => {
+            if (mauSac.filter(color => color.identity == el.mauSac.id).length == 0) {
+                mauSac.push({
+                    id: el.id,
+                    ten: el.mauSac.ten,
+                    image: '../../../uploads/' + el.hinhAnh.anh1,
+                    image2: '../../../uploads/' + el.hinhAnh.anh2,
+                    image3: '../../../uploads/' + el.hinhAnh.anh3,
+                    identity: el.mauSac.id
+                });
+            }
+            if (size.filter(size => size.identity == el.kichThuoc.id).length == 0) {
+                size.push({
+                    id: el.id,
+                    ten: el.kichThuoc.size,
+                    identity: el.kichThuoc.id
+                });
+            }
+            if (chatLieu.filter(category => category.identity == el.chatLieu.id).length == 0) {
+                chatLieu.push({
+                    id: el.id,
+                    ten: el.chatLieu.tenChatLieu,
+                    identity: el.chatLieu.id
+                });
+            }
+        })
+    }
+
+    function renderMauSac() {
+        const listMauSac = document.getElementById("listMauSac");
+        let html = '';
+        if (mauSac && mauSac.length !== 0) {
+            mauSac.forEach(el => {
+                html += `
+                    <button class="sApkZm SkhBL1 mauSac ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" aria-label="Đen" onclick="changeMauSac(this)" aria-disabled="false"
+                            fdprocessedid="wb3xko"><img class="nk0Z0T"
+                                                        src="` + el.image + `">` + el.ten + `
+                    </button>
+                `
+            })
+            listMauSac.innerHTML = html;
+        }
+    }
+
+    function renderKichThuoc() {
+        const listKichThuoc = document.getElementById("listKichThuoc");
+        let html = '';
+
+        // Sort the size array numerically
+        size.sort((a, b) => parseInt(a.size) - parseInt(b.size));
+
+        if (size && size.length !== 0) {
+            size.forEach(el => {
+                html += `
+                <button class="sApkZm SkhBL1 btnSize ` + (el.id === idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false" fdprocessedid="wb3xko">
+                    ` + el.ten + `
+                </button>
+            `;
+            });
+            listKichThuoc.innerHTML = html;
+        }
+    }
+
+
+    // function renderKichThuoc() {
+    //     const listKichThuoc = document.getElementById("listKichThuoc");
+    //     let html = '';
+    //     if (size && size.length !== 0) {
+    //         size.forEach(el => {
+    //             html += `
+    //                 <button class="sApkZm SkhBL1 btnSize ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeSize(this)" aria-label="Đen" aria-disabled="false"
+    //                         fdprocessedid="wb3xko">
+    //                     ` + el.ten + `
+    //                 </button>
+    //             `
+    //         })
+    //         listKichThuoc.innerHTML = html;
+    //     }
+    // }
+
+    function renderChatLieu() {
+        const listChatLieu = document.getElementById("listChatLieu");
+        let html = '';
+        if (chatLieu && chatLieu.length !== 0) {
+            chatLieu.forEach(el => {
+                html += `
+                    <button class="sApkZm SkhBL1 btnChatLieu ` + (el.id == idChiTietSanPham ? 'checked' : '') + `" identity="` + el.identity + `" idCtsp="` + el.id + `" onclick="changeChatLieu(this)" aria-label="Đen" aria-disabled="false"
+                            fdprocessedid="wb3xko">
+                        ` + el.ten + `
+                    </button>
+                `
+            })
+            listChatLieu.innerHTML = html;
+        }
+    }
+
+    function renderSanPham() {
+        $('#tenSanPham').html(sanPham.tenSp);
+        $('#donGia').html(formatCurrency(sanPham.donGia));
+        $('#anh1').attr('src', sanPham.anh1);
+        $('#anh2').attr('src', sanPham.anh2);
+        $('#anh3').attr('src', sanPham.anh3);
+        $('#moTa').html(sanPham.moTa);
+        $('#soLuong').html(sanPham.soLuong);
+
+        if ($('.voucher-ticket').length !== 0) {
+            renderSale($('.voucher-ticket').first());
+        }
+    }
+
+    function changeMauSac(button) {
+        $('.mauSac').removeClass("checked");
+        $(button).addClass("checked");
+        const mauSacSelect = getChiTietSanPhamSelect()
+        $('#anh1').attr('src', mauSacSelect.anh1);
+        $('#anh2').attr('src', mauSacSelect.anh2);
+        $('#anh3').attr('src', mauSacSelect.anh3);
+        $('#soLuong').text(mauSacSelect.soLuongTon);
+        $('#moTa').text(mauSacSelect.mota);
+
+        const saleSelect = $('.voucher-ticket.checked');
+
+        if (saleSelect.length != 0) {
+            $('#tenMaGiamGia').text(saleSelect[0].getAttribute('ten'));
+            $('#thoiGianKetThuc').text('KẾT THÚC SAU ' + new Date(parseInt(saleSelect[0].getAttribute('ngayKetThuc'))).toLocaleString());
+            $('#donGiaTruocSale').text("₫" + mauSacSelect.donGiatoLocaleString('vi-VN'));
+            if (saleSelect[0].getAttribute('hinhThucGiam') == 1) {
+                $('#donGia').text(mauSacSelect.donGia * (100 - saleSelect[0].getAttribute('giaTriGiam')) / 100).toLocaleString('vi-VN') + ' đ';
+                $('#giamGia').text('' + saleSelect[0].getAttribute('giaTriGiam') + ' % giảm');
+            } else {
+                $('#donGia').text(mauSacSelect.donGia - saleSelect[0].getAttribute('giaTriGiam'));
+                $('#giamGia').text('' + saleSelect[0].getAttribute('giaTriGiam') + ' VNĐ giảm');
+                if (mauSacSelect.donGia - saleSelect[0].getAttribute('giaTriGiam') < 0) {
+                    $('#donGia').text(0);
+                }
+            }
+        } else {
+            $('#donGia').text(formatCurrency(mauSacSelect.donGia));
+        }
+    }
+
+    function changeSize(button) {
+        $('.btnSize').removeClass("checked");
+        $(button).addClass("checked");
+        const sizeSelect = getChiTietSanPhamSelect()
+        $('#anh1').attr('src', sizeSelect.anh1);
+        $('#anh2').attr('src', sizeSelect.anh2);
+        $('#anh3').attr('src', sizeSelect.anh3);
+        $('#soLuong').text(sizeSelect.soLuongTon);
+        console.log(sizeSelect)
+    }
+
+    function changeChatLieu(button) {
+        $('.btnChatLieu').removeClass("checked");
+        $(button).addClass("checked");
+        const chatLieuSelect = getChiTietSanPhamSelect()
+        $('#anh1').attr('src', chatLieuSelect.anh1);
+        $('#anh2').attr('src', chatLieuSelect.anh2);
+        $('#anh3').attr('src', chatLieuSelect.anh3);
+        $('#soLuong').text(chatLieuSelect.soLuongTon);
+    }
+</script>
 </html>

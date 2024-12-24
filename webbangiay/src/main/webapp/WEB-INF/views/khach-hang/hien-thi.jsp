@@ -20,8 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet"
-    />
+            rel="stylesheet"/>
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css"/>
@@ -34,39 +33,19 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css"/>
 
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
 </head>
 <body>
 <br>
-
-<ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-           aria-controls="description" aria-selected="true">Thông tin Khách Hàng</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/chi-tiet-san-pham/hien-thi-delete" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Sản phẩm đã xoá</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/khach-hang/view-add" role="tab"
-           onclick="if(!(confirm('Bạn có muốn thực hiện thao tác này không ? ')))return false;">Thêm mới Khách Hàng</a>
-    </li>
-</ul>
 <div class="card mb-4">
-    <h5 class="card-header" style="text-align: center">Thông tin Khách Hàng</h5>
     <table class="table container">
         <tbody>
+        <h3 class="card-header">Thông tin khách hàng</h3>
         <tr>
-            <td colspan="2" style="text-align: center">
-                <form action="/chi-tiet-san-pham/search" method="post">
+            <td style="text-align: center">
+                <form action="/khach-hang/search" method="post">
                     <div class="input-group" style="width:100%; text-align: center">
                         <input type="text" class="form-control" placeholder="Bạn tìm gì..."
                                aria-label="Bạn tìm gì..." name="search">
@@ -77,120 +56,39 @@
                 </form>
             </td>
             <td>
-                <form action="/chi-tiet-san-pham/loc" method="post">
+                <form action="/khach-hang/loc" method="post">
                     <div class="card-body" style="text-align: center">
                         <div class="demo-inline-spacing">
                             <div class="btn-group">
-                                <select class="form-select">
-                                    <option selected disabled>Chất Liệu</option>
-                                    <c:forEach items="${listCL}" var="cl">
-                                        <option value="${cl.tenChatLieu}">${cl.tenChatLieu}</option>
-                                    </c:forEach>
+                                <select class="form-select" name="locTT">
+                                    <option selected disabled>Trạng thái</option>
+                                    <option value="0">Hoạt động</option>
+                                    <option value="1">Không hoạt động</option>
                                 </select>
                             </div>
 
                             <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Secondary
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
+                                <select class="form-select" name="locGT">
+                                    <option selected disabled>Giới tính</option>
+                                    <option value="false">Nam</option>
+                                    <option value="true">Nữ</option>
+                                </select>
                             </div>
 
                             <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-success dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Success
+                                <button type="submit" class="btn btn-primary mr-2">
+                                    Lọc
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-danger dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Danger
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-warning dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Warning
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="btn-group">
-                                <button
-                                        type="button"
-                                        class="btn btn-outline-info dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                >
-                                    Info
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider"/>
-                                    </li>
-                                    <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </form>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td class="text-center" colspan="2">
+                <%--                <a class="btn btn-primary" href="/chi-tiet-san-pham/hien-thi-delete">Sản phẩm đã xoá</a>--%>
+                <a type="button" class="btn btn-primary" href="/khach-hang/view-add">Thêm mới khách hàng</a>
             </td>
         </tr>
         </tbody>
@@ -205,16 +103,13 @@
             <tr>
                 <th>STT</th>
                 <th>Mã</th>
-                <th>Tên</th>
+                <th>Họ tên</th>
+                <th>Giới tính</th>
                 <th>Email</th>
-                <th>SĐT</th>
-                <th>Ngày Sinh</th>
-                <th>Giới Tính</th>
-                <th>Ngày Tạo</th>
-                <th>Ngày Cập Nhập</th>
-                <th>Trạng Thái</th>
-                <th>Tài Khoản</th>
-                <th>Mật Khẩu</th>
+                <th>SDT</th>
+                <th>Ngày sinh</th>
+                <th>Tài khoản</th>
+                <th>Mật khẩu</th>
                 <th colspan="2">Chức năng</th>
             </tr>
             </thead>
@@ -224,26 +119,20 @@
                     <td>${stt.index+1}</td>
                     <td>${kh.ma}</td>
                     <td>${kh.hoTen}</td>
+                    <td>
+                        <c:if test="${kh.gioiTinh == false}">Nam</c:if>
+                        <c:if test="${kh.gioiTinh == true}">Nữ</c:if>
+                    </td>
                     <td>${kh.email}</td>
                     <td>${kh.sdt}</td>
                     <td>${kh.ngaySinh}</td>
-                    <td>
-                        <c:if test="${nv.gioiTinh == false}">Nam</c:if>
-                        <c:if test="${nv.gioiTinh == true}">Nữ</c:if>
-                    </td>
-                    <td>${kh.ngayTao}</td>
-                    <td>${kh.ngayCapNhat}</td>
-                    <td>
-                        <c:if test="${kh.trangThai == true}">Không Hoạt Động</c:if>
-                        <c:if test="${kh.trangThai == false}"> Hoạt Động</c:if>
-                    </td>
                     <td>${kh.taiKhoan}</td>
                     <td>${kh.matKhau}</td>
                     <td colspan="2">
                         <a href="/khach-hang/delete/${kh.id}" class="btn btn-success"
-                           onclick="return tbxd()">Delete</a>
-                        <a href="/khach-hang/view-update/${kh.id}" class="btn btn-success"
-                           onclick="return tbxd()">Update</a>
+                           onclick="return myFunction2()">Delete</a>
+                        <a href="/khach-hang/view-update?id=${kh.id}" class="btn btn-success"
+                           onclick="return myFunction2()">Update</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -254,16 +143,16 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center pagination-lg">
-        <li class="page-item"><a class="page-link" href="/hien-thi/khach-hang?num=0">First</a></li>
+        <li class="page-item"><a class="page-link" href="/khach-hang/hien-thi?num=0">First</a></li>
 
         <c:forEach begin="1" end="${total}" varStatus="status">
             <li class="page-item">
-                <a href="${pageContext.request.contextPath}/hien-thi/khach-hang?num=${status.index -1}"
+                <a href="${pageContext.request.contextPath}/khach-hang/hien-thi?num=${status.index -1}"
                    class="page-link">${status.index}</a>
             </li>
         </c:forEach>
 
-        <li class="page-item"><a class="page-link" href="/hien-thi/khach-hang?num=${total-1}">Last</a></li>
+        <li class="page-item"><a class="page-link" href="/khach-hang/hien-thi?num=${total-1}">Last</a></li>
     </ul>
 </nav>
 
@@ -361,24 +250,24 @@
 
 
 </script>
-<script>
-    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {
-        dropdown.style.display = 'none';
-    });
+<%--<script>--%>
+<%--    document.querySelectorAll('.dropdown-menu').forEach(function (dropdown) {--%>
+<%--        dropdown.style.display = 'none';--%>
+<%--    });--%>
 
-    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha
-    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {
-        dropdown.addEventListener('click', function () {
-            const dropdownMenu = dropdown.nextElementSibling;
+<%--    // Hiển thị/ẩn các dropdown menu con khi người dùng chọn một giá trị từ dropdown menu cha--%>
+<%--    document.querySelectorAll('.dropdown-toggle').forEach(function (dropdown) {--%>
+<%--        dropdown.addEventListener('click', function () {--%>
+<%--            const dropdownMenu = dropdown.nextElementSibling;--%>
 
-            if (dropdownMenu.style.display === 'block') {
-                dropdownMenu.style.display = 'none';
-            } else {
-                dropdownMenu.style.display = 'block';
-            }
-        });
-    });
-</script>
+<%--            if (dropdownMenu.style.display === 'block') {--%>
+<%--                dropdownMenu.style.display = 'none';--%>
+<%--            } else {--%>
+<%--                dropdownMenu.style.display = 'block';--%>
+<%--            }--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 <script src="../../vendors/js/vendor.bundle.base.js"></script>
 <script src="../../js/off-canvas.js"></script>
 <script src="../../js/hoverable-collapse.js"></script>

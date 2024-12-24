@@ -15,11 +15,11 @@ import java.util.UUID;
 @Service
 public class SanPhamServiceImpl implements SanPhamService {
     @Autowired
-    SanPhamRepository sanPhamRepository;
+    private SanPhamRepository sanPhamRepository;
 
     @Override
     public Page<SanPham> getAll(Pageable pageable) {
-        return sanPhamRepository.findAll(pageable);
+        return sanPhamRepository.findAllByTrangThai(1, pageable);
     }
 
     @Override

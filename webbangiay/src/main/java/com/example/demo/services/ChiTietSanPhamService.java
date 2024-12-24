@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.models.ChiTietSanPham;
+import com.example.demo.models.SanPham;
 import com.example.demo.models.dto.SanPhamDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,10 @@ public interface ChiTietSanPhamService {
     //tìm theo id
     public ChiTietSanPham findById(UUID id);
 
+    List<ChiTietSanPham> findChiTietSanPhamBySanPham(SanPham sanPham);
+
+    List<ChiTietSanPham> findChiTietSanPhamBySanPhamHome(SanPham sanPham);
+
     //thêm
     public ChiTietSanPham add(ChiTietSanPham chiTietSanPham);
 
@@ -34,18 +39,19 @@ public interface ChiTietSanPhamService {
     public void updateTT();
 
     //tìm kiếm bên trang trạng thái
-    public List<ChiTietSanPham> search0(String search);
+    public List<SanPham> search0(String search);
 
     //tìm kiếm bên trang view trạng thái
     public List<ChiTietSanPham> search1(String search);
 
     //lọc bên trang trạng thái
-    public List<ChiTietSanPham> loc(String locSP, String locMS, String locKT, String locCL);
+    List<SanPham> loc(String locTH, String locPL);
 
-    //lọc bên trang view trạng thái
-    public List<ChiTietSanPham> loc1(String locSP, String locMS, String locKT, String locCL);
+    List<SanPham> loc1(String locTH, String locPL, Integer locTT);
 
     public Boolean delete(UUID id);
 
     Boolean addAllChiTietSanPham(SanPhamDto sanPhamDto);
+
+    Boolean updateAllChiTietSanPham(SanPhamDto sanPhamDto);
 }

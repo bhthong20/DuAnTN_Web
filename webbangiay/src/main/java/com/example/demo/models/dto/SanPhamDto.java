@@ -13,11 +13,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SanPhamDto {
-    private UUID id;
+    private String id;
     private String tenSanPham;
-    private UUID idLoaiSanPham;
-    private UUID idHinhAnh;
-    private UUID idThuongHieu;
+    private String idLoaiSanPham;
+    private String idHinhAnh;
+    private String anh1;
+    private String anh2;
+    private String anh3;
+    private String idThuongHieu;
     private String moTa;
     private List<ChiTietSanPhamDto> chiTietSanPhamDtos;
 }

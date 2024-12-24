@@ -25,4 +25,6 @@ public interface NhanVienService {
 
     public void deleteNhanVien (UUID id);
 
+    List<NhanVien> loc(Integer locTT, Boolean locGT);
+
 }

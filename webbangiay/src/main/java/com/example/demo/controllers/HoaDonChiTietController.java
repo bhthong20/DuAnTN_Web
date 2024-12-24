@@ -40,7 +40,9 @@ public class HoaDonChiTietController {
         List<HoaDonChiTiet> hdct = hoaDonChiTietService.findAll();
         model.addAttribute("listhoaDonCT", hdct);
 //        model.addAttribute("total", list.getTotalPages());
-        return "hoa-don-chi-tiet/hien-thi";
+        model.addAttribute("contentPage", "../hoa-don-chi-tiet/hien-thi.jsp");
+        return "home/layout";
+
     }
     @GetMapping("/view-add")
     public String viewAdd(Model model, @ModelAttribute("hoaDonCT") HoaDonChiTiet hoaDonChiTiet, @ModelAttribute(name="hoaDon") HoaDon hoaDon, @ModelAttribute(name="chiTietSanPham") ChiTietSanPham chiTietSanPham) {

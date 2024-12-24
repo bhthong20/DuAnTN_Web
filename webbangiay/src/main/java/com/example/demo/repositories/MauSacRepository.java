@@ -1,6 +1,5 @@
 package com.example.demo.repositories;
 
-import com.example.demo.models.ChatLieu;
 import com.example.demo.models.MauSac;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

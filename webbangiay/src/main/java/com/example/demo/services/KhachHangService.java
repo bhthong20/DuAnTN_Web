@@ -13,6 +13,8 @@ public interface KhachHangService {
     public List<KhachHang> findAll();
 
     public List<KhachHang> search(String search);
+    
+    List<KhachHang> loc(Integer locTT, Boolean locGT);
 
     public KhachHang findById(UUID id);
 
