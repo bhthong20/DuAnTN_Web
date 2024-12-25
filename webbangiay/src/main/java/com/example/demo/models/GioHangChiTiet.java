@@ -9,11 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -23,6 +19,7 @@ import java.util.UUID;
 @ToString
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "gio_hang_chi_tiet")
 public class GioHangChiTiet {

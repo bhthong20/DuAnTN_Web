@@ -92,4 +92,7 @@ public class NhanVien {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "chuc_vu_id")
     private ChucVu chucVu;
+
+    @Column(name = "role")
+    private String role;
 }

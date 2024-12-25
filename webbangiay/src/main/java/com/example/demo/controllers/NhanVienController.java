@@ -92,9 +92,9 @@ public class NhanVienController {
         }
         String maNhanVien = "nhanVien" + (nhanVienService.getAll().size() + 1);
         nhanVien.setMa(maNhanVien);
+        nhanVien.setRole("ROLE_EMPLOYEE");
         nhanVien.setNgayTao(Date.valueOf(LocalDate.now()));
         nhanVienService.add(nhanVien);
-        System.out.println("listChucVu");
         return "redirect:/nhan-vien/hien-thi";
     }
 

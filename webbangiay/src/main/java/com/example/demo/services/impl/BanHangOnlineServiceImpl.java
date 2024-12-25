@@ -2,24 +2,40 @@ package com.example.demo.services.impl;
 
 import com.example.demo.models.*;
 import com.example.demo.models.dto.BanHangRequest;
+import com.example.demo.models.dto.GioHangDto;
 import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.SanPhamAddHoaDon;
 import com.example.demo.repositories.*;
 import com.example.demo.services.BanHangOnlineService;
+import com.example.demo.util.Cookies;
 import com.example.demo.util.UserLoginCommon;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Autowired
@@ -46,21 +62,57 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     @Autowired
     private LichSuTrangThaiRepository lichSuTrangThaiRepository;
 
+    @Autowired
+    private Cookies cookies;
+
+    private final Gson gson;
+
     @Override
-    public Long countGioHang() {
-        return gioHangChiTietRepository.countByKhachHang((KhachHang) common.getUserLogin());
+    public Long countGioHang(HttpServletRequest httpServletRequest) {
+        if (!ObjectUtils.isEmpty(common.getUserLogin())) {
+            return gioHangChiTietRepository.countByKhachHang((KhachHang) common.getUserLogin());
+        } else {
+            String cart = cookies.getCookieValue(httpServletRequest, "gioHang");
+            if (cart == null || cart.isEmpty()) {
+                return 0L;
+            }
+            List<GioHangDto> listCartItem = gson.fromJson(URLDecoder.decode(cart, StandardCharsets.UTF_8), new TypeToken<List<GioHangDto>>() {
+            }.getType());
+            return listCartItem.stream()
+                    .mapToLong(GioHangDto::getSoLuong)
+                    .sum();
+        }
     }
 
     @Override
-    public List<GioHangChiTiet> getListGioHang() {
-        return gioHangChiTietRepository.findAllByKhachHang((KhachHang) common.getUserLogin());
+    public List<GioHangChiTiet> getListGioHang(HttpServletRequest httpServletRequest) {
+        if (!ObjectUtils.isEmpty(common.getUserLogin())) {
+            return gioHangChiTietRepository.findAllByKhachHang((KhachHang) common.getUserLogin());
+        } else {
+            String cart = cookies.getCookieValue(httpServletRequest, "gioHang");
+            if (cart == null || cart.isEmpty()) {
+                return new ArrayList<>();
+            } else {
+                List<GioHangDto> listCartItem = gson.fromJson(URLDecoder.decode(cart, StandardCharsets.UTF_8), new TypeToken<List<GioHangDto>>() {
+                }.getType());
+
+                List<UUID> ids = listCartItem.stream().map(GioHangDto::getIdChiTietSanPham).collect(Collectors.toList());
+                List<ChiTietSanPham> listCtsp = chiTietSanPhamRepository.findAllByIdIn(ids);
+                return listCartItem.stream().map(e -> GioHangChiTiet.builder()
+                        .id(e.getId())
+                        .chiTietSanPham(listCtsp.stream().filter(f -> f.getId().equals(e.getIdChiTietSanPham())).findFirst().orElse(null))
+                        .donGia(e.getDonGia())
+                        .soLuong(e.getSoLuong())
+                        .build()).collect(Collectors.toList());
+            }
+        }
     }
 
     @Override
     @Transactional
-    public Boolean themVaoGioHang(BanHangRequest banHangRequest) throws BadRequestException {
-        try {
-            ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(banHangRequest.getChiTietSanPham())).get();
+    public Boolean themVaoGioHang(BanHangRequest banHangRequest, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) throws BadRequestException {
+        ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(banHangRequest.getChiTietSanPham())).orElseThrow(() -> new BadRequestException("Sản phẩm không tồn tại"));
+        if (!ObjectUtils.isEmpty(common.getUserLogin())) {
             Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
                     findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
 
@@ -77,32 +129,47 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
                 gioHangChiTiet.get().setSoLuong(gioHangChiTiet.get().getSoLuong() + banHangRequest.getSoLuong());
                 gioHangChiTietRepository.save(gioHangChiTiet.get());
             }
-        } catch (Exception e) {
-            throw e;
+        } else {
+            cookies.addCartToCookie(httpServletRequest, httpServletResponse, "gioHang", banHangRequest);
         }
         return true;
     }
 
     @Override
     @Transactional
-    public Boolean updateGioHang(List<BanHangRequest> list) throws BadRequestException {
+    public Boolean updateGioHang(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest,List<BanHangRequest> list) throws BadRequestException {
         try {
-            for (BanHangRequest el : list) {
-                ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
-                Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
-                        findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
+            if (!ObjectUtils.isEmpty(common.getUserLogin())) {
+                for (BanHangRequest el : list) {
+                    ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
+                    Optional<GioHangChiTiet> gioHangChiTiet = gioHangChiTietRepository.
+                            findByKhachHangAndChiTietSanPham((KhachHang) common.getUserLogin(), chiTietSanPham);
 
-                if (el.getSoLuong() > chiTietSanPham.getSoLuongTon()) {
-                    throw new BadRequestException("Sản phẩm " + chiTietSanPham.getSanPham().getTenSP() +
-                            ". Có màu " + chiTietSanPham.getMauSac().getTen() +
-                            ". Có kích cớ: " + chiTietSanPham.getKichThuoc().getSize() +
-                            ". Có chất liệu: " + chiTietSanPham.getChatLieu().getTenChatLieu() +
-                            ". Chỉ còn lại " + chiTietSanPham.getSoLuongTon());
+                    if (el.getSoLuong() > chiTietSanPham.getSoLuongTon()) {
+                        throw new BadRequestException("Sản phẩm " + chiTietSanPham.getSanPham().getTenSP() +
+                                ". Có màu " + chiTietSanPham.getMauSac().getTen() +
+                                ". Có kích cớ: " + chiTietSanPham.getKichThuoc().getSize() +
+                                ". Có chất liệu: " + chiTietSanPham.getChatLieu().getTenChatLieu() +
+                                ". Chỉ còn lại " + chiTietSanPham.getSoLuongTon());
+                    }
+
+                    gioHangChiTiet.get().setSoLuong(el.getSoLuong());
+                    gioHangChiTietRepository.save(gioHangChiTiet.get());
                 }
-
-                gioHangChiTiet.get().setSoLuong(el.getSoLuong());
-                gioHangChiTietRepository.save(gioHangChiTiet.get());
+            }else{
+                for (BanHangRequest el : list) {
+                    ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(UUID.fromString(el.getChiTietSanPham())).get();
+                    if (el.getSoLuong() > chiTietSanPham.getSoLuongTon()) {
+                        throw new BadRequestException("Sản phẩm " + chiTietSanPham.getSanPham().getTenSP() +
+                                ". Có màu " + chiTietSanPham.getMauSac().getTen() +
+                                ". Có kích cớ: " + chiTietSanPham.getKichThuoc().getSize() +
+                                ". Có chất liệu: " + chiTietSanPham.getChatLieu().getTenChatLieu() +
+                                ". Chỉ còn lại " + chiTietSanPham.getSoLuongTon());
+                    }
+                }
+                cookies.updateQuantityCartCookie(httpServletRequest,httpServletResponse,list,"gioHang");
             }
+
         } catch (Exception e) {
             throw e;
         }
@@ -110,8 +177,12 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
     }
 
     @Override
-    public Boolean deleteGioHang(List<UUID> listId) {
-        gioHangChiTietRepository.deleteAllById(listId);
+    public Boolean deleteGioHang(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest, List<UUID> listId) {
+        if (!ObjectUtils.isEmpty(common.getUserLogin())) {
+            gioHangChiTietRepository.deleteAllById(listId);
+        } else {
+            cookies.deleteCartCookie(httpServletRequest, httpServletResponse, listId, "gioHang");
+        }
         return true;
     }
 
@@ -139,7 +210,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
     @Override
     @Transactional
-    public UUID taoHoaDon(List<BanHangRequest> list) throws BadRequestException {
+    public UUID taoHoaDon(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest,List<BanHangRequest> list) throws BadRequestException {
         try {
             List<HoaDon> hoaDonss = hoaDonRepository.findAllByLoaiAndTrangThai(1, 9);
             List<HoaDon> hoaDons = hoaDonRepository.findAll(); // Lấy danh sách hóa đơn từ cơ sở dữ liệu
@@ -195,6 +266,7 @@ public class BanHangOnlineServiceImpl implements BanHangOnlineService {
 
                 hoaDonChiTietRepository.save(hoaDonChiTiet);
             }
+            cookies.deleteCartPayCookie(httpServletRequest,httpServletResponse,list,"gioHang");
             return hoaDon.getId();
         } catch (Exception e) {
             throw e;

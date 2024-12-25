@@ -8,6 +8,9 @@ import com.example.demo.models.dto.HoaDonRequest;
 import com.example.demo.models.dto.TrangThaiHoaDonRequest;
 import com.example.demo.services.BanHangOnlineService;
 import com.example.demo.util.CallApiGiaHangTietKiem;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,33 +36,33 @@ public class BanHangOnlineRestController {
     }
 
     @GetMapping("/count-gio-hang")
-    public Long countGioHang() {
-        return service.countGioHang();
+    public Long countGioHang(HttpServletRequest httpServletRequest) {
+        return service.countGioHang(httpServletRequest);
     }
 
     @PostMapping("/them-gio-hang")
-    public Boolean themVaoGioHang(@RequestBody BanHangRequest banHangRequest) throws BadRequestException {
-        return service.themVaoGioHang(banHangRequest);
+    public Boolean themVaoGioHang(@RequestBody BanHangRequest banHangRequest, HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) throws BadRequestException {
+        return service.themVaoGioHang(banHangRequest,httpServletResponse,httpServletRequest);
     }
 
     @GetMapping("/list-gio-hang")
-    public List<GioHangChiTiet> getListGioHang() {
-        return service.getListGioHang();
+    public List<GioHangChiTiet> getListGioHang(HttpServletRequest httpServletRequest)  {
+        return service.getListGioHang(httpServletRequest);
     }
 
     @PostMapping("/delete-gio-hang")
-    public Boolean deleteGioHang(@RequestBody List<UUID> list) {
-        return service.deleteGioHang(list);
+    public Boolean deleteGioHang(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest,@RequestBody List<UUID> list) {
+        return service.deleteGioHang(httpServletResponse,httpServletRequest,list);
     }
 
     @PostMapping("/update-gio-hang")
-    public Boolean updateGioHang(@RequestBody List<BanHangRequest> list) throws BadRequestException {
-        return service.updateGioHang(list);
+    public Boolean updateGioHang( HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest,@RequestBody List<BanHangRequest> list) throws BadRequestException {
+        return service.updateGioHang(httpServletResponse,httpServletRequest,list);
     }
 
     @PostMapping("/tao-hoa-don")
-    public UUID taoHoaDon(@RequestBody List<BanHangRequest> list) throws BadRequestException {
-        return service.taoHoaDon(list);
+    public UUID taoHoaDon(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest,@RequestBody List<BanHangRequest> list) throws BadRequestException {
+        return service.taoHoaDon(httpServletResponse,httpServletRequest,list);
     }
 
     @PostMapping("/list-hoa-don")
